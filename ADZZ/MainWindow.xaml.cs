@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ADZZ.Wydatki_i_przychody___okno_i_strony;
+using ADZZ.Zarządzanie_zwierzetami___okno_i_strony;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,7 +42,15 @@ namespace ADZZ
         /// <param name="e"></param>
         private void BtZarzadzaj_Click(object sender, RoutedEventArgs e)
         {
-            
+            ZarzadzanieZwierzetami przejscie = new ZarzadzanieZwierzetami(); //Tworze instancje okna od zarzadzania aby do niego przejsc
+            przejscie.ShowDialog(); //Showdialog poniewaz blokuje mi mainwindow dzieki czemu nie mozna uzywac innego poza tym wlaczonym
+        }
+
+        private void BtWydatkiPrzychody_Click(object sender, RoutedEventArgs e)
+        {
+            WydatkiPrzychody przejscie = new WydatkiPrzychody(); //Tworze instancje klasy WydatkiPrzychody aby przejsc do nowego okna
+            przejscie.ShowDialog();
+
         }
     }
 }
