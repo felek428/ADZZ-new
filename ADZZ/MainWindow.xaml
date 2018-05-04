@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="BtZarzadzaj" Content="Zarządzaj zwierzętami" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="BtWydatkiPrzychody" Content="Wydatki/Przychody" HorizontalAlignment="Left" Margin="45,85,0,0" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="BtStatystyki" Content="Statystyki" HorizontalAlignment="Left" Margin="45,125,0,0" VerticalAlignment="Top" Width="180"/>
+        <Border BorderBrush="Black" BorderThickness="1" Height="144" Margin="0,45,45,0" Width="324" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Grid>
+                <Label x:Name="LabelLiczbaZwierzat" Content="Aktualna liczba zwierząt:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="LabelOstatnieWydatki" Content="Wydatki z ostatnich 7 dni:" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="LabelOstatniPrzychod" Content="Przychód z ostatnich 7 dni:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+                <TextBlock x:Name="TbAktualnaIlosc" HorizontalAlignment="Left" Margin="154,15,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top"/>
+                <TextBlock x:Name="TbOstatnieWydatki" HorizontalAlignment="Left" Margin="161,40,0,0" TextWrapping="Wrap" Text="2000" VerticalAlignment="Top"/>
+                <TextBlock x:Name="TbOstatniPrzychod" HorizontalAlignment="Left" Margin="166,65,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+        <Button x:Name="BtExit" Content="Wyjście" HorizontalAlignment="Left" Margin="45,310,0,0" VerticalAlignment="Top" Width="180" Height="26"/>
+
+
+
+
     </Grid>
 </Window>
