@@ -10,37 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ADZZ
+namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
+    /// Logika interakcji dla klasy ZarzadzanieZwierzetami.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ZarzadzanieZwierzetami : Window
     {
-        public MainWindow()
+        public ZarzadzanieZwierzetami()
         {
             InitializeComponent();
         }
         /// <summary>
-        /// Zamykanie całego programu
+        /// Powrot do głównego okna
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtExit_Click(object sender, RoutedEventArgs e)
+        private void BtnWroc_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-        /// <summary>
-        /// Przechodzenie do okna zarzadzania zwierzetami
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtZarzadzaj_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
