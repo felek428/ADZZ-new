@@ -26,6 +26,7 @@ namespace ADZZ
         public MainWindow()
         {
             InitializeComponent();
+            TypZwierzat.UzupelnijTypy();
         }
         /// <summary>
         /// Zamykanie całego programu

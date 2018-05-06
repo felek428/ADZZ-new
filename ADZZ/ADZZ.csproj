@@ -61,6 +61,12 @@
     <Compile Include="Wydatki i przychody - okno i strony\WydatkiPrzychody.xaml.cs">
       <DependentUpon>WydatkiPrzychody.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaStada.xaml.cs">
+      <DependentUpon>FormularzDodaniaStada.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaZwierzecia.xaml.cs">
+      <DependentUpon>FormularzDodaniaZwierzecia.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Zarządzanie zwierzetami - okno i strony\ZarzadzanieZwierzetami.xaml.cs">
       <DependentUpon>ZarzadzanieZwierzetami.xaml</DependentUpon>
     </Compile>
@@ -81,6 +87,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Wydatki i przychody - okno i strony\WydatkiPrzychody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaStada.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaZwierzecia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

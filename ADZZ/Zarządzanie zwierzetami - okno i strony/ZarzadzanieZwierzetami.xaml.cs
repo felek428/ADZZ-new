@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +21,14 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     /// </summary>
     public partial class ZarzadzanieZwierzetami : Window
     {
+
+
+
         public ZarzadzanieZwierzetami()
         {
             InitializeComponent();
             TypZwierzat.UstawListeTypow(WyborTypu);
-           
+            Debug.WriteLine("ELO");
         }
         /// <summary>
         /// Powrot do głównego okna
