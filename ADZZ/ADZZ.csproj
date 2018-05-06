@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Statystyki - okno i strony\Statystyki.xaml.cs">
+      <DependentUpon>Statystyki.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wydatki i przychody - okno i strony\WydatkiPrzychody.xaml.cs">
       <DependentUpon>WydatkiPrzychody.xaml</DependentUpon>
     </Compile>
@@ -72,6 +75,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Statystyki - okno i strony\Statystyki.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Wydatki i przychody - okno i strony\WydatkiPrzychody.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,8 +114,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Statystyki - okno i strony\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

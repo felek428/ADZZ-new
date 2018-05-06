@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
         mc:Ignorable="d"
-        Title="ZarzadzanieZwierzetami" Height="450" Width="800">
+        Title="ZarzadzanieZwierzetami" Height="550" Width="950">
     <Grid>
         <Button x:Name="BtnDodaj" Content="Dodaj nowe zwierzęta" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="180"/>
         <Button x:Name="BtnEdytuj" Content="Edytuj istniejące zwierzęta" HorizontalAlignment="Left" Margin="45,80,0,0" VerticalAlignment="Top" Width="180"/>

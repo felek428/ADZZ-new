@@ -1,4 +1,5 @@
-﻿using ADZZ.Wydatki_i_przychody___okno_i_strony;
+﻿using ADZZ.Statystyki___okno_i_strony;
+using ADZZ.Wydatki_i_przychody___okno_i_strony;
 using ADZZ.Zarządzanie_zwierzetami___okno_i_strony;
 using System;
 using System.Collections.Generic;
@@ -33,13 +34,9 @@ namespace ADZZ
         /// <param name="e"></param>
         private void BtExit_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Close();                                                    //Metoda do zamykania aplikacji z pozycji MainWindow
         }
-        /// <summary>
-        /// Przechodzenie do okna zarzadzania zwierzetami
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        #region Metody otwierania okienek dla przyciskow z głównego menu
         private void BtZarzadzaj_Click(object sender, RoutedEventArgs e)
         {
             ZarzadzanieZwierzetami przejscie = new ZarzadzanieZwierzetami(); //Tworze instancje okna od zarzadzania aby do niego przejsc
@@ -52,5 +49,12 @@ namespace ADZZ
             przejscie.ShowDialog();
 
         }
+
+        private void BtStatystyki_Click(object sender, RoutedEventArgs e)
+        {
+            Statystyki przejscie = new Statystyki();    //Tworze instancje klasy Statystyki aby przejsc do nowego okna
+            przejscie.ShowDialog();
+        }
+        #endregion
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADZZ.Wydatki_i_przychody___okno_i_strony"
         mc:Ignorable="d"
-        Title="WydatkiPrzychody" Height="450" Width="800">
+        Title="WydatkiPrzychody" Height="550" Width="950">
     <Grid>
         <Button Content="Dodaj wydatek" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="120"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="45,115,0,0" VerticalAlignment="Top" Width="120"/>

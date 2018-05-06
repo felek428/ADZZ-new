@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADZZ"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="950">
     <Grid>
         <Button x:Name="BtZarzadzaj" Content="Zarządzaj zwierzętami" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="180" Click="BtZarzadzaj_Click"/>
         <Button x:Name="BtWydatkiPrzychody" Content="Wydatki/Przychody" HorizontalAlignment="Left" Margin="45,85,0,0" VerticalAlignment="Top" Width="180" Click="BtWydatkiPrzychody_Click"/>
-        <Button x:Name="BtStatystyki" Content="Statystyki" HorizontalAlignment="Left" Margin="45,125,0,0" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="BtStatystyki" Content="Statystyki" HorizontalAlignment="Left" Margin="45,125,0,0" VerticalAlignment="Top" Width="180" Click="BtStatystyki_Click"/>
         <Border BorderBrush="Black" BorderThickness="1" Height="144" Margin="0,45,45,0" Width="324" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Grid>
                 <Label x:Name="LabelLiczbaZwierzat" Content="Aktualna liczba zwierząt:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -20,7 +20,7 @@
                 <TextBlock x:Name="TbOstatniPrzychod" HorizontalAlignment="Left" Margin="166,65,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top"/>
             </Grid>
         </Border>
-        <Button x:Name="BtExit" Content="Wyjście" HorizontalAlignment="Left" Margin="45,310,0,0" VerticalAlignment="Top" Width="180" Height="26" Click="BtExit_Click"/>
+        <Button x:Name="BtExit" Content="Wyjście" HorizontalAlignment="Left" Margin="45,310,0,45" VerticalAlignment="Bottom" Width="180" Height="26" Click="BtExit_Click"/>
 
 
 
