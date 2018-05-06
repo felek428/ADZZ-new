@@ -57,6 +57,7 @@
     <Compile Include="Statystyki - okno i strony\Statystyki.xaml.cs">
       <DependentUpon>Statystyki.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TypZwierzat.cs" />
     <Compile Include="Wydatki i przychody - okno i strony\WydatkiPrzychody.xaml.cs">
       <DependentUpon>WydatkiPrzychody.xaml</DependentUpon>
     </Compile>

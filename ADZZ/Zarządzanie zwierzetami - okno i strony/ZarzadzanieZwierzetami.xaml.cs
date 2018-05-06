@@ -22,6 +22,8 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         public ZarzadzanieZwierzetami()
         {
             InitializeComponent();
+            TypZwierzat.UstawListeTypow(WyborTypu);
+           
         }
         /// <summary>
         /// Powrot do głównego okna

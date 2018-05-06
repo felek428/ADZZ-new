@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="ZarzadzanieZwierzetami" Height="550" Width="950">
     <Grid>
-        <Button x:Name="BtnDodaj" Content="Dodaj nowe zwierzęta" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="180"/>
-        <Button x:Name="BtnEdytuj" Content="Edytuj istniejące zwierzęta" HorizontalAlignment="Left" Margin="45,80,0,0" VerticalAlignment="Top" Width="180"/>
-        <Button x:Name="BtnUsun" Content="Usuń zwierzęta" HorizontalAlignment="Left" Margin="45,118,0,0" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="BtnDodaj" Content="Dodaj nowe" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="BtnEdytuj" Content="Edytuj istniejące" HorizontalAlignment="Left" Margin="45,80,0,0" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="BtnUsun" Content="Usuń" HorizontalAlignment="Left" Margin="45,118,0,0" VerticalAlignment="Top" Width="180"/>
         <Button x:Name="BtnWroc" Content="Wróć" HorizontalAlignment="Left" Margin="45,0,0,45" VerticalAlignment="Bottom" Width="75" Height="22" Click="BtnWroc_Click"/>
-
+        <Frame x:Name="RamkaForumalarzaDanych" Margin="270,45,0,0"/>
+        <ComboBox x:Name="WyborTypu" HorizontalAlignment="Left" Margin="270,10,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
