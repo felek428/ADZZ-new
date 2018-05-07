@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADZZ"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="950">
+        Title="MainWindow" Height="550" Width="950"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="BtZarzadzaj" Content="Zarządzaj zwierzętami" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="180" Click="BtZarzadzaj_Click"/>
         <Button x:Name="BtWydatkiPrzychody" Content="Wydatki/Przychody" HorizontalAlignment="Left" Margin="45,85,0,0" VerticalAlignment="Top" Width="180" Click="BtWydatkiPrzychody_Click"/>

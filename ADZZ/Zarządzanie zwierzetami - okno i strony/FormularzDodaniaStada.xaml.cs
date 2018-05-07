@@ -24,5 +24,10 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             InitializeComponent();
         }
+
+        private void btDodaj_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Dodales stado!");
+        }
     }
 }

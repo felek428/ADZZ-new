@@ -37,12 +37,18 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         /// <param name="e"></param>
         private void BtnWroc_Click(object sender, RoutedEventArgs e)
         {
+            TypZwierzat.wybor = 0;
             Close();
         }
 
+        /// <summary>
+        /// Ustawia wartosc zmiennej wybor w statycznym polu w klasie TypZwierzat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WyborTypu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var elementComboBox = WyborTypu.SelectedItem.ToString();
+            var elementComboBox = WyborTypu.SelectedItem.ToString(); //Odczytuje wybrany item w combobox 
             switch (elementComboBox)
             {
                 case "Pojedyncze zwierze":
@@ -58,6 +64,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             }
         }
 
+        /// <summary>
+        /// Metoda wyswietla odpowiedni formularz w zaleznosci od wybranego typu zwierzat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnDodaj_Click(object sender, RoutedEventArgs e)
         {
             var wybor = TypZwierzat.wybor;
@@ -70,6 +81,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                     RamkaForumalarzaDanych.Content = new FormularzDodaniaStada();
                     break;
                 default:
+                    MessageBoxResult brakWyboru = MessageBox.Show("Wybierz typ zwierząt!");
                     break;
             }
         }

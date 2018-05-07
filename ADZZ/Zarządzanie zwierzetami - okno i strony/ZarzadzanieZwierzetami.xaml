@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
         mc:Ignorable="d"
-        Title="ZarzadzanieZwierzetami" Height="550" Width="950">
+        Title="ZarzadzanieZwierzetami" Height="550" Width="950"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="BtnDodaj" Content="Dodaj nowe" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="180" Click="BtnDodaj_Click"/>
         <Button x:Name="BtnEdytuj" Content="Edytuj istniejące" HorizontalAlignment="Left" Margin="45,80,0,0" VerticalAlignment="Top" Width="180"/>
         <Button x:Name="BtnUsun" Content="Usuń" HorizontalAlignment="Left" Margin="45,118,0,0" VerticalAlignment="Top" Width="180"/>
         <Button x:Name="BtnWroc" Content="Wróć" HorizontalAlignment="Left" Margin="45,0,0,45" VerticalAlignment="Bottom" Width="75" Height="22" Click="BtnWroc_Click"/>
         <Frame x:Name="RamkaForumalarzaDanych" Margin="270,45,0,0" NavigationUIVisibility="Hidden" />
-        <ComboBox x:Name="WyborTypu" Margin="400,14,0,0" VerticalAlignment="Top" Width="140" HorizontalAlignment="Left" SelectionChanged="WyborTypu_SelectionChanged"/>
-        <Label Content="Wybierz typ zwierząt" HorizontalAlignment="Left" Margin="270,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,0.521" Width="122"/>
+        <ComboBox x:Name="WyborTypu" Margin="355,14,0,0" VerticalAlignment="Top" Width="140" HorizontalAlignment="Left" SelectionChanged="WyborTypu_SelectionChanged"/>
+        <Label x:Name="typZwierzatL" Content="Typ zwierząt" HorizontalAlignment="Left" Margin="270,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,0.521" Width="80"/>
     </Grid>
 </Window>

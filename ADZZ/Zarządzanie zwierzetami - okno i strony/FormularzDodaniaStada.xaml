@@ -9,7 +9,17 @@
       Title="FormularzDodaniaStada">
 
     <Grid Background="White">
-        <Label Content="Tu bedzie formularz do dodania stada" HorizontalAlignment="Left" Margin="199,192,0,0" VerticalAlignment="Top" Height="49" Width="411" FontSize="24"/>
+        <Label x:Name="kodL" Content="Nr identyfikacyjny:" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="gatunekL" Content="Gatunek:" HorizontalAlignment="Left" Margin="28,36,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="rasaL" Content="Rasa:" HorizontalAlignment="Left" Margin="28,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="iloscL" Content="Ilość:" HorizontalAlignment="Left" Margin="28,88,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="okresOdL" Content="Okres aktywnosci od:" HorizontalAlignment="Left" Margin="28,114,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbKod" HorizontalAlignment="Left" Height="23" Margin="160,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbGatunk" HorizontalAlignment="Left" Height="23" Margin="160,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbRasa" HorizontalAlignment="Left" Height="23" Margin="160,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbIlosc" HorizontalAlignment="Left" Height="23" Margin="160,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbOkresOd" HorizontalAlignment="Left" Height="23" Margin="160,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="205,190,0,0" VerticalAlignment="Top" Width="75" Click="btDodaj_Click"/>
 
     </Grid>
 </Page>
