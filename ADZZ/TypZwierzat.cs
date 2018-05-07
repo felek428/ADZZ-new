@@ -13,12 +13,12 @@ namespace ADZZ
     class TypZwierzat
     {
         enum Typy
-        {          
-            Pojedyncze_zwierze = 1, 
+        {
+            Pojedyncze_zwierze = 1,
             Stado = 2,
         }
 
-        private int wybor;  //Wybor bedzie 0, 1, 2 i w zaleznosci od dokonanego wyboru w comboboxie bedzie wystawietlana odpowiednia strona dla stada lub pojedynczego zwierzecia
+        public static int wybor { get; set; }  //Wybor bedzie 0, 1, 2 i w zaleznosci od dokonanego wyboru w comboboxie bedzie wystawietlana odpowiednia strona dla stada lub pojedynczego zwierzecia
 
         static List<string> ListaTypow = new List<string>();
         /// <summary>
@@ -26,7 +26,7 @@ namespace ADZZ
         /// </summary>
         public static void UzupelnijTypy()
         {
-            ListaTypow.Add("Pojedyncze Zwierze");
+            ListaTypow.Add("Pojedyncze zwierze");
             ListaTypow.Add("Stado");
         }
         
