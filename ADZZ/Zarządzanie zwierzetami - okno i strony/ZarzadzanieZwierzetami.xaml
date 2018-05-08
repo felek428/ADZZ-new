@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
         mc:Ignorable="d"
-        Title="ZarzadzanieZwierzetami" Height="550" Width="950"
+        Title="Zarzadzanie zwierzetami" Height="550" Width="950" MinHeight="550" MinWidth="950" MaxHeight="550" MaxWidth="950"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="BtnDodaj" Content="Dodaj nowe" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="180" Click="BtnDodaj_Click"/>

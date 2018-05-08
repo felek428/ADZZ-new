@@ -58,8 +58,8 @@
       <DependentUpon>Statystyki.xaml</DependentUpon>
     </Compile>
     <Compile Include="TypZwierzat.cs" />
-    <Compile Include="Wydatki i przychody - okno i strony\WydatkiPrzychody.xaml.cs">
-      <DependentUpon>WydatkiPrzychody.xaml</DependentUpon>
+    <Compile Include="Rozliczenia - okno i strony\Rozliczenia.xaml.cs">
+      <DependentUpon>Rozliczenia.xaml</DependentUpon>
     </Compile>
     <Compile Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaStada.xaml.cs">
       <DependentUpon>FormularzDodaniaStada.xaml</DependentUpon>
@@ -89,7 +89,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wydatki i przychody - okno i strony\WydatkiPrzychody.xaml">
+    <Page Include="Rozliczenia - okno i strony\Rozliczenia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

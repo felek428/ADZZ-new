@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADZZ.Statystyki___okno_i_strony"
         mc:Ignorable="d"
-        Title="Statystyki" Height="550" Width="950">
+        Title="Statystyki" Height="550" Width="950" MinHeight="550" MinWidth="950" MaxHeight="550" MaxWidth="950"> 
     <Grid>
         <Button x:Name="BtnWroc" Content="Wróć" HorizontalAlignment="Left" Margin="45,0,0,45" VerticalAlignment="Bottom" Width="75" Click="BtnWroc_Click" Height="22"/>
 

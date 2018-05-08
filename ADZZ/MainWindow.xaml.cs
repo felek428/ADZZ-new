@@ -1,5 +1,5 @@
 ﻿using ADZZ.Statystyki___okno_i_strony;
-using ADZZ.Wydatki_i_przychody___okno_i_strony;
+using ADZZ.Rozliczenia___okno_i_strony;
 using ADZZ.Zarządzanie_zwierzetami___okno_i_strony;
 using System;
 using System.Collections.Generic;
@@ -46,7 +46,7 @@ namespace ADZZ
 
         private void BtWydatkiPrzychody_Click(object sender, RoutedEventArgs e)
         {
-            WydatkiPrzychody przejscie = new WydatkiPrzychody(); //Tworze instancje klasy WydatkiPrzychody aby przejsc do nowego okna
+            Rozliczenia przejscie = new Rozliczenia(); //Tworze instancje klasy WydatkiPrzychody aby przejsc do nowego okna
             przejscie.ShowDialog();
 
         }

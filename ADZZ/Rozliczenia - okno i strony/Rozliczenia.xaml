@@ -1,11 +1,11 @@
-﻿<Window x:Class="ADZZ.Wydatki_i_przychody___okno_i_strony.WydatkiPrzychody"
+﻿<Window x:Class="ADZZ.Rozliczenia___okno_i_strony.Rozliczenia"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ADZZ.Wydatki_i_przychody___okno_i_strony"
+        xmlns:local="clr-namespace:ADZZ.Rozliczenia___okno_i_strony"
         mc:Ignorable="d"
-        Title="WydatkiPrzychody" Height="550" Width="950">
+        Title="Rozliczenia" Height="550" Width="950" MinHeight="550" MinWidth="950" MaxHeight="550" MaxWidth="950">
     <Grid>
         <Button Content="Dodaj wydatek" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="120"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="45,115,0,0" VerticalAlignment="Top" Width="120"/>

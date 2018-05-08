@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ADZZ.Wydatki_i_przychody___okno_i_strony
+namespace ADZZ.Rozliczenia___okno_i_strony
 {
     /// <summary>
     /// Logika interakcji dla klasy WydatkiPrzychody.xaml
     /// </summary>
-    public partial class WydatkiPrzychody : Window
+    public partial class Rozliczenia : Window
     {
-        public WydatkiPrzychody()
+        public Rozliczenia()
         {
             InitializeComponent();
         }
