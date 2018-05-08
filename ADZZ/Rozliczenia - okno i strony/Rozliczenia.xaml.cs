@@ -28,5 +28,12 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         {
             Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FormularzDodaniaRozliczenia obj = new FormularzDodaniaRozliczenia();
+            RamkaFormularzaRozliczen.Content = obj;
+            
+        }
     }
 }

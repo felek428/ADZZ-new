@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Rozliczenia - okno i strony\FormularzDodaniaRozliczenia.xaml.cs">
+      <DependentUpon>FormularzDodaniaRozliczenia.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Statystyki - okno i strony\Statystyki.xaml.cs">
       <DependentUpon>Statystyki.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Rozliczenia - okno i strony\FormularzDodaniaRozliczenia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Statystyki - okno i strony\Statystyki.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
