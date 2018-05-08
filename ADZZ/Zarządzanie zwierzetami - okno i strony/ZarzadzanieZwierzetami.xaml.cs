@@ -84,6 +84,12 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                     MessageBoxResult brakWyboru = MessageBox.Show("Wybierz typ zwierząt!");
                     break;
             }
+            
+        }
+
+        private void BtnEdytuj_Click(object sender, RoutedEventArgs e)
+        {
+            RamkaForumalarzaDanych.Content = new FormularzEdycji();
         }
     }
 }

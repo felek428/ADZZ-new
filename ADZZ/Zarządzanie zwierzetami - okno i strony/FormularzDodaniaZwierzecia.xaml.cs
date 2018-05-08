@@ -20,14 +20,17 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     /// </summary>
     public partial class FormularzDodaniaZwierzecia : Page
     {
+        
+
         public FormularzDodaniaZwierzecia()
         {
-            InitializeComponent();
+            InitializeComponent();       
         }
 
-        private void btDodaj_Click(object sender, RoutedEventArgs e)
+        private void BtDodaj_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Dodales zwierze!");
+           
         }
     }
 }

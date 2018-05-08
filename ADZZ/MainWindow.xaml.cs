@@ -57,5 +57,7 @@ namespace ADZZ
             przejscie.ShowDialog();
         }
         #endregion
+
+        
     }
 }
