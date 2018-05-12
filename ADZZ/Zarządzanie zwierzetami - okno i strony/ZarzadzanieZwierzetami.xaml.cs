@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
@@ -90,6 +91,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         private void BtnEdytuj_Click(object sender, RoutedEventArgs e)
         {
             RamkaForumalarzaDanych.Content = new FormularzEdycji();
+        }
+
+        private void RamkaForumalarzaDanych_Navigated(object sender, NavigationEventArgs e)
+        {
+            RamkaForumalarzaDanych.NavigationService.RemoveBackEntry();
         }
     }
 }

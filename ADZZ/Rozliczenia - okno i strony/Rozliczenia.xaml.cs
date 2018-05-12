@@ -22,6 +22,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         public Rozliczenia()
         {
             InitializeComponent();
+            RamkaFormularzaRozliczen.NavigationService.RemoveBackEntry();
         }
 
         private void BtnWroc_Click(object sender, RoutedEventArgs e)
@@ -31,9 +32,17 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             FormularzDodaniaRozliczenia obj = new FormularzDodaniaRozliczenia();
             RamkaFormularzaRozliczen.Content = obj;
             
+
+
+        }
+
+        private void RamkaFormularzaRozliczen_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            RamkaFormularzaRozliczen.NavigationService.RemoveBackEntry();
         }
     }
 }

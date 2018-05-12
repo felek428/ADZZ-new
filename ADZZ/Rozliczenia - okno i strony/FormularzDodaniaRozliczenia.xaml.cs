@@ -32,6 +32,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             InitializeComponent();
             StworzListe(listaRodzajuRozliczen);
             WypelnienieComboBox();
+            
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

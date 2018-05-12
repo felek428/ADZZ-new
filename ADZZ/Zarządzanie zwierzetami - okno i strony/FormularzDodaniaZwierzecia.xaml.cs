@@ -24,7 +24,8 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         public FormularzDodaniaZwierzecia()
         {
-            InitializeComponent();       
+            InitializeComponent();    
+            
         }
 
         private void BtDodaj_Click(object sender, RoutedEventArgs e)

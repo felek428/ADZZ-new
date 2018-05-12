@@ -47,5 +47,10 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             UzupelnionyFormularzEdycji.Visibility = Visibility.Hidden;
             BtUsun.Visibility = Visibility.Hidden;
         }
+
+        private void UzupelnionyFormularzEdycji_Navigated(object sender, NavigationEventArgs e)
+        {
+            UzupelnionyFormularzEdycji.NavigationService.RemoveBackEntry();
+        }
     }
 }
