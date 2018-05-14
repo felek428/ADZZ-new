@@ -24,7 +24,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Dodaje wpis do bazy
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btDodaj_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Dodales stado!");

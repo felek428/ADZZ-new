@@ -7,9 +7,8 @@
         mc:Ignorable="d"
         Title="Rozliczenia" Height="550" Width="950" MinHeight="550" MinWidth="950" MaxHeight="550" MaxWidth="950">
     <Grid>
-        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="45,115,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Edytuj" HorizontalAlignment="Left" Margin="45,80,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BtDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="120" Click="BtDodaj_Click"/>
+        <Button x:Name="BtEdytuj" Content="Edytuj" HorizontalAlignment="Left" Margin="45,80,0,0" VerticalAlignment="Top" Width="120" Click="BtEdytuj_Click"/>
         <Button x:Name="BtnWroc" Content="Wróć" HorizontalAlignment="Left" Margin="45,0,0,45" VerticalAlignment="Bottom" Width="120" Click="BtnWroc_Click"/>
         <Frame x:Name="RamkaFormularzaRozliczen" Margin="200,10,10,10" NavigationUIVisibility="Hidden" Navigated="RamkaFormularzaRozliczen_Navigated"/>
         

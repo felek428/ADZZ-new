@@ -22,15 +22,18 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         public Rozliczenia()
         {
             InitializeComponent();
-            RamkaFormularzaRozliczen.NavigationService.RemoveBackEntry();
         }
 
         private void BtnWroc_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Wyswietlam formularz rozliczen na zawartosci frame'a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtDodaj_Click(object sender, RoutedEventArgs e)
         {
             
             FormularzDodaniaRozliczenia obj = new FormularzDodaniaRozliczenia();
@@ -39,10 +42,18 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
 
         }
+        /// <summary>
+        /// Metoda, która czyści "History stack" dzieki czemu strony nie układają sie na stosie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RamkaFormularzaRozliczen_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e) => RamkaFormularzaRozliczen.NavigationService.RemoveBackEntry();
+        
 
-        private void RamkaFormularzaRozliczen_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        private void BtEdytuj_Click(object sender, RoutedEventArgs e)
         {
-            RamkaFormularzaRozliczen.NavigationService.RemoveBackEntry();
+            
+            
         }
     }
 }

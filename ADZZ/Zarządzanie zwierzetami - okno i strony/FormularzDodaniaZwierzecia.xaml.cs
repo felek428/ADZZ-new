@@ -28,6 +28,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             
         }
 
+        /// <summary>
+        /// Dodaje wpis do bazy
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtDodaj_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Dodales zwierze!");

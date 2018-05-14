@@ -26,7 +26,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             InitializeComponent();
         }
         
-        
+        /// <summary>
+        /// Wyswietla formularz dodania zwierzecia z uzupełnionymi danymi po podaniu kryterium jakim jest kod zwierzecia
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtSzukaj_Click(object sender, RoutedEventArgs e)
         {
 
@@ -40,7 +44,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             UzupelnionyFormularzEdycji.Content = obj;
             UzupelnionyFormularzEdycji.Visibility = Visibility.Visible;
         }
-
+        /// <summary>
+        /// Usuwa wpis z bazy 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtUsun_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Usunięto!");
@@ -48,9 +56,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             BtUsun.Visibility = Visibility.Hidden;
         }
 
-        private void UzupelnionyFormularzEdycji_Navigated(object sender, NavigationEventArgs e)
-        {
-            UzupelnionyFormularzEdycji.NavigationService.RemoveBackEntry();
-        }
+        /// <summary>
+        /// Metoda, która czyści "History stack" dzieki czemu strony nie układają sie na stosie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UzupelnionyFormularzEdycji_Navigated(object sender, NavigationEventArgs e) => UzupelnionyFormularzEdycji.NavigationService.RemoveBackEntry();
     }
 }

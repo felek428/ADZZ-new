@@ -87,15 +87,20 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             }
             
         }
-
+        /// <summary>
+        /// Wyswietla formularz edycji
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnEdytuj_Click(object sender, RoutedEventArgs e)
         {
             RamkaForumalarzaDanych.Content = new FormularzEdycji();
         }
-
-        private void RamkaForumalarzaDanych_Navigated(object sender, NavigationEventArgs e)
-        {
-            RamkaForumalarzaDanych.NavigationService.RemoveBackEntry();
-        }
+        /// <summary>
+        /// Metoda, która czyści "History stack" dzieki czemu strony nie układają sie na stosie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RamkaForumalarzaDanych_Navigated(object sender, NavigationEventArgs e) => RamkaForumalarzaDanych.NavigationService.RemoveBackEntry();
     }
 }

@@ -31,7 +31,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         {
             InitializeComponent();
             StworzListe(listaRodzajuRozliczen);
-            WypelnienieComboBox();
+            WypelnienieComboBox();                      //Wypelnianie combobox|  Sposób wypełniania bedzie inny
             
         }
 
@@ -54,14 +54,18 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         }
         public void StworzListe(List<string> lista)
         {
-            lista.Add("Przychód");
+            lista.Add("Przychód");                              //Stala lista przychod/wydatek, ale to bede zaciagal z bazy
             lista.Add("Wydatek");
         }
         public void WypelnienieComboBox()
         {
             WyborRozliczenia.ItemsSource = listaRodzajuRozliczen;
         }
-
+        /// <summary>
+        /// Dodaje wpis do bazy
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtDodaj_Click(object sender, RoutedEventArgs e)
         {
             int kwota = Int32.Parse(tbKwota.Text);
