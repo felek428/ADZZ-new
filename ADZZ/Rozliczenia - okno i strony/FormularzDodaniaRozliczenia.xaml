@@ -13,9 +13,11 @@
         <ComboBox x:Name="WyborRozliczenia" HorizontalAlignment="Left" Margin="141,24,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
         <TextBox x:Name="tbKwota" HorizontalAlignment="Left" Height="23" Margin="141,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="kwotaL" Content="Kwota:" HorizontalAlignment="Left" Margin="45,52,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="opisL" Content="Opis:" HorizontalAlignment="Left" Margin="45,83,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbOpis" HorizontalAlignment="Left" Height="97" Margin="141,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289"/>
-        <Button x:Name="BtDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="355,202,0,0" VerticalAlignment="Top" Width="75" Click="BtDodaj_Click"/>
+        <Label x:Name="opisL" Content="Opis:" HorizontalAlignment="Left" Margin="45,114,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbOpis" HorizontalAlignment="Left" Height="97" Margin="141,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289"/>
+        <Button x:Name="BtDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="355,256,0,0" VerticalAlignment="Top" Width="75" Click="BtDodaj_Click"/>
+        <Label x:Name="dataL" Content="Data:" HorizontalAlignment="Left" Margin="45,83,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbData" HorizontalAlignment="Left" Height="23" Margin="141,85,0,0" TextWrapping="Wrap" Text="Data" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Page>

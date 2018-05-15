@@ -55,5 +55,11 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             
             
         }
+
+        private void BtZarzadzajCenami_Click(object sender, RoutedEventArgs e)
+        {
+            ZarzadzanieCenami obj = new ZarzadzanieCenami();
+            RamkaFormularzaRozliczen.Content = obj;
+        }
     }
 }
