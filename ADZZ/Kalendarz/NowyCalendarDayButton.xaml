@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="NewCalendar.NowyCalendarDayButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NewCalendar"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"  Background="White"   MouseRightButtonDown="UserControl_MouseRightButtonDown"
+             >
+    <DockPanel LastChildFill="True" Margin="0,0,0,0">
+        <TextBlock Name="Tekst" Text="{Binding DayNumber}"  DockPanel.Dock="Top" TextAlignment="Justify" Margin="0,0,0,0"/>
+        <ScrollViewer Name="Viewer"  VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top">
+            <DockPanel Name="Dok" LastChildFill="False"/>
+        </ScrollViewer>
+
+
+    </DockPanel>
+
+
+</UserControl>

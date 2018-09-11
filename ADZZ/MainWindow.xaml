@@ -4,27 +4,102 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADZZ"
+        xmlns:Ikony="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:Kalendarz="clr-namespace:NewCalendar"
         mc:Ignorable="d"
-        Title="ADZZ" Height="550" Width="950" MinHeight="550" MinWidth="950" MaxHeight="550" MaxWidth="950"
+        Title="ADZZ" Height="800" Width="1400" MinHeight="550" MinWidth="950"  
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button x:Name="BtZarzadzaj" Content="Zarządzaj zwierzętami" HorizontalAlignment="Left" Margin="45,45,0,0" VerticalAlignment="Top" Width="180" Click="BtZarzadzaj_Click"/>
-        <Button x:Name="BtWydatkiPrzychody" Content="Rozliczenia" HorizontalAlignment="Left" Margin="45,85,0,0" VerticalAlignment="Top" Width="180" Click="BtWydatkiPrzychody_Click"/>
-        <Button x:Name="BtStatystyki" Content="Statystyki" HorizontalAlignment="Left" Margin="45,125,0,0" VerticalAlignment="Top" Width="180" Click="BtStatystyki_Click"/>
-        <Border BorderBrush="Black" BorderThickness="1" Height="144" Margin="0,45,45,0" Width="324" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Grid>
-                <Label x:Name="LabelLiczbaZwierzat" Content="Aktualna liczba zwierząt:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="LabelOstatnieWydatki" Content="Wydatki z ostatnich 7 dni:" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="LabelOstatniPrzychod" Content="Przychód z ostatnich 7 dni:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
-                <TextBlock x:Name="TbAktualnaIlosc" HorizontalAlignment="Left" Margin="154,15,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top"/>
-                <TextBlock x:Name="TbOstatnieWydatki" HorizontalAlignment="Left" Margin="161,40,0,0" TextWrapping="Wrap" Text="2000" VerticalAlignment="Top"/>
-                <TextBlock x:Name="TbOstatniPrzychod" HorizontalAlignment="Left" Margin="166,65,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top"/>
-            </Grid>
-        </Border>
-        <Button x:Name="BtExit" Content="Wyjście" HorizontalAlignment="Left" Margin="45,310,0,45" VerticalAlignment="Bottom" Width="180" Height="26" Click="BtExit_Click"/>
-
-
-
+        <Grid Margin="0,0,0,0" HorizontalAlignment="Left" Width="283" >
+            <ListBox Background="LightSeaGreen" Margin="0,0,0,0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template" >
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <ContentPresenter Content="{TemplateBinding Content}"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <ContentPresenter Content="{Binding}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <Expander BorderBrush="Black" BorderThickness="3,3,3,3" Width="279" Margin="0,0,0,0">
+                    <Expander.Header >
+                        <BulletDecorator Width="250">
+                            <BulletDecorator.Bullet>
+                                <Ikony:PackIcon Kind="Cow" Height="66" Width="82" Margin="147,0,-147,0"/>
+                            </BulletDecorator.Bullet>
+                            <TextBlock Foreground="WhiteSmoke" Text="Zwierzeta" FontSize="18" Height="26" FontWeight="Bold" Margin="-54,0,96,0" />
+                        </BulletDecorator>
+                    </Expander.Header>
+                    <StackPanel>
+                        <Button x:Name="BtZnajdzZwierze" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Znajdź zwierze" FontSize="22" FontWeight="Bold"/>
+                        <Button x:Name="BtDodajZwierze" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Dodaj zwierze" FontSize="22" FontWeight="Bold" Click="BtDodajZwierze_Click"/>
+                        <Button x:Name="BtKalendarz" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Kalendarz rujowy" FontSize="22" FontWeight="Bold" Click="BtKalendarz_Click"/>
+                    </StackPanel>
+                </Expander>
+                <Expander BorderBrush="Black" BorderThickness="3,1,3,3" Width="279" Margin="0,0,0,0">
+                    <Expander.Header >
+                        <BulletDecorator Width="250">
+                            <BulletDecorator.Bullet>
+                                <Ikony:PackIcon Kind="CashUsd" Height="66" Width="82" Margin="147,0,-147,0"/>
+                            </BulletDecorator.Bullet>
+                            <TextBlock Foreground="WhiteSmoke" Text="Rozliczenia" FontSize="18" Height="26" FontWeight="Bold" Margin="-54,0,96,0" />
+                        </BulletDecorator>
+                    </Expander.Header>
+                    <StackPanel>
+                        <Button Focusable="False" Height="50" Background="DarkSeaGreen" HorizontalAlignment="Left" Width="274" Content="Lista zwierząt" FontSize="22" FontWeight="Bold"/>
+                        <Button Focusable="False" Height="50" Background="DarkSeaGreen" HorizontalAlignment="Left" Width="274" Content="Znowu taki tekst" FontSize="22" FontWeight="Bold"/>
+                    </StackPanel>
+                </Expander>
+                <Expander  BorderBrush="Black" BorderThickness="3,1,3,3" Width="279">
+                    <Expander.Header>
+                        <BulletDecorator Width="250">
+                            <BulletDecorator.Bullet>
+                                <Ikony:PackIcon Kind="ChartBar" Height="66" Width="82" Margin="147,0,-147,0"/>
+                            </BulletDecorator.Bullet>
+                            <TextBlock Foreground="WhiteSmoke" Text="Statystyki" FontSize="18" Height="26" FontWeight="Bold" Margin="-54,0,96,0" />
+                        </BulletDecorator>
+                    </Expander.Header>
+                    <StackPanel>
+                        <Button Content="Text here" FontSize="22" HorizontalAlignment="Left" Margin="20,0,0,0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <TextBlock Margin="20,0,0,0">
+                            <Ikony:PackIcon/>
+                            <Hyperlink Foreground="White" FontSize="22" >Click me</Hyperlink>
+                        </TextBlock>
+                        <Button Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Lista zwierząt" FontSize="22" FontWeight="Bold"/>
+                        <Button Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Znowu taki tekst" FontSize="22" FontWeight="Bold"/>
+                    </StackPanel>
+                </Expander>
+                <ListBoxItem>
+                    <Expander BorderBrush="Black" BorderThickness="3,1,3,3" Width="279" Margin="0,0,0,0">
+                        <Expander.Header >
+                            <BulletDecorator Width="250">
+                                <BulletDecorator.Bullet>
+                                    <Ikony:PackIcon Kind="Cow" Height="66" Width="82" Margin="147,0,-147,0"/>
+                                </BulletDecorator.Bullet>
+                                <TextBlock Foreground="WhiteSmoke" Text="Zwierzeta" FontSize="18" Height="26" FontWeight="Bold" Margin="-54,0,96,0" />
+                            </BulletDecorator>
+                        </Expander.Header>
+                        <Button Width="194" Height="50"/>
+                    </Expander>
+                </ListBoxItem>
+            </ListBox>
+        </Grid>
+        <Frame x:Name="ramkaAkcji" Margin="283,0,0,0" NavigationUIVisibility="Hidden" Navigated="ramkaAkcji_Navigated"/>
 
     </Grid>
 </Window>

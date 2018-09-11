@@ -9,7 +9,7 @@
       Title="FormularzDodaniaZwierzecia">
 
     <Grid Background="White">
-        <Label x:Name="nrIdentyfikacyjnyL" Content="Nr identyfikacyjny:" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" />
+        <Label x:Name="nrKolczykaL" Content="Nr kolczyka:" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" />
         <Label x:Name="plecL" Content="Płeć:" HorizontalAlignment="Left" Margin="28,41,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dataUrL" Content="Data Urodzenia:" HorizontalAlignment="Left" Margin="28,72,0,0" VerticalAlignment="Top"/>
         <Label x:Name="gatunekL" Content="Gatunek:" HorizontalAlignment="Left" Margin="28,103,0,0" VerticalAlignment="Top"/>
@@ -19,10 +19,10 @@
         <TextBox x:Name="tbKod" HorizontalAlignment="Left" Height="23" Margin="160,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="tbPlec" HorizontalAlignment="Left" Height="23" Margin="160,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="tbDataUr" HorizontalAlignment="Left" Height="23" Margin="160,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="tbGatunek" HorizontalAlignment="Left" Height="23" Margin="160,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="tbRasa" HorizontalAlignment="Left" Height="23" Margin="160,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="tbOkresOd" HorizontalAlignment="Left" Height="23" Margin="160,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="tbOkresDo" HorizontalAlignment="Left" Height="23" Margin="160,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
         <Button x:Name="btDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="205,268,0,0" VerticalAlignment="Top" Width="75" Click="BtDodaj_Click"/>
+        <ComboBox HorizontalAlignment="Left" Margin="160,107,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" Margin="160,138,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Page>

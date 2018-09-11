@@ -24,6 +24,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         public FormularzDodaniaZwierzecia()
         {
+            tbKod.Text = "ala";
             InitializeComponent();    
             
         }
