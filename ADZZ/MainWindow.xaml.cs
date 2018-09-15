@@ -74,5 +74,10 @@ namespace ADZZ
         {
             ramkaAkcji.Content = new NowyCalendar();
         }
+
+        private void BtZnajdzZwierze_Click(object sender, RoutedEventArgs e)
+        {
+            ramkaAkcji.Content = new FormularzDodaniaZwierzecia();
+        }
     }
 }

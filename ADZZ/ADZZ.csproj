@@ -80,6 +80,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Kalendarz\FormularzDodaniaNotatki.xaml.cs">
+      <DependentUpon>FormularzDodaniaNotatki.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Kalendarz\NowyCalendar.xaml.cs" />
     <Compile Include="Kalendarz\NowyCalendarButton.xaml.cs" />
     <Compile Include="Kalendarz\NowyCalendarDayButton.xaml.cs" />
@@ -110,12 +113,13 @@
     <Compile Include="Zarządzanie zwierzetami - okno i strony\FormularzEdycji.xaml.cs">
       <DependentUpon>FormularzEdycji.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Zarządzanie zwierzetami - okno i strony\KalendarzRujowy.xaml.cs">
-      <DependentUpon>KalendarzRujowy.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Zarządzanie zwierzetami - okno i strony\ZarzadzanieZwierzetami.xaml.cs">
       <DependentUpon>ZarzadzanieZwierzetami.xaml</DependentUpon>
     </Compile>
+    <Page Include="Kalendarz\FormularzDodaniaNotatki.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Kalendarz\NowyCalendar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -165,10 +169,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Zarządzanie zwierzetami - okno i strony\FormularzEdycji.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Zarządzanie zwierzetami - okno i strony\KalendarzRujowy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

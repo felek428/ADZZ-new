@@ -1,0 +1,18 @@
+﻿<Window x:Class="ADZZ.Kalendarz.FormularzDodaniaNotatki"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ADZZ.Kalendarz"
+        mc:Ignorable="d"
+        Title="Notatka" Height="150" Width="260" Background="White"  WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ComboBox x:Name="typNotatkiCB" HorizontalAlignment="Left" Margin="120,39,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="kolczykLB" Content="Nr kolczyka" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbKolczyk" MaxLength="12"  HorizontalAlignment="Left" Height="23" Margin="120,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="tbKolczyk_TextChanged"/>
+        <Label x:Name="typLB" Content="Typ notatki" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="BtnDodaj" Height="25" Width="80" Content="Dodaj" Margin="160,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BtnDodaj_Click" />
+        <Label x:Name="PLlabel" Content="PL" HorizontalAlignment="Left" Margin="93,11,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

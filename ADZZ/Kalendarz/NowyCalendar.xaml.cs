@@ -373,8 +373,7 @@ namespace NewCalendar
 
                 var lista = DaysOfWeek.ColumnDefinitions.ToList();
                 var indexCol = lista.IndexOf(DaysOfWeek.ColumnDefinitions.Where(c => c.Name == dayOfWeek).SingleOrDefault()); //pobieram index kolumny podanego dnia
-
-                
+        
                 NowyCalendarDayButton day = new NowyCalendarDayButton(i+1, actualMonth, actualYear);
                 
                 day.Opacity = 0.2;
@@ -433,9 +432,6 @@ namespace NewCalendar
                 MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth); //pobiera nazwe miesiaca w jezyku jaki jest ustawiony na komputerze na podstawie int'a
                 CreateCalendarDayButtonTest(GetCurrentMonthDaysNumber(actualYear, actualMonth), GetCurrentMonth());
 
-
-                Console.WriteLine(" previous "+previousMonth);
-                Console.WriteLine("next"+nextMonth);
                 CreatePreviousMonthDays(GetCurrentMonthDaysNumber(actualYear, previousMonth));
                 CreateNextMonthDays();
             }
@@ -495,7 +491,6 @@ namespace NewCalendar
                 CreateCalendarDayButtonTest(GetCurrentMonthDaysNumber(actualYear, actualMonth), GetCurrentMonth());
                 CreatePreviousMonthDays(GetCurrentMonthDaysNumber(actualYear, previousMonth));
                 CreateNextMonthDays();
-                Console.WriteLine("previous" + previousMonth);
             }else if(states == 1)
             {
                 actualYear += 1;

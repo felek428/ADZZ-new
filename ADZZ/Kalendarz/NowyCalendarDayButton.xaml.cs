@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADZZ.Kalendarz;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace NewCalendar
         public int DayNumber { get; private set; }
         public int ActualMonth { get; private set; }
         public int ActualYear { get; private set; }
-
+        private NowyCalendarDayButton ClickedDay;
 
         public NowyCalendarDayButton()
         {
@@ -100,6 +101,11 @@ namespace NewCalendar
         /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            FormularzDodaniaNotatki obj = new FormularzDodaniaNotatki(ClickedDay);
+            obj.ShowDialog();
+            
+            Console.WriteLine(obj.typNotatkiCB.SelectedItem);
+            /*
             Label note = new Label();
             note.Name = "Ala";
             note.Content = "Ruja";
@@ -121,6 +127,7 @@ namespace NewCalendar
 
             Dok.Children.Add(noteBorder);
             DockPanel.SetDock(noteBorder, Dock.Top);
+            */
         }
         private void LabelClick(object sender, MouseEventArgs et)
         {
@@ -134,6 +141,7 @@ namespace NewCalendar
         /// <param name="e"></param>
         private void UserControl_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            ClickedDay = sender as NowyCalendarDayButton;
             ContextMenu contextMenu = new ContextMenu();
             MenuItem nowyLabel = new MenuItem();
             nowyLabel.Header = "Dodaj notke";

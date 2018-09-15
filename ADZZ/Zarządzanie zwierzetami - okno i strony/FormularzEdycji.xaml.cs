@@ -35,9 +35,8 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
 
             FormularzDodaniaZwierzecia obj = new FormularzDodaniaZwierzecia();
-            obj.tbDataUr.Text = "test";
-            obj.tbKod.Text = "testttt";
-            obj.tbKod.IsEnabled = false;
+            obj.tbKolczyk.Text = "testttt";
+            obj.tbKolczyk.IsEnabled = false;
             obj.btDodaj.Content = "Zmień";
             BtUsun.Visibility = Visibility.Visible;
             UzupelnionyFormularzEdycji.Content = obj;
