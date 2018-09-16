@@ -64,33 +64,7 @@ namespace NewCalendar
 
             Tekst.Background = gradient;
 
-            switch (day)
-            {
-                case 0:
-                    Label note = new Label();
-                    note.Name = "Ala";
-                    note.Content = "Ruja";
-
-                    note.ToolTip = note.Content;
-
-                    note.MouseLeftButtonDown += new MouseButtonEventHandler(LabelClick);
-
-                    Border borderNote = new Border();
-                    borderNote.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
-                    borderNote.BorderThickness = new Thickness(1, 1, 1, 1);
-                    borderNote.CornerRadius = new CornerRadius(20, 20, 20, 20);
-                    borderNote.Background = new SolidColorBrush(Colors.AliceBlue);
-                    borderNote.Child = note;
-
-                    Label test = new Label();
-                    test.Content = "ala";
-
-                    Dok.Children.Add(borderNote);
-                    DockPanel.SetDock(borderNote, Dock.Top);
-                    break;
-                default:
-                    break;
-            }
+          
             DataContext = this;
 
         }

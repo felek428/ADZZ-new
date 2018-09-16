@@ -24,11 +24,11 @@ namespace ADZZ.Kalendarz
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private NowyCalendarDayButton objekt;
-        public FormularzDodaniaNotatki(NowyCalendarDayButton sender)
+        public FormularzDodaniaNotatki(NowyCalendarDayButton ClickedDay)
         {
 
             InitializeComponent();
-            objekt = sender;
+            objekt = ClickedDay;
             typNotatkiCB.Items.Add("Ruja");
             typNotatkiCB.Items.Add("Wycielenie");
 
@@ -59,26 +59,7 @@ namespace ADZZ.Kalendarz
                 }
                 else
                 {
-                    Label note = new Label();
-                    note.Content = typNotatkiCB.SelectedItem;
-
-                    note.ToolTip = note.Content;
-
-                    //note.MouseLeftButtonDown += new MouseButtonEventHandler(LabelClick);
-
-                    Border noteBorder = new Border();
-                    noteBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
-                    noteBorder.BorderThickness = new Thickness(1, 1, 1, 1);
-                    noteBorder.CornerRadius = new CornerRadius(20, 20, 20, 20);
-                    noteBorder.Background = new SolidColorBrush(Colors.AliceBlue);
-                    noteBorder.Child = note;
-
-
-                    Label test = new Label();
-
-
-                    objekt.Dok.Children.Add(noteBorder);
-                    DockPanel.SetDock(noteBorder, Dock.Top);
+                    CreateLabel(typNotatkiCB.SelectedItem.ToString(), "PL" + tbKolczyk.Text);
                     this.Close();
 
 
@@ -126,6 +107,28 @@ namespace ADZZ.Kalendarz
                     break;
                 }
             }            
+        }
+        /// <summary>
+        /// Tworzy label na elemencie NowyCalendarDayButton
+        /// </summary>
+        /// <param name="typNotatki">String czy jest to ruja czy wycielenie</param>
+        /// <param name="kolczyk">Kolczyk zwierzecia</param>
+        public void CreateLabel( string typNotatki, string kolczyk)
+        {
+            Label note = new Label();
+            note.Content = typNotatki;
+
+            note.ToolTip = note.Content + "\n" + kolczyk;
+
+            Border noteBorder = new Border();
+            noteBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
+            noteBorder.BorderThickness = new Thickness(1, 1, 1, 1);
+            noteBorder.CornerRadius = new CornerRadius(20, 20, 20, 20);
+            noteBorder.Background = new SolidColorBrush(Colors.AliceBlue);
+            noteBorder.Child = note;
+
+            objekt.Dok.Children.Add(noteBorder);
+            DockPanel.SetDock(noteBorder, Dock.Top);
         }
     }
 }

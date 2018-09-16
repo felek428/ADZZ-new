@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ADZZ;
+using ADZZ.Kalendarz;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -22,6 +24,7 @@ namespace NewCalendar
     /// </summary>
     public partial class NowyCalendar : UserControl
     {
+        PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         /// <summary>
         /// Przechowuje nazwe miesiaca
         /// </summary>
@@ -255,6 +258,43 @@ namespace NewCalendar
                 dayBorder.BorderThickness = new Thickness(1, 1, 1, 1);
                 dayBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
 
+
+
+                var queryRozrodTyp = from Rozrod in Polaczenie.Rozrod
+                                  where Rozrod.Data == Convert.ToDateTime((i+1).ToString() + "." + month + "." + actualYear)
+                                  select Rozrod.czyRuja;
+                if (Polaczenie.Rozrod.Any(x => x.Data == Convert.ToDateTime((i + 1).ToString() + "." + month + "." + actualYear)))
+                {
+                    for(int j = 0; j < queryRozrodTyp.ToList().Count; j++)
+                    {
+
+                        FormularzDodaniaNotatki notka = new FormularzDodaniaNotatki(day);
+                        
+                    
+
+                        var queryRozrodIdZwierzecia = from Rozrod in Polaczenie.Rozrod
+                                                      where Rozrod.Data == Convert.ToDateTime((i + 1).ToString() + "." + month + "." + actualYear)
+                                                      select Rozrod.id_zwierze;
+                        var queryZwierzeKolczyk = from Zwierze in Polaczenie.Zwierze
+                                                  where Zwierze.Id == queryRozrodIdZwierzecia.ToList()[j]
+                                                  select Zwierze.nr_kolczyka;
+
+                        var typNotki = queryRozrodTyp.ToList()[j];
+
+                        switch (typNotki)
+                        {
+                            case 0:
+                                notka.CreateLabel("Ruja", queryZwierzeKolczyk.FirstOrDefault());
+                                break;
+                            case 1:
+                                notka.CreateLabel("Wycielenie", queryZwierzeKolczyk.FirstOrDefault());
+                                break;
+                        }                  
+                    }
+                    
+                    
+
+                }
                 dayBorder.Child = day;
 
                 MonthView.Children.Add(dayBorder);
