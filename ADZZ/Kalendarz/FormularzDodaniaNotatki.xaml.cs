@@ -34,6 +34,15 @@ namespace ADZZ.Kalendarz
 
 
         }
+        public FormularzDodaniaNotatki(NowyCalendarDayButton ClickedDay,string kappa)
+        {
+
+
+            objekt = ClickedDay;
+
+
+
+        }
         /// <summary>
         /// Zatwierdznie notatki i dodanie jej do bazy
         /// </summary>
@@ -59,7 +68,10 @@ namespace ADZZ.Kalendarz
                 }
                 else
                 {
-                    CreateLabel(typNotatkiCB.SelectedItem.ToString(), "PL" + tbKolczyk.Text);
+                    NotatkaKalendarza notka = new NotatkaKalendarza(objekt);
+                    notka.CreateLabel(typNotatkiCB.SelectedItem.ToString(), "PL" + tbKolczyk.Text);
+
+                    //CreateLabel(typNotatkiCB.SelectedItem.ToString(), "PL" + tbKolczyk.Text);
                     this.Close();
 
 
@@ -108,27 +120,6 @@ namespace ADZZ.Kalendarz
                 }
             }            
         }
-        /// <summary>
-        /// Tworzy label na elemencie NowyCalendarDayButton
-        /// </summary>
-        /// <param name="typNotatki">String czy jest to ruja czy wycielenie</param>
-        /// <param name="kolczyk">Kolczyk zwierzecia</param>
-        public void CreateLabel( string typNotatki, string kolczyk)
-        {
-            Label note = new Label();
-            note.Content = typNotatki;
-
-            note.ToolTip = note.Content + "\n" + kolczyk;
-
-            Border noteBorder = new Border();
-            noteBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
-            noteBorder.BorderThickness = new Thickness(1, 1, 1, 1);
-            noteBorder.CornerRadius = new CornerRadius(20, 20, 20, 20);
-            noteBorder.Background = new SolidColorBrush(Colors.AliceBlue);
-            noteBorder.Child = note;
-
-            objekt.Dok.Children.Add(noteBorder);
-            DockPanel.SetDock(noteBorder, Dock.Top);
-        }
+        
     }
 }

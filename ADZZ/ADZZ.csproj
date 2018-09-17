@@ -86,6 +86,7 @@
     <Compile Include="Kalendarz\NowyCalendar.xaml.cs" />
     <Compile Include="Kalendarz\NowyCalendarButton.xaml.cs" />
     <Compile Include="Kalendarz\NowyCalendarDayButton.xaml.cs" />
+    <Compile Include="NotatkaKalendarza.cs" />
     <Compile Include="PolaczenieBaza.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

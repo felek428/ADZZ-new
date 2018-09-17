@@ -79,29 +79,7 @@ namespace NewCalendar
             obj.ShowDialog();
             
             Console.WriteLine(obj.typNotatkiCB.SelectedItem);
-            /*
-            Label note = new Label();
-            note.Name = "Ala";
-            note.Content = "Ruja";
-            
-            note.ToolTip = note.Content;
-            
-            note.MouseLeftButtonDown += new MouseButtonEventHandler(LabelClick);
 
-            Border noteBorder = new Border();
-            noteBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
-            noteBorder.BorderThickness = new Thickness(1, 1, 1, 1);
-            noteBorder.CornerRadius = new CornerRadius(20, 20, 20, 20);
-            noteBorder.Background = new SolidColorBrush(Colors.AliceBlue);
-            noteBorder.Child = note;
-
-
-            Label test = new Label();
-
-
-            Dok.Children.Add(noteBorder);
-            DockPanel.SetDock(noteBorder, Dock.Top);
-            */
         }
         private void LabelClick(object sender, MouseEventArgs et)
         {
