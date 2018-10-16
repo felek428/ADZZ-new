@@ -24,6 +24,7 @@ namespace ADZZ.Kalendarz
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private NowyCalendarDayButton objekt;
+        public int MaxLenght { get; set; }
         public FormularzDodaniaNotatki(NowyCalendarDayButton ClickedDay)
         {
 
@@ -31,7 +32,8 @@ namespace ADZZ.Kalendarz
             objekt = ClickedDay;
             typNotatkiCB.Items.Add("Ruja");
             typNotatkiCB.Items.Add("Wycielenie");
-
+            WypelnienieCbKolczyk();
+            
 
         }
         public FormularzDodaniaNotatki(NowyCalendarDayButton ClickedDay,string kappa)
@@ -50,16 +52,16 @@ namespace ADZZ.Kalendarz
         /// <param name="e"></param>
         private void BtnDodaj_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine(cbKolczyk.SelectedItem);
 
-
-            if (typNotatkiCB.SelectedItem != null && tbKolczyk.Text != "")
+            if (typNotatkiCB.SelectedItem != null || cbKolczyk.SelectedItem != null)
             {
                 
 
                 Rozrod NowaNotka = new Rozrod();
                 
                 var queryZwierze = (from Zwierze in Polaczenie.Zwierze
-                                   where Zwierze.nr_kolczyka == "PL" + tbKolczyk.Text
+                                   where Zwierze.nr_kolczyka.Equals(cbKolczyk.SelectedItem)
                                    select Zwierze.Id).FirstOrDefault();
                 if(queryZwierze == 0)
                 {
@@ -69,7 +71,7 @@ namespace ADZZ.Kalendarz
                 else
                 {
                     NotatkaKalendarza notka = new NotatkaKalendarza(objekt);
-                    notka.CreateLabel(typNotatkiCB.SelectedItem.ToString(), "PL" + tbKolczyk.Text);
+                    notka.CreateLabel(typNotatkiCB.SelectedItem.ToString(), cbKolczyk.SelectedItem.ToString());
 
                     //CreateLabel(typNotatkiCB.SelectedItem.ToString(), "PL" + tbKolczyk.Text);
                     this.Close();
@@ -104,22 +106,19 @@ namespace ADZZ.Kalendarz
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tbKolczyk_TextChanged(object sender, TextChangedEventArgs e)
+        private void cbKolczyk_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ObservableCollection<char> kolczyk = new ObservableCollection<char>();
-            for(int i = 0; i < tbKolczyk.Text.Length; i++)
-            {
-                if (!Char.IsDigit(tbKolczyk.Text[i]))
-                {
-
-                    tbKolczyk.Text = tbKolczyk.Text.Remove(i, 1);
-                    tbKolczyk.Focus();
-                    tbKolczyk.Select(tbKolczyk.Text.Length, 0);
-                    MessageBox.Show("Wpisany znak nie jest cyfrą!");
-                    break;
-                }
-            }            
+           
+            Kolczyk kolczyk = new Kolczyk();
+            kolczyk.walidacjaKolczyk(cbKolczyk);
+                    
         }
         
+        private void WypelnienieCbKolczyk()
+        {
+            var queryKolczyk = (from Zwierze in Polaczenie.Zwierze
+                                select Zwierze.nr_kolczyka).ToList();
+            cbKolczyk.ItemsSource = queryKolczyk;
+        }
     }
 }

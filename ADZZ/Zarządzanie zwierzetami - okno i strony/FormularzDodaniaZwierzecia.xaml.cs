@@ -91,8 +91,17 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 
                 Polaczenie.Zwierze.InsertOnSubmit(NowyZwierzak);
                 Polaczenie.SubmitChanges();
-
+                
                 MessageBox.Show("Udalo sie!");
+                
+                tbKolczyk.Text = string.Empty;
+                maleCheckB.IsChecked = false;
+                femaleCheckB.IsChecked = false;
+                DataUrDP.SelectedDate = null;
+                GatunekCB.SelectedIndex = -1;
+                RasaCB.SelectedIndex = -1;
+                okresOdDP.SelectedDate = null;
+                okresDoDP.SelectedDate = null;
 
             }
             else
@@ -104,23 +113,26 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         private void GatunekCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RasaCB.IsEnabled = false;
-            
-            var queryGatunek = (from Gatunek in Polaczenie.Gatunek
-                         where Gatunek.nazwa == GatunekCB.SelectedItem.ToString()
-                         select Gatunek.Id).FirstOrDefault();
+            if(GatunekCB.SelectedIndex != -1)
+            {
+                var queryGatunek = (from Gatunek in Polaczenie.Gatunek
+                                    where Gatunek.nazwa == GatunekCB.SelectedItem.ToString()
+                                    select Gatunek.Id).FirstOrDefault();
 
-            var queryRasa = from Rasa in Polaczenie.Rasa
-                            where Rasa.id_gatunek == queryGatunek
-                             select Rasa.nazwa;
-            if (queryRasa.ToList().Count > 0)
-            {
-                RasaCB.IsEnabled = true;
-                RasaCB.ItemsSource = queryRasa.ToList();
+                var queryRasa = from Rasa in Polaczenie.Rasa
+                                where Rasa.id_gatunek == queryGatunek
+                                select Rasa.nazwa;
+                if (queryRasa.ToList().Count > 0)
+                {
+                    RasaCB.IsEnabled = true;
+                    RasaCB.ItemsSource = queryRasa.ToList();
+                }
+                else
+                {
+                    MessageBox.Show("Brakuje ras? Dodaj nowe!");
+                }
             }
-            else
-            {
-                MessageBox.Show("Brakuje ras? Dodaj nowe!");
-            }
+            
             
             
         }
@@ -140,26 +152,22 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void tbKolczyk_TextChanged(object sender, TextChangedEventArgs e)
         {
-            for (int i = 0; i < tbKolczyk.Text.Length; i++)
-            {
-                if (!Char.IsDigit(tbKolczyk.Text[i]))
-                {
-
-                    tbKolczyk.Text = tbKolczyk.Text.Remove(i, 1);
-                    tbKolczyk.Focus();
-                    tbKolczyk.Select(tbKolczyk.Text.Length, 0);
-                    MessageBox.Show("Wpisany znak nie jest cyfrą!");
-                    break;
-                }
-            }
+            
+            Kolczyk kolczyk = new Kolczyk();
+            kolczyk.walidacjaKolczyk(tbKolczyk);
+            
         }
 
         private void RasaCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var queryRasa = (from Rasa in Polaczenie.Rasa
-                            where Rasa.nazwa == RasaCB.SelectedItem.ToString()
-                            select Rasa.Id).FirstOrDefault();
-            Console.WriteLine(queryRasa);
+            if(RasaCB.SelectedIndex != -1)
+            {
+                var queryRasa = (from Rasa in Polaczenie.Rasa
+                                 where Rasa.nazwa == RasaCB.SelectedItem.ToString()
+                                 select Rasa.Id).FirstOrDefault();
+                Console.WriteLine(queryRasa);
+            }
+            
         }
     }
 }

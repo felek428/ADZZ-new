@@ -4,20 +4,32 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ADZZ.Rozliczenia___okno_i_strony"
+      xmlns:Ikony="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FormularzDodaniaRozliczenia">
 
     <Grid Background="White">
-        <Label x:Name="typRozliczeniaL" Content="Typ rozliczenia:" HorizontalAlignment="Left" Margin="45,20,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="WyborRozliczenia" HorizontalAlignment="Left" Margin="141,24,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
-        <TextBox x:Name="tbKwota" HorizontalAlignment="Left" Height="23" Margin="141,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="kwotaL" Content="Kwota:" HorizontalAlignment="Left" Margin="45,52,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="opisL" Content="Opis:" HorizontalAlignment="Left" Margin="45,114,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbOpis" HorizontalAlignment="Left" Height="97" Margin="141,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289"/>
+        <Label x:Name="typRozliczeniaL" Content="Kategoria rozliczenia:" HorizontalAlignment="Left" Margin="45,57,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="WyborRozliczenia" HorizontalAlignment="Left" Margin="172,57,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" />
+        <Label x:Name="kwotaL" Content="Kwota:" HorizontalAlignment="Left" Margin="45,84,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="opisL" Content="Opis:" HorizontalAlignment="Left" Margin="45,140,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbOpis" MaxLength="200" HorizontalAlignment="Left" Height="101" Margin="172,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="323"/>
         <Button x:Name="BtDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="355,256,0,0" VerticalAlignment="Top" Width="75" Click="BtDodaj_Click"/>
-        <Label x:Name="dataL" Content="Data:" HorizontalAlignment="Left" Margin="45,83,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbData" HorizontalAlignment="Left" Height="23" Margin="141,85,0,0" TextWrapping="Wrap" Text="Data" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="dataL" Content="Data:" HorizontalAlignment="Left" Margin="45,111,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="DataDP" HorizontalAlignment="Left" Height="23" Margin="172,112,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbKwota"   HorizontalAlignment="Left" Height="23" Margin="172,84,0,0"  VerticalAlignment="Top" Width="120" TextChanged="tbKwota_TextChanged"/>
+        <Label x:Name="lbLitry" Content="Litry:" HorizontalAlignment="Left" Margin="297,84,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <TextBox x:Name="tbLitry" HorizontalAlignment="Left" Height="23" Margin="404,84,0,0"  VerticalAlignment="Top" Width="91" RenderTransformOrigin="0.5,0.478" Visibility="Hidden"/>
+        <Label x:Name="lbNrKolczyka" Content="Nr Kolczyka:" HorizontalAlignment="Left" Margin="297,110,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <TextBox x:Name="tbKolczyk" HorizontalAlignment="Left" Height="23" Margin="404,113,0,0"   VerticalAlignment="Top" Width="90" MaxLength="12" Visibility="Hidden"/>
+        <Label x:Name="lbPL" Content="PL" HorizontalAlignment="Left" Margin="382,110,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label x:Name="lbNrStada" Content="Nr stada:" HorizontalAlignment="Left" Margin="297,110,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <TextBox x:Name="tbNrStada" HorizontalAlignment="Left" Height="23" Margin="404,113,0,0"  VerticalAlignment="Top" Width="90" MaxLength="12" Visibility="Hidden"/>
+        <Label Content="Typ Zwierząt:" HorizontalAlignment="Left" Margin="45,30,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbTypyZwierzat" HorizontalAlignment="Left" Margin="172,30,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbTypyZwierzat_SelectionChanged" />
+        <Ikony:PackIcon Name="infoDodajKategorie" Kind="Information" Height="22" Width="35" Margin="297,57,0,0" ToolTip="Brakuje kategorii? Kliknij aby dodać nowe!" MouseLeftButtonDown="PackIcon_MouseLeftButtonDown" MouseEnter="infoDodajKategorie_MouseEnter" MouseLeave="infoDodajKategorie_MouseLeave"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="56,369,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 
     </Grid>
 </Page>

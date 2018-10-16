@@ -86,11 +86,15 @@
     <Compile Include="Kalendarz\NowyCalendar.xaml.cs" />
     <Compile Include="Kalendarz\NowyCalendarButton.xaml.cs" />
     <Compile Include="Kalendarz\NowyCalendarDayButton.xaml.cs" />
+    <Compile Include="Kolczyk.cs" />
     <Compile Include="NotatkaKalendarza.cs" />
     <Compile Include="PolaczenieBaza.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PolaczenieBaza.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Rozliczenia - okno i strony\FormularzDodaniaKategoriiRozliczen.xaml.cs">
+      <DependentUpon>FormularzDodaniaKategoriiRozliczen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Rozliczenia - okno i strony\FormularzDodaniaRozliczenia.xaml.cs">
       <DependentUpon>FormularzDodaniaRozliczenia.xaml</DependentUpon>
@@ -98,13 +102,7 @@
     <Compile Include="Rozliczenia - okno i strony\ZarzadzanieCenami.xaml.cs">
       <DependentUpon>ZarzadzanieCenami.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Statystyki - okno i strony\Statystyki.xaml.cs">
-      <DependentUpon>Statystyki.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TypZwierzat.cs" />
-    <Compile Include="Rozliczenia - okno i strony\Rozliczenia.xaml.cs">
-      <DependentUpon>Rozliczenia.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaStada.xaml.cs">
       <DependentUpon>FormularzDodaniaStada.xaml</DependentUpon>
     </Compile>
@@ -145,19 +143,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Rozliczenia - okno i strony\FormularzDodaniaKategoriiRozliczen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Rozliczenia - okno i strony\FormularzDodaniaRozliczenia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Rozliczenia - okno i strony\ZarzadzanieCenami.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Statystyki - okno i strony\Statystyki.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Rozliczenia - okno i strony\Rozliczenia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,6 +210,8 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Statystyki - okno i strony\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

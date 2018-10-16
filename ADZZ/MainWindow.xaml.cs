@@ -1,4 +1,4 @@
-﻿using ADZZ.Statystyki___okno_i_strony;
+﻿
 using ADZZ.Rozliczenia___okno_i_strony;
 using ADZZ.Zarządzanie_zwierzetami___okno_i_strony;
 using System;
@@ -54,8 +54,8 @@ namespace ADZZ
 
         private void BtStatystyki_Click(object sender, RoutedEventArgs e)
         {
-            Statystyki przejscie = new Statystyki();    //Tworze instancje klasy Statystyki aby przejsc do nowego okna
-            przejscie.ShowDialog();
+            
+           
         }
 
         #endregion
@@ -78,6 +78,11 @@ namespace ADZZ
         private void BtZnajdzZwierze_Click(object sender, RoutedEventArgs e)
         {
             ramkaAkcji.Content = new FormularzDodaniaZwierzecia();
+        }
+
+        private void btnDodajRozliczenie_Click(object sender, RoutedEventArgs e)
+        {
+            ramkaAkcji.Content = new FormularzDodaniaRozliczenia();
         }
     }
 }

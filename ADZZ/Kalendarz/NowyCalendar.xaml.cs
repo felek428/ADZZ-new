@@ -264,7 +264,7 @@ namespace NewCalendar
                                   where Rozrod.Data == Convert.ToDateTime((i+1).ToString() + "." + month + "." + actualYear)
                                   select Rozrod;
                 var dany = queryRozrod.ToList();
-                //if (Polaczenie.Rozrod.Any(x => x.Data == Convert.ToDateTime((i + 1).ToString() + "." + month + "." + actualYear)))
+                //if (Polaczenie.Rozrod.Any(x => x.Data == Convert.ToDateTime((i + 1).ToString() + "." + month + "." + actualYear))) //warunek sprawdzajacy czy istenieje wpis w bazie
                 
                 for(int j = 0; j < queryRozrod.ToList().Count; j++)
                 {
@@ -283,9 +283,6 @@ namespace NewCalendar
                      }                  
                  }
                     
-                    
-    
-               
                 dayBorder.Child = day;
 
                 MonthView.Children.Add(dayBorder);
