@@ -73,7 +73,6 @@ namespace ADZZ.Kalendarz
                     NotatkaKalendarza notka = new NotatkaKalendarza(objekt);
                     notka.CreateLabel(typNotatkiCB.SelectedItem.ToString(), cbKolczyk.SelectedItem.ToString());
 
-                    //CreateLabel(typNotatkiCB.SelectedItem.ToString(), "PL" + tbKolczyk.Text);
                     this.Close();
 
 

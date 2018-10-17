@@ -242,7 +242,12 @@ namespace NewCalendar
         {
             MonthView.Children.Clear();
             var indexRow = 0;
-            for(int i = 0; i < daysNumber; i++)
+
+            var queryRozrod = from Rozrod in Polaczenie.Rozrod
+                              where Rozrod.Data.Month == month && Rozrod.Data.Year == actualYear
+                              select Rozrod;
+            var ListaRozrod = queryRozrod.ToList();
+            for (int i = 0; i < daysNumber; i++)
             {
                 var dayOfWeek = DateTime.Parse((actualYear + "/" + month + "/" + (i+1).ToString()).ToString()).DayOfWeek.ToString(); //sprawdza jaki to dzien tygodnia
                 
@@ -259,26 +264,26 @@ namespace NewCalendar
                 dayBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
 
 
-                
+                /*
                 var queryRozrod = from Rozrod in Polaczenie.Rozrod
                                   where Rozrod.Data == Convert.ToDateTime((i+1).ToString() + "." + month + "." + actualYear)
                                   select Rozrod;
                 var dany = queryRozrod.ToList();
-                //if (Polaczenie.Rozrod.Any(x => x.Data == Convert.ToDateTime((i + 1).ToString() + "." + month + "." + actualYear))) //warunek sprawdzajacy czy istenieje wpis w bazie
-                
-                for(int j = 0; j < queryRozrod.ToList().Count; j++)
+                */
+                var dayList = ListaRozrod.Where(x => x.Data.Day == i + 1).ToList();
+                for(int j = 0; j < dayList.Count(); j++)
                 {
                     
                     NotatkaKalendarza notka = new NotatkaKalendarza(day);
-                    var typNotki = queryRozrod.ToList()[j].czyRuja;
+                    var typNotki = dayList[j].czyRuja;
                         
                     switch (typNotki)
                      {
                         case 0:
-                            notka.CreateLabel("Ruja", dany[j].Zwierze.nr_kolczyka);
+                            notka.CreateLabel("Ruja", dayList[j].Zwierze.nr_kolczyka);
                             break;
                         case 1:
-                            notka.CreateLabel("Wycielenie", dany[j].Zwierze.nr_kolczyka);
+                            notka.CreateLabel("Wycielenie", dayList[j].Zwierze.nr_kolczyka);
                             break;
                      }                  
                  }

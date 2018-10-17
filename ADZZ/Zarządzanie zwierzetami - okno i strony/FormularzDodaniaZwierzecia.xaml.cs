@@ -133,8 +133,6 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 }
             }
             
-            
-            
         }
 
         private void femaleCheckB_Click(object sender, RoutedEventArgs e)

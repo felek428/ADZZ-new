@@ -68,9 +68,7 @@ namespace ADZZ
                 {
                     
                     Kolczyk.Text = Kolczyk.Text.Remove(i, 1);
-                    //Kolczyk.Focus();
                     Kolczyk.Select(Kolczyk.Text.Length, 0);
-                    //MessageBox.Show("Wpisany znak nie jest cyfrą!");
                     break;
                 }
             }
