@@ -39,11 +39,7 @@ namespace ADZZ
             Close();                                                    //Metoda do zamykania aplikacji z pozycji MainWindow
         }
         #region Metody otwierania okienek dla przyciskow z głównego menu
-        private void BtZarzadzaj_Click(object sender, RoutedEventArgs e)
-        {
-            ZarzadzanieZwierzetami przejscie = new ZarzadzanieZwierzetami(); //Tworze instancje okna od zarzadzania aby do niego przejsc
-            przejscie.ShowDialog(); //Showdialog poniewaz blokuje mi mainwindow dzieki czemu nie mozna uzywac innego poza tym wlaczonym
-        }
+
 
         private void BtWydatkiPrzychody_Click(object sender, RoutedEventArgs e)
         {

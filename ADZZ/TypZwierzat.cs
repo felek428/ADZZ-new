@@ -32,10 +32,6 @@ namespace ADZZ
             ListaTypow.Add("Pojedyncze zwierze");
             ListaTypow.Add("Stado");
         }
-        public TypZwierzat(NowyCalendarDayButton guzik)
-        {
-            ClickedDay = guzik;
-        }
         public TypZwierzat()
         {
 
@@ -45,12 +41,6 @@ namespace ADZZ
         /// Ustawia zawartosc ComboBoxa
         /// </summary>
         /// <param name="ListaTypow">Kontrolka typu ComboBox</param>
-        public static void UstawListeTypow(ComboBox ListaTypowBox)
-        {
-
-            ListaTypowBox.ItemsSource = ListaTypow;
-            //ListaTypow.ItemsSource = Enum.GetValues(typeof(Typy));
-        }   
         
         public void WypelnienieCBTypami(ComboBox cbTypy)
         {

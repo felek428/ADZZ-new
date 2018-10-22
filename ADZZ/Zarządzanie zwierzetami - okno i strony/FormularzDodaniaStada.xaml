@@ -9,7 +9,7 @@
       Title="FormularzDodaniaStada">
 
     <Grid Background="White">
-        <Label x:Name="kodL" Content="Nr identyfikacyjny:" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="kodL" Content="Nr stada:" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="gatunekL" Content="Gatunek:" HorizontalAlignment="Left" Margin="28,36,0,0" VerticalAlignment="Top"/>
         <Label x:Name="rasaL" Content="Rasa:" HorizontalAlignment="Left" Margin="28,62,0,0" VerticalAlignment="Top"/>
         <Label x:Name="iloscL" Content="Ilość:" HorizontalAlignment="Left" Margin="28,88,0,0" VerticalAlignment="Top"/>
