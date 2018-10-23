@@ -77,6 +77,8 @@ namespace ADZZ.Kalendarz
 
 
                     var dataNotki = objekt.DayNumber + "." + objekt.ActualMonth + "." + objekt.ActualYear;
+                    var zmienna = Convert.ToDateTime(dataNotki);
+                    var zmienna2 = zmienna.ToShortDateString();
                     NowaNotka.Data = Convert.ToDateTime(dataNotki);
                     if (typNotatkiCB.SelectedItem.Equals("Ruja"))
                     {

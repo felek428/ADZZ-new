@@ -34,6 +34,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             WypelnienieWykres();
             ramkaInformacje.Content = new FormularzDodaniaZwierzecia();
             WypelnienieListViewRuja(Kolczyk);
+            WypelnienieLVListaWycielen(Kolczyk);
             
         }
 
@@ -53,12 +54,21 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         
         private void WypelnienieListViewRuja(string kolczyk)
         {
-            var query2 = from Rozrod in Polaczenie.Rozrod
+            var query = from Rozrod in Polaczenie.Rozrod
                          where Rozrod.Zwierze.nr_kolczyka == kolczyk && Rozrod.czyRuja == 1
-                         select new { Nowa=Rozrod.Data };
-            
+                         orderby Rozrod.Data descending
+                         select new { NowaData=Rozrod.Data.ToShortDateString()};
 
-            LVListaRuji.ItemsSource = query2;
+
+            LVListaRuji.ItemsSource = query;
+        }
+        private void WypelnienieLVListaWycielen(string kolczyk)
+        {
+            var query = from Rozrod in Polaczenie.Rozrod
+                         where Rozrod.Zwierze.nr_kolczyka == kolczyk && Rozrod.czyRuja == 0
+                         orderby Rozrod.Data descending
+                         select new { NowaData = Rozrod.Data.ToShortDateString() };
+            LVListaWycielen.ItemsSource = query;
         }
         
     }

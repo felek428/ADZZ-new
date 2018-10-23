@@ -30,17 +30,23 @@
         <GroupBox x:Name="GBOgolneInformacje" Header="Ogólne informacje" HorizontalAlignment="Left" Height="336" Margin="10,10,0,0" VerticalAlignment="Top" Width="314">
             <Frame x:Name="ramkaInformacje"/>
         </GroupBox>
-        <GroupBox Header="Lista ruji" HorizontalAlignment="Left" Height="270" Margin="10,364,0,0" VerticalAlignment="Top" Width="203">
+        <GroupBox Header="Lista ruji" HorizontalAlignment="Left" Height="270" Margin="10,364,0,0" VerticalAlignment="Top" Width="232">
             <ListView x:Name="LVListaRuji">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=Nowa}"/>
+                        <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=NowaData}" />
                     </GridView>
                 </ListView.View>
             </ListView>
         </GroupBox>
         <GroupBox Header="Lista wycieleń" HorizontalAlignment="Left" Height="152" Margin="396,10,0,0" VerticalAlignment="Top" Width="234">
-            <ListView x:Name="LVListaWycielen"/>
+            <ListView x:Name="LVListaWycielen">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=NowaData}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </GroupBox>
 
     </Grid>
