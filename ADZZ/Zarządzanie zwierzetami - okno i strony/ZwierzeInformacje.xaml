@@ -3,14 +3,45 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Charts="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+       
       xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="1109"
       Title="ZwierzeInformacje"
       Background="White">
 
     <Grid>
-        <Button x:Name="btnPowrot" Content="Powrót" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" Width="75" Click="btnPowrot_Click"/>
+        <Button x:Name="btnPowrot" Content="Powrót" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="btnPowrot_Click"/>
+
+        <GroupBox x:Name="GBFinanse" Header="Finanse" HorizontalAlignment="Left" Height="474" Margin="396,216,0,0" VerticalAlignment="Top" Width="703">
+            <Charts:Chart x:Name="Wykres" Margin="10" BorderThickness="0">
+                <Charts:Chart.Series >
+                    <!--<Charts:LineSeries Title="WYDAJNOSC" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"/>-->
+                    <!--Wykres liniowy-->
+                    <!--<Charts:ColumnSeries Title="Wydajnosc" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"   />-->
+                    <!--Wykres slupkowy-->
+                    <Charts:PieSeries Title="Wydajnosc" x:Name="Seria" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" ItemsSource="{Binding points}"/>
+                    <!--Wykres kolowy-->
+                </Charts:Chart.Series>
+            </Charts:Chart>
+        </GroupBox>
+
+        <GroupBox x:Name="GBOgolneInformacje" Header="Ogólne informacje" HorizontalAlignment="Left" Height="336" Margin="10,10,0,0" VerticalAlignment="Top" Width="314">
+            <Frame x:Name="ramkaInformacje"/>
+        </GroupBox>
+        <GroupBox Header="Lista ruji" HorizontalAlignment="Left" Height="270" Margin="10,364,0,0" VerticalAlignment="Top" Width="203">
+            <ListView x:Name="LVListaRuji">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=Nowa}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+        <GroupBox Header="Lista wycieleń" HorizontalAlignment="Left" Height="152" Margin="396,10,0,0" VerticalAlignment="Top" Width="234">
+            <ListView x:Name="LVListaWycielen"/>
+        </GroupBox>
 
     </Grid>
 </Page>

@@ -26,8 +26,13 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             InitializeComponent();
             var query = (from Zwierze in Polaczenie.Zwierze           
-                         select Zwierze).ToList();
-            Listview.ItemsSource = query;
+                         select new ListaZwierzatKrotka{ NrKolczyka = Zwierze.nr_kolczyka, NazwaRasa = Zwierze.Rasa.nazwa, NazwaGatunek = Zwierze.Rasa.Gatunek.nazwa }).ToList();
+
+            var query2 = from Rozrod in Polaczenie.Rozrod
+                         where Rozrod.Zwierze.nr_kolczyka == "PL111111111111" && Rozrod.czyRuja == 1
+                         select new { Nowa=Rozrod.Data };
+            LVListaZwierzat.ItemsSource = query;
+            
             Datagrid.ItemsSource = query;
             ramkaAkcji = ramka;
         }
@@ -37,18 +42,27 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         }
 
-        private void Listview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
 
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            
             var item = sender as ListViewItem;
+            
             if (item != null && item.IsSelected)
             {
-                ramkaAkcji.Content = new ZwierzeInformacje(ramkaAkcji);
+                var SelectedKolczyk = (ListaZwierzatKrotka)LVListaZwierzat.SelectedItem;
+                
+                
+                ramkaAkcji.Content = new ZwierzeInformacje(ramkaAkcji,SelectedKolczyk.NrKolczyka);
             }
+        }
+        public class ListaZwierzatKrotka
+        {
+            public string NrKolczyka { get; set; }
+            public string NazwaRasa { get; set; }
+            public string NazwaGatunek { get; set; }
+
+           
         }
     }
 }
