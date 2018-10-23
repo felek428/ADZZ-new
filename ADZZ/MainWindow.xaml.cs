@@ -71,14 +71,14 @@ namespace ADZZ
             ramkaAkcji.Content = new NowyCalendar();
         }
 
-        private void BtZnajdzZwierze_Click(object sender, RoutedEventArgs e)
-        {
-            ramkaAkcji.Content = new FormularzDodaniaZwierzecia();
-        }
-
         private void btnDodajRozliczenie_Click(object sender, RoutedEventArgs e)
         {
             ramkaAkcji.Content = new FormularzDodaniaRozliczenia();
+        }
+
+        private void BtListaZwierzat_Click(object sender, RoutedEventArgs e)
+        {
+            ramkaAkcji.Content = new ListaZwierzat(ramkaAkcji);
         }
     }
 }

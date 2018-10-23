@@ -36,12 +36,12 @@
                             <BulletDecorator.Bullet>
                                 <Ikony:PackIcon Kind="Cow" Height="66" Width="82" Margin="147,0,-147,0"/>
                             </BulletDecorator.Bullet>
-                            <TextBlock Foreground="WhiteSmoke" Text="Zwierzeta" FontSize="18" Height="26" FontWeight="Bold" Margin="-54,0,96,0" />
+                            <TextBlock Foreground="WhiteSmoke" Text="Zwierzęta" FontSize="18" Height="26" FontWeight="Bold" Margin="-54,0,96,0" />
                         </BulletDecorator>
                     </Expander.Header>
                     <StackPanel>
-                        <Button x:Name="BtZnajdzZwierze" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Znajdź zwierze" FontSize="22" FontWeight="Bold" Click="BtZnajdzZwierze_Click"/>
-                        <Button x:Name="BtDodajZwierze" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Dodaj zwierze" FontSize="22" FontWeight="Bold" Click="BtDodajZwierze_Click"/>
+                        <Button x:Name="BtListaZwierzat" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Lista zwierząt" FontSize="22" FontWeight="Bold" Click="BtListaZwierzat_Click"/>
+                        <Button x:Name="BtDodajZwierze" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Dodaj zwierzę" FontSize="22" FontWeight="Bold" Click="BtDodajZwierze_Click"/>
                         <Button x:Name="BtKalendarz" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Kalendarz rujowy" FontSize="22" FontWeight="Bold" Click="BtKalendarz_Click"/>
                     </StackPanel>
                 </Expander>

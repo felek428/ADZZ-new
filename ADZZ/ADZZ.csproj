@@ -109,6 +109,12 @@
     <Compile Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaZwierzecia.xaml.cs">
       <DependentUpon>FormularzDodaniaZwierzecia.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Zarządzanie zwierzetami - okno i strony\ListaZwierzat.xaml.cs">
+      <DependentUpon>ListaZwierzat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Zarządzanie zwierzetami - okno i strony\ZwierzeInformacje.xaml.cs">
+      <DependentUpon>ZwierzeInformacje.xaml</DependentUpon>
+    </Compile>
     <Page Include="Kalendarz\FormularzDodaniaNotatki.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,6 +160,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaZwierzecia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Zarządzanie zwierzetami - okno i strony\ListaZwierzat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Zarządzanie zwierzetami - okno i strony\ZwierzeInformacje.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BazaZwierzat" Class="PolaczenieBazaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=&quot;C:\Users\idea 305\Documents\BazaZwierzat.mdf&quot;;Integrated Security=True;Connect Timeout=30" SettingsObjectName="ADZZ.Properties.Settings" SettingsPropertyName="BazaZwierzatConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Gatunek" Member="Gatunek">
-    <Type Name="Gatunek">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="nazwa" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Association Name="Gatunek_Rasa" Member="Rasa" ThisKey="Id" OtherKey="id_gatunek" Type="Rasa" />
-      <Association Name="Gatunek_Stado" Member="Stado" ThisKey="Id" OtherKey="id_gatunek" Type="Stado" />
-    </Type>
-  </Table>
   <Table Name="dbo.Historia_cen" Member="Historia_cen">
     <Type Name="Historia_cen">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -52,8 +44,8 @@
       <Column Name="id_gatunek" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="id_historia" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Stado_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_stado" Type="Rozliczenia" />
-      <Association Name="Gatunek_Stado" Member="Gatunek" ThisKey="id_gatunek" OtherKey="Id" Type="Gatunek" IsForeignKey="true" />
       <Association Name="Historia_Stada_Stado" Member="Historia_Stada" ThisKey="id_historia" OtherKey="Id" Type="Historia_Stada" IsForeignKey="true" />
+      <Association Name="Gatunek_Stado" Member="Gatunek" ThisKey="id_gatunek" OtherKey="Id" Type="Gatunek" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Zwierze" Member="Zwierze">
@@ -92,6 +84,15 @@
       <Association Name="Kategoria_rozliczen_Rozliczenia" Member="Kategoria_rozliczen" ThisKey="id_kategoria" OtherKey="Id" Type="Kategoria_rozliczen" IsForeignKey="true" />
       <Association Name="Stado_Rozliczenia" Member="Stado" ThisKey="id_stado" OtherKey="Id" Type="Stado" IsForeignKey="true" />
       <Association Name="Zwierze_Rozliczenia" Member="Zwierze" ThisKey="id_zwierze" OtherKey="Id" Type="Zwierze" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Gatunek" Member="Gatunek">
+    <Type Name="Gatunek">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nazwa" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="czyStado" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Association Name="Gatunek_Rasa" Member="Rasa" ThisKey="Id" OtherKey="id_gatunek" Type="Rasa" />
+      <Association Name="Gatunek_Stado" Member="Stado" ThisKey="Id" OtherKey="id_gatunek" Type="Stado" />
     </Type>
   </Table>
 </Database>
