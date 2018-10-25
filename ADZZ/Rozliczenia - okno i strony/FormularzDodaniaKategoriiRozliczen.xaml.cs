@@ -44,6 +44,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             Polaczenie.Kategoria_rozliczen.InsertOnSubmit(nowaKategoria);
             Polaczenie.SubmitChanges();
             actualForm.WypelnienieComboBox();
+            actualForm.WyborRozliczenia.SelectedItem = tbNazwaKategorii.Text;
             
             Close();
         }

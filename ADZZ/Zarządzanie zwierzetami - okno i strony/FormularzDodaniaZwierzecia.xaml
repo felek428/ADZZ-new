@@ -16,9 +16,8 @@
         <Label x:Name="rasaL" Content="Rasa:" HorizontalAlignment="Left" Margin="28,134,0,0" VerticalAlignment="Top"/>
         <Label x:Name="okresOdL" Content="Okres aktywności od:" HorizontalAlignment="Left" Margin="28,165,0,0" VerticalAlignment="Top"/>
         <Label x:Name="okresDoL" Content="Okres aktywności do:" HorizontalAlignment="Left" Margin="28,196,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="prefixPL" Content="PL" Width="23" Height="23" Margin="137,13,512,439" HorizontalContentAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbKolczyk" HorizontalAlignment="Left" MaxLength="12" Height="23" Margin="160,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tbKolczyk_TextChanged" />
-        <DatePicker x:Name="DataUrDP" HorizontalAlignment="Left" Height="23" Margin="160,75,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbKolczyk" HorizontalAlignment="Left" MaxLength="14" Height="23" Margin="160,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tbKolczyk_TextChanged" />
+        <DatePicker x:Name="DataUrDP" HorizontalAlignment="Left" Height="23" Margin="160,75,0,0" VerticalAlignment="Top" Width="120" />
         <Button x:Name="btDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="205,268,0,0" VerticalAlignment="Top" Width="75" Click="BtDodaj_Click"/>
         <ComboBox x:Name="GatunekCB" HorizontalAlignment="Left" Margin="160,107,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="GatunekCB_SelectionChanged"/>
         <ComboBox x:Name="RasaCB" HorizontalAlignment="Left" Margin="160,138,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False" SelectionChanged="RasaCB_SelectionChanged"/>

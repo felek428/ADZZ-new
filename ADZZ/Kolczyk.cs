@@ -27,51 +27,57 @@ namespace ADZZ
 
         private void WalidacjaCBkolczyk(Control Kontrolka)
         {
-            var Kolczyk = Kontrolka as ComboBox;
+            var kolczyk = Kontrolka as ComboBox;
+            var textBox = (kolczyk.Template.FindName("PART_EditableTextBox",
+                       kolczyk) as TextBox);
+            textBox.MaxLength = 14;             
+            KontrolaWprowadzania(textBox);
             
-            for (int i = 0; i < Kolczyk.Text.Length; i++)
-            {
-                var textBox = (Kolczyk.Template.FindName("PART_EditableTextBox",
-                       Kolczyk) as TextBox);
-                textBox.MaxLength = 14;
-                if (i == 0 && Kolczyk.Text[i] != 'P')
-                {
-                    
-                    textBox.Text = Kolczyk.Text.Remove(i, 1);
-                    textBox.Focus();
-                    textBox.Select(textBox.Text.Length, 0);
-
-                } else if (i == 1 && Kolczyk.Text[i] != 'L')
-                {
-                    
-                    textBox.Text = Kolczyk.Text.Remove(i, 1);
-                    textBox.Focus();
-                    textBox.Select(textBox.Text.Length, 0);
-
-
-                } else if (i > 1 && !Char.IsDigit(Kolczyk.Text[i]))
-                {
-                    
-                    textBox.Text = Kolczyk.Text.Remove(i, 1);
-                    textBox.Focus();
-                    textBox.Select(textBox.Text.Length, 0);
-
-                }
-            }
         }
         private void WalidacjaTBkolczyk(Control Kontrolka)
         {
-            var Kolczyk = Kontrolka as TextBox;
-            for(int i = 0; i < Kolczyk.Text.Length; i++)
+            var kolczyk = Kontrolka as TextBox;
+            kolczyk.Select(kolczyk.Text.Length, 0);
+            KontrolaWprowadzania(kolczyk);
+        }
+        /// <summary>
+        /// Kontroluje wpisywany tekst i ustala format wpisywanego kolczyka
+        /// </summary>
+        /// <param name="kolczyk"></param>
+        /// <param name="i"></param>
+        private void KontrolaWprowadzania(TextBox kolczyk)
+        {
+            kolczyk.Text = kolczyk.Text.ToUpper();
+            
+            for (int i = 0; i < kolczyk.Text.Length; i++)
             {
-                if (!Char.IsDigit(Kolczyk.Text[i]))
+                if (i == 0 && kolczyk.Text[i] != 'P')
                 {
-                    
-                    Kolczyk.Text = Kolczyk.Text.Remove(i, 1);
-                    Kolczyk.Select(Kolczyk.Text.Length, 0);
-                    break;
+
+                    kolczyk.Text = kolczyk.Text.Remove(i, 1);
+                    kolczyk.Focus();
+                    kolczyk.Select(kolczyk.Text.Length, 0);
+
+                }
+                else if (i == 1 && kolczyk.Text[i] != 'L')
+                {
+
+                    kolczyk.Text = kolczyk.Text.Remove(i, 1);
+                    kolczyk.Focus();
+                    kolczyk.Select(kolczyk.Text.Length, 0);
+
+
+                }
+                else if (i > 1 && !Char.IsDigit(kolczyk.Text[i]))
+                {
+
+                    kolczyk.Text = kolczyk.Text.Remove(i, 1);
+                    kolczyk.Focus();
+                    kolczyk.Select(kolczyk.Text.Length, 0);
+
                 }
             }
+            
         }
     }
 }

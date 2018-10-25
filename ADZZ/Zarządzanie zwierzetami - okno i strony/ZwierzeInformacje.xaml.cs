@@ -32,10 +32,19 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             InitializeComponent();
             ramkaAkcji = ramka;
             WypelnienieWykres();
-            ramkaInformacje.Content = new FormularzDodaniaZwierzecia();
-            WypelnienieListViewRuja(Kolczyk);
+            
+            FormularzDodaniaZwierzecia nowy = new FormularzDodaniaZwierzecia(Kolczyk,1,DateTime.Now, DateTime.Now, DateTime.Now, "kot","Zwierze");
+
+
+            ramkaInformacje.Content = nowy;
+                        WypelnienieListViewRuja(Kolczyk);
             WypelnienieLVListaWycielen(Kolczyk);
             
+        }
+
+        private void Przycisk()
+        {
+            MessageBox.Show("Ala");
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)

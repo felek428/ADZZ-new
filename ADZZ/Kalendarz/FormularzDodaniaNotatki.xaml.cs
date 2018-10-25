@@ -77,16 +77,15 @@ namespace ADZZ.Kalendarz
 
 
                     var dataNotki = objekt.DayNumber + "." + objekt.ActualMonth + "." + objekt.ActualYear;
-                    var zmienna = Convert.ToDateTime(dataNotki);
-                    var zmienna2 = zmienna.ToShortDateString();
+
                     NowaNotka.Data = Convert.ToDateTime(dataNotki);
                     if (typNotatkiCB.SelectedItem.Equals("Ruja"))
                     {
-                        NowaNotka.czyRuja = 0;
+                        NowaNotka.czyRuja = 1;
                     }
                     else
                     {
-                        NowaNotka.czyRuja = 1;
+                        NowaNotka.czyRuja = 0;
                     }
 
                     NowaNotka.id_zwierze = queryZwierze;

@@ -48,20 +48,6 @@
       <Association Name="Gatunek_Stado" Member="Gatunek" ThisKey="id_gatunek" OtherKey="Id" Type="Gatunek" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Zwierze" Member="Zwierze">
-    <Type Name="Zwierze">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="data_urodzenia" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="nr_kolczyka" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="plec" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Column Name="okres_od" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="okres_do" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="id_rasa" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Zwierze_Rozrod" Member="Rozrod" ThisKey="Id" OtherKey="id_zwierze" Type="Rozrod" />
-      <Association Name="Zwierze_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_zwierze" Type="Rozliczenia" />
-      <Association Name="Rasa_Zwierze" Member="Rasa" ThisKey="id_rasa" OtherKey="Id" Type="Rasa" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Rozrod" Member="Rozrod">
     <Type Name="Rozrod">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -93,6 +79,23 @@
       <Column Name="czyStado" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Association Name="Gatunek_Rasa" Member="Rasa" ThisKey="Id" OtherKey="id_gatunek" Type="Rasa" />
       <Association Name="Gatunek_Stado" Member="Stado" ThisKey="Id" OtherKey="id_gatunek" Type="Stado" />
+      <Association Name="Gatunek_Zwierze" Member="Zwierze" ThisKey="Id" OtherKey="id_gatunek" Type="Zwierze" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Zwierze" Member="Zwierze">
+    <Type Name="Zwierze">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="data_urodzenia" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="nr_kolczyka" Type="System.String" DbType="VarChar(14) NOT NULL" CanBeNull="false" />
+      <Column Name="plec" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="okres_od" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="okres_do" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="id_rasa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_gatunek" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Zwierze_Rozrod" Member="Rozrod" ThisKey="Id" OtherKey="id_zwierze" Type="Rozrod" />
+      <Association Name="Zwierze_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_zwierze" Type="Rozliczenia" />
+      <Association Name="Gatunek_Zwierze" Member="Gatunek" ThisKey="id_gatunek" OtherKey="Id" Type="Gatunek" IsForeignKey="true" />
+      <Association Name="Rasa_Zwierze" Member="Rasa" ThisKey="id_rasa" OtherKey="Id" Type="Rasa" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
