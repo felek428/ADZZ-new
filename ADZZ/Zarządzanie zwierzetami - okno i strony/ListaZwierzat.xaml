@@ -14,7 +14,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="LVListaZwierzat" Grid.Column="0"  Margin="20,20,10,20">
+        <ListView x:Name="LVListaZwierzat" Grid.Column="0"  Margin="20,65,10,20">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nr kolczyka" DisplayMemberBinding="{Binding Path=NrKolczyka}"/>
@@ -31,6 +31,8 @@
         <DataGrid x:Name="Datagrid" Grid.Column="1" Margin="10,20,20,20">
             
         </DataGrid>
+        <Label x:Name="lbFiltr" Content="Szukaj:" HorizontalAlignment="Left" Margin="20,34,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbFiltr" HorizontalAlignment="Left" Height="23" Margin="71,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" TextChanged="TBFiltr_TextChanged"/>
 
     </Grid>
 </Page>

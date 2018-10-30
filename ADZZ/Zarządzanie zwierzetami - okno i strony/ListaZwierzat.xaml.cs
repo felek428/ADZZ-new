@@ -26,13 +26,15 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             InitializeComponent();
             var query = (from Zwierze in Polaczenie.Zwierze           
-                         select new ListaZwierzatKrotka{ NrKolczyka = Zwierze.nr_kolczyka, NazwaRasa = Zwierze.Rasa.nazwa, NazwaGatunek = Zwierze.Gatunek.nazwa }).ToList();
-
+                         select new ZwierzeNiepelne{ NrKolczyka = Zwierze.nr_kolczyka, NazwaRasa = Zwierze.Rasa.nazwa, NazwaGatunek = Zwierze.Gatunek.nazwa }).ToList();
+            /*
             var query2 = from Rozrod in Polaczenie.Rozrod
                          where Rozrod.Zwierze.nr_kolczyka == "PL111111111111" && Rozrod.czyRuja == 1
-                         select new { Nowa=Rozrod.Data };
+                         select new { Nowa=Rozrod.Data };*/
             LVListaZwierzat.ItemsSource = query;
-            
+
+            CollectionView filtrowanieKolekcji = (CollectionView)CollectionViewSource.GetDefaultView(LVListaZwierzat.ItemsSource);
+            filtrowanieKolekcji.Filter = ListaZwierzatFiltr;
             Datagrid.ItemsSource = query;
             ramkaAkcji = ramka;
         }
@@ -50,19 +52,36 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             
             if (item != null && item.IsSelected)
             {
-                var SelectedKolczyk = (ListaZwierzatKrotka)LVListaZwierzat.SelectedItem;
+                var SelectedKolczyk = (ZwierzeNiepelne)LVListaZwierzat.SelectedItem;
                 
                 
                 ramkaAkcji.Content = new ZwierzeInformacje(ramkaAkcji,SelectedKolczyk.NrKolczyka);
             }
         }
-        public class ListaZwierzatKrotka
+        public class ZwierzeNiepelne
         {
             public string NrKolczyka { get; set; }
             public string NazwaRasa { get; set; }
             public string NazwaGatunek { get; set; }
 
            
+        }
+
+        private void TBFiltr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(LVListaZwierzat.ItemsSource).Refresh();
+        }
+
+        private bool ListaZwierzatFiltr(object lista)
+        {
+            if (String.IsNullOrEmpty(tbFiltr.Text))
+            {
+                return true;
+            }
+            else
+            {
+                return ((lista as ZwierzeNiepelne).NrKolczyka.IndexOf(tbFiltr.Text,StringComparison.OrdinalIgnoreCase) >=0);
+            }
         }
     }
 }
