@@ -39,9 +39,6 @@ namespace ADZZ
     partial void InsertKategoria_rozliczen(Kategoria_rozliczen instance);
     partial void UpdateKategoria_rozliczen(Kategoria_rozliczen instance);
     partial void DeleteKategoria_rozliczen(Kategoria_rozliczen instance);
-    partial void InsertRasa(Rasa instance);
-    partial void UpdateRasa(Rasa instance);
-    partial void DeleteRasa(Rasa instance);
     partial void InsertStado(Stado instance);
     partial void UpdateStado(Stado instance);
     partial void DeleteStado(Stado instance);
@@ -51,12 +48,15 @@ namespace ADZZ
     partial void InsertRozliczenia(Rozliczenia instance);
     partial void UpdateRozliczenia(Rozliczenia instance);
     partial void DeleteRozliczenia(Rozliczenia instance);
-    partial void InsertGatunek(Gatunek instance);
-    partial void UpdateGatunek(Gatunek instance);
-    partial void DeleteGatunek(Gatunek instance);
     partial void InsertZwierze(Zwierze instance);
     partial void UpdateZwierze(Zwierze instance);
     partial void DeleteZwierze(Zwierze instance);
+    partial void InsertRasa(Rasa instance);
+    partial void UpdateRasa(Rasa instance);
+    partial void DeleteRasa(Rasa instance);
+    partial void InsertGatunek(Gatunek instance);
+    partial void UpdateGatunek(Gatunek instance);
+    partial void DeleteGatunek(Gatunek instance);
     #endregion
 		
 		public PolaczenieBazaDataContext() : 
@@ -113,14 +113,6 @@ namespace ADZZ
 			}
 		}
 		
-		public System.Data.Linq.Table<Rasa> Rasa
-		{
-			get
-			{
-				return this.GetTable<Rasa>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Stado> Stado
 		{
 			get
@@ -145,19 +137,27 @@ namespace ADZZ
 			}
 		}
 		
-		public System.Data.Linq.Table<Gatunek> Gatunek
-		{
-			get
-			{
-				return this.GetTable<Gatunek>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Zwierze> Zwierze
 		{
 			get
 			{
 				return this.GetTable<Zwierze>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Rasa> Rasa
+		{
+			get
+			{
+				return this.GetTable<Rasa>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Gatunek> Gatunek
+		{
+			get
+			{
+				return this.GetTable<Gatunek>();
 			}
 		}
 	}
@@ -686,185 +686,6 @@ namespace ADZZ
 		{
 			this.SendPropertyChanging();
 			entity.Kategoria_rozliczen = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rasa")]
-	public partial class Rasa : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _nazwa;
-		
-		private System.Nullable<int> _id_gatunek;
-		
-		private EntitySet<Zwierze> _Zwierze;
-		
-		private EntityRef<Gatunek> _Gatunek;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnnazwaChanging(string value);
-    partial void OnnazwaChanged();
-    partial void Onid_gatunekChanging(System.Nullable<int> value);
-    partial void Onid_gatunekChanged();
-    #endregion
-		
-		public Rasa()
-		{
-			this._Zwierze = new EntitySet<Zwierze>(new Action<Zwierze>(this.attach_Zwierze), new Action<Zwierze>(this.detach_Zwierze));
-			this._Gatunek = default(EntityRef<Gatunek>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="VarChar(30)")]
-		public string nazwa
-		{
-			get
-			{
-				return this._nazwa;
-			}
-			set
-			{
-				if ((this._nazwa != value))
-				{
-					this.OnnazwaChanging(value);
-					this.SendPropertyChanging();
-					this._nazwa = value;
-					this.SendPropertyChanged("nazwa");
-					this.OnnazwaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_gatunek", DbType="Int")]
-		public System.Nullable<int> id_gatunek
-		{
-			get
-			{
-				return this._id_gatunek;
-			}
-			set
-			{
-				if ((this._id_gatunek != value))
-				{
-					if (this._Gatunek.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_gatunekChanging(value);
-					this.SendPropertyChanging();
-					this._id_gatunek = value;
-					this.SendPropertyChanged("id_gatunek");
-					this.Onid_gatunekChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rasa_Zwierze", Storage="_Zwierze", ThisKey="Id", OtherKey="id_rasa")]
-		public EntitySet<Zwierze> Zwierze
-		{
-			get
-			{
-				return this._Zwierze;
-			}
-			set
-			{
-				this._Zwierze.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Rasa", Storage="_Gatunek", ThisKey="id_gatunek", OtherKey="Id", IsForeignKey=true)]
-		public Gatunek Gatunek
-		{
-			get
-			{
-				return this._Gatunek.Entity;
-			}
-			set
-			{
-				Gatunek previousValue = this._Gatunek.Entity;
-				if (((previousValue != value) 
-							|| (this._Gatunek.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Gatunek.Entity = null;
-						previousValue.Rasa.Remove(this);
-					}
-					this._Gatunek.Entity = value;
-					if ((value != null))
-					{
-						value.Rasa.Add(this);
-						this._id_gatunek = value.Id;
-					}
-					else
-					{
-						this._id_gatunek = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Gatunek");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Zwierze(Zwierze entity)
-		{
-			this.SendPropertyChanging();
-			entity.Rasa = this;
-		}
-		
-		private void detach_Zwierze(Zwierze entity)
-		{
-			this.SendPropertyChanging();
-			entity.Rasa = null;
 		}
 	}
 	
@@ -1640,200 +1461,6 @@ namespace ADZZ
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gatunek")]
-	public partial class Gatunek : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _nazwa;
-		
-		private System.Nullable<byte> _czyStado;
-		
-		private EntitySet<Rasa> _Rasa;
-		
-		private EntitySet<Stado> _Stado;
-		
-		private EntitySet<Zwierze> _Zwierze;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnnazwaChanging(string value);
-    partial void OnnazwaChanged();
-    partial void OnczyStadoChanging(System.Nullable<byte> value);
-    partial void OnczyStadoChanged();
-    #endregion
-		
-		public Gatunek()
-		{
-			this._Rasa = new EntitySet<Rasa>(new Action<Rasa>(this.attach_Rasa), new Action<Rasa>(this.detach_Rasa));
-			this._Stado = new EntitySet<Stado>(new Action<Stado>(this.attach_Stado), new Action<Stado>(this.detach_Stado));
-			this._Zwierze = new EntitySet<Zwierze>(new Action<Zwierze>(this.attach_Zwierze), new Action<Zwierze>(this.detach_Zwierze));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="VarChar(30)")]
-		public string nazwa
-		{
-			get
-			{
-				return this._nazwa;
-			}
-			set
-			{
-				if ((this._nazwa != value))
-				{
-					this.OnnazwaChanging(value);
-					this.SendPropertyChanging();
-					this._nazwa = value;
-					this.SendPropertyChanged("nazwa");
-					this.OnnazwaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_czyStado", DbType="TinyInt")]
-		public System.Nullable<byte> czyStado
-		{
-			get
-			{
-				return this._czyStado;
-			}
-			set
-			{
-				if ((this._czyStado != value))
-				{
-					this.OnczyStadoChanging(value);
-					this.SendPropertyChanging();
-					this._czyStado = value;
-					this.SendPropertyChanged("czyStado");
-					this.OnczyStadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Rasa", Storage="_Rasa", ThisKey="Id", OtherKey="id_gatunek")]
-		public EntitySet<Rasa> Rasa
-		{
-			get
-			{
-				return this._Rasa;
-			}
-			set
-			{
-				this._Rasa.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Stado", Storage="_Stado", ThisKey="Id", OtherKey="id_gatunek")]
-		public EntitySet<Stado> Stado
-		{
-			get
-			{
-				return this._Stado;
-			}
-			set
-			{
-				this._Stado.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Zwierze", Storage="_Zwierze", ThisKey="Id", OtherKey="id_gatunek")]
-		public EntitySet<Zwierze> Zwierze
-		{
-			get
-			{
-				return this._Zwierze;
-			}
-			set
-			{
-				this._Zwierze.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Rasa(Rasa entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = this;
-		}
-		
-		private void detach_Rasa(Rasa entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = null;
-		}
-		
-		private void attach_Stado(Stado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = this;
-		}
-		
-		private void detach_Stado(Stado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = null;
-		}
-		
-		private void attach_Zwierze(Zwierze entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = this;
-		}
-		
-		private void detach_Zwierze(Zwierze entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Zwierze")]
 	public partial class Zwierze : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1860,9 +1487,9 @@ namespace ADZZ
 		
 		private EntitySet<Rozliczenia> _Rozliczenia;
 		
-		private EntityRef<Gatunek> _Gatunek;
-		
 		private EntityRef<Rasa> _Rasa;
+		
+		private EntityRef<Gatunek> _Gatunek;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1890,8 +1517,8 @@ namespace ADZZ
 		{
 			this._Rozrod = new EntitySet<Rozrod>(new Action<Rozrod>(this.attach_Rozrod), new Action<Rozrod>(this.detach_Rozrod));
 			this._Rozliczenia = new EntitySet<Rozliczenia>(new Action<Rozliczenia>(this.attach_Rozliczenia), new Action<Rozliczenia>(this.detach_Rozliczenia));
-			this._Gatunek = default(EntityRef<Gatunek>);
 			this._Rasa = default(EntityRef<Rasa>);
+			this._Gatunek = default(EntityRef<Gatunek>);
 			OnCreated();
 		}
 		
@@ -2089,40 +1716,6 @@ namespace ADZZ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Zwierze", Storage="_Gatunek", ThisKey="id_gatunek", OtherKey="Id", IsForeignKey=true)]
-		public Gatunek Gatunek
-		{
-			get
-			{
-				return this._Gatunek.Entity;
-			}
-			set
-			{
-				Gatunek previousValue = this._Gatunek.Entity;
-				if (((previousValue != value) 
-							|| (this._Gatunek.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Gatunek.Entity = null;
-						previousValue.Zwierze.Remove(this);
-					}
-					this._Gatunek.Entity = value;
-					if ((value != null))
-					{
-						value.Zwierze.Add(this);
-						this._id_gatunek = value.Id;
-					}
-					else
-					{
-						this._id_gatunek = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Gatunek");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rasa_Zwierze", Storage="_Rasa", ThisKey="id_rasa", OtherKey="Id", IsForeignKey=true)]
 		public Rasa Rasa
 		{
@@ -2153,6 +1746,40 @@ namespace ADZZ
 						this._id_rasa = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Rasa");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Zwierze", Storage="_Gatunek", ThisKey="id_gatunek", OtherKey="Id", IsForeignKey=true)]
+		public Gatunek Gatunek
+		{
+			get
+			{
+				return this._Gatunek.Entity;
+			}
+			set
+			{
+				Gatunek previousValue = this._Gatunek.Entity;
+				if (((previousValue != value) 
+							|| (this._Gatunek.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Gatunek.Entity = null;
+						previousValue.Zwierze.Remove(this);
+					}
+					this._Gatunek.Entity = value;
+					if ((value != null))
+					{
+						value.Zwierze.Add(this);
+						this._id_gatunek = value.Id;
+					}
+					else
+					{
+						this._id_gatunek = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Gatunek");
 				}
 			}
 		}
@@ -2199,6 +1826,379 @@ namespace ADZZ
 		{
 			this.SendPropertyChanging();
 			entity.Zwierze = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rasa")]
+	public partial class Rasa : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _nazwa;
+		
+		private System.Nullable<int> _id_gatunek;
+		
+		private EntitySet<Zwierze> _Zwierze;
+		
+		private EntityRef<Gatunek> _Gatunek;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnnazwaChanging(string value);
+    partial void OnnazwaChanged();
+    partial void Onid_gatunekChanging(System.Nullable<int> value);
+    partial void Onid_gatunekChanged();
+    #endregion
+		
+		public Rasa()
+		{
+			this._Zwierze = new EntitySet<Zwierze>(new Action<Zwierze>(this.attach_Zwierze), new Action<Zwierze>(this.detach_Zwierze));
+			this._Gatunek = default(EntityRef<Gatunek>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="VarChar(30)")]
+		public string nazwa
+		{
+			get
+			{
+				return this._nazwa;
+			}
+			set
+			{
+				if ((this._nazwa != value))
+				{
+					this.OnnazwaChanging(value);
+					this.SendPropertyChanging();
+					this._nazwa = value;
+					this.SendPropertyChanged("nazwa");
+					this.OnnazwaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_gatunek", DbType="Int")]
+		public System.Nullable<int> id_gatunek
+		{
+			get
+			{
+				return this._id_gatunek;
+			}
+			set
+			{
+				if ((this._id_gatunek != value))
+				{
+					if (this._Gatunek.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_gatunekChanging(value);
+					this.SendPropertyChanging();
+					this._id_gatunek = value;
+					this.SendPropertyChanged("id_gatunek");
+					this.Onid_gatunekChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rasa_Zwierze", Storage="_Zwierze", ThisKey="Id", OtherKey="id_rasa")]
+		public EntitySet<Zwierze> Zwierze
+		{
+			get
+			{
+				return this._Zwierze;
+			}
+			set
+			{
+				this._Zwierze.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Rasa", Storage="_Gatunek", ThisKey="id_gatunek", OtherKey="Id", IsForeignKey=true)]
+		public Gatunek Gatunek
+		{
+			get
+			{
+				return this._Gatunek.Entity;
+			}
+			set
+			{
+				Gatunek previousValue = this._Gatunek.Entity;
+				if (((previousValue != value) 
+							|| (this._Gatunek.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Gatunek.Entity = null;
+						previousValue.Rasa.Remove(this);
+					}
+					this._Gatunek.Entity = value;
+					if ((value != null))
+					{
+						value.Rasa.Add(this);
+						this._id_gatunek = value.Id;
+					}
+					else
+					{
+						this._id_gatunek = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Gatunek");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Zwierze(Zwierze entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rasa = this;
+		}
+		
+		private void detach_Zwierze(Zwierze entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rasa = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gatunek")]
+	public partial class Gatunek : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _nazwa;
+		
+		private System.Nullable<byte> _czyStado;
+		
+		private EntitySet<Stado> _Stado;
+		
+		private EntitySet<Zwierze> _Zwierze;
+		
+		private EntitySet<Rasa> _Rasa;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnnazwaChanging(string value);
+    partial void OnnazwaChanged();
+    partial void OnczyStadoChanging(System.Nullable<byte> value);
+    partial void OnczyStadoChanged();
+    #endregion
+		
+		public Gatunek()
+		{
+			this._Stado = new EntitySet<Stado>(new Action<Stado>(this.attach_Stado), new Action<Stado>(this.detach_Stado));
+			this._Zwierze = new EntitySet<Zwierze>(new Action<Zwierze>(this.attach_Zwierze), new Action<Zwierze>(this.detach_Zwierze));
+			this._Rasa = new EntitySet<Rasa>(new Action<Rasa>(this.attach_Rasa), new Action<Rasa>(this.detach_Rasa));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="VarChar(30)")]
+		public string nazwa
+		{
+			get
+			{
+				return this._nazwa;
+			}
+			set
+			{
+				if ((this._nazwa != value))
+				{
+					this.OnnazwaChanging(value);
+					this.SendPropertyChanging();
+					this._nazwa = value;
+					this.SendPropertyChanged("nazwa");
+					this.OnnazwaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_czyStado", DbType="TinyInt")]
+		public System.Nullable<byte> czyStado
+		{
+			get
+			{
+				return this._czyStado;
+			}
+			set
+			{
+				if ((this._czyStado != value))
+				{
+					this.OnczyStadoChanging(value);
+					this.SendPropertyChanging();
+					this._czyStado = value;
+					this.SendPropertyChanged("czyStado");
+					this.OnczyStadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Stado", Storage="_Stado", ThisKey="Id", OtherKey="id_gatunek")]
+		public EntitySet<Stado> Stado
+		{
+			get
+			{
+				return this._Stado;
+			}
+			set
+			{
+				this._Stado.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Zwierze", Storage="_Zwierze", ThisKey="Id", OtherKey="id_gatunek")]
+		public EntitySet<Zwierze> Zwierze
+		{
+			get
+			{
+				return this._Zwierze;
+			}
+			set
+			{
+				this._Zwierze.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Rasa", Storage="_Rasa", ThisKey="Id", OtherKey="id_gatunek")]
+		public EntitySet<Rasa> Rasa
+		{
+			get
+			{
+				return this._Rasa;
+			}
+			set
+			{
+				this._Rasa.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Stado(Stado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = this;
+		}
+		
+		private void detach_Stado(Stado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = null;
+		}
+		
+		private void attach_Zwierze(Zwierze entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = this;
+		}
+		
+		private void detach_Zwierze(Zwierze entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = null;
+		}
+		
+		private void attach_Rasa(Rasa entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = this;
+		}
+		
+		private void detach_Rasa(Rasa entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = null;
 		}
 	}
 }

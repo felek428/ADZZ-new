@@ -26,7 +26,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             InitializeComponent();
             var query = (from Zwierze in Polaczenie.Zwierze           
-                         select new ZwierzeNiepelne{ NrKolczyka = Zwierze.nr_kolczyka, NazwaRasa = Zwierze.Rasa.nazwa, NazwaGatunek = Zwierze.Gatunek.nazwa }).ToList();
+                         select new ZwierzeNiepelnyOpis{ NrKolczyka = Zwierze.nr_kolczyka, NazwaRasa = Zwierze.Rasa.nazwa, NazwaGatunek = Zwierze.Gatunek.nazwa }).ToList();
             /*
             var query2 = from Rozrod in Polaczenie.Rozrod
                          where Rozrod.Zwierze.nr_kolczyka == "PL111111111111" && Rozrod.czyRuja == 1
@@ -52,13 +52,13 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             
             if (item != null && item.IsSelected)
             {
-                var SelectedKolczyk = (ZwierzeNiepelne)LVListaZwierzat.SelectedItem;
+                var SelectedKolczyk = (ZwierzeNiepelnyOpis)LVListaZwierzat.SelectedItem;
                 
                 
                 ramkaAkcji.Content = new ZwierzeInformacje(ramkaAkcji,SelectedKolczyk.NrKolczyka);
             }
         }
-        public class ZwierzeNiepelne
+        public class ZwierzeNiepelnyOpis
         {
             public string NrKolczyka { get; set; }
             public string NazwaRasa { get; set; }
@@ -80,7 +80,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             }
             else
             {
-                return ((lista as ZwierzeNiepelne).NrKolczyka.IndexOf(tbFiltr.Text,StringComparison.OrdinalIgnoreCase) >=0);
+                return ((lista as ZwierzeNiepelnyOpis).NrKolczyka.IndexOf(tbFiltr.Text,StringComparison.OrdinalIgnoreCase) >=0);
             }
         }
     }

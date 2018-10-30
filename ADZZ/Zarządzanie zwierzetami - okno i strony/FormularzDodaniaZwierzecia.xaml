@@ -23,7 +23,7 @@
         <ComboBox x:Name="RasaCB" HorizontalAlignment="Left" Margin="160,138,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False" SelectionChanged="RasaCB_SelectionChanged"/>
         <CheckBox x:Name="maleCheckB" Content="M" HorizontalAlignment="Left" Margin="160,47,0,0" VerticalAlignment="Top" Click="maleCheckB_Click"/>
         <CheckBox x:Name="femaleCheckB" Content="F" HorizontalAlignment="Left" Margin="196,47,0,0" VerticalAlignment="Top" Click="femaleCheckB_Click"/>
-        <DatePicker x:Name="okresOdDP" HorizontalAlignment="Left" Margin="160,167,0,0" VerticalAlignment="Top" Width="120"/>
-        <DatePicker x:Name="okresDoDP" HorizontalAlignment="Left" Margin="160,198,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="okresOdDP" HorizontalAlignment="Left" Margin="160,167,0,0" VerticalAlignment="Top" Width="120" SelectedDateChanged="okresOdDP_SelectedDateChanged"/>
+        <DatePicker x:Name="okresDoDP" HorizontalAlignment="Left" Margin="160,198,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
     </Grid>
 </Page>

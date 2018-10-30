@@ -22,12 +22,12 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private int wybraneZwierzeId;
-        
-    public FormularzDodaniaZwierzecia()
+
+        public FormularzDodaniaZwierzecia()
         {
             InitializeComponent();
             WypelnienieCBGatunek();
-            
+
         }
         public FormularzDodaniaZwierzecia(string nr_kolczyka, int plec, DateTime dataur, DateTime okresod, DateTime okresdo, string rasa, string gatunek)
         {
@@ -37,7 +37,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             btDodaj.Click -= new RoutedEventHandler(BtDodaj_Click);
             btDodaj.Click += new RoutedEventHandler(BtDodaj_Zmien_Click);
             tbKolczyk.IsEnabled = false;
-            
+
 
             var query = (from Z in Polaczenie.Zwierze
                          where Z.nr_kolczyka == nr_kolczyka.ToString()
@@ -45,10 +45,10 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             wybraneZwierzeId = query[0].Id;
             WypelnienieCBGatunek();
             foreach (var item in query)
-            { 
+            {
                 tbKolczyk.Text = item.nr_kolczyka;
 
-                if( item.plec == 1)
+                if (item.plec == 1)
                 {
                     femaleCheckB.IsChecked = true;
                 }
@@ -58,12 +58,12 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 }
                 DataUrDP.SelectedDate = item.data_urodzenia;
                 okresOdDP.SelectedDate = item.okres_od;
-                if(item.okres_do != null)
+                if (item.okres_do != null)
                 {
                     okresDoDP.SelectedDate = item.okres_do;
                 }
                 GatunekCB.SelectedItem = item.Gatunek.nazwa;
-                if(RasaCB.Items.Count != 0 && item.id_rasa != null)
+                if (RasaCB.Items.Count != 0 && item.id_rasa != null)
                 {
                     RasaCB.SelectedItem = item.Rasa.nazwa;
                     Console.WriteLine("Tutaj sa rasy");
@@ -79,12 +79,12 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         }
         private void BtDodaj_Zmien_Click(object sender, RoutedEventArgs e)
         {
-            
 
-            MessageBoxResult potwierdzenie = MessageBox.Show("Czy na pewno chcesz wprowadzic podane zmiany?", 
-                                                             "Potwierdzenie", 
+
+            MessageBoxResult potwierdzenie = MessageBox.Show("Czy na pewno chcesz wprowadzic podane zmiany?",
+                                                             "Potwierdzenie",
                                                              MessageBoxButton.YesNo);
-            if(potwierdzenie == MessageBoxResult.Yes)
+            if (potwierdzenie == MessageBoxResult.Yes)
             {
                 Zwierze queryZmiana = (from Zwierze in Polaczenie.Zwierze
                                        where Zwierze.Id == wybraneZwierzeId
@@ -96,7 +96,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
                 MessageBox.Show("Powiodło się!");
             }
-            
+
         }
         /// <summary>
         /// Dodaje wpis do bazy
@@ -105,25 +105,24 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         /// <param name="e"></param>
         private void BtDodaj_Click(object sender, RoutedEventArgs e)
         {
-            
-           
+
+
             //if(okresOdDP.SelectedDate.Value.Date > okresDoDP.SelectedDate.Value.Date)
 
             //DataUrDP.SelectedDate = null;
             //okresOdDP.SelectedDate = null;
-            if (tbKolczyk != null && (maleCheckB.IsChecked==true || femaleCheckB.IsChecked == true) &&  DataUrDP.SelectedDate != null && okresOdDP.SelectedDate != null)
-            {
+            
                 Zwierze NowyZwierzak = new Zwierze();
 
-                NowyZwierzak.nr_kolczyka = tbKolczyk.Text;
-                WpisDoBazyZwierze(NowyZwierzak);
                 
-        
+                WpisDoBazyZwierze(NowyZwierzak);
+
+
                 Polaczenie.Zwierze.InsertOnSubmit(NowyZwierzak);
                 Polaczenie.SubmitChanges();
-                
-                MessageBox.Show("Udalo sie!");
-                
+
+                MessageBox.Show("Powiodło się!");
+
                 tbKolczyk.Text = string.Empty;
                 maleCheckB.IsChecked = false;
                 femaleCheckB.IsChecked = false;
@@ -133,11 +132,8 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 okresOdDP.SelectedDate = null;
                 okresDoDP.SelectedDate = null;
 
-            }
-            else
-            {
-                MessageBox.Show("Uzupelnij brakujace pola");
-            }
+            
+            
         }
 
         private void GatunekCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -161,16 +157,16 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 {
                     RasaCB.ItemsSource = null;
                 }
-                
+
             }
-            
+
         }
 
         private void femaleCheckB_Click(object sender, RoutedEventArgs e)
         {
             femaleCheckB.IsChecked = true;
             maleCheckB.IsChecked = false;
-            
+
         }
 
         private void maleCheckB_Click(object sender, RoutedEventArgs e)
@@ -181,22 +177,22 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void tbKolczyk_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
             Kolczyk kolczyk = new Kolczyk();
             kolczyk.walidacjaKolczyk(tbKolczyk);
-            
+
         }
 
         private void RasaCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(RasaCB.SelectedIndex != -1)
+            if (RasaCB.SelectedIndex != -1)
             {
                 var queryRasa = (from Rasa in Polaczenie.Rasa
                                  where Rasa.nazwa == RasaCB.SelectedItem.ToString()
                                  select Rasa.Id).FirstOrDefault();
                 Console.WriteLine(queryRasa);
             }
-            
+
         }
         private void WypelnienieCBGatunek()
         {
@@ -204,58 +200,92 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             {
                 GatunekCB.Items.Add(rekord.nazwa);
             }
-            
+
         }
 
 
 
         private void WpisDoBazyZwierze(Zwierze zwierze)
         {
-            zwierze.data_urodzenia = DataUrDP.SelectedDate.Value.Date;
+            if (tbKolczyk != null && (maleCheckB.IsChecked == true || femaleCheckB.IsChecked == true) && DataUrDP.SelectedDate != null && okresOdDP.SelectedDate != null)
+            {
+                zwierze.nr_kolczyka = tbKolczyk.Text;
+                zwierze.data_urodzenia = DataUrDP.SelectedDate.Value.Date;
 
-            if (maleCheckB.IsChecked == true)
-            {
-                zwierze.plec = 0;
+                if (maleCheckB.IsChecked == true)
+                {
+                    zwierze.plec = 0;
+                }
+                else
+                {
+                    zwierze.plec = 1;
+                }
+
+                zwierze.okres_od = okresOdDP.SelectedDate.Value.Date;
+
+                if (okresDoDP.SelectedDate == null)
+                {
+                    zwierze.okres_do = null;
+                }
+                else
+                {
+                    zwierze.okres_do = okresDoDP.SelectedDate.Value.Date;
+                }
+
+                if (GatunekCB.SelectedItem == null)
+                {
+                    zwierze.id_gatunek = null;
+                }
+                else
+                {
+                    var queryGatunek = (from Gatunek in Polaczenie.Gatunek
+                                        where Gatunek.nazwa == GatunekCB.SelectedItem.ToString()
+                                        select Gatunek.Id).FirstOrDefault();
+                    zwierze.id_gatunek = queryGatunek;
+                }
+
+                if (RasaCB.SelectedItem == null)
+                {
+                    zwierze.id_rasa = null;
+                }
+                else
+                {
+                    var queryRasa = (from Rasa in Polaczenie.Rasa
+                                     where Rasa.nazwa == RasaCB.SelectedItem.ToString()
+                                     select Rasa.Id).SingleOrDefault();
+
+                    //Zwierze Nowe_rasa_id = new Zwierze() { id_rasa = queryRasa };
+                    //zwierze.id_rasa = Polaczenie.Rasa.Single(p => p.Id == queryRasa);
+                    //Polaczenie.Zwierze.Attach(Nowe_rasa_id);
+                    //zwierze.id_rasa = null;
+                    zwierze.Rasa = Polaczenie.Rasa.Single(x => x.Id == queryRasa);
+
+
+                    
+                    //zwierze.Rasa.Id = queryRasa;
+                    
+                   
+                }
             }
             else
             {
-                zwierze.plec = 1;
-            }
-            zwierze.okres_od = okresOdDP.SelectedDate.Value.Date;
-            if (okresDoDP.SelectedDate == null)
-            {
-                zwierze.okres_do = null;
-            }
-            else
-            {
-                zwierze.okres_do = okresDoDP.SelectedDate.Value.Date;
+                MessageBox.Show("Uzupelnij brakujace pola");
             }
 
-            if (GatunekCB.SelectedItem == null)
-            {
-                zwierze.id_gatunek = null;
-            }
-            else
-            {
-                var queryGatunek = (from Gatunek in Polaczenie.Gatunek
-                                    where Gatunek.nazwa == GatunekCB.SelectedItem.ToString()
-                                    select Gatunek.Id).FirstOrDefault();
-                zwierze.id_gatunek = queryGatunek;
-            }
-
-            if (RasaCB.SelectedItem == null)
-            {
-                zwierze.id_rasa = null;
-            }
-            else
-            {
-                var queryRasa = (from Rasa in Polaczenie.Rasa
-                                 where Rasa.nazwa == RasaCB.SelectedItem.ToString()
-                                 select Rasa.Id).FirstOrDefault();
-                zwierze.id_rasa = queryRasa;
-            }
         }
 
-      
+        private void okresOdDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (okresOdDP != null)
+            {
+                okresDoDP.IsEnabled = true;
+                // Console.WriteLine(okresOdDP.SelectedDate.Value);
+            }
+            else
+            {
+                okresDoDP.IsEnabled = false;
+
+            }
+        }
     }
 }
