@@ -94,7 +94,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
                 Polaczenie.SubmitChanges();
 
-                MessageBox.Show("Powiodło się!");
+                
             }
 
         }
@@ -121,7 +121,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 Polaczenie.Zwierze.InsertOnSubmit(NowyZwierzak);
                 Polaczenie.SubmitChanges();
 
-                MessageBox.Show("Powiodło się!");
+               
 
                 tbKolczyk.Text = string.Empty;
                 maleCheckB.IsChecked = false;
@@ -254,18 +254,10 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                                      where Rasa.nazwa == RasaCB.SelectedItem.ToString()
                                      select Rasa.Id).SingleOrDefault();
 
-                    //Zwierze Nowe_rasa_id = new Zwierze() { id_rasa = queryRasa };
-                    //zwierze.id_rasa = Polaczenie.Rasa.Single(p => p.Id == queryRasa);
-                    //Polaczenie.Zwierze.Attach(Nowe_rasa_id);
-                    //zwierze.id_rasa = null;
                     zwierze.Rasa = Polaczenie.Rasa.Single(x => x.Id == queryRasa);
-
-
-                    
-                    //zwierze.Rasa.Id = queryRasa;
-                    
-                   
+ 
                 }
+                MessageBox.Show("Powiodło się!");
             }
             else
             {
@@ -276,15 +268,45 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void okresOdDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (okresOdDP != null)
+            if(okresOdDP.SelectedDate != null && DataUrDP.SelectedDate.Value.Date > okresOdDP.SelectedDate.Value.Date)
             {
-                okresDoDP.IsEnabled = true;
-                // Console.WriteLine(okresOdDP.SelectedDate.Value);
+                okresOdDP.SelectedDate = DataUrDP.SelectedDate;
+            }
+
+        }
+
+        private void okresDoDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(okresDoDP.SelectedDate != null && okresOdDP.SelectedDate != null && okresOdDP.SelectedDate.Value.Date > okresDoDP.SelectedDate.Value.Date)
+            {
+                okresDoDP.SelectedDate= okresOdDP.SelectedDate;
+            }
+            
+        }
+
+        private void DataUrDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(okresOdDP.SelectedDate != null && DataUrDP.SelectedDate.Value.Date > okresOdDP.SelectedDate.Value.Date)
+            {
+                okresOdDP.SelectedDate = DataUrDP.SelectedDate;
             }
             else
             {
-                okresDoDP.IsEnabled = false;
+                okresOdDP.IsEnabled = true;
+            }
+        }
 
+        private void okresOdDP_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (okresOdDP.SelectedDate != null)
+            {
+                okresDoDP.IsEnabled = true;
+            }
+            if(okresOdDP.Text == string.Empty)
+            {
+                okresOdDP.SelectedDate = null;
+                okresDoDP.IsEnabled = false;
+                okresDoDP.Text = string.Empty;
             }
         }
     }

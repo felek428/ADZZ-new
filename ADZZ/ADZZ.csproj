@@ -118,6 +118,10 @@
     <Compile Include="Zarządzanie zwierzetami - okno i strony\ZwierzeInformacje.xaml.cs">
       <DependentUpon>ZwierzeInformacje.xaml</DependentUpon>
     </Compile>
+    <Page Include="style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Kalendarz\FormularzDodaniaNotatki.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
