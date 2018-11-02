@@ -22,6 +22,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private int wybraneZwierzeId;
+        private int wybranyGatunek;
 
         public FormularzDodaniaZwierzecia()
         {
@@ -131,6 +132,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 RasaCB.SelectedIndex = -1;
                 okresOdDP.SelectedDate = null;
                 okresDoDP.SelectedDate = null;
+                infoDodajRase.Visibility = Visibility.Hidden;
 
             
             
@@ -139,11 +141,14 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         private void GatunekCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RasaCB.IsEnabled = false;
+            infoDodajRase.Visibility = Visibility.Visible;
             if (GatunekCB.SelectedIndex != -1)
             {
                 var queryGatunek = (from Gatunek in Polaczenie.Gatunek
                                     where Gatunek.nazwa == GatunekCB.SelectedItem.ToString()
                                     select Gatunek.Id).FirstOrDefault();
+
+                wybranyGatunek = queryGatunek;
 
                 var queryRasa = from Rasa in Polaczenie.Rasa
                                 where Rasa.id_gatunek == queryGatunek
@@ -200,7 +205,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             {
                 GatunekCB.Items.Add(rekord.nazwa);
             }
-
+            
         }
 
 
@@ -286,7 +291,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void DataUrDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(okresOdDP.SelectedDate != null && DataUrDP.SelectedDate.Value.Date > okresOdDP.SelectedDate.Value.Date)
+            if(DataUrDP.SelectedDate != null && okresOdDP.SelectedDate != null && DataUrDP.SelectedDate.Value.Date > okresOdDP.SelectedDate.Value.Date)
             {
                 okresOdDP.SelectedDate = DataUrDP.SelectedDate;
             }
@@ -308,6 +313,22 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 okresDoDP.IsEnabled = false;
                 okresDoDP.Text = string.Empty;
             }
+        }
+
+        private void infoDodajRase_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            FormularzDodaniaRasy nowaRasa = new FormularzDodaniaRasy(wybranyGatunek, RasaCB);
+            nowaRasa.ShowDialog();
+        }
+
+        private void infoDodajRase_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void infoDodajRase_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
         }
     }
 }

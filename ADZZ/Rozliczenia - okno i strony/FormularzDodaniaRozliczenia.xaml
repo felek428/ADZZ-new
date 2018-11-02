@@ -15,7 +15,7 @@
         <Label x:Name="kwotaL" Content="Kwota:" HorizontalAlignment="Left" Margin="45,84,0,0" VerticalAlignment="Top"/>
         <Label x:Name="opisL" Content="Opis:" HorizontalAlignment="Left" Margin="45,140,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbOpis" MaxLength="200" HorizontalAlignment="Left" Height="101" Margin="172,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="323"/>
-        <Button x:Name="BtDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="355,256,0,0" VerticalAlignment="Top" Width="75" Click="BtDodaj_Click"/>
+        <Button Style="{StaticResource NowyStylButton}" x:Name="BtDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="355,256,0,0" VerticalAlignment="Top" Width="75" Click="BtDodaj_Click"/>
         <Label x:Name="dataL" Content="Data:" HorizontalAlignment="Left" Margin="45,111,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="DataDP" HorizontalAlignment="Left" Height="23" Margin="172,112,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="tbKwota"   HorizontalAlignment="Left" Height="23" Margin="172,84,0,0"  VerticalAlignment="Top" Width="120" TextChanged="tbKwota_TextChanged"/>

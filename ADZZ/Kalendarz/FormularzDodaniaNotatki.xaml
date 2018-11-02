@@ -11,7 +11,7 @@
         <Label x:Name="kolczykLB" Content="Nr kolczyka" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbKolczyk" MaxLength="12"  HorizontalAlignment="Left" Height="23" Margin="16,77,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="cbKolczyk_TextChanged" Visibility="Hidden"/>
         <Label x:Name="typLB" Content="Typ notatki" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="BtnDodaj" Height="25" Width="80" Content="Dodaj" Margin="160,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BtnDodaj_Click" />
+        <Button Style="{StaticResource NowyStylButton}" x:Name="BtnDodaj" Height="25" Width="80" Content="Dodaj" Margin="160,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BtnDodaj_Click" />
         <Label x:Name="PLlabel" Content="PL" HorizontalAlignment="Left" Margin="93,11,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <ComboBox x:Name="cbKolczyk"  HorizontalAlignment="Left" Margin="120,15,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" TextBoxBase.TextChanged="cbKolczyk_TextChanged"/>
 

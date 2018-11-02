@@ -106,6 +106,9 @@
       <DependentUpon>ZarzadzanieCenami.xaml</DependentUpon>
     </Compile>
     <Compile Include="TypZwierzat.cs" />
+    <Compile Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaRasy.xaml.cs">
+      <DependentUpon>FormularzDodaniaRasy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaStada.xaml.cs">
       <DependentUpon>FormularzDodaniaStada.xaml</DependentUpon>
     </Compile>
@@ -159,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Rozliczenia - okno i strony\ZarzadzanieCenami.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Zarządzanie zwierzetami - okno i strony\FormularzDodaniaRasy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -87,7 +87,7 @@ namespace NewCalendar
             MessageBox.Show("PL132143141413431\n" + zmienna.ToString());
         }
         /// <summary>
-        /// Tworzy menu contextowe po nacisnieciu RPM
+        /// Tworzy menu contextowe po nacisnieciu PPM
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -16,9 +16,9 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="PreviousButton" FontSize="20" FontFamily="Segoe UI Symbol" Content="&#xE112;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="75" Click="Previous_Click"/>
-                <Button x:Name="MonthYear" Click="MonthYear_Click"  Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="75" Height="30" />
-                <Button x:Name="NextButton"  FontSize="20" FontFamily="Segoe UI Symbol" Content="&#xE111;" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="75" Click="NextButton_Click"/>
+                <Button Style="{StaticResource NowyStylButton}" x:Name="PreviousButton" FontSize="20" FontFamily="Segoe UI Symbol" Content="&#xE112;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="75" Click="Previous_Click"/>
+                <Button Style="{StaticResource NowyStylButton}" x:Name="MonthYear" Click="MonthYear_Click"  Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="75" Height="30" />
+                <Button Style="{StaticResource NowyStylButton}" x:Name="NextButton"  FontSize="20" FontFamily="Segoe UI Symbol" Content="&#xE111;" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="75" Click="NextButton_Click"/>
             </Grid>
             <Grid x:Name="DaysOfWeek" DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>

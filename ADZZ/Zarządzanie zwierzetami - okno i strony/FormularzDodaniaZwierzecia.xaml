@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
+      xmlns:Ikony="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="475" d:DesignWidth="672"
       Title="FormularzDodaniaZwierzecia">
@@ -18,12 +19,14 @@
         <Label x:Name="okresDoL" Content="Okres aktywności do:" HorizontalAlignment="Left" Margin="28,196,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbKolczyk" HorizontalAlignment="Left" MaxLength="14" Height="23" Margin="160,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tbKolczyk_TextChanged" />
         <DatePicker x:Name="DataUrDP" HorizontalAlignment="Left" Height="23" Margin="160,75,0,0" VerticalAlignment="Top" Width="120" SelectedDateChanged="DataUrDP_SelectedDateChanged" />
-        <Button x:Name="btDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="205,268,0,0" VerticalAlignment="Top" Width="75" Click="BtDodaj_Click"/>
+        <Button Style="{StaticResource NowyStylButton}" x:Name="btDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="205,268,0,0" VerticalAlignment="Top" Width="75" Click="BtDodaj_Click"/>
         <ComboBox x:Name="GatunekCB" HorizontalAlignment="Left" Margin="160,107,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="GatunekCB_SelectionChanged" />
         <ComboBox x:Name="RasaCB" HorizontalAlignment="Left" Margin="160,138,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False" SelectionChanged="RasaCB_SelectionChanged"/>
         <CheckBox x:Name="maleCheckB" Content="M" HorizontalAlignment="Left" Margin="160,47,0,0" VerticalAlignment="Top" Click="maleCheckB_Click"/>
         <CheckBox x:Name="femaleCheckB" Content="F" HorizontalAlignment="Left" Margin="196,47,0,0" VerticalAlignment="Top" Click="femaleCheckB_Click"/>
         <DatePicker x:Name="okresOdDP" HorizontalAlignment="Left" Margin="160,167,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False" SelectedDateChanged="okresOdDP_SelectedDateChanged" TextBoxBase.TextChanged="okresOdDP_TextChanged"/>
         <DatePicker x:Name="okresDoDP" HorizontalAlignment="Left" Margin="160,198,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False" SelectedDateChanged="okresDoDP_SelectedDateChanged"/>
+        <Ikony:PackIcon Name="infoDodajRase" Kind="Information" Height="22" Width="35" Margin="280,138,0,0" ToolTip="Brakuje ras? Kliknij aby dodać nowe!" MouseLeftButtonDown="infoDodajRase_MouseLeftButtonDown" MouseEnter="infoDodajRase_MouseEnter" MouseLeave="infoDodajRase_MouseLeave" Visibility="Hidden"/>
+
     </Grid>
 </Page>
