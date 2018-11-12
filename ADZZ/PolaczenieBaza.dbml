@@ -10,15 +10,6 @@
       <Association Name="Kategoria_rozliczen_Historia_cen" Member="Kategoria_rozliczen" ThisKey="id_kategoria_rozliczen" OtherKey="Id" Type="Kategoria_rozliczen" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Historia_Stada" Member="Historia_Stada">
-    <Type Name="Historia_Stada">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="okres_od" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="okres_do" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="ilosc" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Association Name="Historia_Stada_Stado" Member="Stado" ThisKey="Id" OtherKey="id_historia" Type="Stado" />
-    </Type>
-  </Table>
   <Table Name="dbo.Kategoria_rozliczen" Member="Kategoria_rozliczen">
     <Type Name="Kategoria_rozliczen">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -26,17 +17,6 @@
       <Column Name="czyPrzychod" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Association Name="Kategoria_rozliczen_Historia_cen" Member="Historia_cen" ThisKey="Id" OtherKey="id_kategoria_rozliczen" Type="Historia_cen" />
       <Association Name="Kategoria_rozliczen_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_kategoria" Type="Rozliczenia" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Stado" Member="Stado">
-    <Type Name="Stado">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="nr_stada" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="id_gatunek" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_historia" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Stado_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_stado" Type="Rozliczenia" />
-      <Association Name="Historia_Stada_Stado" Member="Historia_Stada" ThisKey="id_historia" OtherKey="Id" Type="Historia_Stada" IsForeignKey="true" />
-      <Association Name="Gatunek_Stado" Member="Gatunek" ThisKey="id_gatunek" OtherKey="Id" Type="Gatunek" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Rozrod" Member="Rozrod">
@@ -59,8 +39,8 @@
       <Column Name="id_stado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="kwota" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="Kategoria_rozliczen_Rozliczenia" Member="Kategoria_rozliczen" ThisKey="id_kategoria" OtherKey="Id" Type="Kategoria_rozliczen" IsForeignKey="true" />
-      <Association Name="Stado_Rozliczenia" Member="Stado" ThisKey="id_stado" OtherKey="Id" Type="Stado" IsForeignKey="true" />
       <Association Name="Zwierze_Rozliczenia" Member="Zwierze" ThisKey="id_zwierze" OtherKey="Id" Type="Zwierze" IsForeignKey="true" />
+      <Association Name="Stado_Rozliczenia" Member="Stado" ThisKey="id_stado" OtherKey="Id" Type="Stado" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Zwierze" Member="Zwierze">
@@ -93,9 +73,29 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nazwa" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Column Name="czyStado" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Association Name="Gatunek_Stado" Member="Stado" ThisKey="Id" OtherKey="id_gatunek" Type="Stado" />
       <Association Name="Gatunek_Zwierze" Member="Zwierze" ThisKey="Id" OtherKey="id_gatunek" Type="Zwierze" />
       <Association Name="Gatunek_Rasa" Member="Rasa" ThisKey="Id" OtherKey="id_gatunek" Type="Rasa" />
+      <Association Name="Gatunek_Stado" Member="Stado" ThisKey="Id" OtherKey="id_gatunek" Type="Stado" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Stado" Member="Stado">
+    <Type Name="Stado">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nr_stada" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
+      <Column Name="id_gatunek" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Stado_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_stado" Type="Rozliczenia" />
+      <Association Name="Stado_Historia_Stada" Member="Historia_Stada" ThisKey="Id" OtherKey="id_stado" Type="Historia_Stada" />
+      <Association Name="Gatunek_Stado" Member="Gatunek" ThisKey="id_gatunek" OtherKey="Id" Type="Gatunek" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Historia_Stada" Member="Historia_Stada">
+    <Type Name="Historia_Stada">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="okres_od" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="okres_do" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ilosc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_stado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Stado_Historia_Stada" Member="Stado" ThisKey="id_stado" OtherKey="Id" Type="Stado" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

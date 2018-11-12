@@ -27,7 +27,7 @@
             </Charts:Chart>
         </GroupBox>
 
-        <GroupBox x:Name="GBOgolneInformacje" Header="Ogólne informacje" HorizontalAlignment="Left" Height="336" Margin="10,10,0,0" VerticalAlignment="Top" Width="314">
+        <GroupBox x:Name="GBOgolneInformacje" Header="Ogólne informacje" HorizontalAlignment="Left" Height="336" Margin="10,10,0,0" VerticalAlignment="Top" Width="323">
             <Frame x:Name="ramkaInformacje"/>
         </GroupBox>
         <GroupBox Header="Lista ruji" HorizontalAlignment="Left" Height="270" Margin="10,364,0,0" VerticalAlignment="Top" Width="232">

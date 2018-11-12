@@ -1,0 +1,18 @@
+﻿<Page x:Class="ADZZ.WyborTypow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ADZZ"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="WyborTypow"
+      Background="White">
+
+    <Grid>
+        <Frame x:Name="RamkaAkcjiTypy" Margin="0,67,0,0" Navigated="RamkaAkcjiTypy_Navigated"/>
+        <ComboBox x:Name="cbTypZwierzat" Visibility="Visible" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="96,10,0,0" SelectionChanged="cbTypZwierzat_SelectionChanged" />
+        <Label x:Name="lbTypZwierzat" Visibility="Visible" Content="Typ zwierzat: " HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>

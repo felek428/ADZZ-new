@@ -44,15 +44,14 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             Polaczenie.Rasa.InsertOnSubmit(nowaRasa);
             Polaczenie.SubmitChanges();
 
-            if (cbRasa.SelectedIndex < 0)
-            {
+            
                 cbRasa.IsEnabled = true;
                 var query = from Rasa in Polaczenie.Rasa
                             where Rasa.id_gatunek == wybranyGatunekId
                             select Rasa.nazwa;
                 cbRasa.ItemsSource = query;
                 cbRasa.SelectedItem = nowaRasa.nazwa;
-            }
+            
 
             Close();
         }

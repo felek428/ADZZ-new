@@ -24,6 +24,7 @@ namespace ADZZ
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -58,7 +59,11 @@ namespace ADZZ
 
         private void BtDodajZwierze_Click(object sender, RoutedEventArgs e)
         {
-            ramkaAkcji.Content = new FormularzDodaniaZwierzecia();
+            //ramkaAkcji.Content = new FormularzDodaniaZwierzecia();
+            ramkaAkcji.Content = new WyborTypow(typeof(FormularzDodaniaZwierzecia));
+            
+          
+            
         }
 
         private void ramkaAkcji_Navigated(object sender, NavigationEventArgs e)
@@ -69,6 +74,7 @@ namespace ADZZ
         private void BtKalendarz_Click(object sender, RoutedEventArgs e)
         {
             ramkaAkcji.Content = new NowyCalendar();
+            
         }
 
         private void btnDodajRozliczenie_Click(object sender, RoutedEventArgs e)
@@ -78,7 +84,17 @@ namespace ADZZ
 
         private void BtListaZwierzat_Click(object sender, RoutedEventArgs e)
         {
-            ramkaAkcji.Content = new ListaZwierzat(ramkaAkcji);
+            //ramkaAkcji.Content = new ListaZwierzat(ramkaAkcji);
+            ramkaAkcji.Content = new WyborTypow(typeof(ListaZwierzat));
+            
         }
+
+        private void ramkaAkcji_ContentRendered(object sender, EventArgs e)
+        {
+           
+        
+        }
+
+        
     }
 }

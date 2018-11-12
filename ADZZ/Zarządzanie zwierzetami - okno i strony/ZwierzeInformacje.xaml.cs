@@ -49,7 +49,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
-            ramkaAkcji.Content = new ListaZwierzat(ramkaAkcji);
+            //ramkaAkcji.Content = new ListaZwierzat(ramkaAkcji);
         }
 
         private void WypelnienieWykres()

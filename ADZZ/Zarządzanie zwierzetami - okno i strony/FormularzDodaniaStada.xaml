@@ -4,22 +4,22 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
+      xmlns:Ikony="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="475" d:DesignWidth="672"
       Title="FormularzDodaniaStada">
 
     <Grid Background="White">
-        <Label x:Name="kodL" Content="Nr stada:" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="gatunekL" Content="Gatunek:" HorizontalAlignment="Left" Margin="28,36,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="rasaL" Content="Rasa:" HorizontalAlignment="Left" Margin="28,62,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="iloscL" Content="Ilość:" HorizontalAlignment="Left" Margin="28,88,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="okresOdL" Content="Okres aktywnosci od:" HorizontalAlignment="Left" Margin="28,114,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbKod" HorizontalAlignment="Left" Height="23" Margin="160,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbGatunk" HorizontalAlignment="Left" Height="23" Margin="160,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbRasa" HorizontalAlignment="Left" Height="23" Margin="160,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbIlosc" HorizontalAlignment="Left" Height="23" Margin="160,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbOkresOd" HorizontalAlignment="Left" Height="23" Margin="160,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="205,190,0,0" VerticalAlignment="Top" Width="75" Click="btDodaj_Click"/>
-        
+        <Label x:Name="nrKolczykaL" Content="Nr siedziby stada:" HorizontalAlignment="Left" Margin="13,10,0,0" VerticalAlignment="Top" Width="111" />
+        <Label x:Name="iloscL" Content="Ilość:" HorizontalAlignment="Left" Margin="13,42,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label x:Name="gatunekL" Content="Gatunek:" HorizontalAlignment="Left" Margin="13,73,0,0" VerticalAlignment="Top" Width="61"/>
+        <Label x:Name="okresOdL" Content="Okres aktywności od:" HorizontalAlignment="Left" Margin="13,109,0,0" VerticalAlignment="Top" Width="129"/>
+        <TextBox x:Name="tbKolczyk" HorizontalAlignment="Left" MaxLength="14" Height="23" Margin="153,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="127" TextChanged="tbKolczyk_TextChanged"/>
+        <Button Style="{StaticResource NowyStylButton}" x:Name="btDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="201,167,0,0" VerticalAlignment="Top" Width="79" Click="btDodaj_Click" />
+        <ComboBox x:Name="GatunekCB" HorizontalAlignment="Left" Margin="153,77,0,0" VerticalAlignment="Top" Width="127" />
+        <DatePicker x:Name="okresOdDP" HorizontalAlignment="Left" Margin="153,111,0,0" VerticalAlignment="Top" Width="127" IsEnabled="True"/>
+        <TextBox x:Name="tbIlosc" HorizontalAlignment="Left" Height="23" Margin="153,45,0,0"  VerticalAlignment="Top" Width="127" TextChanged="tbIlosc_TextChanged" />
+
+
     </Grid>
 </Page>

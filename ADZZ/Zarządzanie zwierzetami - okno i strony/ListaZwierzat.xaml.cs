@@ -22,20 +22,30 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     {
         private Frame ramkaAkcji;
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
-        public ListaZwierzat(Frame ramka)
+        public ListaZwierzat(Frame ramka, int wybranyIndex)
         {
             InitializeComponent();
-            var query = (from Zwierze in Polaczenie.Zwierze           
-                         select new ZwierzeNiepelnyOpis{ NrKolczyka = Zwierze.nr_kolczyka, NazwaRasa = Zwierze.Rasa.nazwa, NazwaGatunek = Zwierze.Gatunek.nazwa }).ToList();
-            /*
-            var query2 = from Rozrod in Polaczenie.Rozrod
-                         where Rozrod.Zwierze.nr_kolczyka == "PL111111111111" && Rozrod.czyRuja == 1
-                         select new { Nowa=Rozrod.Data };*/
-            LVListaZwierzat.ItemsSource = query;
+
+            if(wybranyIndex == 0)
+            {
+                var query = (from Zwierze in Polaczenie.Zwierze
+                             select new ZwierzeNiepelnyOpis { NrKolczyka = Zwierze.nr_kolczyka, NazwaRasa = Zwierze.Rasa.nazwa, NazwaGatunek = Zwierze.Gatunek.nazwa }).ToList();
+
+                LVListaZwierzat.ItemsSource = query;
+            }
+            else if(wybranyIndex == 1)
+            {
+                var query = (from Stado in Polaczenie.Stado
+                             select new ZwierzeNiepelnyOpis { NrKolczyka = Stado.nr_stada, NazwaGatunek = Stado.Gatunek.nazwa }).ToList();
+                LVListaZwierzat.ItemsSource = query;
+                
+            }
+
+
+            
 
             CollectionView filtrowanieKolekcji = (CollectionView)CollectionViewSource.GetDefaultView(LVListaZwierzat.ItemsSource);
             filtrowanieKolekcji.Filter = ListaZwierzatFiltr;
-            Datagrid.ItemsSource = query;
             ramkaAkcji = ramka;
         }
 
@@ -63,6 +73,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             public string NrKolczyka { get; set; }
             public string NazwaRasa { get; set; }
             public string NazwaGatunek { get; set; }
+            public string NrSiedzibyStada { get; set; }
 
            
         }

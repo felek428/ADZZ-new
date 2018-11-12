@@ -10,16 +10,13 @@
       Background="White">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <ListView x:Name="LVListaZwierzat" Grid.Column="0"  Margin="20,65,10,20">
+        
+        <ListView x:Name="LVListaZwierzat"  Margin="20,57,0,20" HorizontalAlignment="Left" Width="Auto">
             <ListView.View>
-                <GridView>
+                <GridView  >
                     <GridViewColumn Header="Nr kolczyka" DisplayMemberBinding="{Binding Path=NrKolczyka}"/>
                     <GridViewColumn Header="Gatunek" DisplayMemberBinding="{Binding Path=NazwaGatunek}"/>
-                    <GridViewColumn Header="Rasa" DisplayMemberBinding="{Binding Path=NazwaRasa}"/>
+                    <GridViewColumn Header="Rasa" DisplayMemberBinding="{Binding Path=NazwaRasa}" />
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
@@ -28,11 +25,8 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <DataGrid x:Name="Datagrid" Grid.Column="1" Margin="10,20,20,20">
-            
-        </DataGrid>
-        <Label x:Name="lbFiltr" Content="Szukaj:" HorizontalAlignment="Left" Margin="20,34,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbFiltr" HorizontalAlignment="Left" Height="23" Margin="71,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" TextChanged="TBFiltr_TextChanged"/>
+        <Label x:Name="lbFiltr" Content="Szukaj:" HorizontalAlignment="Left" Margin="20,26,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbFiltr" HorizontalAlignment="Left" Height="23" Margin="66,29,0,0"  VerticalAlignment="Top" Width="149" TextChanged="TBFiltr_TextChanged"/>
 
     </Grid>
 </Page>

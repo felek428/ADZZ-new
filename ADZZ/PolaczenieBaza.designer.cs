@@ -33,15 +33,9 @@ namespace ADZZ
     partial void InsertHistoria_cen(Historia_cen instance);
     partial void UpdateHistoria_cen(Historia_cen instance);
     partial void DeleteHistoria_cen(Historia_cen instance);
-    partial void InsertHistoria_Stada(Historia_Stada instance);
-    partial void UpdateHistoria_Stada(Historia_Stada instance);
-    partial void DeleteHistoria_Stada(Historia_Stada instance);
     partial void InsertKategoria_rozliczen(Kategoria_rozliczen instance);
     partial void UpdateKategoria_rozliczen(Kategoria_rozliczen instance);
     partial void DeleteKategoria_rozliczen(Kategoria_rozliczen instance);
-    partial void InsertStado(Stado instance);
-    partial void UpdateStado(Stado instance);
-    partial void DeleteStado(Stado instance);
     partial void InsertRozrod(Rozrod instance);
     partial void UpdateRozrod(Rozrod instance);
     partial void DeleteRozrod(Rozrod instance);
@@ -57,6 +51,12 @@ namespace ADZZ
     partial void InsertGatunek(Gatunek instance);
     partial void UpdateGatunek(Gatunek instance);
     partial void DeleteGatunek(Gatunek instance);
+    partial void InsertStado(Stado instance);
+    partial void UpdateStado(Stado instance);
+    partial void DeleteStado(Stado instance);
+    partial void InsertHistoria_Stada(Historia_Stada instance);
+    partial void UpdateHistoria_Stada(Historia_Stada instance);
+    partial void DeleteHistoria_Stada(Historia_Stada instance);
     #endregion
 		
 		public PolaczenieBazaDataContext() : 
@@ -97,27 +97,11 @@ namespace ADZZ
 			}
 		}
 		
-		public System.Data.Linq.Table<Historia_Stada> Historia_Stada
-		{
-			get
-			{
-				return this.GetTable<Historia_Stada>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Kategoria_rozliczen> Kategoria_rozliczen
 		{
 			get
 			{
 				return this.GetTable<Kategoria_rozliczen>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Stado> Stado
-		{
-			get
-			{
-				return this.GetTable<Stado>();
 			}
 		}
 		
@@ -158,6 +142,22 @@ namespace ADZZ
 			get
 			{
 				return this.GetTable<Gatunek>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Stado> Stado
+		{
+			get
+			{
+				return this.GetTable<Stado>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Historia_Stada> Historia_Stada
+		{
+			get
+			{
+				return this.GetTable<Historia_Stada>();
 			}
 		}
 	}
@@ -361,168 +361,6 @@ namespace ADZZ
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Historia_Stada")]
-	public partial class Historia_Stada : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<System.DateTime> _okres_od;
-		
-		private System.Nullable<System.DateTime> _okres_do;
-		
-		private System.Nullable<short> _ilosc;
-		
-		private EntitySet<Stado> _Stado;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void Onokres_odChanging(System.Nullable<System.DateTime> value);
-    partial void Onokres_odChanged();
-    partial void Onokres_doChanging(System.Nullable<System.DateTime> value);
-    partial void Onokres_doChanged();
-    partial void OniloscChanging(System.Nullable<short> value);
-    partial void OniloscChanged();
-    #endregion
-		
-		public Historia_Stada()
-		{
-			this._Stado = new EntitySet<Stado>(new Action<Stado>(this.attach_Stado), new Action<Stado>(this.detach_Stado));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_okres_od", DbType="Date")]
-		public System.Nullable<System.DateTime> okres_od
-		{
-			get
-			{
-				return this._okres_od;
-			}
-			set
-			{
-				if ((this._okres_od != value))
-				{
-					this.Onokres_odChanging(value);
-					this.SendPropertyChanging();
-					this._okres_od = value;
-					this.SendPropertyChanged("okres_od");
-					this.Onokres_odChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_okres_do", DbType="Date")]
-		public System.Nullable<System.DateTime> okres_do
-		{
-			get
-			{
-				return this._okres_do;
-			}
-			set
-			{
-				if ((this._okres_do != value))
-				{
-					this.Onokres_doChanging(value);
-					this.SendPropertyChanging();
-					this._okres_do = value;
-					this.SendPropertyChanged("okres_do");
-					this.Onokres_doChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ilosc", DbType="SmallInt")]
-		public System.Nullable<short> ilosc
-		{
-			get
-			{
-				return this._ilosc;
-			}
-			set
-			{
-				if ((this._ilosc != value))
-				{
-					this.OniloscChanging(value);
-					this.SendPropertyChanging();
-					this._ilosc = value;
-					this.SendPropertyChanged("ilosc");
-					this.OniloscChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Historia_Stada_Stado", Storage="_Stado", ThisKey="Id", OtherKey="id_historia")]
-		public EntitySet<Stado> Stado
-		{
-			get
-			{
-				return this._Stado;
-			}
-			set
-			{
-				this._Stado.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Stado(Stado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Historia_Stada = this;
-		}
-		
-		private void detach_Stado(Stado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Historia_Stada = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kategoria_rozliczen")]
 	public partial class Kategoria_rozliczen : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -686,250 +524,6 @@ namespace ADZZ
 		{
 			this.SendPropertyChanging();
 			entity.Kategoria_rozliczen = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Stado")]
-	public partial class Stado : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _nr_stada;
-		
-		private System.Nullable<int> _id_gatunek;
-		
-		private System.Nullable<int> _id_historia;
-		
-		private EntitySet<Rozliczenia> _Rozliczenia;
-		
-		private EntityRef<Historia_Stada> _Historia_Stada;
-		
-		private EntityRef<Gatunek> _Gatunek;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void Onnr_stadaChanging(string value);
-    partial void Onnr_stadaChanged();
-    partial void Onid_gatunekChanging(System.Nullable<int> value);
-    partial void Onid_gatunekChanged();
-    partial void Onid_historiaChanging(System.Nullable<int> value);
-    partial void Onid_historiaChanged();
-    #endregion
-		
-		public Stado()
-		{
-			this._Rozliczenia = new EntitySet<Rozliczenia>(new Action<Rozliczenia>(this.attach_Rozliczenia), new Action<Rozliczenia>(this.detach_Rozliczenia));
-			this._Historia_Stada = default(EntityRef<Historia_Stada>);
-			this._Gatunek = default(EntityRef<Gatunek>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nr_stada", DbType="VarChar(15)")]
-		public string nr_stada
-		{
-			get
-			{
-				return this._nr_stada;
-			}
-			set
-			{
-				if ((this._nr_stada != value))
-				{
-					this.Onnr_stadaChanging(value);
-					this.SendPropertyChanging();
-					this._nr_stada = value;
-					this.SendPropertyChanged("nr_stada");
-					this.Onnr_stadaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_gatunek", DbType="Int")]
-		public System.Nullable<int> id_gatunek
-		{
-			get
-			{
-				return this._id_gatunek;
-			}
-			set
-			{
-				if ((this._id_gatunek != value))
-				{
-					if (this._Gatunek.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_gatunekChanging(value);
-					this.SendPropertyChanging();
-					this._id_gatunek = value;
-					this.SendPropertyChanged("id_gatunek");
-					this.Onid_gatunekChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_historia", DbType="Int")]
-		public System.Nullable<int> id_historia
-		{
-			get
-			{
-				return this._id_historia;
-			}
-			set
-			{
-				if ((this._id_historia != value))
-				{
-					if (this._Historia_Stada.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_historiaChanging(value);
-					this.SendPropertyChanging();
-					this._id_historia = value;
-					this.SendPropertyChanged("id_historia");
-					this.Onid_historiaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Rozliczenia", Storage="_Rozliczenia", ThisKey="Id", OtherKey="id_stado")]
-		public EntitySet<Rozliczenia> Rozliczenia
-		{
-			get
-			{
-				return this._Rozliczenia;
-			}
-			set
-			{
-				this._Rozliczenia.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Historia_Stada_Stado", Storage="_Historia_Stada", ThisKey="id_historia", OtherKey="Id", IsForeignKey=true)]
-		public Historia_Stada Historia_Stada
-		{
-			get
-			{
-				return this._Historia_Stada.Entity;
-			}
-			set
-			{
-				Historia_Stada previousValue = this._Historia_Stada.Entity;
-				if (((previousValue != value) 
-							|| (this._Historia_Stada.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Historia_Stada.Entity = null;
-						previousValue.Stado.Remove(this);
-					}
-					this._Historia_Stada.Entity = value;
-					if ((value != null))
-					{
-						value.Stado.Add(this);
-						this._id_historia = value.Id;
-					}
-					else
-					{
-						this._id_historia = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Historia_Stada");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Stado", Storage="_Gatunek", ThisKey="id_gatunek", OtherKey="Id", IsForeignKey=true)]
-		public Gatunek Gatunek
-		{
-			get
-			{
-				return this._Gatunek.Entity;
-			}
-			set
-			{
-				Gatunek previousValue = this._Gatunek.Entity;
-				if (((previousValue != value) 
-							|| (this._Gatunek.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Gatunek.Entity = null;
-						previousValue.Stado.Remove(this);
-					}
-					this._Gatunek.Entity = value;
-					if ((value != null))
-					{
-						value.Stado.Add(this);
-						this._id_gatunek = value.Id;
-					}
-					else
-					{
-						this._id_gatunek = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Gatunek");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Rozliczenia(Rozliczenia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Stado = this;
-		}
-		
-		private void detach_Rozliczenia(Rozliczenia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Stado = null;
 		}
 	}
 	
@@ -1132,9 +726,9 @@ namespace ADZZ
 		
 		private EntityRef<Kategoria_rozliczen> _Kategoria_rozliczen;
 		
-		private EntityRef<Stado> _Stado;
-		
 		private EntityRef<Zwierze> _Zwierze;
+		
+		private EntityRef<Stado> _Stado;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1161,8 +755,8 @@ namespace ADZZ
 		public Rozliczenia()
 		{
 			this._Kategoria_rozliczen = default(EntityRef<Kategoria_rozliczen>);
-			this._Stado = default(EntityRef<Stado>);
 			this._Zwierze = default(EntityRef<Zwierze>);
+			this._Stado = default(EntityRef<Stado>);
 			OnCreated();
 		}
 		
@@ -1372,40 +966,6 @@ namespace ADZZ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Rozliczenia", Storage="_Stado", ThisKey="id_stado", OtherKey="Id", IsForeignKey=true)]
-		public Stado Stado
-		{
-			get
-			{
-				return this._Stado.Entity;
-			}
-			set
-			{
-				Stado previousValue = this._Stado.Entity;
-				if (((previousValue != value) 
-							|| (this._Stado.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Stado.Entity = null;
-						previousValue.Rozliczenia.Remove(this);
-					}
-					this._Stado.Entity = value;
-					if ((value != null))
-					{
-						value.Rozliczenia.Add(this);
-						this._id_stado = value.Id;
-					}
-					else
-					{
-						this._id_stado = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Stado");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Zwierze_Rozliczenia", Storage="_Zwierze", ThisKey="id_zwierze", OtherKey="Id", IsForeignKey=true)]
 		public Zwierze Zwierze
 		{
@@ -1436,6 +996,40 @@ namespace ADZZ
 						this._id_zwierze = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Zwierze");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Rozliczenia", Storage="_Stado", ThisKey="id_stado", OtherKey="Id", IsForeignKey=true)]
+		public Stado Stado
+		{
+			get
+			{
+				return this._Stado.Entity;
+			}
+			set
+			{
+				Stado previousValue = this._Stado.Entity;
+				if (((previousValue != value) 
+							|| (this._Stado.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Stado.Entity = null;
+						previousValue.Rozliczenia.Remove(this);
+					}
+					this._Stado.Entity = value;
+					if ((value != null))
+					{
+						value.Rozliczenia.Add(this);
+						this._id_stado = value.Id;
+					}
+					else
+					{
+						this._id_stado = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Stado");
 				}
 			}
 		}
@@ -2020,11 +1614,11 @@ namespace ADZZ
 		
 		private System.Nullable<byte> _czyStado;
 		
-		private EntitySet<Stado> _Stado;
-		
 		private EntitySet<Zwierze> _Zwierze;
 		
 		private EntitySet<Rasa> _Rasa;
+		
+		private EntitySet<Stado> _Stado;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2040,9 +1634,9 @@ namespace ADZZ
 		
 		public Gatunek()
 		{
-			this._Stado = new EntitySet<Stado>(new Action<Stado>(this.attach_Stado), new Action<Stado>(this.detach_Stado));
 			this._Zwierze = new EntitySet<Zwierze>(new Action<Zwierze>(this.attach_Zwierze), new Action<Zwierze>(this.detach_Zwierze));
 			this._Rasa = new EntitySet<Rasa>(new Action<Rasa>(this.attach_Rasa), new Action<Rasa>(this.detach_Rasa));
+			this._Stado = new EntitySet<Stado>(new Action<Stado>(this.attach_Stado), new Action<Stado>(this.detach_Stado));
 			OnCreated();
 		}
 		
@@ -2106,19 +1700,6 @@ namespace ADZZ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Stado", Storage="_Stado", ThisKey="Id", OtherKey="id_gatunek")]
-		public EntitySet<Stado> Stado
-		{
-			get
-			{
-				return this._Stado;
-			}
-			set
-			{
-				this._Stado.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Zwierze", Storage="_Zwierze", ThisKey="Id", OtherKey="id_gatunek")]
 		public EntitySet<Zwierze> Zwierze
 		{
@@ -2145,6 +1726,19 @@ namespace ADZZ
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Stado", Storage="_Stado", ThisKey="Id", OtherKey="id_gatunek")]
+		public EntitySet<Stado> Stado
+		{
+			get
+			{
+				return this._Stado;
+			}
+			set
+			{
+				this._Stado.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2163,18 +1757,6 @@ namespace ADZZ
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Stado(Stado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = this;
-		}
-		
-		private void detach_Stado(Stado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = null;
 		}
 		
 		private void attach_Zwierze(Zwierze entity)
@@ -2199,6 +1781,424 @@ namespace ADZZ
 		{
 			this.SendPropertyChanging();
 			entity.Gatunek = null;
+		}
+		
+		private void attach_Stado(Stado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = this;
+		}
+		
+		private void detach_Stado(Stado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Stado")]
+	public partial class Stado : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _nr_stada;
+		
+		private System.Nullable<int> _id_gatunek;
+		
+		private EntitySet<Rozliczenia> _Rozliczenia;
+		
+		private EntitySet<Historia_Stada> _Historia_Stada;
+		
+		private EntityRef<Gatunek> _Gatunek;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void Onnr_stadaChanging(string value);
+    partial void Onnr_stadaChanged();
+    partial void Onid_gatunekChanging(System.Nullable<int> value);
+    partial void Onid_gatunekChanged();
+    #endregion
+		
+		public Stado()
+		{
+			this._Rozliczenia = new EntitySet<Rozliczenia>(new Action<Rozliczenia>(this.attach_Rozliczenia), new Action<Rozliczenia>(this.detach_Rozliczenia));
+			this._Historia_Stada = new EntitySet<Historia_Stada>(new Action<Historia_Stada>(this.attach_Historia_Stada), new Action<Historia_Stada>(this.detach_Historia_Stada));
+			this._Gatunek = default(EntityRef<Gatunek>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nr_stada", DbType="VarChar(14)")]
+		public string nr_stada
+		{
+			get
+			{
+				return this._nr_stada;
+			}
+			set
+			{
+				if ((this._nr_stada != value))
+				{
+					this.Onnr_stadaChanging(value);
+					this.SendPropertyChanging();
+					this._nr_stada = value;
+					this.SendPropertyChanged("nr_stada");
+					this.Onnr_stadaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_gatunek", DbType="Int")]
+		public System.Nullable<int> id_gatunek
+		{
+			get
+			{
+				return this._id_gatunek;
+			}
+			set
+			{
+				if ((this._id_gatunek != value))
+				{
+					if (this._Gatunek.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_gatunekChanging(value);
+					this.SendPropertyChanging();
+					this._id_gatunek = value;
+					this.SendPropertyChanged("id_gatunek");
+					this.Onid_gatunekChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Rozliczenia", Storage="_Rozliczenia", ThisKey="Id", OtherKey="id_stado")]
+		public EntitySet<Rozliczenia> Rozliczenia
+		{
+			get
+			{
+				return this._Rozliczenia;
+			}
+			set
+			{
+				this._Rozliczenia.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Historia_Stada", Storage="_Historia_Stada", ThisKey="Id", OtherKey="id_stado")]
+		public EntitySet<Historia_Stada> Historia_Stada
+		{
+			get
+			{
+				return this._Historia_Stada;
+			}
+			set
+			{
+				this._Historia_Stada.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Stado", Storage="_Gatunek", ThisKey="id_gatunek", OtherKey="Id", IsForeignKey=true)]
+		public Gatunek Gatunek
+		{
+			get
+			{
+				return this._Gatunek.Entity;
+			}
+			set
+			{
+				Gatunek previousValue = this._Gatunek.Entity;
+				if (((previousValue != value) 
+							|| (this._Gatunek.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Gatunek.Entity = null;
+						previousValue.Stado.Remove(this);
+					}
+					this._Gatunek.Entity = value;
+					if ((value != null))
+					{
+						value.Stado.Add(this);
+						this._id_gatunek = value.Id;
+					}
+					else
+					{
+						this._id_gatunek = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Gatunek");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Rozliczenia(Rozliczenia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Stado = this;
+		}
+		
+		private void detach_Rozliczenia(Rozliczenia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Stado = null;
+		}
+		
+		private void attach_Historia_Stada(Historia_Stada entity)
+		{
+			this.SendPropertyChanging();
+			entity.Stado = this;
+		}
+		
+		private void detach_Historia_Stada(Historia_Stada entity)
+		{
+			this.SendPropertyChanging();
+			entity.Stado = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Historia_Stada")]
+	public partial class Historia_Stada : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<System.DateTime> _okres_od;
+		
+		private System.Nullable<System.DateTime> _okres_do;
+		
+		private System.Nullable<int> _ilosc;
+		
+		private System.Nullable<int> _id_stado;
+		
+		private EntityRef<Stado> _Stado;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void Onokres_odChanging(System.Nullable<System.DateTime> value);
+    partial void Onokres_odChanged();
+    partial void Onokres_doChanging(System.Nullable<System.DateTime> value);
+    partial void Onokres_doChanged();
+    partial void OniloscChanging(System.Nullable<int> value);
+    partial void OniloscChanged();
+    partial void Onid_stadoChanging(System.Nullable<int> value);
+    partial void Onid_stadoChanged();
+    #endregion
+		
+		public Historia_Stada()
+		{
+			this._Stado = default(EntityRef<Stado>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_okres_od", DbType="Date")]
+		public System.Nullable<System.DateTime> okres_od
+		{
+			get
+			{
+				return this._okres_od;
+			}
+			set
+			{
+				if ((this._okres_od != value))
+				{
+					this.Onokres_odChanging(value);
+					this.SendPropertyChanging();
+					this._okres_od = value;
+					this.SendPropertyChanged("okres_od");
+					this.Onokres_odChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_okres_do", DbType="Date")]
+		public System.Nullable<System.DateTime> okres_do
+		{
+			get
+			{
+				return this._okres_do;
+			}
+			set
+			{
+				if ((this._okres_do != value))
+				{
+					this.Onokres_doChanging(value);
+					this.SendPropertyChanging();
+					this._okres_do = value;
+					this.SendPropertyChanged("okres_do");
+					this.Onokres_doChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ilosc", DbType="Int")]
+		public System.Nullable<int> ilosc
+		{
+			get
+			{
+				return this._ilosc;
+			}
+			set
+			{
+				if ((this._ilosc != value))
+				{
+					this.OniloscChanging(value);
+					this.SendPropertyChanging();
+					this._ilosc = value;
+					this.SendPropertyChanged("ilosc");
+					this.OniloscChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_stado", DbType="Int")]
+		public System.Nullable<int> id_stado
+		{
+			get
+			{
+				return this._id_stado;
+			}
+			set
+			{
+				if ((this._id_stado != value))
+				{
+					if (this._Stado.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_stadoChanging(value);
+					this.SendPropertyChanging();
+					this._id_stado = value;
+					this.SendPropertyChanged("id_stado");
+					this.Onid_stadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Historia_Stada", Storage="_Stado", ThisKey="id_stado", OtherKey="Id", IsForeignKey=true)]
+		public Stado Stado
+		{
+			get
+			{
+				return this._Stado.Entity;
+			}
+			set
+			{
+				Stado previousValue = this._Stado.Entity;
+				if (((previousValue != value) 
+							|| (this._Stado.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Stado.Entity = null;
+						previousValue.Historia_Stada.Remove(this);
+					}
+					this._Stado.Entity = value;
+					if ((value != null))
+					{
+						value.Historia_Stada.Add(this);
+						this._id_stado = value.Id;
+					}
+					else
+					{
+						this._id_stado = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Stado");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

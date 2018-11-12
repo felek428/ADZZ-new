@@ -100,7 +100,8 @@
                 </ListBoxItem>-->
             </ListBox>
         </Grid>
-        <Frame x:Name="ramkaAkcji" Margin="283,0,0,0" NavigationUIVisibility="Hidden" Navigated="ramkaAkcji_Navigated"/>
+        <Frame x:Name="ramkaAkcji" Margin="283,0,0,0" NavigationUIVisibility="Hidden" Navigated="ramkaAkcji_Navigated" ContentRendered="ramkaAkcji_ContentRendered"/>
+        
 
     </Grid>
 </Window>

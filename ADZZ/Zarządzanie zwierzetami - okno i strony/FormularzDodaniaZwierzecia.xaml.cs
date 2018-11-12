@@ -38,7 +38,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             btDodaj.Click -= new RoutedEventHandler(BtDodaj_Click);
             btDodaj.Click += new RoutedEventHandler(BtDodaj_Zmien_Click);
             tbKolczyk.IsEnabled = false;
-
+            
 
             var query = (from Z in Polaczenie.Zwierze
                          where Z.nr_kolczyka == nr_kolczyka.ToString()
@@ -203,7 +203,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             foreach (Gatunek rekord in Polaczenie.Gatunek)
             {
-                GatunekCB.Items.Add(rekord.nazwa);
+                if (rekord.czyStado != 1)
+                {
+                    GatunekCB.Items.Add(rekord.nazwa);
+                }
+                
             }
             
         }
@@ -255,8 +259,9 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 }
                 else
                 {
+                    
                     var queryRasa = (from Rasa in Polaczenie.Rasa
-                                     where Rasa.nazwa == RasaCB.SelectedItem.ToString()
+                                     where Rasa.nazwa == RasaCB.SelectedItem.ToString() && Rasa.id_gatunek == wybranyGatunek
                                      select Rasa.Id).SingleOrDefault();
 
                     zwierze.Rasa = Polaczenie.Rasa.Single(x => x.Id == queryRasa);
