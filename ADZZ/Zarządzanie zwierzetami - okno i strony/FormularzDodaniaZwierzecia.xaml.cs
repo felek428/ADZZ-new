@@ -30,7 +30,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             WypelnienieCBGatunek();
 
         }
-        public FormularzDodaniaZwierzecia(string nr_kolczyka, int plec, DateTime dataur, DateTime okresod, DateTime okresdo, string rasa, string gatunek)
+        public FormularzDodaniaZwierzecia(string nr_kolczyka)
         {
             InitializeComponent();
             //WypelnienieCBGatunek();
@@ -67,11 +67,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 if (RasaCB.Items.Count != 0 && item.id_rasa != null)
                 {
                     RasaCB.SelectedItem = item.Rasa.nazwa;
-                    Console.WriteLine("Tutaj sa rasy");
+
                 }
                 else
                 {
-                    Console.WriteLine("Ale tu nie ma ras");
+
                 }
             }
 

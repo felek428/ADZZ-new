@@ -121,6 +121,9 @@
     <Compile Include="Zarządzanie zwierzetami - okno i strony\ListaZwierzat.xaml.cs">
       <DependentUpon>ListaZwierzat.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Zarządzanie zwierzetami - okno i strony\StadoInformacje.xaml.cs">
+      <DependentUpon>StadoInformacje.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Zarządzanie zwierzetami - okno i strony\ZwierzeInformacje.xaml.cs">
       <DependentUpon>ZwierzeInformacje.xaml</DependentUpon>
     </Compile>
@@ -185,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Zarządzanie zwierzetami - okno i strony\ListaZwierzat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Zarządzanie zwierzetami - okno i strony\StadoInformacje.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -21,6 +21,31 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     public partial class FormularzDodaniaStada : Page
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
+        private int wybraneStadoId;
+        public FormularzDodaniaStada(string kolczyk)
+        {
+            InitializeComponent();
+            wypelnienieGatunekCb(GatunekCB);
+            btDodaj.Content = "Aktualizuj";
+            btDodaj.Click -= new RoutedEventHandler(btDodaj_Click);
+            btDodaj.Click += new RoutedEventHandler(btAktualizuj_Click);
+            tbKolczyk.IsEnabled = false;
+
+            var queryStado = (from Stado in Polaczenie.Stado
+                              where Stado.nr_stada == kolczyk
+                              select Stado).FirstOrDefault();
+            wybraneStadoId = queryStado.Id;
+
+            var queryHistoria = (from Historia in Polaczenie.Historia_Stada
+                                 where Historia.id_stado == queryStado.Id
+                                 select Historia).ToList().Last();
+
+            tbKolczyk.Text = kolczyk;
+            tbIlosc.Text = queryHistoria.ilosc.ToString();
+            GatunekCB.SelectedItem = queryStado.Gatunek.nazwa;
+            okresOdDP.SelectedDate = queryHistoria.okres_od;
+
+        }
         public FormularzDodaniaStada()
         {
             InitializeComponent();
@@ -61,23 +86,64 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             
         }
 
+        private void btAktualizuj_Click(object sender, RoutedEventArgs e)
+        {
+            Stado queryStado = (from Stado in Polaczenie.Stado
+                               where Stado.Id == wybraneStadoId
+                               select Stado).FirstOrDefault();
+            WpisDoStado(queryStado);
+            Polaczenie.SubmitChanges();
+            Historia_Stada queryHistoria = (from Historia in Polaczenie.Historia_Stada
+                                            where Historia.id_stado == wybraneStadoId
+                                            select Historia).ToList().Last();
+            WpisDoHistoriaStada(queryHistoria, wybraneStadoId);
+
+        }
+
         private void btDodaj_Click(object sender, RoutedEventArgs e)
         {
             Stado noweStado = new Stado();
             Historia_Stada nowaHistoriaStada = new Historia_Stada();
 
+            WpisDoBazy(noweStado, nowaHistoriaStada);
+
+            tbKolczyk.Text = string.Empty;
+            tbIlosc.Text = string.Empty;
+            GatunekCB.SelectedIndex = -1;
+            okresOdDP.SelectedDate = null;
+            /*
             WpisDoStado(noweStado);
-            WpisDoHistoriaStada(nowaHistoriaStada, OstatniWpisStado());
-            
-        }
+            WpisDoHistoriaStada(nowaHistoriaStada, OstatniWpisStado());*/
 
-        private void WpisDoBazy()
+        }
+        /// <summary>
+        /// Tworzy nowe rekordy w tabeli stado oraz tabeli Historia_stad(tworząc nową historie dla nowo dodanego stada)
+        /// </summary>
+        /// <param name="noweStado"></param>
+        /// <param name="nowaHistoria"></param>
+        private void WpisDoBazy(Stado noweStado, Historia_Stada nowaHistoria)
         {
-            
-            
-            
-        }
+            if (tbKolczyk.Text != string.Empty && tbIlosc.Text != string.Empty && GatunekCB.SelectedItem != null && okresOdDP.SelectedDate != null)
+            {
+                WpisDoStado(noweStado);
 
+
+                Polaczenie.Stado.InsertOnSubmit(noweStado);
+
+                Polaczenie.SubmitChanges();
+                nowaHistoria.id_stado = OstatniWpisStado();
+                nowaHistoria.okres_od = okresOdDP.SelectedDate;
+                nowaHistoria.ilosc = Convert.ToInt32(tbIlosc.Text);
+                Polaczenie.Historia_Stada.InsertOnSubmit(nowaHistoria);
+                Polaczenie.SubmitChanges();
+
+
+                MessageBox.Show("Powiodło się");
+
+                
+
+            }
+        }
 
         private void WpisDoStado(Stado noweStado)
         {
@@ -89,23 +155,34 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 noweStado.nr_stada = tbKolczyk.Text;
                 noweStado.id_gatunek = queryGatunek;
 
-                
-                Polaczenie.Stado.InsertOnSubmit(noweStado);
-                
-                Polaczenie.SubmitChanges();
             }
             
         }
 
-        private void WpisDoHistoriaStada(Historia_Stada nowaHistoria, int idStada)
+        private void WpisDoHistoriaStada(Historia_Stada staraHistoria, int idStada)
         {
             if (tbKolczyk.Text != string.Empty && tbIlosc.Text != string.Empty && GatunekCB.SelectedItem != null && okresOdDP.SelectedDate != null)
             {
-                nowaHistoria.id_stado = idStada;
-                nowaHistoria.okres_od = okresOdDP.SelectedDate;
-                nowaHistoria.ilosc = Convert.ToInt32(tbIlosc.Text);
-                Polaczenie.Historia_Stada.InsertOnSubmit(nowaHistoria);
-                Polaczenie.SubmitChanges();
+                if(staraHistoria.okres_od != okresOdDP.SelectedDate.Value.Date && !tbIlosc.Text.Equals(staraHistoria.ilosc))
+                {
+                    staraHistoria.okres_do = okresOdDP.SelectedDate;
+                    Polaczenie.SubmitChanges();
+
+
+                    var nowaHistoria = new Historia_Stada();
+
+                    nowaHistoria.id_stado = idStada;
+                    nowaHistoria.okres_od = okresOdDP.SelectedDate;
+                    nowaHistoria.ilosc = Convert.ToInt32(tbIlosc.Text);
+                    Polaczenie.Historia_Stada.InsertOnSubmit(nowaHistoria);
+                    Polaczenie.SubmitChanges();
+                }
+
+                
+
+
+               
+               
             }
         }
 

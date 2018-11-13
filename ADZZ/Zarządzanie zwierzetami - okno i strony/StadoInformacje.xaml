@@ -1,0 +1,31 @@
+﻿<Page x:Class="ADZZ.Zarządzanie_zwierzetami___okno_i_strony.StadoInformacje"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
+      xmlns:Charts="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1109"
+      Title="StadoInformacje"
+      Background="White">
+
+    <Grid>
+        <GroupBox Header="Ogólne informacje" HorizontalAlignment="Left" Height="233" Margin="37,34,0,0" VerticalAlignment="Top" Width="319">
+            <Frame x:Name="ramkaInformacji"/>
+        </GroupBox>
+        <GroupBox x:Name="GBFinanse" Header="Finanse" HorizontalAlignment="Left" Height="474" Margin="420,38,0,0" VerticalAlignment="Top" Width="627">
+            <Charts:Chart x:Name="Wykres" Margin="10" BorderThickness="0">
+                <Charts:Chart.Series >
+                    <!--<Charts:LineSeries Title="WYDAJNOSC" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"/>-->
+                    <!--Wykres liniowy-->
+                    <!--<Charts:ColumnSeries Title="Wydajnosc" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"   />-->
+                    <!--Wykres slupkowy-->
+                    <Charts:PieSeries Title="Wydajnosc" x:Name="Seria" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" ItemsSource="{Binding points}"/>
+                    <!--Wykres kolowy-->
+                </Charts:Chart.Series>
+            </Charts:Chart>
+        </GroupBox>
+    </Grid>
+</Page>

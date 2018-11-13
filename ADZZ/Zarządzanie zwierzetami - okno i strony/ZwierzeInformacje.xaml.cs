@@ -33,11 +33,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             ramkaAkcji = ramka;
             WypelnienieWykres();
             
-            FormularzDodaniaZwierzecia nowy = new FormularzDodaniaZwierzecia(Kolczyk,1,DateTime.Now, DateTime.Now, DateTime.Now, "kot","Zwierze");
+            FormularzDodaniaZwierzecia nowy = new FormularzDodaniaZwierzecia(Kolczyk);
 
 
             ramkaInformacje.Content = nowy;
-                        WypelnienieListViewRuja(Kolczyk);
+            WypelnienieListViewRuja(Kolczyk);
             WypelnienieLVListaWycielen(Kolczyk);
             
         }

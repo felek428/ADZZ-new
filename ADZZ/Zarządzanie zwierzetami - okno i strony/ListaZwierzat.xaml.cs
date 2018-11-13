@@ -22,10 +22,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     {
         private Frame ramkaAkcji;
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
+        private int wybranyIndex;
         public ListaZwierzat(Frame ramka, int wybranyIndex)
         {
             InitializeComponent();
-
+            this.wybranyIndex = wybranyIndex;
             if(wybranyIndex == 0)
             {
                 var query = (from Zwierze in Polaczenie.Zwierze
@@ -59,13 +60,23 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             
             var item = sender as ListViewItem;
+
             
+
             if (item != null && item.IsSelected)
             {
                 var SelectedKolczyk = (ZwierzeNiepelnyOpis)LVListaZwierzat.SelectedItem;
+
+                if (wybranyIndex == 0)
+                {
+                    ramkaAkcji.Content = new ZwierzeInformacje(ramkaAkcji, SelectedKolczyk.NrKolczyka);
+                }
+                else if (wybranyIndex == 1)
+                {
+                    ramkaAkcji.Content = new StadoInformacje(SelectedKolczyk.NrKolczyka);
+
+                }
                 
-                
-                ramkaAkcji.Content = new ZwierzeInformacje(ramkaAkcji,SelectedKolczyk.NrKolczyka);
             }
         }
         public class ZwierzeNiepelnyOpis
