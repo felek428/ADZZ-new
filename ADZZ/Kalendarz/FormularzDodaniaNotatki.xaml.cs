@@ -32,8 +32,8 @@ namespace ADZZ.Kalendarz
             objekt = ClickedDay;
             typNotatkiCB.Items.Add("Ruja");
             typNotatkiCB.Items.Add("Wycielenie");
-            WypelnienieCbKolczyk();
-            
+            Kolczyk ZawartoscCbKolczyk = new Kolczyk();
+            ZawartoscCbKolczyk.WypelnienieCbKolczykZwierze(cbKolczyk);
 
         }
         public FormularzDodaniaNotatki(NowyCalendarDayButton ClickedDay,string kappa)
@@ -114,11 +114,6 @@ namespace ADZZ.Kalendarz
                     
         }
         
-        private void WypelnienieCbKolczyk()
-        {
-            var queryKolczyk = (from Zwierze in Polaczenie.Zwierze
-                                select Zwierze.nr_kolczyka).ToList();
-            cbKolczyk.ItemsSource = queryKolczyk;
-        }
+        
     }
 }

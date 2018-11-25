@@ -28,21 +28,6 @@
       <Association Name="Zwierze_Rozrod" Member="Zwierze" ThisKey="id_zwierze" OtherKey="Id" Type="Zwierze" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Rozliczenia" Member="Rozliczenia">
-    <Type Name="Rozliczenia">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="opis" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="ilosc_litrow" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="id_zwierze" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_kategoria" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_stado" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="kwota" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="Kategoria_rozliczen_Rozliczenia" Member="Kategoria_rozliczen" ThisKey="id_kategoria" OtherKey="Id" Type="Kategoria_rozliczen" IsForeignKey="true" />
-      <Association Name="Zwierze_Rozliczenia" Member="Zwierze" ThisKey="id_zwierze" OtherKey="Id" Type="Zwierze" IsForeignKey="true" />
-      <Association Name="Stado_Rozliczenia" Member="Stado" ThisKey="id_stado" OtherKey="Id" Type="Stado" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Zwierze" Member="Zwierze">
     <Type Name="Zwierze">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -83,8 +68,8 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nr_stada" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
       <Column Name="id_gatunek" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Stado_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_stado" Type="Rozliczenia" />
       <Association Name="Stado_Historia_Stada" Member="Historia_Stada" ThisKey="Id" OtherKey="id_stado" Type="Historia_Stada" />
+      <Association Name="Stado_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_stado" Type="Rozliczenia" />
       <Association Name="Gatunek_Stado" Member="Gatunek" ThisKey="id_gatunek" OtherKey="Id" Type="Gatunek" IsForeignKey="true" />
     </Type>
   </Table>
@@ -96,6 +81,21 @@
       <Column Name="ilosc" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="id_stado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Stado_Historia_Stada" Member="Stado" ThisKey="id_stado" OtherKey="Id" Type="Stado" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rozliczenia" Member="Rozliczenia">
+    <Type Name="Rozliczenia">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="opis" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ilosc_litrow" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_zwierze" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_kategoria" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_stado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kwota" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Kategoria_rozliczen_Rozliczenia" Member="Kategoria_rozliczen" ThisKey="id_kategoria" OtherKey="Id" Type="Kategoria_rozliczen" IsForeignKey="true" />
+      <Association Name="Stado_Rozliczenia" Member="Stado" ThisKey="id_stado" OtherKey="Id" Type="Stado" IsForeignKey="true" />
+      <Association Name="Zwierze_Rozliczenia" Member="Zwierze" ThisKey="id_zwierze" OtherKey="Id" Type="Zwierze" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

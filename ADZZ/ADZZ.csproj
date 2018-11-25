@@ -105,6 +105,9 @@
     <Compile Include="Rozliczenia - okno i strony\ZarzadzanieCenami.xaml.cs">
       <DependentUpon>ZarzadzanieCenami.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Statystyki - okno i strony\StatystykiZwierzat.xaml.cs">
+      <DependentUpon>StatystykiZwierzat.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TypZwierzat.cs" />
     <Compile Include="WyborTypow.xaml.cs">
       <DependentUpon>WyborTypow.xaml</DependentUpon>
@@ -127,6 +130,10 @@
     <Compile Include="Zarządzanie zwierzetami - okno i strony\ZwierzeInformacje.xaml.cs">
       <DependentUpon>ZwierzeInformacje.xaml</DependentUpon>
     </Compile>
+    <Page Include="Statystyki - okno i strony\StatystykiZwierzat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -238,8 +245,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Statystyki - okno i strony\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

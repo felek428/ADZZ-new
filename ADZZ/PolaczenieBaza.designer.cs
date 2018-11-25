@@ -39,9 +39,6 @@ namespace ADZZ
     partial void InsertRozrod(Rozrod instance);
     partial void UpdateRozrod(Rozrod instance);
     partial void DeleteRozrod(Rozrod instance);
-    partial void InsertRozliczenia(Rozliczenia instance);
-    partial void UpdateRozliczenia(Rozliczenia instance);
-    partial void DeleteRozliczenia(Rozliczenia instance);
     partial void InsertZwierze(Zwierze instance);
     partial void UpdateZwierze(Zwierze instance);
     partial void DeleteZwierze(Zwierze instance);
@@ -57,6 +54,9 @@ namespace ADZZ
     partial void InsertHistoria_Stada(Historia_Stada instance);
     partial void UpdateHistoria_Stada(Historia_Stada instance);
     partial void DeleteHistoria_Stada(Historia_Stada instance);
+    partial void InsertRozliczenia(Rozliczenia instance);
+    partial void UpdateRozliczenia(Rozliczenia instance);
+    partial void DeleteRozliczenia(Rozliczenia instance);
     #endregion
 		
 		public PolaczenieBazaDataContext() : 
@@ -113,14 +113,6 @@ namespace ADZZ
 			}
 		}
 		
-		public System.Data.Linq.Table<Rozliczenia> Rozliczenia
-		{
-			get
-			{
-				return this.GetTable<Rozliczenia>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Zwierze> Zwierze
 		{
 			get
@@ -158,6 +150,14 @@ namespace ADZZ
 			get
 			{
 				return this.GetTable<Historia_Stada>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Rozliczenia> Rozliczenia
+		{
+			get
+			{
+				return this.GetTable<Rozliczenia>();
 			}
 		}
 	}
@@ -677,359 +677,6 @@ namespace ADZZ
 						this._id_zwierze = default(int);
 					}
 					this.SendPropertyChanged("Zwierze");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rozliczenia")]
-	public partial class Rozliczenia : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.DateTime _data;
-		
-		private string _opis;
-		
-		private System.Nullable<short> _ilosc_litrow;
-		
-		private System.Nullable<int> _id_zwierze;
-		
-		private System.Nullable<int> _id_kategoria;
-		
-		private System.Nullable<int> _id_stado;
-		
-		private System.Nullable<double> _kwota;
-		
-		private EntityRef<Kategoria_rozliczen> _Kategoria_rozliczen;
-		
-		private EntityRef<Zwierze> _Zwierze;
-		
-		private EntityRef<Stado> _Stado;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OndataChanging(System.DateTime value);
-    partial void OndataChanged();
-    partial void OnopisChanging(string value);
-    partial void OnopisChanged();
-    partial void Onilosc_litrowChanging(System.Nullable<short> value);
-    partial void Onilosc_litrowChanged();
-    partial void Onid_zwierzeChanging(System.Nullable<int> value);
-    partial void Onid_zwierzeChanged();
-    partial void Onid_kategoriaChanging(System.Nullable<int> value);
-    partial void Onid_kategoriaChanged();
-    partial void Onid_stadoChanging(System.Nullable<int> value);
-    partial void Onid_stadoChanged();
-    partial void OnkwotaChanging(System.Nullable<double> value);
-    partial void OnkwotaChanged();
-    #endregion
-		
-		public Rozliczenia()
-		{
-			this._Kategoria_rozliczen = default(EntityRef<Kategoria_rozliczen>);
-			this._Zwierze = default(EntityRef<Zwierze>);
-			this._Stado = default(EntityRef<Stado>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="Date NOT NULL")]
-		public System.DateTime data
-		{
-			get
-			{
-				return this._data;
-			}
-			set
-			{
-				if ((this._data != value))
-				{
-					this.OndataChanging(value);
-					this.SendPropertyChanging();
-					this._data = value;
-					this.SendPropertyChanged("data");
-					this.OndataChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_opis", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string opis
-		{
-			get
-			{
-				return this._opis;
-			}
-			set
-			{
-				if ((this._opis != value))
-				{
-					this.OnopisChanging(value);
-					this.SendPropertyChanging();
-					this._opis = value;
-					this.SendPropertyChanged("opis");
-					this.OnopisChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ilosc_litrow", DbType="SmallInt")]
-		public System.Nullable<short> ilosc_litrow
-		{
-			get
-			{
-				return this._ilosc_litrow;
-			}
-			set
-			{
-				if ((this._ilosc_litrow != value))
-				{
-					this.Onilosc_litrowChanging(value);
-					this.SendPropertyChanging();
-					this._ilosc_litrow = value;
-					this.SendPropertyChanged("ilosc_litrow");
-					this.Onilosc_litrowChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_zwierze", DbType="Int")]
-		public System.Nullable<int> id_zwierze
-		{
-			get
-			{
-				return this._id_zwierze;
-			}
-			set
-			{
-				if ((this._id_zwierze != value))
-				{
-					if (this._Zwierze.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_zwierzeChanging(value);
-					this.SendPropertyChanging();
-					this._id_zwierze = value;
-					this.SendPropertyChanged("id_zwierze");
-					this.Onid_zwierzeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_kategoria", DbType="Int")]
-		public System.Nullable<int> id_kategoria
-		{
-			get
-			{
-				return this._id_kategoria;
-			}
-			set
-			{
-				if ((this._id_kategoria != value))
-				{
-					if (this._Kategoria_rozliczen.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_kategoriaChanging(value);
-					this.SendPropertyChanging();
-					this._id_kategoria = value;
-					this.SendPropertyChanged("id_kategoria");
-					this.Onid_kategoriaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_stado", DbType="Int")]
-		public System.Nullable<int> id_stado
-		{
-			get
-			{
-				return this._id_stado;
-			}
-			set
-			{
-				if ((this._id_stado != value))
-				{
-					if (this._Stado.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_stadoChanging(value);
-					this.SendPropertyChanging();
-					this._id_stado = value;
-					this.SendPropertyChanged("id_stado");
-					this.Onid_stadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kwota", DbType="Float")]
-		public System.Nullable<double> kwota
-		{
-			get
-			{
-				return this._kwota;
-			}
-			set
-			{
-				if ((this._kwota != value))
-				{
-					this.OnkwotaChanging(value);
-					this.SendPropertyChanging();
-					this._kwota = value;
-					this.SendPropertyChanged("kwota");
-					this.OnkwotaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kategoria_rozliczen_Rozliczenia", Storage="_Kategoria_rozliczen", ThisKey="id_kategoria", OtherKey="Id", IsForeignKey=true)]
-		public Kategoria_rozliczen Kategoria_rozliczen
-		{
-			get
-			{
-				return this._Kategoria_rozliczen.Entity;
-			}
-			set
-			{
-				Kategoria_rozliczen previousValue = this._Kategoria_rozliczen.Entity;
-				if (((previousValue != value) 
-							|| (this._Kategoria_rozliczen.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Kategoria_rozliczen.Entity = null;
-						previousValue.Rozliczenia.Remove(this);
-					}
-					this._Kategoria_rozliczen.Entity = value;
-					if ((value != null))
-					{
-						value.Rozliczenia.Add(this);
-						this._id_kategoria = value.Id;
-					}
-					else
-					{
-						this._id_kategoria = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Kategoria_rozliczen");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Zwierze_Rozliczenia", Storage="_Zwierze", ThisKey="id_zwierze", OtherKey="Id", IsForeignKey=true)]
-		public Zwierze Zwierze
-		{
-			get
-			{
-				return this._Zwierze.Entity;
-			}
-			set
-			{
-				Zwierze previousValue = this._Zwierze.Entity;
-				if (((previousValue != value) 
-							|| (this._Zwierze.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Zwierze.Entity = null;
-						previousValue.Rozliczenia.Remove(this);
-					}
-					this._Zwierze.Entity = value;
-					if ((value != null))
-					{
-						value.Rozliczenia.Add(this);
-						this._id_zwierze = value.Id;
-					}
-					else
-					{
-						this._id_zwierze = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Zwierze");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Rozliczenia", Storage="_Stado", ThisKey="id_stado", OtherKey="Id", IsForeignKey=true)]
-		public Stado Stado
-		{
-			get
-			{
-				return this._Stado.Entity;
-			}
-			set
-			{
-				Stado previousValue = this._Stado.Entity;
-				if (((previousValue != value) 
-							|| (this._Stado.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Stado.Entity = null;
-						previousValue.Rozliczenia.Remove(this);
-					}
-					this._Stado.Entity = value;
-					if ((value != null))
-					{
-						value.Rozliczenia.Add(this);
-						this._id_stado = value.Id;
-					}
-					else
-					{
-						this._id_stado = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Stado");
 				}
 			}
 		}
@@ -1808,9 +1455,9 @@ namespace ADZZ
 		
 		private System.Nullable<int> _id_gatunek;
 		
-		private EntitySet<Rozliczenia> _Rozliczenia;
-		
 		private EntitySet<Historia_Stada> _Historia_Stada;
+		
+		private EntitySet<Rozliczenia> _Rozliczenia;
 		
 		private EntityRef<Gatunek> _Gatunek;
 		
@@ -1828,8 +1475,8 @@ namespace ADZZ
 		
 		public Stado()
 		{
-			this._Rozliczenia = new EntitySet<Rozliczenia>(new Action<Rozliczenia>(this.attach_Rozliczenia), new Action<Rozliczenia>(this.detach_Rozliczenia));
 			this._Historia_Stada = new EntitySet<Historia_Stada>(new Action<Historia_Stada>(this.attach_Historia_Stada), new Action<Historia_Stada>(this.detach_Historia_Stada));
+			this._Rozliczenia = new EntitySet<Rozliczenia>(new Action<Rozliczenia>(this.attach_Rozliczenia), new Action<Rozliczenia>(this.detach_Rozliczenia));
 			this._Gatunek = default(EntityRef<Gatunek>);
 			OnCreated();
 		}
@@ -1898,19 +1545,6 @@ namespace ADZZ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Rozliczenia", Storage="_Rozliczenia", ThisKey="Id", OtherKey="id_stado")]
-		public EntitySet<Rozliczenia> Rozliczenia
-		{
-			get
-			{
-				return this._Rozliczenia;
-			}
-			set
-			{
-				this._Rozliczenia.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Historia_Stada", Storage="_Historia_Stada", ThisKey="Id", OtherKey="id_stado")]
 		public EntitySet<Historia_Stada> Historia_Stada
 		{
@@ -1921,6 +1555,19 @@ namespace ADZZ
 			set
 			{
 				this._Historia_Stada.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Rozliczenia", Storage="_Rozliczenia", ThisKey="Id", OtherKey="id_stado")]
+		public EntitySet<Rozliczenia> Rozliczenia
+		{
+			get
+			{
+				return this._Rozliczenia;
+			}
+			set
+			{
+				this._Rozliczenia.Assign(value);
 			}
 		}
 		
@@ -1978,18 +1625,6 @@ namespace ADZZ
 			}
 		}
 		
-		private void attach_Rozliczenia(Rozliczenia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Stado = this;
-		}
-		
-		private void detach_Rozliczenia(Rozliczenia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Stado = null;
-		}
-		
 		private void attach_Historia_Stada(Historia_Stada entity)
 		{
 			this.SendPropertyChanging();
@@ -1997,6 +1632,18 @@ namespace ADZZ
 		}
 		
 		private void detach_Historia_Stada(Historia_Stada entity)
+		{
+			this.SendPropertyChanging();
+			entity.Stado = null;
+		}
+		
+		private void attach_Rozliczenia(Rozliczenia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Stado = this;
+		}
+		
+		private void detach_Rozliczenia(Rozliczenia entity)
 		{
 			this.SendPropertyChanging();
 			entity.Stado = null;
@@ -2177,6 +1824,359 @@ namespace ADZZ
 						this._id_stado = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Stado");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rozliczenia")]
+	public partial class Rozliczenia : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.DateTime _data;
+		
+		private string _opis;
+		
+		private System.Nullable<int> _ilosc_litrow;
+		
+		private System.Nullable<int> _id_zwierze;
+		
+		private System.Nullable<int> _id_kategoria;
+		
+		private System.Nullable<int> _id_stado;
+		
+		private System.Nullable<double> _kwota;
+		
+		private EntityRef<Kategoria_rozliczen> _Kategoria_rozliczen;
+		
+		private EntityRef<Stado> _Stado;
+		
+		private EntityRef<Zwierze> _Zwierze;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OndataChanging(System.DateTime value);
+    partial void OndataChanged();
+    partial void OnopisChanging(string value);
+    partial void OnopisChanged();
+    partial void Onilosc_litrowChanging(System.Nullable<int> value);
+    partial void Onilosc_litrowChanged();
+    partial void Onid_zwierzeChanging(System.Nullable<int> value);
+    partial void Onid_zwierzeChanged();
+    partial void Onid_kategoriaChanging(System.Nullable<int> value);
+    partial void Onid_kategoriaChanged();
+    partial void Onid_stadoChanging(System.Nullable<int> value);
+    partial void Onid_stadoChanged();
+    partial void OnkwotaChanging(System.Nullable<double> value);
+    partial void OnkwotaChanged();
+    #endregion
+		
+		public Rozliczenia()
+		{
+			this._Kategoria_rozliczen = default(EntityRef<Kategoria_rozliczen>);
+			this._Stado = default(EntityRef<Stado>);
+			this._Zwierze = default(EntityRef<Zwierze>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="Date NOT NULL")]
+		public System.DateTime data
+		{
+			get
+			{
+				return this._data;
+			}
+			set
+			{
+				if ((this._data != value))
+				{
+					this.OndataChanging(value);
+					this.SendPropertyChanging();
+					this._data = value;
+					this.SendPropertyChanged("data");
+					this.OndataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_opis", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string opis
+		{
+			get
+			{
+				return this._opis;
+			}
+			set
+			{
+				if ((this._opis != value))
+				{
+					this.OnopisChanging(value);
+					this.SendPropertyChanging();
+					this._opis = value;
+					this.SendPropertyChanged("opis");
+					this.OnopisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ilosc_litrow", DbType="Int")]
+		public System.Nullable<int> ilosc_litrow
+		{
+			get
+			{
+				return this._ilosc_litrow;
+			}
+			set
+			{
+				if ((this._ilosc_litrow != value))
+				{
+					this.Onilosc_litrowChanging(value);
+					this.SendPropertyChanging();
+					this._ilosc_litrow = value;
+					this.SendPropertyChanged("ilosc_litrow");
+					this.Onilosc_litrowChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_zwierze", DbType="Int")]
+		public System.Nullable<int> id_zwierze
+		{
+			get
+			{
+				return this._id_zwierze;
+			}
+			set
+			{
+				if ((this._id_zwierze != value))
+				{
+					if (this._Zwierze.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_zwierzeChanging(value);
+					this.SendPropertyChanging();
+					this._id_zwierze = value;
+					this.SendPropertyChanged("id_zwierze");
+					this.Onid_zwierzeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_kategoria", DbType="Int")]
+		public System.Nullable<int> id_kategoria
+		{
+			get
+			{
+				return this._id_kategoria;
+			}
+			set
+			{
+				if ((this._id_kategoria != value))
+				{
+					if (this._Kategoria_rozliczen.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_kategoriaChanging(value);
+					this.SendPropertyChanging();
+					this._id_kategoria = value;
+					this.SendPropertyChanged("id_kategoria");
+					this.Onid_kategoriaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_stado", DbType="Int")]
+		public System.Nullable<int> id_stado
+		{
+			get
+			{
+				return this._id_stado;
+			}
+			set
+			{
+				if ((this._id_stado != value))
+				{
+					if (this._Stado.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_stadoChanging(value);
+					this.SendPropertyChanging();
+					this._id_stado = value;
+					this.SendPropertyChanged("id_stado");
+					this.Onid_stadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kwota", DbType="Float")]
+		public System.Nullable<double> kwota
+		{
+			get
+			{
+				return this._kwota;
+			}
+			set
+			{
+				if ((this._kwota != value))
+				{
+					this.OnkwotaChanging(value);
+					this.SendPropertyChanging();
+					this._kwota = value;
+					this.SendPropertyChanged("kwota");
+					this.OnkwotaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kategoria_rozliczen_Rozliczenia", Storage="_Kategoria_rozliczen", ThisKey="id_kategoria", OtherKey="Id", IsForeignKey=true)]
+		public Kategoria_rozliczen Kategoria_rozliczen
+		{
+			get
+			{
+				return this._Kategoria_rozliczen.Entity;
+			}
+			set
+			{
+				Kategoria_rozliczen previousValue = this._Kategoria_rozliczen.Entity;
+				if (((previousValue != value) 
+							|| (this._Kategoria_rozliczen.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Kategoria_rozliczen.Entity = null;
+						previousValue.Rozliczenia.Remove(this);
+					}
+					this._Kategoria_rozliczen.Entity = value;
+					if ((value != null))
+					{
+						value.Rozliczenia.Add(this);
+						this._id_kategoria = value.Id;
+					}
+					else
+					{
+						this._id_kategoria = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Kategoria_rozliczen");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Stado_Rozliczenia", Storage="_Stado", ThisKey="id_stado", OtherKey="Id", IsForeignKey=true)]
+		public Stado Stado
+		{
+			get
+			{
+				return this._Stado.Entity;
+			}
+			set
+			{
+				Stado previousValue = this._Stado.Entity;
+				if (((previousValue != value) 
+							|| (this._Stado.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Stado.Entity = null;
+						previousValue.Rozliczenia.Remove(this);
+					}
+					this._Stado.Entity = value;
+					if ((value != null))
+					{
+						value.Rozliczenia.Add(this);
+						this._id_stado = value.Id;
+					}
+					else
+					{
+						this._id_stado = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Stado");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Zwierze_Rozliczenia", Storage="_Zwierze", ThisKey="id_zwierze", OtherKey="Id", IsForeignKey=true)]
+		public Zwierze Zwierze
+		{
+			get
+			{
+				return this._Zwierze.Entity;
+			}
+			set
+			{
+				Zwierze previousValue = this._Zwierze.Entity;
+				if (((previousValue != value) 
+							|| (this._Zwierze.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Zwierze.Entity = null;
+						previousValue.Rozliczenia.Remove(this);
+					}
+					this._Zwierze.Entity = value;
+					if ((value != null))
+					{
+						value.Rozliczenia.Add(this);
+						this._id_zwierze = value.Id;
+					}
+					else
+					{
+						this._id_zwierze = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Zwierze");
 				}
 			}
 		}

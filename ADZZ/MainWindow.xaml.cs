@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NewCalendar;
+using ADZZ.Statystyki___okno_i_strony;
 
 namespace ADZZ
 {
@@ -79,7 +80,7 @@ namespace ADZZ
 
         private void btnDodajRozliczenie_Click(object sender, RoutedEventArgs e)
         {
-            ramkaAkcji.Content = new FormularzDodaniaRozliczenia();
+            ramkaAkcji.Content = new WyborTypow(typeof(FormularzDodaniaRozliczenia));
         }
 
         private void BtListaZwierzat_Click(object sender, RoutedEventArgs e)
@@ -95,6 +96,9 @@ namespace ADZZ
         
         }
 
-        
+        private void btnStatystykiZwierzat_Click(object sender, RoutedEventArgs e)
+        {
+            ramkaAkcji.Content = new StatystykiZwierzat();
+        }
     }
 }

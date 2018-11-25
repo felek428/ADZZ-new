@@ -1,4 +1,5 @@
-﻿using ADZZ.Zarządzanie_zwierzetami___okno_i_strony;
+﻿using ADZZ.Rozliczenia___okno_i_strony;
+using ADZZ.Zarządzanie_zwierzetami___okno_i_strony;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace ADZZ
             TypZwierzat noweTypy = new TypZwierzat();
             noweTypy.WypelnienieCBTypami(cbTypZwierzat);
             nowyTyp = typWybranejStrony;
+            cbTypZwierzat.SelectedIndex = 0;
         }
         public WyborTypow()
         {
@@ -51,6 +53,10 @@ namespace ADZZ
             else if(typ == typeof(ListaZwierzat))
             {
                 RamkaAkcjiTypy.Content = new ListaZwierzat(RamkaAkcjiTypy, cbTypZwierzat.SelectedIndex);
+            }
+            else if(typ == typeof(FormularzDodaniaRozliczenia))
+            {
+                RamkaAkcjiTypy.Content = new FormularzDodaniaRozliczenia(cbTypZwierzat.SelectedIndex);
             }
         }
 

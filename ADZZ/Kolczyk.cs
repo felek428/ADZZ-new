@@ -10,6 +10,8 @@ namespace ADZZ
 {
     class Kolczyk
     {
+        PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
+
         public void walidacjaKolczyk(Control Kolczyk)
         {
 
@@ -78,6 +80,18 @@ namespace ADZZ
                 }
             }
             
+        }
+        public void WypelnienieCbKolczykZwierze(ComboBox cbKolczyk)
+        {
+            var queryKolczyk = (from Zwierze in Polaczenie.Zwierze
+                                select Zwierze.nr_kolczyka).ToList();
+            cbKolczyk.ItemsSource = queryKolczyk;
+        }
+        public void WypelnienieCbKolczykStado(ComboBox cbKolczyk)
+        {
+            var queryKolczyk = (from Stado in Polaczenie.Stado
+                                select Stado.nr_stada).ToList();
+            cbKolczyk.ItemsSource = queryKolczyk;
         }
     }
 }

@@ -69,18 +69,8 @@
                         </BulletDecorator>
                     </Expander.Header>
                     <StackPanel>
-                        <Button Content="Text here" FontSize="22" HorizontalAlignment="Left" Margin="20,0,0,0">
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <ContentPresenter />
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                        <TextBlock Margin="20,0,0,0">
-                            <Ikony:PackIcon/>
-                            <Hyperlink Foreground="White" FontSize="22" >Click me</Hyperlink>
-                        </TextBlock>
-                        <Button Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Lista zwierząt" FontSize="22" FontWeight="Bold"/>
+                        
+                        <Button x:Name="btnStatystykiZwierzat" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Statystyki zwierząt" FontSize="22" FontWeight="Bold" Click="btnStatystykiZwierzat_Click"/>
                         <Button Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Znowu taki tekst" FontSize="22" FontWeight="Bold"/>
                     </StackPanel>
                 </Expander>

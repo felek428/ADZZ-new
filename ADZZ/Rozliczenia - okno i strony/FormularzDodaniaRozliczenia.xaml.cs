@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,9 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         List<string> listaRodzajuRozliczen = new List<string>(); //Chwilowo, poki nie jest podłączona baza
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private FormularzDodaniaRozliczenia actualForm;
-        public FormularzDodaniaRozliczenia()
+        private int wybranyTyp; 
+        
+        public FormularzDodaniaRozliczenia(int wybranyTyp)
         {
 
             InitializeComponent();
@@ -38,29 +41,45 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             WypelnienieComboBox();                      //Wypelnianie combobox|  Sposób wypełniania bedzie inny
             //WyborRozliczenia.ItemsSource = listaKategorii;
             TypZwierzat noweTypy = new TypZwierzat();
-            noweTypy.WypelnienieCBTypami(cbTypyZwierzat);
+            TypKontrolek(wybranyTyp);
+            this.wybranyTyp = wybranyTyp;
+            Kolczyk TrescCbKolczyk = new Kolczyk();
+            TrescCbKolczyk.WypelnienieCbKolczykZwierze(cbKolczyk);
+            TrescCbKolczyk.WypelnienieCbKolczykStado(cbNrStada);
             
+        }
+        public FormularzDodaniaRozliczenia()
+        {
+
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if(WyborRozliczenia.SelectedIndex != -1)
+            {
+                if (WyborRozliczenia.SelectedItem.ToString() == "Sprzedaz mleka")
+                {
+                    lbLitry.Visibility = Visibility.Visible;
+                    tbLitry.Visibility = Visibility.Visible;
+                    tbKwota.IsEnabled = false;
+                }
+                else
+                {
+                    lbLitry.Visibility = Visibility.Hidden;
+                    tbLitry.Visibility = Visibility.Hidden;
+                    tbKwota.IsEnabled = true;
+                }
+            }
             
-            if(WyborRozliczenia.SelectedItem.ToString() == "Sprzedaz mleka")
-            {
-                lbLitry.Visibility = Visibility.Visible;
-                tbLitry.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                lbLitry.Visibility = Visibility.Hidden;
-                tbLitry.Visibility = Visibility.Hidden;
-            }
         }
         public void StworzListe(List<string> lista)
         {
             lista.Add("Przychód");                              //Stala lista przychod/wydatek, ale to bede zaciagal z bazy
             lista.Add("Wydatek");
         }
+        /// <summary>
+        /// Wypelnienie comboboxa z kategoriami rozliczen
+        /// </summary>
         public void WypelnienieComboBox()
         {
             listaKategorii.Clear();
@@ -71,8 +90,16 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             {
                 listaKategorii.Add(item);
             }
-            this.WyborRozliczenia.ItemsSource = listaKategorii;
-            
+            WyborRozliczenia.ItemsSource = listaKategorii;
+
+            for (int i = 1; i <= 12; i++)
+            {
+                cbMiesiac.Items.Add(i);
+                if(i <= 2)
+                {
+                    cbPolowa.Items.Add(i);
+                }
+            }
 
         }
         /// <summary>
@@ -85,11 +112,16 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         
 
             Rozliczenia nowy = new Rozliczenia();
-            if (WyborRozliczenia.SelectedItem != null && tbKwota.Text != string.Empty && DataDP.SelectedDate != null)
+            if (WyborRozliczenia.SelectedItem != null && DataDP.SelectedDate != null)
             {
                 nowy.data = DataDP.SelectedDate.Value.Date;
-                nowy.kwota = Convert.ToDouble(tbKwota.Text);
+                
                 nowy.opis = tbOpis.Text;
+
+                if(tbKwota.Text != string.Empty)
+                {
+                    nowy.kwota = Convert.ToDouble(tbKwota.Text);
+                }
 
                 var queryKategoria = (from Kategoria_rozliczen in Polaczenie.Kategoria_rozliczen
                                       where Kategoria_rozliczen.nazwa == WyborRozliczenia.SelectedItem.ToString()
@@ -99,17 +131,35 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
                 
 
-                if (tbKolczyk.Text != string.Empty)
+                if (cbKolczyk.SelectedItem != null)
                 {
                     var queryKolczyk = from Zwierze in Polaczenie.Zwierze
-                                       where Zwierze.nr_kolczyka == tbKolczyk.Text
+                                       where Zwierze.nr_kolczyka == cbKolczyk.SelectedItem.ToString()
                                        select Zwierze.Id;
 
                     nowy.id_zwierze = queryKolczyk.FirstOrDefault();
                 }
+
+                if(tbLitry.Text != string.Empty)
+                {
+                    nowy.ilosc_litrow = Convert.ToInt32(tbLitry.Text);
+                }
                 
                 Polaczenie.Rozliczenia.InsertOnSubmit(nowy);
                 Polaczenie.SubmitChanges();
+
+
+
+
+
+
+
+                cbNrStada.SelectedItem = null;
+                cbKolczyk.SelectedItem = null;
+                WyborRozliczenia.SelectedItem = null;
+                tbKwota.Text = string.Empty;
+                DataDP.SelectedDate = null;
+                tbOpis.Text = string.Empty;
             }
             else
             {
@@ -126,7 +176,8 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             string newText = string.Empty;
             bool dotExist = false;
             int miejscaDziesietne = 0;
-            foreach (var znak in tbKwota.Text.ToCharArray())
+            var textbox = (sender as TextBox);
+            foreach (var znak in textbox.Text.ToCharArray())
             {
                 if (Char.IsDigit(znak) && dotExist ==true && miejscaDziesietne < 2)
                 {
@@ -144,9 +195,9 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
 
             }
-            tbKwota.Text = newText;
-            tbKwota.Focus();
-            tbKwota.Select(tbKwota.Text.Length,0);
+            textbox.Text = newText;
+            textbox.Focus();
+            textbox.Select(textbox.Text.Length,0);
 
 
         }
@@ -156,30 +207,33 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             tbKwota.Focus();
             tbKwota.Select(tbKwota.Text.Length, 0);
         }
-
-        private void cbTypyZwierzat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// Okresla jakie kontrolki maja sie wyswietlic na podstawie wybranego typu zwierzat
+        /// </summary>
+        /// <param name="wybranyTyp"></param>
+        private void TypKontrolek(int wybranyTyp)
         {
-            switch(cbTypyZwierzat.SelectedIndex)
+            switch (wybranyTyp)
             {
                 case 0:
                     lbNrKolczyka.Visibility = Visibility.Visible;
-                    lbPL.Visibility = Visibility.Visible;
-                    tbKolczyk.Visibility = Visibility.Visible;
+                    cbKolczyk.Visibility = Visibility.Visible;
 
                     lbNrStada.Visibility = Visibility.Hidden;
-                    tbNrStada.Visibility = Visibility.Hidden;
+                    cbNrStada.Visibility = Visibility.Hidden;
                     break;
                 case 1:
                     lbNrStada.Visibility = Visibility.Visible;
-                    tbNrStada.Visibility = Visibility.Visible;
+                    cbNrStada.Visibility = Visibility.Visible;
 
                     lbNrKolczyka.Visibility = Visibility.Hidden;
-                    tbKolczyk.Visibility = Visibility.Hidden;
+                    cbKolczyk.Visibility = Visibility.Hidden;
                     break;
                 default:
                     break;
             }
         }
+
 
         private void PackIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -208,5 +262,57 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         {
             Cursor = Cursors.Arrow;
         }
+
+        private void cbKolczyk_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Kolczyk kolczyk = new Kolczyk();
+            
+
+            switch (wybranyTyp)
+            {
+                case 0:
+                    kolczyk.walidacjaKolczyk(cbKolczyk);
+                    break;
+                case 1:
+                    kolczyk.walidacjaKolczyk(cbNrStada);
+                    break;
+                default:
+                    break;
+            }
+
+            
+        }
+
+        private void btDodajCene_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbMiesiac.SelectedItem != null && cbPolowa.SelectedItem != null && tbCenaMleka.Text != string.Empty)
+            {
+                Historia_cen nowaCena = new Historia_cen();
+                
+
+                
+                if(Convert.ToInt32(cbPolowa.SelectedItem) == 1)
+                {
+                    nowaCena.okres_od = Convert.ToDateTime("1." + cbMiesiac.SelectedItem.ToString() + "." + DateTime.Now.Year.ToString());
+                    nowaCena.okres_do = Convert.ToDateTime("15." + cbMiesiac.SelectedItem.ToString() + "." + DateTime.Now.Year.ToString());
+
+                }
+                else if(Convert.ToInt32(cbPolowa.SelectedItem) == 2)
+                {
+                    nowaCena.okres_od = Convert.ToDateTime("16." + cbMiesiac.SelectedItem.ToString() + "." + DateTime.Now.Year.ToString());
+                    nowaCena.okres_do = Convert.ToDateTime(DateTime.DaysInMonth(DateTime.Now.Year, Convert.ToInt32(cbMiesiac.SelectedItem)) + "." + cbMiesiac.SelectedItem.ToString() + "." + DateTime.Now.Year.ToString());
+
+                }
+
+                nowaCena.id_kategoria_rozliczen = 1;
+                nowaCena.cena = Convert.ToDouble(tbCenaMleka.Text);
+
+                Polaczenie.Historia_cen.InsertOnSubmit(nowaCena);
+                Polaczenie.SubmitChanges();
+                
+            }
+        }
+
+
     }
 }

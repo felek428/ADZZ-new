@@ -27,19 +27,6 @@
         <elementListCompartment Id="cd48e2e0-bf68-481b-8f9e-ec7db11bcaff" absoluteBounds="0.51500000000000012, 3.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5320c724-f700-4d46-9f52-332461f407b5" absoluteBounds="4.375, 0.75, 2, 2.3478011067708335">
-      <DataClassMoniker Name="/PolaczenieBazaDataContext/Rozliczenia" />
-      <nestedChildShapes>
-        <elementListCompartment Id="abc4cdf0-c45e-44da-a0c6-55d14f281e1b" absoluteBounds="4.39, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(6.875 : 1.44314697265625); (6.73958333333333 : 1.44314697265625 : JumpStart); (6.57291666666667 : 1.44314697265625 : JumpEnd); (6.375 : 1.44314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/PolaczenieBazaDataContext/Kategoria_rozliczen/Kategoria_rozliczen_Rozliczenia" />
-      <nodes>
-        <classShapeMoniker Id="75d7d7f5-0d9a-42ac-9979-a0498e8f5712" />
-        <classShapeMoniker Id="5320c724-f700-4d46-9f52-332461f407b5" />
-      </nodes>
-    </associationConnector>
     <classShape Id="929ab75a-f684-4383-8377-875fd8ae2018" absoluteBounds="1.125, 0.5, 2, 2.3478011067708335">
       <DataClassMoniker Name="/PolaczenieBazaDataContext/Zwierze" />
       <nestedChildShapes>
@@ -53,20 +40,13 @@
         <classShapeMoniker Id="f58825e4-3791-42cd-900b-395cd1063968" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.125 : 1.79890055338542); (3.66666916666667 : 1.79890055338542 : JumpStart); (3.83333583333333 : 1.79890055338542 : JumpEnd); (4.375 : 1.79890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/PolaczenieBazaDataContext/Zwierze/Zwierze_Rozliczenia" />
-      <nodes>
-        <classShapeMoniker Id="929ab75a-f684-4383-8377-875fd8ae2018" />
-        <classShapeMoniker Id="5320c724-f700-4d46-9f52-332461f407b5" />
-      </nodes>
-    </associationConnector>
     <classShape Id="873e93ea-ec05-4ae9-b8c7-5f4f72fc489f" absoluteBounds="3, 4.25, 2, 1.3862939453125">
       <DataClassMoniker Name="/PolaczenieBazaDataContext/Rasa" />
       <nestedChildShapes>
         <elementListCompartment Id="304145b2-1016-40ca-86b9-ee119ea7cf2a" absoluteBounds="3.0149999999999997, 4.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.7500025 : 4.25); (3.7500025 : 0.59375); (3.125 : 0.59375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.6562505 : 4.25); (3.6562505 : 0.53125); (3.125 : 0.53125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PolaczenieBazaDataContext/Rasa/Rasa_Zwierze" />
       <nodes>
         <classShapeMoniker Id="873e93ea-ec05-4ae9-b8c7-5f4f72fc489f" />
@@ -79,14 +59,14 @@
         <elementListCompartment Id="f16b70f7-6cc3-4fc4-8c9d-37d8f8054522" absoluteBounds="6.515, 5.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.65625 : 5.5); (6.65625 : 0.6250025); (3.125 : 0.6250025)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.5 : 6.6050466953125); (5.73958333333333 : 6.6050466953125 : JumpStart); (5.57291666666667 : 6.6050466953125 : JumpEnd); (2.75 : 6.6050466953125); (2.75 : 2.84780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PolaczenieBazaDataContext/Gatunek/Gatunek_Zwierze" />
       <nodes>
         <classShapeMoniker Id="0b2179af-8d81-4088-a110-72486e8a83a9" />
         <classShapeMoniker Id="929ab75a-f684-4383-8377-875fd8ae2018" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.5 : 6.2612944453125); (5.80208333333333 : 6.2612944453125 : JumpStart); (5.63541666666667 : 6.2612944453125 : JumpEnd); (4 : 6.2612944453125); (4 : 5.6362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.5 : 6.2612944453125); (5.73958333333333 : 6.2612944453125 : JumpStart); (5.57291666666667 : 6.2612944453125 : JumpEnd); (4 : 6.2612944453125); (4 : 5.6362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PolaczenieBazaDataContext/Gatunek/Gatunek_Rasa" />
       <nodes>
         <classShapeMoniker Id="0b2179af-8d81-4088-a110-72486e8a83a9" />
@@ -99,14 +79,7 @@
         <elementListCompartment Id="674b2efc-f030-4697-a38b-093957a31670" absoluteBounds="10.14, 6.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(10.125 : 7.3550439453125); (5.71875 : 7.3550439453125); (5.71875 : 3.09780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/PolaczenieBazaDataContext/Stado/Stado_Rozliczenia" />
-      <nodes>
-        <classShapeMoniker Id="84b70aad-4c83-4e29-9736-51fe81ce00c7" />
-        <classShapeMoniker Id="5320c724-f700-4d46-9f52-332461f407b5" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(8.5 : 6.63064697265625); (10.125 : 6.63064697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 6.63064697265625); (10.125 : 6.63064697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PolaczenieBazaDataContext/Gatunek/Gatunek_Stado" />
       <nodes>
         <classShapeMoniker Id="0b2179af-8d81-4088-a110-72486e8a83a9" />
@@ -119,11 +92,38 @@
         <elementListCompartment Id="53039b15-772b-49b1-ae9d-0c9cd51f2519" absoluteBounds="11.39, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(11.75 : 6.375); (11.75 : 5.27089680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.75 : 6.375); (11.75 : 5.27089680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PolaczenieBazaDataContext/Stado/Stado_Historia_Stada" />
       <nodes>
         <classShapeMoniker Id="84b70aad-4c83-4e29-9736-51fe81ce00c7" />
         <classShapeMoniker Id="45de344e-893e-4291-b129-326470a59ce0" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e54750f5-6c7d-46f7-9894-73ab41b741b4" absoluteBounds="4.25, 0.625, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/PolaczenieBazaDataContext/Rozliczenia" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7c271fa3-8fcc-4a6a-817f-4590042d17a0" absoluteBounds="4.265, 1.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.875 : 1.44314697265625); (6.25 : 1.44314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PolaczenieBazaDataContext/Kategoria_rozliczen/Kategoria_rozliczen_Rozliczenia" />
+      <nodes>
+        <classShapeMoniker Id="75d7d7f5-0d9a-42ac-9979-a0498e8f5712" />
+        <classShapeMoniker Id="e54750f5-6c7d-46f7-9894-73ab41b741b4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.125 : 7.3550439453125); (5.65625 : 7.3550439453125); (5.65625 : 2.97280110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PolaczenieBazaDataContext/Stado/Stado_Rozliczenia" />
+      <nodes>
+        <classShapeMoniker Id="84b70aad-4c83-4e29-9736-51fe81ce00c7" />
+        <classShapeMoniker Id="e54750f5-6c7d-46f7-9894-73ab41b741b4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.125 : 1.73640055338542); (3.57291716666667 : 1.73640055338542 : JumpStart); (3.73958383333333 : 1.73640055338542 : JumpEnd); (4.25 : 1.73640055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PolaczenieBazaDataContext/Zwierze/Zwierze_Rozliczenia" />
+      <nodes>
+        <classShapeMoniker Id="929ab75a-f684-4383-8377-875fd8ae2018" />
+        <classShapeMoniker Id="e54750f5-6c7d-46f7-9894-73ab41b741b4" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
