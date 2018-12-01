@@ -57,7 +57,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         {
             if(WyborRozliczenia.SelectedIndex != -1)
             {
-                if (WyborRozliczenia.SelectedItem.ToString() == "Sprzedaz mleka")
+                if (WyborRozliczenia.SelectedIndex == 0)
                 {
                     lbLitry.Visibility = Visibility.Visible;
                     tbLitry.Visibility = Visibility.Visible;

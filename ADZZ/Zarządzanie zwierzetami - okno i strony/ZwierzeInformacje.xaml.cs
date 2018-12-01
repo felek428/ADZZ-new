@@ -23,6 +23,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
 
+        string wybranyKolczyk;
         private Frame ramkaAkcji;
         public ZwierzeInformacje()
         {
@@ -32,11 +33,14 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             InitializeComponent();
             ramkaAkcji = ramka;
+            wybranyKolczyk = Kolczyk;
             WypelnienieWykres();
             
+            
+
             FormularzDodaniaZwierzecia nowy = new FormularzDodaniaZwierzecia(Kolczyk);
 
-
+           
             ramkaInformacje.Content = nowy;
             WypelnienieListViewRuja(Kolczyk);
             WypelnienieLVListaWycielen(Kolczyk);
@@ -83,13 +87,51 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private double WydatkiZwierze()
         {
+            var queryWydatki = (from R in Polaczenie.Rozliczenia
+                         where R.Zwierze.nr_kolczyka == wybranyKolczyk && R.Kategoria_rozliczen.czyPrzychod == 0
+                         select R.kwota).ToList();
+            double sumaKwota = 0;
 
-            return 0;
+            foreach (var item in queryWydatki)
+            {
+                sumaKwota += (double)item;
+            }
+
+            return sumaKwota;
         }
         
         private double PrzychodZwierze()
         {
-            return 0;
+            var queryPrzychod = (from R in Polaczenie.Rozliczenia
+                         where R.Zwierze.nr_kolczyka == wybranyKolczyk && (R.Kategoria_rozliczen.czyPrzychod == 1 || R.ilosc_litrow != null)
+                         select new { Kwota = R.kwota, Data = R.data, Litry = R.ilosc_litrow }).ToList();
+            var queryCena = (from Cena in Polaczenie.Historia_cen
+                            where Cena.id_kategoria_rozliczen == 1
+                            select Cena).ToList();
+
+            double sumaKwota = 0;
+            double sumaKwotaLitry = 0;
+             
+
+            foreach (var item in queryPrzychod)
+            {
+                if(item.Kwota != null)
+                {
+                    sumaKwota += (double)item.Kwota;
+                }
+                else if(item.Litry != null)
+                {
+                    foreach (var cena in queryCena)
+                    {
+                       if(item.Data > cena.okres_od && item.Data < cena.okres_do)
+                        {
+                            sumaKwotaLitry += (double)item.Litry * (double)cena.cena;
+                        }
+                    }
+                }
+            }
+
+            return sumaKwota + sumaKwotaLitry;
         }
     }
 }
