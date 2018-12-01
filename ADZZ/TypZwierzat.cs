@@ -29,7 +29,7 @@ namespace ADZZ
         /// </summary>
         public static void UzupelnijTypy()
         {
-            ListaTypow.Add("Pojedyncze zwierze");
+            ListaTypow.Add("Pojedyńcze zwierzę");
             ListaTypow.Add("Stado");
         }
         public TypZwierzat()

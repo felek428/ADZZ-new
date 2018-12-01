@@ -22,6 +22,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     public partial class ZwierzeInformacje : Page
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
+
         private Frame ramkaAkcji;
         public ZwierzeInformacje()
         {
@@ -55,9 +56,9 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         private void WypelnienieWykres()
         {
             ((PieSeries)Wykres.Series[0]).ItemsSource =
-                new KeyValuePair<string, int>[]{
-                new KeyValuePair<string,int>("Wydatki", 2000),
-                new KeyValuePair<string,int>("Przychód", 1500)
+                new KeyValuePair<string, double>[]{
+                new KeyValuePair<string,double>("Wydatki", WydatkiZwierze()),
+                new KeyValuePair<string,double>("Przychód", PrzychodZwierze())
                 };
         }
         
@@ -79,6 +80,16 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                          select new { NowaData = Rozrod.Data.ToShortDateString() };
             LVListaWycielen.ItemsSource = query;
         }
+
+        private double WydatkiZwierze()
+        {
+
+            return 0;
+        }
         
+        private double PrzychodZwierze()
+        {
+            return 0;
+        }
     }
 }

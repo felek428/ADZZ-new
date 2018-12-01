@@ -33,9 +33,6 @@ namespace ADZZ
     partial void InsertHistoria_cen(Historia_cen instance);
     partial void UpdateHistoria_cen(Historia_cen instance);
     partial void DeleteHistoria_cen(Historia_cen instance);
-    partial void InsertKategoria_rozliczen(Kategoria_rozliczen instance);
-    partial void UpdateKategoria_rozliczen(Kategoria_rozliczen instance);
-    partial void DeleteKategoria_rozliczen(Kategoria_rozliczen instance);
     partial void InsertRozrod(Rozrod instance);
     partial void UpdateRozrod(Rozrod instance);
     partial void DeleteRozrod(Rozrod instance);
@@ -45,15 +42,18 @@ namespace ADZZ
     partial void InsertRasa(Rasa instance);
     partial void UpdateRasa(Rasa instance);
     partial void DeleteRasa(Rasa instance);
-    partial void InsertGatunek(Gatunek instance);
-    partial void UpdateGatunek(Gatunek instance);
-    partial void DeleteGatunek(Gatunek instance);
     partial void InsertStado(Stado instance);
     partial void UpdateStado(Stado instance);
     partial void DeleteStado(Stado instance);
     partial void InsertHistoria_Stada(Historia_Stada instance);
     partial void UpdateHistoria_Stada(Historia_Stada instance);
     partial void DeleteHistoria_Stada(Historia_Stada instance);
+    partial void InsertKategoria_rozliczen(Kategoria_rozliczen instance);
+    partial void UpdateKategoria_rozliczen(Kategoria_rozliczen instance);
+    partial void DeleteKategoria_rozliczen(Kategoria_rozliczen instance);
+    partial void InsertGatunek(Gatunek instance);
+    partial void UpdateGatunek(Gatunek instance);
+    partial void DeleteGatunek(Gatunek instance);
     partial void InsertRozliczenia(Rozliczenia instance);
     partial void UpdateRozliczenia(Rozliczenia instance);
     partial void DeleteRozliczenia(Rozliczenia instance);
@@ -97,14 +97,6 @@ namespace ADZZ
 			}
 		}
 		
-		public System.Data.Linq.Table<Kategoria_rozliczen> Kategoria_rozliczen
-		{
-			get
-			{
-				return this.GetTable<Kategoria_rozliczen>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Rozrod> Rozrod
 		{
 			get
@@ -129,14 +121,6 @@ namespace ADZZ
 			}
 		}
 		
-		public System.Data.Linq.Table<Gatunek> Gatunek
-		{
-			get
-			{
-				return this.GetTable<Gatunek>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Stado> Stado
 		{
 			get
@@ -150,6 +134,22 @@ namespace ADZZ
 			get
 			{
 				return this.GetTable<Historia_Stada>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Kategoria_rozliczen> Kategoria_rozliczen
+		{
+			get
+			{
+				return this.GetTable<Kategoria_rozliczen>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Gatunek> Gatunek
+		{
+			get
+			{
+				return this.GetTable<Gatunek>();
 			}
 		}
 		
@@ -358,172 +358,6 @@ namespace ADZZ
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kategoria_rozliczen")]
-	public partial class Kategoria_rozliczen : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _nazwa;
-		
-		private System.Nullable<byte> _czyPrzychod;
-		
-		private EntitySet<Historia_cen> _Historia_cen;
-		
-		private EntitySet<Rozliczenia> _Rozliczenia;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnnazwaChanging(string value);
-    partial void OnnazwaChanged();
-    partial void OnczyPrzychodChanging(System.Nullable<byte> value);
-    partial void OnczyPrzychodChanged();
-    #endregion
-		
-		public Kategoria_rozliczen()
-		{
-			this._Historia_cen = new EntitySet<Historia_cen>(new Action<Historia_cen>(this.attach_Historia_cen), new Action<Historia_cen>(this.detach_Historia_cen));
-			this._Rozliczenia = new EntitySet<Rozliczenia>(new Action<Rozliczenia>(this.attach_Rozliczenia), new Action<Rozliczenia>(this.detach_Rozliczenia));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="VarChar(30)")]
-		public string nazwa
-		{
-			get
-			{
-				return this._nazwa;
-			}
-			set
-			{
-				if ((this._nazwa != value))
-				{
-					this.OnnazwaChanging(value);
-					this.SendPropertyChanging();
-					this._nazwa = value;
-					this.SendPropertyChanged("nazwa");
-					this.OnnazwaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_czyPrzychod", DbType="TinyInt")]
-		public System.Nullable<byte> czyPrzychod
-		{
-			get
-			{
-				return this._czyPrzychod;
-			}
-			set
-			{
-				if ((this._czyPrzychod != value))
-				{
-					this.OnczyPrzychodChanging(value);
-					this.SendPropertyChanging();
-					this._czyPrzychod = value;
-					this.SendPropertyChanged("czyPrzychod");
-					this.OnczyPrzychodChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kategoria_rozliczen_Historia_cen", Storage="_Historia_cen", ThisKey="Id", OtherKey="id_kategoria_rozliczen")]
-		public EntitySet<Historia_cen> Historia_cen
-		{
-			get
-			{
-				return this._Historia_cen;
-			}
-			set
-			{
-				this._Historia_cen.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kategoria_rozliczen_Rozliczenia", Storage="_Rozliczenia", ThisKey="Id", OtherKey="id_kategoria")]
-		public EntitySet<Rozliczenia> Rozliczenia
-		{
-			get
-			{
-				return this._Rozliczenia;
-			}
-			set
-			{
-				this._Rozliczenia.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Historia_cen(Historia_cen entity)
-		{
-			this.SendPropertyChanging();
-			entity.Kategoria_rozliczen = this;
-		}
-		
-		private void detach_Historia_cen(Historia_cen entity)
-		{
-			this.SendPropertyChanging();
-			entity.Kategoria_rozliczen = null;
-		}
-		
-		private void attach_Rozliczenia(Rozliczenia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Kategoria_rozliczen = this;
-		}
-		
-		private void detach_Rozliczenia(Rozliczenia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Kategoria_rozliczen = null;
 		}
 	}
 	
@@ -1249,200 +1083,6 @@ namespace ADZZ
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gatunek")]
-	public partial class Gatunek : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _nazwa;
-		
-		private System.Nullable<byte> _czyStado;
-		
-		private EntitySet<Zwierze> _Zwierze;
-		
-		private EntitySet<Rasa> _Rasa;
-		
-		private EntitySet<Stado> _Stado;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnnazwaChanging(string value);
-    partial void OnnazwaChanged();
-    partial void OnczyStadoChanging(System.Nullable<byte> value);
-    partial void OnczyStadoChanged();
-    #endregion
-		
-		public Gatunek()
-		{
-			this._Zwierze = new EntitySet<Zwierze>(new Action<Zwierze>(this.attach_Zwierze), new Action<Zwierze>(this.detach_Zwierze));
-			this._Rasa = new EntitySet<Rasa>(new Action<Rasa>(this.attach_Rasa), new Action<Rasa>(this.detach_Rasa));
-			this._Stado = new EntitySet<Stado>(new Action<Stado>(this.attach_Stado), new Action<Stado>(this.detach_Stado));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="VarChar(30)")]
-		public string nazwa
-		{
-			get
-			{
-				return this._nazwa;
-			}
-			set
-			{
-				if ((this._nazwa != value))
-				{
-					this.OnnazwaChanging(value);
-					this.SendPropertyChanging();
-					this._nazwa = value;
-					this.SendPropertyChanged("nazwa");
-					this.OnnazwaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_czyStado", DbType="TinyInt")]
-		public System.Nullable<byte> czyStado
-		{
-			get
-			{
-				return this._czyStado;
-			}
-			set
-			{
-				if ((this._czyStado != value))
-				{
-					this.OnczyStadoChanging(value);
-					this.SendPropertyChanging();
-					this._czyStado = value;
-					this.SendPropertyChanged("czyStado");
-					this.OnczyStadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Zwierze", Storage="_Zwierze", ThisKey="Id", OtherKey="id_gatunek")]
-		public EntitySet<Zwierze> Zwierze
-		{
-			get
-			{
-				return this._Zwierze;
-			}
-			set
-			{
-				this._Zwierze.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Rasa", Storage="_Rasa", ThisKey="Id", OtherKey="id_gatunek")]
-		public EntitySet<Rasa> Rasa
-		{
-			get
-			{
-				return this._Rasa;
-			}
-			set
-			{
-				this._Rasa.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Stado", Storage="_Stado", ThisKey="Id", OtherKey="id_gatunek")]
-		public EntitySet<Stado> Stado
-		{
-			get
-			{
-				return this._Stado;
-			}
-			set
-			{
-				this._Stado.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Zwierze(Zwierze entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = this;
-		}
-		
-		private void detach_Zwierze(Zwierze entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = null;
-		}
-		
-		private void attach_Rasa(Rasa entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = this;
-		}
-		
-		private void detach_Rasa(Rasa entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = null;
-		}
-		
-		private void attach_Stado(Stado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = this;
-		}
-		
-		private void detach_Stado(Stado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gatunek = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Stado")]
 	public partial class Stado : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1849,6 +1489,366 @@ namespace ADZZ
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kategoria_rozliczen")]
+	public partial class Kategoria_rozliczen : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _nazwa;
+		
+		private System.Nullable<byte> _czyPrzychod;
+		
+		private EntitySet<Historia_cen> _Historia_cen;
+		
+		private EntitySet<Rozliczenia> _Rozliczenia;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnnazwaChanging(string value);
+    partial void OnnazwaChanged();
+    partial void OnczyPrzychodChanging(System.Nullable<byte> value);
+    partial void OnczyPrzychodChanged();
+    #endregion
+		
+		public Kategoria_rozliczen()
+		{
+			this._Historia_cen = new EntitySet<Historia_cen>(new Action<Historia_cen>(this.attach_Historia_cen), new Action<Historia_cen>(this.detach_Historia_cen));
+			this._Rozliczenia = new EntitySet<Rozliczenia>(new Action<Rozliczenia>(this.attach_Rozliczenia), new Action<Rozliczenia>(this.detach_Rozliczenia));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="NVarChar(30)")]
+		public string nazwa
+		{
+			get
+			{
+				return this._nazwa;
+			}
+			set
+			{
+				if ((this._nazwa != value))
+				{
+					this.OnnazwaChanging(value);
+					this.SendPropertyChanging();
+					this._nazwa = value;
+					this.SendPropertyChanged("nazwa");
+					this.OnnazwaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_czyPrzychod", DbType="TinyInt")]
+		public System.Nullable<byte> czyPrzychod
+		{
+			get
+			{
+				return this._czyPrzychod;
+			}
+			set
+			{
+				if ((this._czyPrzychod != value))
+				{
+					this.OnczyPrzychodChanging(value);
+					this.SendPropertyChanging();
+					this._czyPrzychod = value;
+					this.SendPropertyChanged("czyPrzychod");
+					this.OnczyPrzychodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kategoria_rozliczen_Historia_cen", Storage="_Historia_cen", ThisKey="Id", OtherKey="id_kategoria_rozliczen")]
+		public EntitySet<Historia_cen> Historia_cen
+		{
+			get
+			{
+				return this._Historia_cen;
+			}
+			set
+			{
+				this._Historia_cen.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kategoria_rozliczen_Rozliczenia", Storage="_Rozliczenia", ThisKey="Id", OtherKey="id_kategoria")]
+		public EntitySet<Rozliczenia> Rozliczenia
+		{
+			get
+			{
+				return this._Rozliczenia;
+			}
+			set
+			{
+				this._Rozliczenia.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Historia_cen(Historia_cen entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kategoria_rozliczen = this;
+		}
+		
+		private void detach_Historia_cen(Historia_cen entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kategoria_rozliczen = null;
+		}
+		
+		private void attach_Rozliczenia(Rozliczenia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kategoria_rozliczen = this;
+		}
+		
+		private void detach_Rozliczenia(Rozliczenia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kategoria_rozliczen = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gatunek")]
+	public partial class Gatunek : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _nazwa;
+		
+		private System.Nullable<byte> _czyStado;
+		
+		private EntitySet<Zwierze> _Zwierze;
+		
+		private EntitySet<Rasa> _Rasa;
+		
+		private EntitySet<Stado> _Stado;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnnazwaChanging(string value);
+    partial void OnnazwaChanged();
+    partial void OnczyStadoChanging(System.Nullable<byte> value);
+    partial void OnczyStadoChanged();
+    #endregion
+		
+		public Gatunek()
+		{
+			this._Zwierze = new EntitySet<Zwierze>(new Action<Zwierze>(this.attach_Zwierze), new Action<Zwierze>(this.detach_Zwierze));
+			this._Rasa = new EntitySet<Rasa>(new Action<Rasa>(this.attach_Rasa), new Action<Rasa>(this.detach_Rasa));
+			this._Stado = new EntitySet<Stado>(new Action<Stado>(this.attach_Stado), new Action<Stado>(this.detach_Stado));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="NVarChar(30)")]
+		public string nazwa
+		{
+			get
+			{
+				return this._nazwa;
+			}
+			set
+			{
+				if ((this._nazwa != value))
+				{
+					this.OnnazwaChanging(value);
+					this.SendPropertyChanging();
+					this._nazwa = value;
+					this.SendPropertyChanged("nazwa");
+					this.OnnazwaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_czyStado", DbType="TinyInt")]
+		public System.Nullable<byte> czyStado
+		{
+			get
+			{
+				return this._czyStado;
+			}
+			set
+			{
+				if ((this._czyStado != value))
+				{
+					this.OnczyStadoChanging(value);
+					this.SendPropertyChanging();
+					this._czyStado = value;
+					this.SendPropertyChanged("czyStado");
+					this.OnczyStadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Zwierze", Storage="_Zwierze", ThisKey="Id", OtherKey="id_gatunek")]
+		public EntitySet<Zwierze> Zwierze
+		{
+			get
+			{
+				return this._Zwierze;
+			}
+			set
+			{
+				this._Zwierze.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Rasa", Storage="_Rasa", ThisKey="Id", OtherKey="id_gatunek")]
+		public EntitySet<Rasa> Rasa
+		{
+			get
+			{
+				return this._Rasa;
+			}
+			set
+			{
+				this._Rasa.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gatunek_Stado", Storage="_Stado", ThisKey="Id", OtherKey="id_gatunek")]
+		public EntitySet<Stado> Stado
+		{
+			get
+			{
+				return this._Stado;
+			}
+			set
+			{
+				this._Stado.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Zwierze(Zwierze entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = this;
+		}
+		
+		private void detach_Zwierze(Zwierze entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = null;
+		}
+		
+		private void attach_Rasa(Rasa entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = this;
+		}
+		
+		private void detach_Rasa(Rasa entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = null;
+		}
+		
+		private void attach_Stado(Stado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = this;
+		}
+		
+		private void detach_Stado(Stado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gatunek = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rozliczenia")]
 	public partial class Rozliczenia : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1947,7 +1947,7 @@ namespace ADZZ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_opis", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_opis", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
 		public string opis
 		{
 			get

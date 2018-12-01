@@ -10,15 +10,6 @@
       <Association Name="Kategoria_rozliczen_Historia_cen" Member="Kategoria_rozliczen" ThisKey="id_kategoria_rozliczen" OtherKey="Id" Type="Kategoria_rozliczen" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Kategoria_rozliczen" Member="Kategoria_rozliczen">
-    <Type Name="Kategoria_rozliczen">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="nazwa" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="czyPrzychod" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Association Name="Kategoria_rozliczen_Historia_cen" Member="Historia_cen" ThisKey="Id" OtherKey="id_kategoria_rozliczen" Type="Historia_cen" />
-      <Association Name="Kategoria_rozliczen_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_kategoria" Type="Rozliczenia" />
-    </Type>
-  </Table>
   <Table Name="dbo.Rozrod" Member="Rozrod">
     <Type Name="Rozrod">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -53,16 +44,6 @@
       <Association Name="Gatunek_Rasa" Member="Gatunek" ThisKey="id_gatunek" OtherKey="Id" Type="Gatunek" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Gatunek" Member="Gatunek">
-    <Type Name="Gatunek">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="nazwa" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="czyStado" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Association Name="Gatunek_Zwierze" Member="Zwierze" ThisKey="Id" OtherKey="id_gatunek" Type="Zwierze" />
-      <Association Name="Gatunek_Rasa" Member="Rasa" ThisKey="Id" OtherKey="id_gatunek" Type="Rasa" />
-      <Association Name="Gatunek_Stado" Member="Stado" ThisKey="Id" OtherKey="id_gatunek" Type="Stado" />
-    </Type>
-  </Table>
   <Table Name="dbo.Stado" Member="Stado">
     <Type Name="Stado">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -83,11 +64,30 @@
       <Association Name="Stado_Historia_Stada" Member="Stado" ThisKey="id_stado" OtherKey="Id" Type="Stado" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Kategoria_rozliczen" Member="Kategoria_rozliczen">
+    <Type Name="Kategoria_rozliczen">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nazwa" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="czyPrzychod" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Association Name="Kategoria_rozliczen_Historia_cen" Member="Historia_cen" ThisKey="Id" OtherKey="id_kategoria_rozliczen" Type="Historia_cen" />
+      <Association Name="Kategoria_rozliczen_Rozliczenia" Member="Rozliczenia" ThisKey="Id" OtherKey="id_kategoria" Type="Rozliczenia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Gatunek" Member="Gatunek">
+    <Type Name="Gatunek">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nazwa" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="czyStado" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Association Name="Gatunek_Zwierze" Member="Zwierze" ThisKey="Id" OtherKey="id_gatunek" Type="Zwierze" />
+      <Association Name="Gatunek_Rasa" Member="Rasa" ThisKey="Id" OtherKey="id_gatunek" Type="Rasa" />
+      <Association Name="Gatunek_Stado" Member="Stado" ThisKey="Id" OtherKey="id_gatunek" Type="Stado" />
+    </Type>
+  </Table>
   <Table Name="dbo.Rozliczenia" Member="Rozliczenia">
     <Type Name="Rozliczenia">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="opis" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="opis" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
       <Column Name="ilosc_litrow" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="id_zwierze" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="id_kategoria" Type="System.Int32" DbType="Int" CanBeNull="true" />
