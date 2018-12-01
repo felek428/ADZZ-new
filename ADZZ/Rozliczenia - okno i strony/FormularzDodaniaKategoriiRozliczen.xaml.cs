@@ -21,9 +21,11 @@ namespace ADZZ.Rozliczenia___okno_i_strony
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         FormularzDodaniaRozliczenia actualForm;
-        public FormularzDodaniaKategoriiRozliczen( FormularzDodaniaRozliczenia formularz)
+        ComboBox cbListaKategorii;
+        public FormularzDodaniaKategoriiRozliczen( FormularzDodaniaRozliczenia formularz, ComboBox cbListaKategorii)
         {
             actualForm = formularz;
+            this.cbListaKategorii = cbListaKategorii;
             InitializeComponent();
             WypelnienieCbCzyPrzychod();
         }
@@ -45,7 +47,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             Polaczenie.SubmitChanges();
             actualForm.WypelnienieComboBox();
             actualForm.WyborRozliczenia.SelectedItem = tbNazwaKategorii.Text;
-            
+            cbListaKategorii.SelectedItem = tbNazwaKategorii.Text;
             Close();
         }
 

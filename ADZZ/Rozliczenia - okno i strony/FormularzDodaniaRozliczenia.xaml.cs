@@ -237,7 +237,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
         private void PackIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            FormularzDodaniaKategoriiRozliczen nowaKategoria = new FormularzDodaniaKategoriiRozliczen(actualForm);
+            FormularzDodaniaKategoriiRozliczen nowaKategoria = new FormularzDodaniaKategoriiRozliczen(actualForm, WyborRozliczenia);
             nowaKategoria.ShowDialog();
         }
 
