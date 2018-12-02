@@ -139,6 +139,14 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
                     nowy.id_zwierze = queryKolczyk.FirstOrDefault();
                 }
+                else if (cbNrStada.SelectedItem != null)
+                {
+                    var queryNrStada = from Stado in Polaczenie.Stado
+                                       where Stado.nr_stada == cbNrStada.SelectedItem.ToString()
+                                       select Stado.Id;
+                    nowy.id_stado = queryNrStada.FirstOrDefault();
+                }
+                
 
                 if(tbLitry.Text != string.Empty)
                 {

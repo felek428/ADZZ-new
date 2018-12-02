@@ -22,7 +22,7 @@
                     <!--Wykres liniowy-->
                     <!--<Charts:ColumnSeries Title="Wydajnosc" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"   />-->
                     <!--Wykres slupkowy-->
-                    <Charts:PieSeries Title="Wydajnosc" x:Name="Seria" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" ItemsSource="{Binding points}"/>
+                    <Charts:PieSeries Title="Wydajnosc" x:Name="Seria" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
                     <!--Wykres kolowy-->
                 </Charts:Chart.Series>
             </Charts:Chart>
