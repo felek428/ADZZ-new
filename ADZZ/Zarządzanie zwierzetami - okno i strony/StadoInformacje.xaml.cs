@@ -43,6 +43,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 new KeyValuePair<string,double>("Wydatki", WydatkiStado()),
                 new KeyValuePair<string,double>("Przychód", PrzychodStado())
                 };
+            
         }
 
         private double WydatkiStado()
