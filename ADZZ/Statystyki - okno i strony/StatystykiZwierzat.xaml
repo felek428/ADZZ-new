@@ -11,7 +11,7 @@
       Background="White"
       Title="StatystykiZwierzat">
 
-    
+
 
     <Grid>
         <ComboBox x:Name="cbRodzajStatystyk" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbRodzajStatystyk_SelectionChanged"/>
@@ -25,20 +25,33 @@
 
 
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,37,5,0">
-            <Charts:Chart x:Name="WykresKolumnowy" Margin="0,37,0,0" BorderThickness="0" Visibility="Hidden">
+        <ScrollViewer x:Name="svLine" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,100,5,0">
+
+
+
+
+            <Charts:Chart x:Name="WykresLiniowy"  BorderThickness="0" Visibility="Visible" >
+
+                <Charts:LineSeries x:Name="SeriaLine" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" Visibility="Hidden"/>
+
+
+            </Charts:Chart>
+
+        </ScrollViewer>
+        <ScrollViewer x:Name="svColumn" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,100,5,0" >
+
+            <Charts:Chart x:Name="WykresKolumnowy"  BorderThickness="0" Visibility="Visible">
 
                 <Charts:ColumnSeries  x:Name="SeriaCol" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" />
 
             </Charts:Chart>
         </ScrollViewer>
-              
-        <Charts:Chart x:Name="WykresLiniowy" Margin="0,37,0,0" BorderThickness="0" Visibility="Hidden" >
-
-            <Charts:LineSeries x:Name="SeriaLine" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" Visibility="Hidden"/>
-
-
-        </Charts:Chart>
+        <Label x:Name="lbTypZwierzat" Content="Typ zwierząt:" HorizontalAlignment="Left" Margin="463,39,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbTypZwierzat" HorizontalAlignment="Left" Margin="540,43,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lbOd" Content="Od:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbDo" Content="Do:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="44,41,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="44,70,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

@@ -37,12 +37,21 @@ namespace ADZZ.Statystyki___okno_i_strony
 
        
 
-
-        private void RozszerzWykres(int dlugosclisty,Chart wykres)
+        /// <summary>
+        /// Zwiększa szerkość wykresu jeżeli jest znaczaca ilość danych na osi x
+        /// </summary>
+        /// <param name="dlugoscListy">Ilość danych naniesionych na oś x</param>
+        /// <param name="wykres">Wykres na który nakładane są dane</param>
+        /// <param name="czyDlugie">Jeżeli nazwy danych są długie, wartość true zwiększy szerokość na wykresie dla 1 kolumny</param>
+        private void RozszerzWykres(int dlugoscListy, Chart wykres, bool czyDlugie)
         {
-            if (dlugosclisty > 9)
+            if (dlugoscListy > 15 && czyDlugie == true)
             {
-                wykres.Width = 80 * dlugosclisty;
+                wykres.Width = 130 * dlugoscListy;
+            }
+            else if (dlugoscListy > 9 )
+            {
+                wykres.Width = 80 * dlugoscListy;
             }
             else wykres.Width = this.Width - 80;
         }
@@ -52,70 +61,48 @@ namespace ADZZ.Statystyki___okno_i_strony
             cbRodzajStatystyk.Items.Add("Liczba laktacji");
             cbRodzajStatystyk.Items.Add("Przychód i wydatki");
             cbRodzajStatystyk.Items.Add("Cena mleka");
-            cbRodzajStatystyk.Items.Add("Wydatki zwierząt");
+            cbRodzajStatystyk.Items.Add("Wydajność mleczna");
         }
-        private void LoadColumnChartData()
-        {
-
-
-
-            ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource =
-                new KeyValuePair<string, int>[]{
-        new KeyValuePair<string,int>("Project Manager", 12),
-        new KeyValuePair<string,int>("CEO", 25),
-        new KeyValuePair<string,int>("Software Engg.", 5),
-        new KeyValuePair<string,int>("Team Leader", 6),
-        new KeyValuePair<string,int>("Project Leader", 10),
-        new KeyValuePair<string,int>("Developer", 4) };
-        }
+        
         #region Źródła danych do wykresów
 
         private KeyValuePair<string, int>[] LiczbaZwierzatDanejRasy()
         {
-            var queryRasa = (from Rasa in Polaczenie.Rasa
-                             select Rasa).ToList();
-            var queryZwierze = (from Zwierze in Polaczenie.Zwierze
-                                select Zwierze).ToList();
-
-
-
-            var zestawienie = new KeyValuePair<string, int>[queryRasa.Count];
-            for (int i = 0; i < queryRasa.Count; i++)
+            
+            var zestawienie = new KeyValuePair<string, int>[QueryRasa().Count];
+            for (int i = 0; i < QueryRasa().Count; i++)
             {
                 var licznikSztuk = 0;
-                foreach (var zwierzak in queryZwierze)
+                foreach (var zwierzak in QueryZwierze())
                 {
-                    if (zwierzak.id_rasa == queryRasa[i].Id)
+                    if (zwierzak.id_rasa == QueryRasa()[i].Id)
                     {
                         licznikSztuk++;
                     }
                 }
-                zestawienie[i] = new KeyValuePair<string, int>(queryRasa[i].nazwa, licznikSztuk);
+                zestawienie[i] = new KeyValuePair<string, int>(QueryRasa()[i].nazwa, licznikSztuk);
             }
             return zestawienie;
         }
 
-        private KeyValuePair<string, int>[] LiczbaLaktacji()
+        private List<KeyValuePair<string, int>> LiczbaLaktacji()
         {
-            var queryRozrod = (from Rozrod in Polaczenie.Rozrod
-                               select Rozrod).ToList();
-            var queryZwierze = (from Zwierze in Polaczenie.Zwierze
-                                select Zwierze).ToList();
-
-
-
-            var zestawienie = new KeyValuePair<string, int>[queryZwierze.Count];
-            for (int i = 0; i < queryZwierze.Count; i++)
+            
+            
+            var zestawienie = new List<KeyValuePair<string, int>>();
+            for (int i = 0; i < QueryZwierze().Count; i++)
             {
-                var licznikSztuk = 0;
-                foreach (var wpis in queryRozrod)
+                var licznikLaktacji = 0;
+                foreach (var wpis in QueryRozrod())
                 {
-                    if (wpis.id_zwierze == queryZwierze[i].Id && wpis.czyRuja == 0)
+                    if (wpis.id_zwierze == QueryZwierze()[i].Id && wpis.czyRuja == 0)
                     {
-                        licznikSztuk++;
+                        licznikLaktacji++;
                     }
                 }
-                zestawienie[i] = new KeyValuePair<string, int>(queryZwierze[i].nr_kolczyka, licznikSztuk);
+                if(licznikLaktacji != 0) {
+                    zestawienie.Add(new KeyValuePair<string, int>(QueryZwierze()[i].nr_kolczyka, licznikLaktacji));
+                }
             }
             return zestawienie;
         }
@@ -125,7 +112,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             DaneWykresow noweDane = new DaneWykresow();
 
             var zestawienie = new KeyValuePair<string, double>[12];
-            Console.WriteLine(QueryPrzychod().Count);
+
             double buffor;
             var miesiace = DateTimeFormatInfo.CurrentInfo.MonthNames;
 
@@ -142,7 +129,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                 }
 
 
-                Console.WriteLine(miesiace[i]);
+
                 zestawienie[i] = new KeyValuePair<string, double>(miesiace[i], buffor);
             }
 
@@ -156,11 +143,7 @@ namespace ADZZ.Statystyki___okno_i_strony
 
             var zestawienie = new KeyValuePair<string, double>[12];
             var miesiace = DateTimeFormatInfo.CurrentInfo.MonthNames.ToList();
-            Console.WriteLine(miesiace.Count);
-            foreach (var item in miesiace)
-            {
-                Console.WriteLine(item);
-            }
+
             double buffor;
             for (int i = 0; i < miesiace.Count - 1; i++)
             {
@@ -180,6 +163,44 @@ namespace ADZZ.Statystyki___okno_i_strony
 
             return zestawienie;
         }
+        private KeyValuePair<string, double>[] CenyMleka()
+        {
+            var zestawienie = new KeyValuePair<string, double>[QueryCenyMleka().Count];
+
+            for (int i = 0; i < QueryCenyMleka().Count; i++)
+            {
+                zestawienie[i] = new KeyValuePair<string, double>(Convert.ToDateTime(QueryCenyMleka()[i].okres_od).ToShortDateString(), (double)QueryCenyMleka()[i].cena);
+            }
+
+
+            return zestawienie;
+        }
+
+        private List<KeyValuePair<string, int>> WydajnoscMleczna()
+        {
+            var zestawienie = new List<KeyValuePair<string, int>>();
+            var listaZwierze = QueryZwierze();
+            var listaMleko = QueryMleko();
+            int buffor;
+
+            for(int i = 0; i < listaZwierze.Count; i++)
+            {
+                buffor = 0;
+                foreach (var item in listaMleko)
+                {
+                    if(item.id_zwierze == listaZwierze[i].Id)
+                    {
+                        buffor += (int)item.ilosc_litrow;
+                    }
+
+                }
+                if(buffor != 0)
+                {
+                    zestawienie.Add(new KeyValuePair<string, int>(listaZwierze[i].nr_kolczyka, buffor));
+                }
+            }         
+            return zestawienie;
+        }
         #endregion
 
 
@@ -193,9 +214,13 @@ namespace ADZZ.Statystyki___okno_i_strony
             switch(cbRodzajStatystyk.SelectedItem)
             {
                 case "Liczba zwierzat":
+                    /*
                     WykresKolumnowy.Visibility = Visibility.Visible;
                     WykresKolowy.Visibility = Visibility.Hidden;
                     WykresLiniowy.Visibility = Visibility.Hidden;
+                    */
+                    svColumn.Visibility = Visibility.Visible;
+                    svLine.Visibility = Visibility.Hidden;
 
                     WykresKolumnowy.Series.Clear();
 
@@ -205,29 +230,41 @@ namespace ADZZ.Statystyki___okno_i_strony
                     ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaZwierzatDanejRasy();
 
                     
-                    RozszerzWykres(LiczbaZwierzatDanejRasy().Length,WykresKolumnowy);
+                    RozszerzWykres(LiczbaZwierzatDanejRasy().Length,WykresKolumnowy,false);
 
 
 
 
                     break;
                 case "Liczba laktacji":
-                    WykresKolowy.Visibility = Visibility.Visible;
-                    WykresKolumnowy.Visibility = Visibility.Hidden;
+                    /*
+                    WykresKolowy.Visibility = Visibility.Hidden;
+                    WykresKolumnowy.Visibility = Visibility.Visible;
                     WykresLiniowy.Visibility = Visibility.Hidden;
+                    */
+                    svColumn.Visibility = Visibility.Visible;
+                    svLine.Visibility = Visibility.Hidden;
+
                     WykresKolowy.Series.Clear();
 
-                    DodajSerie(typeof(PieSeries), "Liczba laktacji", WykresKolowy);
-                    ((PieSeries)WykresKolowy.Series[0]).ItemsSource = LiczbaLaktacji();
-                    
+                    WykresKolumnowy.Series.Clear();
+                    DodajSerie(typeof(ColumnSeries), "Liczba laktacji", WykresKolumnowy);
+                    ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaLaktacji();
+
+
+                    RozszerzWykres(LiczbaLaktacji().Count, WykresKolumnowy,true);
+
                     SeriaPie.Title = "Liczba laktacji";
                     break;
                 case "Przychód i wydatki":
-
+                    /*
                     WykresKolumnowy.Visibility = Visibility.Visible;
                     WykresKolowy.Visibility = Visibility.Hidden;
                     WykresLiniowy.Visibility = Visibility.Hidden;
-                    
+                    */
+                    svColumn.Visibility = Visibility.Visible;
+                    svLine.Visibility = Visibility.Hidden;
+
                     WykresKolumnowy.Series.Clear();
 
 
@@ -236,22 +273,37 @@ namespace ADZZ.Statystyki___okno_i_strony
 
                     ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = PrzychodZwierzat();
                     ((ColumnSeries)WykresKolumnowy.Series[1]).ItemsSource = WydatkiZwierzat();
-                    RozszerzWykres(PrzychodZwierzat().Length, WykresKolumnowy);
+                    RozszerzWykres(PrzychodZwierzat().Length, WykresKolumnowy,false);
                     break;
                 case "Cena mleka":
+                    /*
                     WykresKolumnowy.Visibility = Visibility.Hidden;
                     WykresKolowy.Visibility = Visibility.Hidden;
                     WykresLiniowy.Visibility = Visibility.Visible;
+                    */
+                    svColumn.Visibility = Visibility.Hidden;
+                    svLine.Visibility = Visibility.Visible;
                     WykresLiniowy.Series.Clear();
 
                     DodajSerie(typeof(LineSeries), "Cena mleka", WykresLiniowy);
-                    
-                  //  ((LineSeries)WykresLiniowy.Series[0]).ItemsSource = 
-       
+
+                    ((LineSeries)WykresLiniowy.Series[0]).ItemsSource = CenyMleka();
+                    RozszerzWykres(CenyMleka().Length, WykresLiniowy, true);
 
                     break;
-                case "Wydatki zwierząt":
+                case "Wydajność mleczna":
+                    /*
+                    WykresKolumnowy.Visibility = Visibility.Visible;
+                    WykresKolowy.Visibility = Visibility.Hidden;
+                    WykresLiniowy.Visibility = Visibility.Hidden;
+                    */
+                    svColumn.Visibility = Visibility.Visible;
+                    svLine.Visibility = Visibility.Hidden;
 
+                    WykresKolumnowy.Series.Clear();
+                    DodajSerie(typeof(ColumnSeries), "Liczba litrów", WykresKolumnowy);
+                    ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = WydajnoscMleczna();
+                    RozszerzWykres(WydajnoscMleczna().Count,WykresKolumnowy,true);
                     break;
                 
                 default:
@@ -326,6 +378,47 @@ namespace ADZZ.Statystyki___okno_i_strony
                          where R.Kategoria_rozliczen.czyPrzychod == 0
                          select R).ToList();
             return query;
+        }
+        private List<Rasa> QueryRasa()
+        {
+            var queryRasa = (from Rasa in Polaczenie.Rasa
+                             select Rasa).ToList();
+            return queryRasa;
+        }
+
+        private List<Historia_cen> QueryCenyMleka()
+        {
+            var query = (from H in Polaczenie.Historia_cen
+                         orderby H.okres_od ascending
+                         select H).ToList();
+            return query;
+        }
+        private List<Rozliczenia> QueryRozliczenia()
+        {
+            var query = (from R in Polaczenie.Rozliczenia
+                         select R).ToList();
+            return query;
+        }
+        /// <summary>
+        /// Zwraca listę zwierzaków które dają mleko
+        /// </summary>
+        /// <returns></returns>
+        private List<Rozliczenia> QueryMleko()
+        {
+            var query = (from R in Polaczenie.Rozliczenia
+                        where R.ilosc_litrow != null
+                        select R).ToList();
+
+            return query;
+        }
+
+        private List<Rozrod> QueryRozrod()
+        {
+            var queryRozrod = (from Rozrod in Polaczenie.Rozrod
+                               select Rozrod).ToList();
+
+            return queryRozrod;
+
         }
         #endregion
 
