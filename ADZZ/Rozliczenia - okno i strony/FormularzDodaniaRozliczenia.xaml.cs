@@ -46,6 +46,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             Kolczyk TrescCbKolczyk = new Kolczyk();
             TrescCbKolczyk.WypelnienieCbKolczykZwierze(cbKolczyk);
             TrescCbKolczyk.WypelnienieCbKolczykStado(cbNrStada);
+            WypelnijCbRok();
             
         }
         public FormularzDodaniaRozliczenia()
@@ -168,6 +169,9 @@ namespace ADZZ.Rozliczenia___okno_i_strony
                 tbKwota.Text = string.Empty;
                 DataDP.SelectedDate = null;
                 tbOpis.Text = string.Empty;
+                tbLitry.Text = string.Empty;
+                tbLitry.Visibility = Visibility.Hidden;
+                lbLitry.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -291,6 +295,16 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             
         }
 
+        private void WypelnijCbRok()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                cbRok.Items.Add(DateTime.Now.Year - i);
+            }
+
+            cbRok.SelectedIndex = 0;
+        }
+
         private void btDodajCene_Click(object sender, RoutedEventArgs e)
         {
             if (cbMiesiac.SelectedItem != null && cbPolowa.SelectedItem != null && tbCenaMleka.Text != string.Empty)
@@ -320,6 +334,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
                 
             }
         }
+
 
 
     }

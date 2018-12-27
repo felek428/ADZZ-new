@@ -56,7 +56,6 @@
                     </Expander.Header>
                     <StackPanel>
                         <Button x:Name="btnDodajRozliczenie" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Dodaj rozliczenie" FontSize="22" FontWeight="Bold" Click="btnDodajRozliczenie_Click" />
-                        <Button Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Znowu taki tekst" FontSize="22" FontWeight="Bold"/>
                     </StackPanel>
                 </Expander>
                 <Expander  BorderBrush="Black" BorderThickness="3,1,3,3" Width="279">
@@ -71,7 +70,6 @@
                     <StackPanel>
                         
                         <Button x:Name="btnStatystykiZwierzat" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Statystyki zwierząt" FontSize="22" FontWeight="Bold" Click="btnStatystykiZwierzat_Click"/>
-                        <Button Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Znowu taki tekst" FontSize="22" FontWeight="Bold"/>
                     </StackPanel>
                 </Expander>
                 <!--

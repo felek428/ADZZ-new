@@ -52,7 +52,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                 {
                     foreach (var cena in queryCena)
                     {
-                        if (item.Data > cena.okres_od && item.Data < cena.okres_do)
+                        if (item.Data >= cena.okres_od && item.Data <= cena.okres_do)
                         {
                             sumaKwotaLitry += (double)item.Litry * (double)cena.cena;
                         }

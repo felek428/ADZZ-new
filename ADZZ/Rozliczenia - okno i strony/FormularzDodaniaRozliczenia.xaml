@@ -26,14 +26,28 @@
         <Label x:Name="lbNrStada" Content="Nr stada:" HorizontalAlignment="Left" Margin="14,7,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <ComboBox x:Name="cbNrStada"  HorizontalAlignment="Left" Margin="142,10,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" TextBoxBase.TextChanged="cbKolczyk_TextChanged" Height="23" Visibility="Hidden"/>
         <Ikony:PackIcon Name="infoDodajKategorie" Kind="Information" Height="22" Width="36" Margin="266,37,0,0" ToolTip="Brakuje kategorii? Kliknij aby dodać nowe!" MouseLeftButtonDown="PackIcon_MouseLeftButtonDown" MouseEnter="infoDodajKategorie_MouseEnter" MouseLeave="infoDodajKategorie_MouseLeave"/>
-        <ComboBox x:Name="cbMiesiac" HorizontalAlignment="Left" Margin="558,37,0,0" VerticalAlignment="Top" Width="20"/>
-        <Label x:Name="lbMiesiac" Content="Miesiąc:" HorizontalAlignment="Left" Margin="503,35,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbPolowa" HorizontalAlignment="Left" Margin="558,63,0,0" VerticalAlignment="Top" Width="20"/>
-        <Label x:Name="lbPolowa" Content="Połowa:" HorizontalAlignment="Left" Margin="503,61,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbCena" Content="Cena:" HorizontalAlignment="Left" Margin="503,89,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbCenaMleka"   HorizontalAlignment="Left" Height="23" Margin="558,92,0,0"  VerticalAlignment="Top" Width="50" TextChanged="tbKwota_TextChanged"/>
-        <Button x:Name="btDodajCene" Content="Dodaj" HorizontalAlignment="Left" Margin="566,136,0,0" VerticalAlignment="Top" Width="42" Click="btDodajCene_Click"/>
-        <GroupBox x:Name="gbCenaMleka" Header="Cena mleka" HorizontalAlignment="Left" Height="145" Margin="503,19,0,0" VerticalAlignment="Top" Width="111"/>
+
+        <GroupBox x:Name="gbCenaMleka" Header="Cena mleka" HorizontalAlignment="Left" Height="171" Margin="495,19,0,0" VerticalAlignment="Top" Width="129" RenderTransformOrigin="0.5,0.5">
+            <GroupBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.118"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.123"/>
+                </TransformGroup>
+            </GroupBox.RenderTransform>
+            <Grid>
+                <ComboBox x:Name="cbMiesiac" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="55" Margin="0,28,0,0"/>
+                <Label x:Name="lbMiesiac" Content="Miesiąc:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,24,0,0"/>
+                <ComboBox x:Name="cbRok" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="55" Margin="0,1,0,0"/>
+                <Label x:Name="lbRok" Content="Rok:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,-2,0,0"/>
+                <ComboBox x:Name="cbPolowa" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="55" Margin="0,55,0,0"/>
+                <Label x:Name="lbPolowa" Content="Połowa:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,51,0,0" Width="52"/>
+                <Label x:Name="lbCena" Content="Cena:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,79,0,0" Width="40"/>
+                <TextBox x:Name="tbCenaMleka"   HorizontalAlignment="Right" Height="23"   VerticalAlignment="Top" Width="55" TextChanged="tbKwota_TextChanged" Margin="0,82,0,0"/>
+                <Button x:Name="btDodajCene" Content="Dodaj" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="42" Click="btDodajCene_Click" Margin="75,130,0,0"/>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Page>
