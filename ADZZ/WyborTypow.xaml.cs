@@ -1,4 +1,5 @@
 ﻿using ADZZ.Rozliczenia___okno_i_strony;
+using ADZZ.Statystyki___okno_i_strony;
 using ADZZ.Zarządzanie_zwierzetami___okno_i_strony;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,10 @@ namespace ADZZ
             else if(typ == typeof(FormularzDodaniaRozliczenia))
             {
                 RamkaAkcjiTypy.Content = new FormularzDodaniaRozliczenia(cbTypZwierzat.SelectedIndex);
+            }
+            else if(typ == typeof(StatystykiZwierzat))
+            {
+                RamkaAkcjiTypy.Content = new StatystykiZwierzat(cbTypZwierzat.SelectedIndex);
             }
         }
 

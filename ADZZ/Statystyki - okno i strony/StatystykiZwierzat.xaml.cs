@@ -25,19 +25,19 @@ namespace ADZZ.Statystyki___okno_i_strony
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private string TytulSerii = string.Empty;
-        DateTime okresOd;
-        DateTime okresDo;
-        public StatystykiZwierzat()
+        int wybranyTypZwierzat;
+        DateTime? okresOd;
+        DateTime? okresDo;
+        string WybranyZakres;
+        public StatystykiZwierzat(int wybor)
         {
             InitializeComponent();
+            wybranyTypZwierzat = wybor;
             WypelnienieCbStatystyk();
             ResetujOkresOd();
             ResetujOkresDo();
-
+            
             cbRodzajStatystyk.SelectedIndex = 0;
-            //LoadColumnChartData();
-            //W.DataContext = new MyPointsCollection(5);
-
         }
 
        
@@ -62,17 +62,26 @@ namespace ADZZ.Statystyki___okno_i_strony
         }
         private void WypelnienieCbStatystyk()
         {
-            cbRodzajStatystyk.Items.Add("Liczba zwierzat");
-            cbRodzajStatystyk.Items.Add("Liczba laktacji");
-            cbRodzajStatystyk.Items.Add("Przychód i wydatki");
-            cbRodzajStatystyk.Items.Add("Cena mleka");
-            cbRodzajStatystyk.Items.Add("Wydajność mleczna");
-            cbRodzajStatystyk.Items.Add("Zestawienie rozliczeń");
+            if(wybranyTypZwierzat == 0)
+            {
+                cbRodzajStatystyk.Items.Add("Liczba zwierzat");
+                cbRodzajStatystyk.Items.Add("Liczba laktacji");
+                cbRodzajStatystyk.Items.Add("Przychód i wydatki");
+                cbRodzajStatystyk.Items.Add("Cena mleka");
+                cbRodzajStatystyk.Items.Add("Wydajność mleczna");
+                cbRodzajStatystyk.Items.Add("Zestawienie rozliczeń");
+            }
+            else
+            {
+                
+
+            }
+
         }
         
         #region Źródła danych do wykresów
 
-        private List<KeyValuePair<string, int>> LiczbaZwierzatDanejRasy(DateTime okres_od, DateTime okres_do)
+        private List<KeyValuePair<string, int>> LiczbaZwierzatDanejRasy(DateTime? okres_od, DateTime? okres_do)
         {
             var listaRasa = QueryRasa();
             var listaZwierze = QueryZwierze();
@@ -82,8 +91,9 @@ namespace ADZZ.Statystyki___okno_i_strony
                 var licznikSztuk = 0;
                 foreach (var zwierzak in listaZwierze)
                 {
-                    if (okres_od <= zwierzak.okres_od && (zwierzak.okres_do <= okres_do || zwierzak.okres_do == null))
+                    if ( (okres_od <= zwierzak.okres_od || okres_od == null) && ((zwierzak.okres_od <= okres_do && zwierzak.okres_do == null) || (zwierzak.okres_do <= okres_do || (zwierzak.okres_do == null && okres_do == null))) )
                     {
+
                         if (zwierzak.id_rasa == listaRasa[i].Id)
                         {
                             licznikSztuk++;
@@ -124,7 +134,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             return zestawienie;
         }
 
-        private double PrzychodZwierzat(DateTime okres_od, DateTime okres_do)
+        private double PrzychodZwierzat(DateTime? okres_od, DateTime? okres_do)
         {
             double zestawienie = 0;
 
@@ -142,7 +152,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             {
                 buffor = 0;
                 sumaKwotaLitry = 0;
-                if (okres_od <= item.data && item.data <= okres_do )
+                if ((okres_od <= item.data || okres_od == null) && (item.data <= okres_do || okres_do == null))
                 {
                     if (item.kwota != null)
                     {
@@ -162,27 +172,22 @@ namespace ADZZ.Statystyki___okno_i_strony
 
             zestawienie += buffor + sumaKwotaLitry;
             }
-
-
             return zestawienie;
         }
 
-        private double WydatkiZwierzat(DateTime okres_od, DateTime okres_do)
+        private double WydatkiZwierzat(DateTime? okres_od, DateTime? okres_do)
         {
 
 
             double zestawienie = 0;
             var listaWydatki = QueryWydatki();
 
-            var miesiace = DateTimeFormatInfo.CurrentInfo.MonthNames.ToList();
-
             double buffor;
-            
-           
+                   
             foreach (var item in listaWydatki)
             {
                 buffor = 0;
-                if (okres_od <= item.data && item.data <= okres_do)
+                if ((okres_od <= item.data || okres_od == null) && (item.data <= okres_do || okres_do == null))
                 {
                     if (item.kwota != null)
                     {
@@ -192,20 +197,15 @@ namespace ADZZ.Statystyki___okno_i_strony
                 zestawienie += buffor;
             }
 
-
-
-            
-            
-
             return zestawienie;
         }
-        private List<KeyValuePair<string, double>> CenyMleka(DateTime okres_od, DateTime okres_do)
+        private List<KeyValuePair<string, double>> CenyMleka(DateTime? okres_od, DateTime? okres_do)
         {
             var zestawienie = new List<KeyValuePair<string, double>>();
             var listaCenyMleka = QueryCenyMleka();
             for (int i = 0; i < listaCenyMleka.Count; i++)
             {
-                if (okres_od <= listaCenyMleka[i].okres_od && (listaCenyMleka[i].okres_do <= okres_do || listaCenyMleka[i].okres_do == null))
+                if (((okres_od <= listaCenyMleka[i].okres_od || okres_od <= listaCenyMleka[i].okres_do) || okres_od == null) && (listaCenyMleka[i].okres_od <= okres_do || okres_do == null))
                 {
                     zestawienie.Add(new KeyValuePair<string, double>(Convert.ToDateTime(listaCenyMleka[i].okres_od).ToShortDateString(), (double)listaCenyMleka[i].cena));
                 }
@@ -216,7 +216,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             return zestawienie;
         }
 
-        private List<KeyValuePair<string, int>> WydajnoscMleczna(DateTime okres_od, DateTime okres_do)
+        private List<KeyValuePair<string, int>> WydajnoscMleczna(DateTime? okres_od, DateTime? okres_do)
         {
             var zestawienie = new List<KeyValuePair<string, int>>();
             var listaZwierze = QueryZwierze();
@@ -228,7 +228,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                 buffor = 0;
                 foreach (var item in listaMleko)
                 {
-                    if (okres_od <= item.data && item.data <= okres_do)
+                    if ((okres_od <= item.data || okres_od == null) && (item.data <= okres_do || okres_do == null))
                     {
                         if (item.id_zwierze == listaZwierze[i].Id)
                         {
@@ -244,7 +244,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             return zestawienie;
         }
 
-        private List<KeyValuePair<string, double>> ZestawienieRozliczen(DateTime okres_od, DateTime okres_do)
+        private List<KeyValuePair<string, double>> ZestawienieRozliczen(DateTime? okres_od, DateTime? okres_do)
         {
             var zestawienie = new List<KeyValuePair<string, double>>();
             var listaKategorieRoziczen = QueryKategorieRozliczen();
@@ -259,7 +259,7 @@ namespace ADZZ.Statystyki___okno_i_strony
 
                 foreach (var rozliczenie in listaRozliczenia)
                 {
-                    if (okres_od <= rozliczenie.data && rozliczenie.data <= okres_do)
+                    if ((okres_od <= rozliczenie.data || okres_od == null) && (rozliczenie.data <= okres_do || okres_do == null))
                     {
                         if (kategoria.Id == rozliczenie.id_kategoria)
                         {
@@ -303,22 +303,34 @@ namespace ADZZ.Statystyki___okno_i_strony
             switch (cbRodzajStatystyk.SelectedItem)
             {
                 case "Liczba zwierzat":
-                    /*
-                    WykresKolumnowy.Visibility = Visibility.Visible;
-                    WykresKolowy.Visibility = Visibility.Hidden;
-                    WykresLiniowy.Visibility = Visibility.Hidden;
-                    */
+                    lbOd.Visibility = Visibility.Visible;
+                    lbDo.Visibility = Visibility.Visible;
+                    dpOd.Visibility = Visibility.Visible;
+                    dpDo.Visibility = Visibility.Visible;
 
-                    WyswietlLiczbeZwierzat();
+                    svColumn.Visibility = Visibility.Visible;
+                    svLine.Visibility = Visibility.Hidden;
+                    svPie.Visibility = Visibility.Hidden;
+
+                    WykresKolumnowy.Series.Clear();
+
+                    DodajSerie(typeof(ColumnSeries), "Liczba zwierząt", WykresKolumnowy);
+
+
+                    ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaZwierzatDanejRasy(okresOd, okresDo);
+
+
+                    RozszerzWykres(LiczbaZwierzatDanejRasy(okresOd, okresDo).Count, WykresKolumnowy, false);
+
 
 
                     break;
                 case "Liczba laktacji":
-                    /*
-                    WykresKolowy.Visibility = Visibility.Hidden;
-                    WykresKolumnowy.Visibility = Visibility.Visible;
-                    WykresLiniowy.Visibility = Visibility.Hidden;
-                    */
+                    lbOd.Visibility = Visibility.Hidden;
+                    lbDo.Visibility = Visibility.Hidden;
+                    dpOd.Visibility = Visibility.Hidden;
+                    dpDo.Visibility = Visibility.Hidden;
+
                     svColumn.Visibility = Visibility.Visible;
                     svLine.Visibility = Visibility.Hidden;
                     svPie.Visibility = Visibility.Hidden;
@@ -335,11 +347,11 @@ namespace ADZZ.Statystyki___okno_i_strony
                     SeriaPie.Title = "Liczba laktacji";
                     break;
                 case "Przychód i wydatki":
-                    /*
-                    WykresKolumnowy.Visibility = Visibility.Visible;
-                    WykresKolowy.Visibility = Visibility.Hidden;
-                    WykresLiniowy.Visibility = Visibility.Hidden;
-                    */
+                    lbOd.Visibility = Visibility.Visible;
+                    lbDo.Visibility = Visibility.Visible;
+                    dpOd.Visibility = Visibility.Visible;
+                    dpDo.Visibility = Visibility.Visible;
+
                     svColumn.Visibility = Visibility.Hidden;
                     svLine.Visibility = Visibility.Hidden;
                     svPie.Visibility = Visibility.Visible;
@@ -356,14 +368,13 @@ namespace ADZZ.Statystyki___okno_i_strony
 
                     };
                     
-                    //RozszerzWykres(PrzychodZwierzat().Count, WykresKolumnowy, false);
                     break;
                 case "Cena mleka":
-                    /*
-                    WykresKolumnowy.Visibility = Visibility.Hidden;
-                    WykresKolowy.Visibility = Visibility.Hidden;
-                    WykresLiniowy.Visibility = Visibility.Visible;
-                    */
+                    lbOd.Visibility = Visibility.Visible;
+                    lbDo.Visibility = Visibility.Visible;
+                    dpOd.Visibility = Visibility.Visible;
+                    dpDo.Visibility = Visibility.Visible;
+
                     svColumn.Visibility = Visibility.Hidden;
                     svLine.Visibility = Visibility.Visible;
                     svPie.Visibility = Visibility.Hidden;
@@ -377,11 +388,11 @@ namespace ADZZ.Statystyki___okno_i_strony
 
                     break;
                 case "Wydajność mleczna":
-                    /*
-                    WykresKolumnowy.Visibility = Visibility.Visible;
-                    WykresKolowy.Visibility = Visibility.Hidden;
-                    WykresLiniowy.Visibility = Visibility.Hidden;
-                    */
+                    lbOd.Visibility = Visibility.Visible;
+                    lbDo.Visibility = Visibility.Visible;
+                    dpOd.Visibility = Visibility.Visible;
+                    dpDo.Visibility = Visibility.Visible;
+
                     svColumn.Visibility = Visibility.Visible;
                     svLine.Visibility = Visibility.Hidden;
                     svPie.Visibility = Visibility.Hidden;
@@ -392,6 +403,13 @@ namespace ADZZ.Statystyki___okno_i_strony
                     RozszerzWykres(WydajnoscMleczna(okresOd,okresDo).Count, WykresKolumnowy, true);
                     break;
                 case "Zestawienie rozliczeń":
+                    lbOd.Visibility = Visibility.Visible;
+                    lbDo.Visibility = Visibility.Visible;
+                    dpOd.Visibility = Visibility.Visible;
+                    dpDo.Visibility = Visibility.Visible;
+
+                   
+
                     svColumn.Visibility = Visibility.Visible;
                     svLine.Visibility = Visibility.Hidden;
                     svPie.Visibility = Visibility.Hidden;
@@ -403,7 +421,7 @@ namespace ADZZ.Statystyki___okno_i_strony
 
                     ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = ZestawienieRozliczen(okresOd,okresDo);
 
-
+                    
                     RozszerzWykres(ZestawienieRozliczen(okresOd,okresDo).Count, WykresKolumnowy, false);
                     break;
 
@@ -415,31 +433,14 @@ namespace ADZZ.Statystyki___okno_i_strony
 
         private void cbRodzajStatystyk_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-
             WywolanieSwitch();
-            
-
-            
-
+            dpOd.SelectedDate = null;
+            dpDo.SelectedDate = null;
         }
 
         private void WyswietlLiczbeZwierzat()
         {
-            svColumn.Visibility = Visibility.Visible;
-            svLine.Visibility = Visibility.Hidden;
-            svPie.Visibility = Visibility.Hidden;
-
-            WykresKolumnowy.Series.Clear();
-
-            DodajSerie(typeof(ColumnSeries), "Liczba zwierząt", WykresKolumnowy);
-
-
-            ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaZwierzatDanejRasy(okresOd, okresDo);
-
             
-            RozszerzWykres(LiczbaZwierzatDanejRasy(okresOd, okresDo).Count, WykresKolumnowy, false);
-
         }
 
         /// <summary>
@@ -564,11 +565,13 @@ namespace ADZZ.Statystyki___okno_i_strony
 
         private void ResetujOkresOd()
         {
-            okresOd = Convert.ToDateTime(DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString() + "." + (DateTime.Now.Year - 100).ToString());
+            //okresOd = Convert.ToDateTime(DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString() + "." + (DateTime.Now.Year - 100).ToString());
+            okresOd = null;
         }
         private void ResetujOkresDo()
         {
-            okresDo = Convert.ToDateTime(DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString() + "." + (DateTime.Now.Year + 100).ToString());
+            //okresDo = Convert.ToDateTime(DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString() + "." + (DateTime.Now.Year + 100).ToString());
+            okresDo = null;
         }
         private void dpOd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {

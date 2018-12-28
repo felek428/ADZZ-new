@@ -315,14 +315,14 @@ namespace ADZZ.Rozliczenia___okno_i_strony
                 
                 if(Convert.ToInt32(cbPolowa.SelectedItem) == 1)
                 {
-                    nowaCena.okres_od = Convert.ToDateTime("1." + cbMiesiac.SelectedItem.ToString() + "." + DateTime.Now.Year.ToString());
-                    nowaCena.okres_do = Convert.ToDateTime("15." + cbMiesiac.SelectedItem.ToString() + "." + DateTime.Now.Year.ToString());
+                    nowaCena.okres_od = Convert.ToDateTime("1." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+                    nowaCena.okres_do = Convert.ToDateTime("15." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
 
                 }
                 else if(Convert.ToInt32(cbPolowa.SelectedItem) == 2)
                 {
-                    nowaCena.okres_od = Convert.ToDateTime("16." + cbMiesiac.SelectedItem.ToString() + "." + DateTime.Now.Year.ToString());
-                    nowaCena.okres_do = Convert.ToDateTime(DateTime.DaysInMonth(DateTime.Now.Year, Convert.ToInt32(cbMiesiac.SelectedItem)) + "." + cbMiesiac.SelectedItem.ToString() + "." + DateTime.Now.Year.ToString());
+                    nowaCena.okres_od = Convert.ToDateTime("16." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+                    nowaCena.okres_do = Convert.ToDateTime(DateTime.DaysInMonth(Convert.ToInt32(cbRok.SelectedItem), Convert.ToInt32(cbMiesiac.SelectedItem)) + "." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
 
                 }
 

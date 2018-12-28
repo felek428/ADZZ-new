@@ -2,6 +2,7 @@
 using ADZZ.Kalendarz;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -22,7 +23,7 @@ namespace NewCalendar
     /// <summary>
     /// Logika interakcji dla klasy NowyCalendar.xaml
     /// </summary>
-    public partial class NowyCalendar : UserControl
+    public partial class NowyCalendar : UserControl, INotifyPropertyChanged
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         /// <summary>
@@ -48,15 +49,25 @@ namespace NewCalendar
         /// <summary>
         /// Obecnie wyswietlany rok w widkou
         /// </summary>
-        private int actualYear = DateTime.Now.Year;
+        //private int actualYear = DateTime.Now.Year;
+        private int _actualYear;
+        public int actualYear
+        {
+            get { return _actualYear; }
+            set
+            {
+                _actualYear = value;
+                RaisePropertyChanged("actualYear");
+            }
+        }
         /// <summary>
         /// Przechowuje miesiac poprzedzajacy obecnie wyswietlany
         /// </summary>
-        private int previousMonth = (DateTime.Now.Month)-1;
+        private int previousMonth;
         /// <summary>
         /// Przechowuje nastepny miesiac wzgledem obecnie wyswietanego
         /// </summary>
-        private int nextMonth = (DateTime.Now.Month + 1);
+        private int nextMonth;
         /// <summary>
         /// Stala liczba "dzieci" w gridzie od wyswietlania dni
         /// </summary>
@@ -69,6 +80,15 @@ namespace NewCalendar
         /// Prawy kraniec przedzialu przy wyswietlaniu lat
         /// </summary>
         private int fullYearRight;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged(string propName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
         public  int GetMonth
         {
             get { return actualMonth; }
@@ -77,18 +97,43 @@ namespace NewCalendar
         public NowyCalendar()
         {        
             InitializeComponent();
+            SetDefaultNextPreviousMonth();
+            actualYear = DateTime.Now.Year;
             MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
             MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
             CreateDaysOfWeek();
             CreateCalendarDayButtonTest(GetCurrentMonthDaysNumber(actualYear,actualMonth),GetCurrentMonth());
             CreatePreviousMonthDays(GetLastMonthDaysNumber());
             CreateNextMonthDays();
-                        
+             /*           
             NowyCalendarDayButton dm = new NowyCalendarDayButton();
             DataContext = dm;
-
+            */
             DataContext = this;
         }
+
+        private void SetDefaultNextPreviousMonth()
+        {
+            if(DateTime.Now.Month == 1)
+            {
+                previousMonth = 12;
+            }
+            else
+            {
+                previousMonth = (DateTime.Now.Month) - 1;
+            }
+            
+            if(DateTime.Now.Month == 12)
+            {
+                nextMonth = 1;
+            }
+            else
+            {
+                nextMonth = (DateTime.Now.Month + 1);
+            }
+            
+        }
+
         /// <summary>
         /// Akcje po nacisnieciu glownego buttona
         /// </summary>
@@ -514,7 +559,7 @@ namespace NewCalendar
                 {
                     previousMonth = 1;
                     nextMonth += 1;
-                }
+                }               
                 else
                 {
                     previousMonth += 1;

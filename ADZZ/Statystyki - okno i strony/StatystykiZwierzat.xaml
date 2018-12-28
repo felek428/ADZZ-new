@@ -46,8 +46,6 @@
 
             </Charts:Chart>
         </ScrollViewer>
-        <Label x:Name="lbTypZwierzat" Content="Typ zwierząt:" HorizontalAlignment="Left" Margin="162,39,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <ComboBox x:Name="cbTypZwierzat" HorizontalAlignment="Left" Margin="239,41,0,0" VerticalAlignment="Top" Width="120" Height="24" Visibility="Hidden"/>
         <Label x:Name="lbOd" Content="Od:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbDo" Content="Do:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="dpOd" HorizontalAlignment="Left" Margin="44,41,0,0" VerticalAlignment="Top" SelectedDateChanged="dpOd_SelectedDateChanged"/>
