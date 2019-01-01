@@ -42,7 +42,7 @@
 
             <Charts:Chart x:Name="WykresKolumnowy"  BorderThickness="0" Visibility="Visible">
 
-                <Charts:ColumnSeries  x:Name="SeriaCol" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" />
+                <Charts:ColumnSeries  x:Name="SeriaCol" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}"/>
 
             </Charts:Chart>
         </ScrollViewer>
@@ -50,8 +50,9 @@
         <Label x:Name="lbDo" Content="Do:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="dpOd" HorizontalAlignment="Left" Margin="44,41,0,0" VerticalAlignment="Top" SelectedDateChanged="dpOd_SelectedDateChanged"/>
         <DatePicker x:Name="dpDo" HorizontalAlignment="Left" Margin="44,70,0,0" VerticalAlignment="Top" SelectedDateChanged="dpDo_SelectedDateChanged"/>
-        <Label x:Name="lbZakres" Content="Zakres:" HorizontalAlignment="Left" Margin="375,41,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <ComboBox x:Name="cbZakres" HorizontalAlignment="Left" Margin="427,41,0,0" VerticalAlignment="Top" Width="120" Height="26" Visibility="Hidden"/>
+        <Label x:Name="lbZakres" Content="Zakres:" HorizontalAlignment="Left" Margin="156,41,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <ComboBox x:Name="cbZakres" HorizontalAlignment="Left" Margin="208,41,0,0" VerticalAlignment="Top" Width="120" Height="26" Visibility="Hidden" SelectionChanged="cbZakres_SelectionChanged"/>
+        <CheckBox x:Name="checkbNieaktywne" Content="Pokaż nieaktywne" HorizontalAlignment="Left" Margin="158,76,0,0" VerticalAlignment="Top" IsChecked="False" Visibility="Hidden" Checked="checkbNieaktywne_Checked" Unchecked="checkbNieaktywne_Unchecked"/>
 
     </Grid>
 </Page>

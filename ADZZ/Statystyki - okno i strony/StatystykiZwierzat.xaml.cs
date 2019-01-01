@@ -34,13 +34,14 @@ namespace ADZZ.Statystyki___okno_i_strony
             InitializeComponent();
             wybranyTypZwierzat = wybor;
             WypelnienieCbStatystyk();
+            WypelnienieCbZakres();
             ResetujOkresOd();
             ResetujOkresDo();
-            
+
             cbRodzajStatystyk.SelectedIndex = 0;
         }
 
-       
+
 
         /// <summary>
         /// Zwiększa szerkość wykresu jeżeli jest znaczaca ilość danych na osi x
@@ -54,7 +55,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             {
                 wykres.Width = 130 * dlugoscListy;
             }
-            else if (dlugoscListy > 9 )
+            else if (dlugoscListy > 9)
             {
                 wykres.Width = 80 * dlugoscListy;
             }
@@ -62,7 +63,7 @@ namespace ADZZ.Statystyki___okno_i_strony
         }
         private void WypelnienieCbStatystyk()
         {
-            if(wybranyTypZwierzat == 0)
+            if (wybranyTypZwierzat == 0)
             {
                 cbRodzajStatystyk.Items.Add("Liczba zwierzat");
                 cbRodzajStatystyk.Items.Add("Liczba laktacji");
@@ -73,40 +74,300 @@ namespace ADZZ.Statystyki___okno_i_strony
             }
             else
             {
-                
+
 
             }
 
         }
-        
-        #region Źródła danych do wykresów
-
-        private List<KeyValuePair<string, int>> LiczbaZwierzatDanejRasy(DateTime? okres_od, DateTime? okres_do)
+        private void WypelnienieCbZakres()
         {
-            var listaRasa = QueryRasa();
-            var listaZwierze = QueryZwierze();
-            var zestawienie = new List<KeyValuePair<string, int>>();
-            for (int i = 0; i < listaRasa.Count; i++)
-            {
-                var licznikSztuk = 0;
-                foreach (var zwierzak in listaZwierze)
-                {
-                    if ( (okres_od <= zwierzak.okres_od || okres_od == null) && ((zwierzak.okres_od <= okres_do && zwierzak.okres_do == null) || (zwierzak.okres_do <= okres_do || (zwierzak.okres_do == null && okres_do == null))) )
-                    {
+            cbZakres.Items.Add("-------");
+            cbZakres.Items.Add("Gatunek");
+            cbZakres.Items.Add("Rasa");
+            cbZakres.Items.Add("Płeć");
+            cbZakres.SelectedIndex = 0;
+        }
 
-                        if (zwierzak.id_rasa == listaRasa[i].Id)
+        #region Źródła danych do wykresów
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="listaZwierze">Lista zwierzat</param>
+        /// <param name="id">id zakresu tzn.id gautunku, rasy itp</param>
+        /// <param name="okres_od"></param>
+        /// <param name="okres_do"></param>
+        /// <param name="licznikSztuk">licznik sztuk ktory bedzie modyfikowany wewnatrz</param>
+        /// <returns></returns>
+        private int FiltrDatyLiczbaZwierzatAktywnych(List<Zwierze> listaZwierze, int id, DateTime? okres_od, DateTime? okres_do, string typTabeli)
+        {
+            int licznikSztuk = 0;
+            foreach (var zwierzak in listaZwierze)
+            {
+                if ((((okres_od <= zwierzak.okres_od && (okres_do >= zwierzak.okres_od || okresDo == null)) || (okres_od >= zwierzak.okres_od & okres_od <= zwierzak.okres_do)) || okres_od == null) && ((zwierzak.okres_do == null && okres_do == null) || (zwierzak.okres_do >= okres_do && okres_do >= zwierzak.okres_od) || (zwierzak.okres_do == null)))
+                {
+                    if(typTabeli == "rasa")
+                    {
+                        if(zwierzak.id_rasa == id)
                         {
                             licznikSztuk++;
                         }
-                    }        
-                }
-                if(licznikSztuk != 0)
-                {
-                    zestawienie.Add(new KeyValuePair<string, int>(listaRasa[i].nazwa, licznikSztuk));
+                    }
+                    else if(typTabeli == "gatunek")
+                    {
+                        if(zwierzak.id_gatunek == id)
+                        {
+                            licznikSztuk++;
+                        }
+                    }
+                    else if(typTabeli == "plec")
+                    {
+                        if(zwierzak.plec == id)
+                        {
+                            licznikSztuk++;
+                        }
+                    }
+                    else if(typTabeli == "domyslne")
+                    {
+                        if(id == 0)
+                        {
+                            licznikSztuk++;
+                        }
+                        
+                    }
+
+                    //licznikSztuk++;
+
                 }
             }
+            return licznikSztuk;
+        }
+        private List<KeyValuePair<string, int>> LiczbaZwierzatAktywnychPlec(int plec)
+        {
+            var zestawienie = new List<KeyValuePair<string, int>>();
+            var listaZwierzat = QueryZwierze();
+            int licznikSztuk = 0;
+            if (plec == 0)
+            {
+                licznikSztuk = FiltrDatyLiczbaZwierzatAktywnych(listaZwierzat, 0, okresOd, okresDo, "plec");
+                if (licznikSztuk > 0)
+                {
+                    zestawienie.Add(new KeyValuePair<string, int>("Samce", licznikSztuk));
+                }
+            }
+            else if (plec == 1)
+            {
+                licznikSztuk = FiltrDatyLiczbaZwierzatAktywnych(listaZwierzat, 1, okresOd, okresDo, "plec");
+                if (licznikSztuk > 0)
+                {
+                    zestawienie.Add(new KeyValuePair<string, int>("Samice", licznikSztuk));
+                }
+            }
+
             return zestawienie;
         }
+
+        private List<KeyValuePair<string, int>> LiczbaZwierzatAktywnych()
+        {
+            var listaRasa = QueryRasa();
+            var listaZwierze = QueryZwierze();
+            var listaGatunki = QueryGatunekPojedyncze();
+
+            var zestawienie = new List<KeyValuePair<string, int>>();
+
+            var licznikSztuk = 0;
+            if (cbZakres.SelectedIndex > 0 && cbZakres.SelectedItem.ToString() == "Rasa")
+            {
+         
+                foreach (var rasa in listaRasa)
+                {
+                    licznikSztuk = FiltrDatyLiczbaZwierzatAktywnych(listaZwierze, rasa.Id, okresOd, okresDo,"rasa");
+                    if (licznikSztuk != 0)
+                    {
+                        zestawienie.Add(new KeyValuePair<string, int>(rasa.nazwa, licznikSztuk));
+                    }
+                }
+            }
+            else if (cbZakres.SelectedIndex > 0 && cbZakres.SelectedItem.ToString() == "Gatunek" )
+            {
+                foreach (var gatunek in listaGatunki)
+                {
+                    licznikSztuk = FiltrDatyLiczbaZwierzatAktywnych(listaZwierze, gatunek.Id, okresOd, okresDo, "gatunek");
+                    if (licznikSztuk != 0)
+                    {
+                        zestawienie.Add(new KeyValuePair<string, int>(gatunek.nazwa, licznikSztuk));
+                    }
+                }
+            }
+            else if (cbZakres.SelectedIndex > 0 && cbZakres.SelectedItem.ToString() == "Płeć")
+            {
+                for(int i = 0; i < 2; i++)
+                {
+                    licznikSztuk = FiltrDatyLiczbaZwierzatAktywnych(listaZwierze, i, okresOd, okresDo, "plec");
+                    if (licznikSztuk != 0)
+                    {
+                        if(i == 0)
+                        {
+                            zestawienie.Add(new KeyValuePair<string, int>("Samce", licznikSztuk));
+                        }
+                        else if(i == 1)
+                        {
+                            zestawienie.Add(new KeyValuePair<string, int>("Samice", licznikSztuk));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                licznikSztuk = FiltrDatyLiczbaZwierzatAktywnych(listaZwierze, 0, okresOd, okresDo, "domyslne");
+                if (licznikSztuk != 0)
+                {
+                    zestawienie.Add(new KeyValuePair<string, int>("", licznikSztuk));
+                }
+            }
+
+
+            /*
+            foreach (var zwierzak in listaZwierze)
+            {
+                if ((((okres_od <= zwierzak.okres_od && (okres_do >= zwierzak.okres_od || okresDo == null)) || (okres_od >= zwierzak.okres_od & okres_od <= zwierzak.okres_do)) || okres_od == null) && ((zwierzak.okres_do == null && okres_do == null) || (zwierzak.okres_do >= okres_do && okres_do >= zwierzak.okres_od) || (zwierzak.okres_do == null)))
+                {
+
+                licznikSztuk++;
+                        
+                }
+            }
+            */
+
+
+
+
+            
+            
+            return zestawienie;
+        }
+
+        private int FiltrDatyLiczbaZwierzatNieaktywnych(List<Zwierze> listaZwierze, int id, DateTime? okres_od, DateTime? okres_do, string typTabeli)
+        {
+            int licznikSztuk = 0;
+
+            foreach (var zwierzak in listaZwierze)
+            {
+                if (((okres_od <= zwierzak.okres_do || (okres_od == null && zwierzak.okres_do != null)) && (((okres_do > zwierzak.okres_do) || okres_do == null)) || (zwierzak.okres_do != null && okres_od == null && okres_do == null)))
+                {
+                    if (typTabeli == "rasa")
+                    {
+                        if (zwierzak.id_rasa == id)
+                        {
+                            licznikSztuk++;
+                        }
+                    }
+                    else if (typTabeli == "gatunek")
+                    {
+                        if (zwierzak.id_gatunek == id)
+                        {
+                            licznikSztuk++;
+                        }
+                    }
+                    else if (typTabeli == "plec")
+                    {
+                        if (zwierzak.plec == id)
+                        {
+                            licznikSztuk++;
+                        }
+                    }
+                    else if (typTabeli == "domyslne")
+                    {
+                        if (id == 0)
+                        {
+                            licznikSztuk++;
+                        }
+
+                    }
+                   // licznikSztuk++;
+
+                }
+            }
+
+
+            return licznikSztuk;
+        }
+
+        private List<KeyValuePair<string, int>> LiczbaZwierzatNieaktywnych(DateTime? okres_od, DateTime? okres_do)
+        {
+            var listaRasa = QueryRasa();
+            var listaZwierze = QueryZwierze();
+            var listaGatunki = QueryGatunekPojedyncze();
+            var zestawienie = new List<KeyValuePair<string, int>>();
+
+            var licznikSztuk = 0;
+            if (cbZakres.SelectedIndex > 0 && cbZakres.SelectedItem.ToString() == "Rasa")
+            {
+
+                foreach (var rasa in listaRasa)
+                {
+                    licznikSztuk = FiltrDatyLiczbaZwierzatNieaktywnych(listaZwierze, rasa.Id, okresOd, okresDo, "rasa");
+                    if (licznikSztuk != 0)
+                    {
+                        zestawienie.Add(new KeyValuePair<string, int>(rasa.nazwa, licznikSztuk));
+                    }
+                }
+            }
+            else if (cbZakres.SelectedIndex > 0 && cbZakres.SelectedItem.ToString() == "Gatunek")
+            {
+                foreach (var gatunek in listaGatunki)
+                {
+                    licznikSztuk = FiltrDatyLiczbaZwierzatNieaktywnych(listaZwierze, gatunek.Id, okresOd, okresDo, "gatunek");
+                    if (licznikSztuk != 0)
+                    {
+                        zestawienie.Add(new KeyValuePair<string, int>(gatunek.nazwa, licznikSztuk));
+                    }
+                }
+            }
+            else if (cbZakres.SelectedIndex > 0 && cbZakres.SelectedItem.ToString() == "Płeć")
+            {
+                for(int i = 0; i < 2; i++)
+                {
+                    licznikSztuk = FiltrDatyLiczbaZwierzatNieaktywnych(listaZwierze, i, okresOd, okresDo, "plec");
+                    if (licznikSztuk != 0)
+                    {
+                        if (i == 0)
+                        {
+                            zestawienie.Add(new KeyValuePair<string, int>("Samce", licznikSztuk));
+                        }
+                        else if (i == 1)
+                        {
+                            zestawienie.Add(new KeyValuePair<string, int>("Samice", licznikSztuk));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                licznikSztuk = FiltrDatyLiczbaZwierzatNieaktywnych(listaZwierze, 0, okresOd, okresDo, "domyslne");
+                if (licznikSztuk != 0)
+                {
+                    zestawienie.Add(new KeyValuePair<string, int>("", licznikSztuk));
+                }
+            }
+
+
+
+
+            /*
+            foreach (var zwierzak in listaZwierze)
+            {
+                if (((okres_od <= zwierzak.okres_do || (okres_od == null && zwierzak.okres_do != null)) && (((okres_do > zwierzak.okres_do) || okres_do == null)) || (zwierzak.okres_do != null && okres_od == null && okres_do == null)))
+                {
+
+                    licznikSztuk++;
+
+                }
+            }*/
+           
+
+            return zestawienie;
+        }
+
 
         private List<KeyValuePair<string, int>> LiczbaLaktacji()
         {
@@ -307,33 +568,61 @@ namespace ADZZ.Statystyki___okno_i_strony
                     lbDo.Visibility = Visibility.Visible;
                     dpOd.Visibility = Visibility.Visible;
                     dpDo.Visibility = Visibility.Visible;
+                    checkbNieaktywne.Visibility = Visibility.Visible;
+                    cbZakres.Visibility = Visibility.Visible;
+                    lbZakres.Visibility = Visibility.Visible;
 
                     svColumn.Visibility = Visibility.Visible;
-                    svLine.Visibility = Visibility.Hidden;
-                    svPie.Visibility = Visibility.Hidden;
+
 
                     WykresKolumnowy.Series.Clear();
-
-                    DodajSerie(typeof(ColumnSeries), "Liczba zwierząt", WykresKolumnowy);
-
-
-                    ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaZwierzatDanejRasy(okresOd, okresDo);
+                    var LiczbaAktywnych = LiczbaZwierzatAktywnych();
+                    var LiczbaNieaktywnych = LiczbaZwierzatNieaktywnych(okresOd, okresDo);
 
 
-                    RozszerzWykres(LiczbaZwierzatDanejRasy(okresOd, okresDo).Count, WykresKolumnowy, false);
+                    
+                    /*
+                    if(cbZakres.SelectedItem.ToString() == "Płeć")
+                    {
+                        DodajSerie(typeof(ColumnSeries), "Liczba aktywnych samcy", WykresKolumnowy);
+                        ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaZwierzatAktywnychPlec(0);
+                        DodajSerie(typeof(ColumnSeries), "Liczba aktywnych samic", WykresKolumnowy);
+                        ((ColumnSeries)WykresKolumnowy.Series[1]).ItemsSource = LiczbaZwierzatAktywnychPlec(1);
+                    }*/
+                    
+                    if (LiczbaAktywnych.Count > 0)
+                    {
+                        DodajSerie(typeof(ColumnSeries), "Liczba aktywnych zwierzat", WykresKolumnowy);
+                        ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaAktywnych;
+                    }
+                    if(checkbNieaktywne.IsChecked == true)
+                    {
+                        if (LiczbaNieaktywnych.Count > 0 && LiczbaAktywnych.Count <= 0)
+                        {
+                            DodajSerie(typeof(ColumnSeries), "Liczba nieaktywnych zwierzat", WykresKolumnowy);
+                            ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaNieaktywnych;
+                        }
+                        else if (LiczbaNieaktywnych.Count > 0)
+                        {
+                            DodajSerie(typeof(ColumnSeries), "Liczba nieaktywnych zwierzat", WykresKolumnowy);
+                            ((ColumnSeries)WykresKolumnowy.Series[1]).ItemsSource = LiczbaNieaktywnych;
+                        }
 
+                    }
+                    
+
+
+
+                    RozszerzWykres(LiczbaAktywnych.Count, WykresKolumnowy, false);
+                    
 
 
                     break;
                 case "Liczba laktacji":
-                    lbOd.Visibility = Visibility.Hidden;
-                    lbDo.Visibility = Visibility.Hidden;
-                    dpOd.Visibility = Visibility.Hidden;
-                    dpDo.Visibility = Visibility.Hidden;
+
 
                     svColumn.Visibility = Visibility.Visible;
-                    svLine.Visibility = Visibility.Hidden;
-                    svPie.Visibility = Visibility.Hidden;
+
 
                     WykresKolowy.Series.Clear();
 
@@ -352,8 +641,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     dpOd.Visibility = Visibility.Visible;
                     dpDo.Visibility = Visibility.Visible;
 
-                    svColumn.Visibility = Visibility.Hidden;
-                    svLine.Visibility = Visibility.Hidden;
+
                     svPie.Visibility = Visibility.Visible;
 
                     WykresKolowy.Series.Clear();
@@ -375,9 +663,8 @@ namespace ADZZ.Statystyki___okno_i_strony
                     dpOd.Visibility = Visibility.Visible;
                     dpDo.Visibility = Visibility.Visible;
 
-                    svColumn.Visibility = Visibility.Hidden;
                     svLine.Visibility = Visibility.Visible;
-                    svPie.Visibility = Visibility.Hidden;
+
 
                     WykresLiniowy.Series.Clear();
 
@@ -394,8 +681,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     dpDo.Visibility = Visibility.Visible;
 
                     svColumn.Visibility = Visibility.Visible;
-                    svLine.Visibility = Visibility.Hidden;
-                    svPie.Visibility = Visibility.Hidden;
+
 
                     WykresKolumnowy.Series.Clear();
                     DodajSerie(typeof(ColumnSeries), "Liczba litrów", WykresKolumnowy);
@@ -408,11 +694,8 @@ namespace ADZZ.Statystyki___okno_i_strony
                     dpOd.Visibility = Visibility.Visible;
                     dpDo.Visibility = Visibility.Visible;
 
-                   
-
                     svColumn.Visibility = Visibility.Visible;
-                    svLine.Visibility = Visibility.Hidden;
-                    svPie.Visibility = Visibility.Hidden;
+
 
                     WykresKolumnowy.Series.Clear();
 
@@ -433,14 +716,19 @@ namespace ADZZ.Statystyki___okno_i_strony
 
         private void cbRodzajStatystyk_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            checkbNieaktywne.Visibility = Visibility.Hidden;
+            cbZakres.Visibility = Visibility.Hidden;
+            lbZakres.Visibility = Visibility.Hidden;
+
+
+            svColumn.Visibility = Visibility.Hidden;
+            svLine.Visibility = Visibility.Hidden;
+            svPie.Visibility = Visibility.Hidden;
+
+
             WywolanieSwitch();
             dpOd.SelectedDate = null;
             dpDo.SelectedDate = null;
-        }
-
-        private void WyswietlLiczbeZwierzat()
-        {
-            
         }
 
         /// <summary>
@@ -560,6 +848,14 @@ namespace ADZZ.Statystyki___okno_i_strony
 
             return query;
         }
+        private List<Gatunek> QueryGatunekPojedyncze()
+        {
+            var query = (from Gatunek in Polaczenie.Gatunek
+                        where Gatunek.czyStado == 0
+                        select Gatunek).ToList() ;
+
+            return query;
+        }
 
         #endregion
 
@@ -600,6 +896,20 @@ namespace ADZZ.Statystyki___okno_i_strony
 
             WywolanieSwitch();
         }
+
+        private void checkbNieaktywne_Checked(object sender, RoutedEventArgs e)
+        {
+            WywolanieSwitch();
+        }
+
+        private void checkbNieaktywne_Unchecked(object sender, RoutedEventArgs e)
+        {
+            WywolanieSwitch();
+        }
+
+        private void cbZakres_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            WywolanieSwitch();
+        }
     }
-    
 }
