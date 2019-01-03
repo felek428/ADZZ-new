@@ -25,14 +25,14 @@ namespace ADZZ.Statystyki___okno_i_strony
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private string TytulSerii = string.Empty;
-        int wybranyTypZwierzat;
         DateTime? okresOd;
         DateTime? okresDo;
         string WybranyZakres;
-        public StatystykiZwierzat(int wybor)
+        public StatystykiZwierzat()
         {
             InitializeComponent();
-            wybranyTypZwierzat = wybor;
+            
+         
             WypelnienieCbStatystyk();
             WypelnienieCbZakres();
             ResetujOkresOd();
@@ -63,20 +63,15 @@ namespace ADZZ.Statystyki___okno_i_strony
         }
         private void WypelnienieCbStatystyk()
         {
-            if (wybranyTypZwierzat == 0)
-            {
-                cbRodzajStatystyk.Items.Add("Liczba zwierzat");
-                cbRodzajStatystyk.Items.Add("Liczba laktacji");
-                cbRodzajStatystyk.Items.Add("Przychód i wydatki");
-                cbRodzajStatystyk.Items.Add("Cena mleka");
-                cbRodzajStatystyk.Items.Add("Wydajność mleczna");
-                cbRodzajStatystyk.Items.Add("Zestawienie rozliczeń");
-            }
-            else
-            {
-
-
-            }
+            
+            cbRodzajStatystyk.Items.Add("Liczba zwierząt");
+            cbRodzajStatystyk.Items.Add("Liczba laktacji");
+            cbRodzajStatystyk.Items.Add("Przychód i wydatki");
+            cbRodzajStatystyk.Items.Add("Cena mleka");
+            cbRodzajStatystyk.Items.Add("Wydajność mleczna");
+            cbRodzajStatystyk.Items.Add("Zestawienie rozliczeń");
+            
+            
 
         }
         private void WypelnienieCbZakres()
@@ -87,8 +82,16 @@ namespace ADZZ.Statystyki___okno_i_strony
             cbZakres.Items.Add("Płeć");
             cbZakres.SelectedIndex = 0;
         }
+        private void WypelnienieCbStado()
+        {
+            var stada = QueryStado();
+            foreach (var item in stada)
+            {
+                cbStado.Items.Add(item.nr_stada);
+            }
+        }
 
-        #region Źródła danych do wykresów
+        #region Źródła danych do wykresów pojedynczych zwierzat
         /// <summary>
         /// 
         /// </summary>
@@ -135,36 +138,11 @@ namespace ADZZ.Statystyki___okno_i_strony
                         
                     }
 
-                    //licznikSztuk++;
-
                 }
             }
             return licznikSztuk;
         }
-        private List<KeyValuePair<string, int>> LiczbaZwierzatAktywnychPlec(int plec)
-        {
-            var zestawienie = new List<KeyValuePair<string, int>>();
-            var listaZwierzat = QueryZwierze();
-            int licznikSztuk = 0;
-            if (plec == 0)
-            {
-                licznikSztuk = FiltrDatyLiczbaZwierzatAktywnych(listaZwierzat, 0, okresOd, okresDo, "plec");
-                if (licznikSztuk > 0)
-                {
-                    zestawienie.Add(new KeyValuePair<string, int>("Samce", licznikSztuk));
-                }
-            }
-            else if (plec == 1)
-            {
-                licznikSztuk = FiltrDatyLiczbaZwierzatAktywnych(listaZwierzat, 1, okresOd, okresDo, "plec");
-                if (licznikSztuk > 0)
-                {
-                    zestawienie.Add(new KeyValuePair<string, int>("Samice", licznikSztuk));
-                }
-            }
-
-            return zestawienie;
-        }
+        
 
         private List<KeyValuePair<string, int>> LiczbaZwierzatAktywnych()
         {
@@ -223,26 +201,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                 {
                     zestawienie.Add(new KeyValuePair<string, int>("", licznikSztuk));
                 }
-            }
-
-
-            /*
-            foreach (var zwierzak in listaZwierze)
-            {
-                if ((((okres_od <= zwierzak.okres_od && (okres_do >= zwierzak.okres_od || okresDo == null)) || (okres_od >= zwierzak.okres_od & okres_od <= zwierzak.okres_do)) || okres_od == null) && ((zwierzak.okres_do == null && okres_do == null) || (zwierzak.okres_do >= okres_do && okres_do >= zwierzak.okres_od) || (zwierzak.okres_do == null)))
-                {
-
-                licznikSztuk++;
-                        
-                }
-            }
-            */
-
-
-
-
-            
-            
+            }       
             return zestawienie;
         }
 
@@ -283,7 +242,6 @@ namespace ADZZ.Statystyki___okno_i_strony
                         }
 
                     }
-                   // licznikSztuk++;
 
                 }
             }
@@ -292,7 +250,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             return licznikSztuk;
         }
 
-        private List<KeyValuePair<string, int>> LiczbaZwierzatNieaktywnych(DateTime? okres_od, DateTime? okres_do)
+        private List<KeyValuePair<string, int>> LiczbaZwierzatNieaktywnych()
         {
             var listaRasa = QueryRasa();
             var listaZwierze = QueryZwierze();
@@ -349,22 +307,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     zestawienie.Add(new KeyValuePair<string, int>("", licznikSztuk));
                 }
             }
-
-
-
-
-            /*
-            foreach (var zwierzak in listaZwierze)
-            {
-                if (((okres_od <= zwierzak.okres_do || (okres_od == null && zwierzak.okres_do != null)) && (((okres_do > zwierzak.okres_do) || okres_do == null)) || (zwierzak.okres_do != null && okres_od == null && okres_do == null)))
-                {
-
-                    licznikSztuk++;
-
-                }
-            }*/
-           
-
+      
             return zestawienie;
         }
 
@@ -563,60 +506,77 @@ namespace ADZZ.Statystyki___okno_i_strony
         {
             switch (cbRodzajStatystyk.SelectedItem)
             {
-                case "Liczba zwierzat":
+                case "Liczba zwierząt":
                     lbOd.Visibility = Visibility.Visible;
                     lbDo.Visibility = Visibility.Visible;
                     dpOd.Visibility = Visibility.Visible;
                     dpDo.Visibility = Visibility.Visible;
+                    
                     checkbNieaktywne.Visibility = Visibility.Visible;
+
                     cbZakres.Visibility = Visibility.Visible;
                     lbZakres.Visibility = Visibility.Visible;
+                    cbTyp.Visibility = Visibility.Visible;
+                    lbTyp.Visibility = Visibility.Visible;
+                    
 
                     svColumn.Visibility = Visibility.Visible;
 
-
-                    WykresKolumnowy.Series.Clear();
-                    var LiczbaAktywnych = LiczbaZwierzatAktywnych();
-                    var LiczbaNieaktywnych = LiczbaZwierzatNieaktywnych(okresOd, okresDo);
-
-
-                    
-                    /*
-                    if(cbZakres.SelectedItem.ToString() == "Płeć")
+                    if (cbTyp.SelectedIndex == 0)
                     {
-                        DodajSerie(typeof(ColumnSeries), "Liczba aktywnych samcy", WykresKolumnowy);
-                        ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaZwierzatAktywnychPlec(0);
-                        DodajSerie(typeof(ColumnSeries), "Liczba aktywnych samic", WykresKolumnowy);
-                        ((ColumnSeries)WykresKolumnowy.Series[1]).ItemsSource = LiczbaZwierzatAktywnychPlec(1);
-                    }*/
-                    
-                    if (LiczbaAktywnych.Count > 0)
-                    {
-                        DodajSerie(typeof(ColumnSeries), "Liczba aktywnych zwierzat", WykresKolumnowy);
-                        ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaAktywnych;
-                    }
-                    if(checkbNieaktywne.IsChecked == true)
-                    {
-                        if (LiczbaNieaktywnych.Count > 0 && LiczbaAktywnych.Count <= 0)
+                        WykresKolumnowy.Series.Clear();
+                        var LiczbaAktywnych = LiczbaZwierzatAktywnych();
+                        var LiczbaNieaktywnych = LiczbaZwierzatNieaktywnych();
+
+                        if (LiczbaAktywnych.Count > 0)
                         {
-                            DodajSerie(typeof(ColumnSeries), "Liczba nieaktywnych zwierzat", WykresKolumnowy);
-                            ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaNieaktywnych;
+                            DodajSerie(typeof(ColumnSeries), "Liczba aktywnych zwierzat", WykresKolumnowy);
+                            ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaAktywnych;
                         }
-                        else if (LiczbaNieaktywnych.Count > 0)
+                        if (checkbNieaktywne.IsChecked == true)
                         {
-                            DodajSerie(typeof(ColumnSeries), "Liczba nieaktywnych zwierzat", WykresKolumnowy);
-                            ((ColumnSeries)WykresKolumnowy.Series[1]).ItemsSource = LiczbaNieaktywnych;
+                            if (LiczbaNieaktywnych.Count > 0 && LiczbaAktywnych.Count <= 0)
+                            {
+                                DodajSerie(typeof(ColumnSeries), "Liczba nieaktywnych zwierzat", WykresKolumnowy);
+                                ((ColumnSeries)WykresKolumnowy.Series[0]).ItemsSource = LiczbaNieaktywnych;
+                            }
+                            else if (LiczbaNieaktywnych.Count > 0)
+                            {
+                                DodajSerie(typeof(ColumnSeries), "Liczba nieaktywnych zwierzat", WykresKolumnowy);
+                                ((ColumnSeries)WykresKolumnowy.Series[1]).ItemsSource = LiczbaNieaktywnych;
+                            }
+
                         }
 
+                        RozszerzWykres(LiczbaAktywnych.Count, WykresKolumnowy, false);
                     }
+                    else
+                    {
+                        svColumn.Visibility = Visibility.Hidden;
+                        svLine.Visibility = Visibility.Visible;
+                        checkbNieaktywne.Visibility = Visibility.Hidden;
+
+                        cbZakres.Visibility = Visibility.Hidden;
+                        lbZakres.Visibility = Visibility.Hidden;
+
+                        cbStado.Visibility = Visibility.Visible;
+                        lbStado.Visibility = Visibility.Visible;
+
+                        var listaStad = QueryStado();
+
+                        WykresLiniowy.Series.Clear();
+
+                        
+                        DodajSerie(typeof(LineSeries), cbStado.SelectedItem.ToString(), WykresLiniowy);
+
+                        ((LineSeries)WykresLiniowy.Series[0]).ItemsSource = LiczbaZwierzatStada(cbStado.SelectedItem.ToString(),okresOd,okresDo);
+                        
+
+
+
+                    }
+                   
                     
-
-
-
-                    RozszerzWykres(LiczbaAktywnych.Count, WykresKolumnowy, false);
-                    
-
-
                     break;
                 case "Liczba laktacji":
 
@@ -640,7 +600,9 @@ namespace ADZZ.Statystyki___okno_i_strony
                     lbDo.Visibility = Visibility.Visible;
                     dpOd.Visibility = Visibility.Visible;
                     dpDo.Visibility = Visibility.Visible;
-
+                    cbTyp.Visibility = Visibility.Visible;
+                    lbTyp.Visibility = Visibility.Visible;
+                    
 
                     svPie.Visibility = Visibility.Visible;
 
@@ -712,23 +674,90 @@ namespace ADZZ.Statystyki___okno_i_strony
                     break;
             }
         }
+        
 
+        #region Źródła danych do wykresow stad
+        private List<KeyValuePair<string, int>> LiczbaZwierzatStada(string nr_kolczyka, DateTime? okres_od, DateTime? okres_do)
+        {
+            var zestawienie = new List<KeyValuePair<string, int>>();
+            var listaStad = QueryStado();
+            var listaHistoriaStad = QueryHistoriaStada();
+
+
+            foreach (var historia in listaHistoriaStad)
+            {
+                if ((okres_od <= historia.okres_od  || okres_od == null) && (historia.okres_od <= okres_do || okres_do == null))
+                {
+                    if (nr_kolczyka == historia.Stado.nr_stada)
+                    {
+                        zestawienie.Add(new KeyValuePair<string, int>(Convert.ToDateTime(historia.okres_od).ToShortDateString(), (int)historia.ilosc));
+                    }
+                }
+                
+
+            }
+
+            
+
+
+
+            return zestawienie;
+
+        }
+
+
+        #endregion
+
+        private void WypelnienieCbTyp()
+        {
+            if(cbRodzajStatystyk.SelectedItem.ToString() == "Liczba zwierząt")
+            {
+                cbTyp.Items.Add("Pojedyńcze zwierzęta");
+                cbTyp.Items.Add("Stado");
+            }
+            else if(cbRodzajStatystyk.SelectedItem.ToString() == "Przychód i wydatki")
+            {
+
+                cbTyp.Items.Add("Ogólne");
+                cbTyp.Items.Add("Pojedyńcze zwierzęta");
+                cbTyp.Items.Add("Stado");
+            }
+        }
 
         private void cbRodzajStatystyk_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            cbTyp.Items.Clear();
+            WypelnienieCbTyp();
+            cbTyp.SelectedIndex = 0;
+
             checkbNieaktywne.Visibility = Visibility.Hidden;
             cbZakres.Visibility = Visibility.Hidden;
             lbZakres.Visibility = Visibility.Hidden;
 
+            lbOd.Visibility = Visibility.Hidden;
+            lbDo.Visibility = Visibility.Hidden;
+            dpOd.Visibility = Visibility.Hidden;
+            dpDo.Visibility = Visibility.Hidden;
 
             svColumn.Visibility = Visibility.Hidden;
             svLine.Visibility = Visibility.Hidden;
             svPie.Visibility = Visibility.Hidden;
 
+            lbTyp.Visibility = Visibility.Hidden;
+            cbTyp.Visibility = Visibility.Hidden;
+
+           
+
+            cbZakres.SelectedIndex = 0;
+            checkbNieaktywne.IsChecked = false;
+
+            
 
             WywolanieSwitch();
             dpOd.SelectedDate = null;
             dpDo.SelectedDate = null;
+            
+            
         }
 
         /// <summary>
@@ -787,7 +816,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             var query = (from R in Polaczenie.Rozliczenia
                          where R.Kategoria_rozliczen.czyPrzychod == 1
                          select R).ToList();
-
+            
             return query;
         }
         private List<Rozliczenia> QueryWydatki()
@@ -856,9 +885,20 @@ namespace ADZZ.Statystyki___okno_i_strony
 
             return query;
         }
+        /// <summary>
+        /// Zwraca historie stada na podstawie podane kolczyka
+        /// </summary>
+        /// <param name="kolczyk">kolczyk stada</param>
+        /// <returns></returns>
+        private List<Historia_Stada> QueryHistoriaStada()
+        {
+            var query = (from H in Polaczenie.Historia_Stada                     
+                         select H).ToList();
+            return query;
+        }
 
         #endregion
-
+        #region Akcje kontrolek filtrów
         private void ResetujOkresOd()
         {
             //okresOd = Convert.ToDateTime(DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString() + "." + (DateTime.Now.Year - 100).ToString());
@@ -911,5 +951,27 @@ namespace ADZZ.Statystyki___okno_i_strony
         {
             WywolanieSwitch();
         }
+
+        private void cbTyp_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lbStado.Visibility = Visibility.Hidden;
+            cbStado.Visibility = Visibility.Hidden;
+            svLine.Visibility = Visibility.Hidden;
+            if (cbStado.ItemsSource == null && cbTyp.SelectedIndex == 1)
+            {
+                WypelnienieCbStado();
+                cbStado.SelectedIndex = 0;
+            }
+            
+            WywolanieSwitch();
+        }
+
+        private void cbStado_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            WywolanieSwitch();
+        }
+        #endregion
+
+
     }
 }

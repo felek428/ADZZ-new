@@ -98,7 +98,7 @@ namespace ADZZ
 
         private void btnStatystykiZwierzat_Click(object sender, RoutedEventArgs e)
         {
-            ramkaAkcji.Content = new WyborTypow(typeof(StatystykiZwierzat));
+            ramkaAkcji.Content = new StatystykiZwierzat();
         }
     }
 }

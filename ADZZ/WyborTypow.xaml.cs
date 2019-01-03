@@ -59,10 +59,7 @@ namespace ADZZ
             {
                 RamkaAkcjiTypy.Content = new FormularzDodaniaRozliczenia(cbTypZwierzat.SelectedIndex);
             }
-            else if(typ == typeof(StatystykiZwierzat))
-            {
-                RamkaAkcjiTypy.Content = new StatystykiZwierzat(cbTypZwierzat.SelectedIndex);
-            }
+            
         }
 
         private void cbTypZwierzat_SelectionChanged(object sender, SelectionChangedEventArgs e)
