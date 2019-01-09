@@ -338,11 +338,11 @@ namespace ADZZ.Statystyki___okno_i_strony
             return zestawienie;
         }
 
-        private double PrzychodZwierzat(DateTime? okres_od, DateTime? okres_do)
+        private double PrzychodZwierzat(DateTime? okres_od, DateTime? okres_do, List<Rozliczenia> listaPrzychod)
         {
             double zestawienie = 0;
 
-            var listaPrzychod = QueryPrzychod();
+           // var listaPrzychod = QueryPrzychod();
             var listaCenyMleka = QueryCenyMleka();
             var miesiace = DateTimeFormatInfo.CurrentInfo.MonthNames;
 
@@ -379,12 +379,12 @@ namespace ADZZ.Statystyki___okno_i_strony
             return zestawienie;
         }
 
-        private double WydatkiZwierzat(DateTime? okres_od, DateTime? okres_do)
+        private double WydatkiZwierzat(DateTime? okres_od, DateTime? okres_do, List<Rozliczenia> listaWydatki)
         {
 
 
             double zestawienie = 0;
-            var listaWydatki = QueryWydatki();
+            //var listaWydatki = QueryWydatki();
 
             double buffor;
                    
@@ -608,15 +608,33 @@ namespace ADZZ.Statystyki___okno_i_strony
 
                     WykresKolowy.Series.Clear();
 
+                    if(cbTyp.SelectedIndex == 0)
+                    {
+                        DodajSerie(typeof(PieSeries), "Bilans", WykresKolowy);
+                        ((PieSeries)WykresKolowy.Series[0]).ItemsSource = new KeyValuePair<string, double>[] {
+                        new KeyValuePair<string, double>("Przychod",PrzychodZwierzat(okresOd,okresDo,QueryPrzychod())),
+                        new KeyValuePair<string, double>("Wydatki", WydatkiZwierzat(okresOd,okresDo,QueryWydatki()))
 
-                    DodajSerie(typeof(PieSeries), "Bilans", WykresKolowy);
+                        };
+                    }
+                    else if(cbTyp.SelectedIndex == 1)
+                    {
+                        DodajSerie(typeof(PieSeries), "Bilans", WykresKolowy);
+                        ((PieSeries)WykresKolowy.Series[0]).ItemsSource = new KeyValuePair<string, double>[] {
+                        new KeyValuePair<string, double>("Przychod",PrzychodZwierzat(okresOd,okresDo,QueryPrzychodPojedyncze())),
+                        new KeyValuePair<string, double>("Wydatki", WydatkiZwierzat(okresOd,okresDo,QueryWydatkiPojedyncze()))
 
-
-                    ((PieSeries)WykresKolowy.Series[0]).ItemsSource = new KeyValuePair<string, double>[] {
-                        new KeyValuePair<string, double>("Przychod",PrzychodZwierzat(okresOd,okresDo)),
-                        new KeyValuePair<string, double>("Wydatki", WydatkiZwierzat(okresOd,okresDo))
-
-                    };
+                        };
+                    }
+                    else if(cbTyp.SelectedIndex == 2)
+                    {
+                        DodajSerie(typeof(PieSeries), "Bilans", WykresKolowy);
+                        ((PieSeries)WykresKolowy.Series[0]).ItemsSource = new KeyValuePair<string, double>[] {
+                        new KeyValuePair<string, double>("Przychod",PrzychodZwierzat(okresOd,okresDo,QueryPrzychodStado())),
+                        new KeyValuePair<string, double>("Wydatki", WydatkiZwierzat(okresOd,okresDo,QueryWydatkiStado()))
+                        };
+                    } 
+                    
                     
                     break;
                 case "Cena mleka":
@@ -819,10 +837,42 @@ namespace ADZZ.Statystyki___okno_i_strony
             
             return query;
         }
+
+        private List<Rozliczenia> QueryPrzychodPojedyncze()
+        {
+            var query = (from R in Polaczenie.Rozliczenia
+                         where R.Kategoria_rozliczen.czyPrzychod == 1 && R.id_zwierze != null
+                         select R).ToList();
+
+            return query;
+        }
+        private List<Rozliczenia> QueryPrzychodStado()
+        {
+            var query = (from R in Polaczenie.Rozliczenia
+                         where R.Kategoria_rozliczen.czyPrzychod == 1 && R.id_stado != null
+                         select R).ToList();
+
+            return query;
+        }
         private List<Rozliczenia> QueryWydatki()
         {
             var query = (from R in Polaczenie.Rozliczenia
                          where R.Kategoria_rozliczen.czyPrzychod == 0
+                         select R).ToList();
+            return query;
+        }
+
+        private List<Rozliczenia> QueryWydatkiPojedyncze()
+        {
+            var query = (from R in Polaczenie.Rozliczenia
+                         where R.Kategoria_rozliczen.czyPrzychod == 0 && R.id_zwierze != null
+                         select R).ToList();
+            return query;
+        }
+        private List<Rozliczenia> QueryWydatkiStado()
+        {
+            var query = (from R in Polaczenie.Rozliczenia
+                         where R.Kategoria_rozliczen.czyPrzychod == 0 && R.id_stado != null
                          select R).ToList();
             return query;
         }

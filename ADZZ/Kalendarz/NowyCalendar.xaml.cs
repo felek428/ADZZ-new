@@ -152,13 +152,55 @@ namespace NewCalendar
                     CreateCalendarButton();
                     MonthYear.Content = actualYear;
                     DaysOfWeek.Visibility = Visibility.Hidden;
+
+                    if (fullYearRight - DateTime.Now.Year >= 100 && fullYearRight == actualYear)
+                    {
+
+                        NextButton.IsEnabled = false;
+
+                    }
+                    else
+                    {
+                        NextButton.IsEnabled = true;
+                    }
+
+                    if (fullYearLeft - DateTime.Now.Year <= 100 && fullYearLeft == actualYear)
+                    {
+
+                        PreviousButton.IsEnabled = false;
+
+                    }
+                    else
+                    {
+                        PreviousButton.IsEnabled = true;
+                    }
+
+
                     break;
                 case 1:
+                    if(fullYearRight - actualYear <= 10 && (DateTime.Now.Year - actualYear) <= -99)
+                    {
+                       
+                        NextButton.IsEnabled = false;
+                        
+                    }
+
+                    if (fullYearLeft - actualYear == 0 && (DateTime.Now.Year - actualYear) >= 99)
+                    {
+
+                        PreviousButton.IsEnabled = false;
+
+                    }
+
+
                     YearView.Children.Clear();
                     CreateYearSection();
                     MonthYear.Content = (fullYearLeft.ToString() + "-" + fullYearRight.ToString());
                     states = 2;
                     CreateCalendarButton();
+                    break;
+                case 2:
+
                     break;
                 default:
                     break;
@@ -260,10 +302,26 @@ namespace NewCalendar
                 {
                     previousMonth = 12;
                 }
+
                 if(actualMonth == 12)
                 {
                     nextMonth = 1;
                 }
+
+                if(fullYearRight == actualYear && nextMonth > 1)
+                {
+                    NextButton.IsEnabled = true;
+                }
+                if (fullYearLeft == actualYear && previousMonth < 12)
+                {
+                    PreviousButton.IsEnabled = true;
+                }
+                else if(fullYearLeft == actualYear && previousMonth == 12)
+                {
+                    PreviousButton.IsEnabled = false;
+                }
+
+
                 CreatePreviousMonthDays(GetCurrentMonthDaysNumber(actualYear, previousMonth));
                 CreateNextMonthDays();
                 MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth); // przypisanie na nowo nazwy obecnego miesiaca i wyswietlenie na buttonie
@@ -276,6 +334,27 @@ namespace NewCalendar
                 MonthYear.Content = actualYear;
                 states = 1;
                 CreateCalendarButton();
+                if (fullYearRight - DateTime.Now.Year == 100 && fullYearRight == actualYear)
+                {
+
+                    NextButton.IsEnabled = false;
+
+                }
+                else
+                {
+                    NextButton.IsEnabled = true;
+                }
+
+                if (fullYearLeft - DateTime.Now.Year == -100 && fullYearLeft == actualYear)
+                {
+
+                    PreviousButton.IsEnabled = false;
+
+                }
+                else
+                {
+                    PreviousButton.IsEnabled = true;
+                }
 
             }
         }    
@@ -525,11 +604,27 @@ namespace NewCalendar
                 CreateYearSection();
                 CreateCalendarButton();
                 MonthYear.Content = (fullYearLeft.ToString() + "-" + fullYearRight.ToString());
-                if ((DateTime.Now.Year - actualYear)> 99)
-                {
-                    PreviousButton.IsEnabled = false;
-                }
+                
             }
+            
+            if ((DateTime.Now.Year - actualYear) > 99 && states == 2)
+            {
+                PreviousButton.IsEnabled = false;
+            }
+            else if ((DateTime.Now.Year - actualYear) > 108 && states == 1)
+            {
+                PreviousButton.IsEnabled = false;
+            }
+            else if (previousMonth == 12 && states == 0 && (DateTime.Now.Year - actualYear) > 108)
+            {
+                PreviousButton.IsEnabled = false;
+            }
+            else
+            {
+                NextButton.IsEnabled = true;
+            }
+
+
         }
         /// <summary>
         /// Akcje po nacisnieciu guzika nastepny
@@ -571,6 +666,7 @@ namespace NewCalendar
                 CreateNextMonthDays();
             }else if(states == 1)
             {
+
                 actualYear += 1;
                 MonthYear.Content = actualYear;
             }
@@ -581,10 +677,25 @@ namespace NewCalendar
                 CreateYearSection();
                 CreateCalendarButton();
                 MonthYear.Content = (fullYearLeft.ToString() + "-" + fullYearRight.ToString());
-                if ((DateTime.Now.Year - actualYear) < -98)
-                {
-                    NextButton.IsEnabled = false;
-                }
+                
+                
+            }
+
+            if ((DateTime.Now.Year - actualYear) <= -99 && states == 2)
+            {
+                NextButton.IsEnabled = false;
+            }
+            else if ((DateTime.Now.Year - actualYear) < -99 && states == 1 )
+            {
+                NextButton.IsEnabled = false;
+            }
+            else if(nextMonth == 1 && states == 0 && (DateTime.Now.Year - actualYear) <= -99)
+            {
+                NextButton.IsEnabled = false;
+            }
+            else
+            {
+                PreviousButton.IsEnabled = true;
             }
         }
         /// <summary>
@@ -625,12 +736,26 @@ namespace NewCalendar
         /// <returns></returns>
         private int GetLastMonthDaysNumber()
         {
-            var buffor = actualMonth-1;                   
+            int buffor;            
+            if(actualMonth == 1)
+            {
+                buffor = 12;
+            }
+            else
+            {
+                buffor = actualMonth - 1;
+            }
+
             return GetCurrentMonthDaysNumber(actualYear,buffor);
         }      
         private int GetCurrentMonth()
         {
             return actualMonth;
+        }
+
+        private void NextButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
         }
     }
 }
