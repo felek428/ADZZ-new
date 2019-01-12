@@ -11,7 +11,10 @@
       Background="White"
       Title="StatystykiZwierzat">
 
-
+    <Page.Resources>
+        
+        
+    </Page.Resources>
 
     <Grid>
         <ComboBox x:Name="cbRodzajStatystyk" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbRodzajStatystyk_SelectionChanged"/>
@@ -19,7 +22,7 @@
         <ScrollViewer x:Name="svPie" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,100,5,0">
             <Charts:Chart x:Name="WykresKolowy" Margin="0,37,0,0" BorderThickness="0" Visibility="Visible">
                 <Charts:PieSeries x:Name="SeriaPie" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" ItemsSource="{Binding points}"/>
-
+                
             </Charts:Chart>
         </ScrollViewer>
 
@@ -32,7 +35,7 @@
 
             <Charts:Chart x:Name="WykresLiniowy"  BorderThickness="0" Visibility="Visible" >
 
-                <Charts:LineSeries x:Name="SeriaLine" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" Visibility="Hidden"/>
+                <Charts:LineSeries x:Name="SeriaLine" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" Visibility="Hidden" />
 
 
             </Charts:Chart>
@@ -57,6 +60,6 @@
         <ComboBox x:Name="cbTyp" HorizontalAlignment="Left" Margin="385,41,0,0" VerticalAlignment="Top" Width="120" Height="26" Visibility="Hidden" SelectionChanged="cbTyp_SelectionChanged"/>
         <Label x:Name="lbStado" Content="Stado:" HorizontalAlignment="Left" Margin="339,72,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <ComboBox x:Name="cbStado" HorizontalAlignment="Left" Margin="385,72,0,0" VerticalAlignment="Top" Width="120" Height="26" Visibility="Hidden" SelectionChanged="cbStado_SelectionChanged"/>
-
+        
     </Grid>
 </Page>
