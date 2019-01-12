@@ -62,7 +62,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             DaneWykresow noweDane = new DaneWykresow();
 
-            ((PieSeries)Wykres.Series[0]).ItemsSource =
+            ((System.Windows.Controls.DataVisualization.Charting.PieSeries)Wykres.Series[0]).ItemsSource =
                 new KeyValuePair<string, double>[]{
                 new KeyValuePair<string,double>("Wydatki", noweDane.WydatkiZwierze(wybranyKolczyk)),
                 new KeyValuePair<string,double>("Przychód", noweDane.PrzychodZwierze(wybranyKolczyk))

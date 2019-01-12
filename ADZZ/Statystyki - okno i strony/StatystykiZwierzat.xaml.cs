@@ -27,12 +27,14 @@ namespace ADZZ.Statystyki___okno_i_strony
         private string TytulSerii = string.Empty;
         DateTime? okresOd;
         DateTime? okresDo;
+        PieSeries bufforSeria;
         string WybranyZakres;
-        
+        List<Brush> listaKolorow = new List<Brush>();
+        int licznikKolorow = 0;
         public StatystykiZwierzat()
         {
             InitializeComponent();
-            
+            DataContext = this;
          
             WypelnienieCbStatystyk();
             WypelnienieCbZakres();
@@ -519,8 +521,8 @@ namespace ADZZ.Statystyki___okno_i_strony
                     lbZakres.Visibility = Visibility.Visible;
                     cbTyp.Visibility = Visibility.Visible;
                     lbTyp.Visibility = Visibility.Visible;
-                    
 
+                    cbStado.SelectedIndex = 0;
                     svColumn.Visibility = Visibility.Visible;
 
                     if (cbTyp.SelectedIndex == 0)
@@ -582,7 +584,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                         DodajSerie(typeof(LineSeries), cbStado.SelectedItem.ToString(), WykresLiniowy);
 
                         ((LineSeries)WykresLiniowy.Series[0]).ItemsSource = LiczbaZwierzatStada(cbStado.SelectedItem.ToString(),okresOd,okresDo);
-                        
+                       
 
 
 
@@ -843,7 +845,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     Style styl = new Style();
                     styl.BasedOn = this.FindResource("Styl1") as Style;
                     styl.TargetType = typeof(ColumnDataPoint);
-                    styl.Setters.Add(new Setter(ColumnDataPoint.BackgroundProperty, kolor));
+                  //  styl.Setters.Add(new Setter(ColumnDataPoint.BackgroundProperty, kolor));
                     Style stylLegend = FindResource("LegendStyle") as Style;
 
 
@@ -874,7 +876,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     Style styl = new Style();
                     styl.BasedOn = this.FindResource("Styl2") as Style;
                     styl.TargetType = typeof(ColumnDataPoint);
-                    styl.Setters.Add(new Setter(ColumnDataPoint.BackgroundProperty, kolor));
+                    //styl.Setters.Add(new Setter(ColumnDataPoint.BackgroundProperty, kolor));
 
                     Style stylLegend = FindResource("LegendStyle2") as Style;
                     
@@ -895,6 +897,18 @@ namespace ADZZ.Statystyki___okno_i_strony
                 nowaSeria.IndependentValuePath = "Key";
                 nowaSeria.Title = tytulSerii;
                 
+                Style styl = new Style();
+                styl.BasedOn = this.FindResource("PieStyl") as Style;
+                styl.TargetType = typeof(PieDataPoint);
+                //styl.Setters.Add(new Setter(PieDataPoint.BackgroundProperty, Brushes.MediumPurple));
+
+                //nowaSeria.DataPointStyle = styl;
+
+                Style legendStyle = FindResource("PieLegendStyle") as Style;
+
+                //nowaSeria.LegendItemStyle = legendStyle;
+
+                bufforSeria = nowaSeria;
                 wykres.Series.Add(nowaSeria);
             }
             else
@@ -1147,7 +1161,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             lbStado.Visibility = Visibility.Hidden;
             cbStado.Visibility = Visibility.Hidden;
             svLine.Visibility = Visibility.Hidden;
-            if (cbStado.ItemsSource == null && cbTyp.SelectedIndex == 1)
+            if (cbStado.Items.Count == 0)
             {
                 WypelnienieCbStado();
                 cbStado.SelectedIndex = 0;
@@ -1160,8 +1174,37 @@ namespace ADZZ.Statystyki___okno_i_strony
         {
             WywolanieSwitch();
         }
+
         #endregion
 
+        private void Path_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(listaKolorow.Count == 2)
+            {
+                listaKolorow.Clear();
+                licznikKolorow = 0;
+            }
+            Random r = new Random();
+            var kolor = new SolidColorBrush(Color.FromArgb(
+                  0xFF,
+                  (byte)r.Next(255),
+                  (byte)r.Next(255),
+                  (byte)r.Next(255)));
 
+            (sender as Path).Fill = kolor;
+
+            Style styl = FindResource("PieLegendStyle") as Style;
+
+            listaKolorow.Add(kolor);
+           // bufforSeria.LegendItemStyle = styl;
+            System.Threading.Thread.Sleep(50);
+        }
+
+        private void Rectangle_Loaded(object sender, RoutedEventArgs e)
+        {   
+            (sender as Rectangle).Fill = listaKolorow[licznikKolorow];
+            licznikKolorow++;
+        }
     }
+    
 }

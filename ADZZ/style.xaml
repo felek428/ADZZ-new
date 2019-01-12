@@ -710,5 +710,104 @@
             </Setter.Value>
         </Setter>
     </Style>
-         
+         <!--____________________________Pie Chart style___________________________________________-->
+    <Style x:Key="PieLegendStyle" TargetType="Charts:LegendItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Charts:LegendItem">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Rectangle Width="8" Height="8"  Stroke="{Binding BorderBrush}" StrokeThickness="1" VerticalAlignment="Center"  />
+                            <Label Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="PieStyl" TargetType="{x:Type Charts:PieDataPoint}">
+        <Setter Property="Background" Value="Orange"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="RatioStringFormat" Value="{}{0:p2}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Charts:PieDataPoint}">
+                    <Grid x:Name="Root" Opacity="0">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="{x:Null}" GeneratedDuration="0:0:0.1" GeneratedEasingFunction="{x:Null}" Storyboard="{x:Null}" To="{x:Null}"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="0.6" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="MouseOverHighlight"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="{x:Null}" GeneratedDuration="0:0:0.1" GeneratedEasingFunction="{x:Null}" Storyboard="{x:Null}" To="{x:Null}"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Unselected"/>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="0.6" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="SelectionHighlight"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="RevealStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="{x:Null}" GeneratedDuration="0:0:0.5" GeneratedEasingFunction="{x:Null}" Storyboard="{x:Null}" To="{x:Null}"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Shown">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Root"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Hidden">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Root"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Label Content="{Binding Path=Value}"/>
+                        <Path Data="{TemplateBinding Geometry}"   Stroke="{TemplateBinding BorderBrush}" StrokeMiterLimit="1"  >
+                            <Path.ToolTip>
+                                <StackPanel>
+                                    <ContentControl Content="{TemplateBinding FormattedDependentValue}"/>
+                                    <ContentControl Content="{TemplateBinding FormattedRatio}"/>
+
+                                </StackPanel>
+                            </Path.ToolTip>
+
+                        </Path>
+
+
+                        <Path x:Name="Slice" Data="{TemplateBinding Geometry}" Stroke="{TemplateBinding BorderBrush}" StrokeMiterLimit="1" Opacity="1">
+                            <Path.ToolTip>
+                                <StackPanel>
+                                    <ContentControl Content="{TemplateBinding FormattedDependentValue}"/>
+                                    <ContentControl Content="{TemplateBinding FormattedRatio}"/>
+                                </StackPanel>
+                            </Path.ToolTip>
+                            <Path.Fill>
+                                <LinearGradientBrush ColorInterpolationMode="SRgbLinearInterpolation" MappingMode="RelativeToBoundingBox">
+                                    <GradientStop  Color="#77FFFFFF" Offset="0" />
+                                    <GradientStop  Color="#00FFFFFF" Offset="1" />
+                                </LinearGradientBrush>
+                            </Path.Fill>
+                        </Path>
+                        <Path x:Name="SelectionHighlight" Data="{TemplateBinding GeometrySelection}" Fill="Red" IsHitTestVisible="False" Opacity="0" StrokeMiterLimit="1"/>
+                        <Path x:Name="MouseOverHighlight" Data="{TemplateBinding GeometryHighlight}" Fill="White" IsHitTestVisible="False" Opacity="0" StrokeMiterLimit="1"/>
+                    </Grid>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

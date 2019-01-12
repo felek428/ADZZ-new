@@ -12,15 +12,19 @@
       Title="StatystykiZwierzat">
 
     <Page.Resources>
+
+        
+
         
         
+
     </Page.Resources>
 
     <Grid>
         <ComboBox x:Name="cbRodzajStatystyk" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbRodzajStatystyk_SelectionChanged"/>
 
         <ScrollViewer x:Name="svPie" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,100,5,0">
-            <Charts:Chart x:Name="WykresKolowy" Margin="0,37,0,0" BorderThickness="0" Visibility="Visible">
+            <Charts:Chart x:Name="WykresKolowy" Margin="0,37,0,0" BorderThickness="0" Visibility="Visible" >
                 <Charts:PieSeries x:Name="SeriaPie" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" ItemsSource="{Binding points}"/>
                 
             </Charts:Chart>
