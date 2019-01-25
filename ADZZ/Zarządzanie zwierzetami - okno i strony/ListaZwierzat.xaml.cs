@@ -23,26 +23,14 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         private Frame ramkaAkcji;
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private int wybranyIndex;
+        private int WybranyId;
         public ListaZwierzat(Frame ramka, int wybranyIndex)
         {
             InitializeComponent();
             this.wybranyIndex = wybranyIndex;
-            if(wybranyIndex == 0)
-            {
-                var query = (from Zwierze in Polaczenie.Zwierze
-                             select new ZwierzeNiepelnyOpis { NrKolczyka = Zwierze.nr_kolczyka, NazwaRasa = Zwierze.Rasa.nazwa, NazwaGatunek = Zwierze.Gatunek.nazwa }).ToList();
 
-                LVListaZwierzat.ItemsSource = query;
-            }
-            else if(wybranyIndex == 1)
-            {
-                var query = (from Stado in Polaczenie.Stado
-                             select new ZwierzeNiepelnyOpis { NrKolczyka = Stado.nr_stada, NazwaGatunek = Stado.Gatunek.nazwa }).ToList();
-                LVListaZwierzat.ItemsSource = query;
-                
-            }
-
-
+            WypelnijListe();
+            
             
 
             CollectionView filtrowanieKolekcji = (CollectionView)CollectionViewSource.GetDefaultView(LVListaZwierzat.ItemsSource);
@@ -55,6 +43,23 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         }
 
+        private void WypelnijListe()
+        {
+            if (wybranyIndex == 0)
+            {
+                var query = (from Zwierze in Polaczenie.Zwierze
+                             select new ZwierzeNiepelnyOpis { NrKolczyka = Zwierze.nr_kolczyka, NazwaRasa = Zwierze.Rasa.nazwa, NazwaGatunek = Zwierze.Gatunek.nazwa, Id = Zwierze.Id }).ToList();
+
+                LVListaZwierzat.ItemsSource = query;
+            }
+            else if (wybranyIndex == 1)
+            {
+                var query = (from Stado in Polaczenie.Stado
+                             select new ZwierzeNiepelnyOpis { NrKolczyka = Stado.nr_stada, NazwaGatunek = Stado.Gatunek.nazwa }).ToList();
+                LVListaZwierzat.ItemsSource = query;
+
+            }
+        }
 
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -85,6 +90,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             public string NazwaRasa { get; set; }
             public string NazwaGatunek { get; set; }
             public string NrSiedzibyStada { get; set; }
+            public int Id { get; set; }
 
            
         }
@@ -104,6 +110,46 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             {
                 return ((lista as ZwierzeNiepelnyOpis).NrKolczyka.IndexOf(tbFiltr.Text,StringComparison.OrdinalIgnoreCase) >=0);
             }
+        }
+
+        private void LVListaZwierzat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(LVListaZwierzat.SelectedItem != null)
+            {
+                btUsun.IsEnabled = true;
+                
+            }
+            else
+            {
+                btUsun.IsEnabled = false;
+            }
+            
+           
+        }
+        private void ListViewItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+            var item = sender as ListViewItem;
+            if (item != null && item.IsSelected)
+            {
+                var ZaznaczonaPozycja = (ZwierzeNiepelnyOpis)LVListaZwierzat.SelectedItem;
+                WybranyId = ZaznaczonaPozycja.Id;
+                
+            }
+        }
+
+        
+
+        private void btUsun_Click(object sender, RoutedEventArgs e)
+        {
+            if(LVListaZwierzat.SelectedItem != null)
+            {
+                Zwierze usunZwierze = Polaczenie.Zwierze.Single(x => x.Id == WybranyId);
+    
+                Polaczenie.Zwierze.DeleteOnSubmit(usunZwierze);
+                Polaczenie.SubmitChanges();
+            }
+            WypelnijListe();
         }
     }
 }

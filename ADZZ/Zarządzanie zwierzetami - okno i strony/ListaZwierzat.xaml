@@ -11,7 +11,7 @@
 
     <Grid>
         
-        <ListView x:Name="LVListaZwierzat"  Margin="20,57,0,20" HorizontalAlignment="Left" Width="Auto">
+        <ListView x:Name="LVListaZwierzat"  Margin="20,57,0,20" HorizontalAlignment="Left" Width="Auto" SelectionChanged="LVListaZwierzat_SelectionChanged">
             <ListView.View>
                 <GridView  >
                     <GridViewColumn Header="Nr kolczyka" DisplayMemberBinding="{Binding Path=NrKolczyka}"/>
@@ -22,11 +22,13 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
+                    <EventSetter Event="MouseLeftButtonUp" Handler="ListViewItem_MouseLeftButtonDown"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
         <Label x:Name="lbFiltr" Content="Szukaj:" HorizontalAlignment="Left" Margin="20,26,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbFiltr" HorizontalAlignment="Left" Height="23" Margin="66,29,0,0"  VerticalAlignment="Top" Width="149" TextChanged="TBFiltr_TextChanged"/>
-
+        <Button x:Name="btUsun" Content="Usuń" IsEnabled="False" HorizontalAlignment="Left" Margin="220,29,0,0" VerticalAlignment="Top" Width="75" Click="btUsun_Click" Height="23"/>
+        
     </Grid>
 </Page>
