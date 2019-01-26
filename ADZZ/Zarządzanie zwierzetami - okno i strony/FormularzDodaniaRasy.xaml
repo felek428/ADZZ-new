@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="lbNazwaKategorii" Content="Nazwa:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbNazwaRasy" HorizontalAlignment="Left" Height="23" Margin="63,13,0,0"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbNazwaRasy" MaxLength="30" HorizontalAlignment="Left" Height="23" Margin="63,13,0,0"  VerticalAlignment="Top" Width="120"/>
         <Button Style="{StaticResource NowyStylButton}" x:Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="108,45,0,0" VerticalAlignment="Top" Width="75" Click="btnDodaj_Click"/>
 
     </Grid>

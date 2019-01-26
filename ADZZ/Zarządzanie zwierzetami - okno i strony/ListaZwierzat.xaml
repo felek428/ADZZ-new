@@ -23,6 +23,7 @@
                 <Style TargetType="ListViewItem">
                     <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
                     <EventSetter Event="MouseLeftButtonUp" Handler="ListViewItem_MouseLeftButtonDown"/>
+                    
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>

@@ -47,7 +47,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             TrescCbKolczyk.WypelnienieCbKolczykZwierze(cbKolczyk);
             TrescCbKolczyk.WypelnienieCbKolczykStado(cbNrStada);
             WypelnijCbRok();
-            
+            WypelnijListe();
         }
         public FormularzDodaniaRozliczenia()
         {
@@ -159,7 +159,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
 
 
-
+                
 
 
 
@@ -177,8 +177,8 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             {
                 MessageBox.Show("Uzupelnij pola!");
             }
-            
 
+            
         }
 
         
@@ -334,8 +334,21 @@ namespace ADZZ.Rozliczenia___okno_i_strony
                 
             }
         }
+        private void WypelnijListe()
+        {
+            var query = (from R in Polaczenie.Rozliczenia
+                         select new SkroconeRozliczenie { Data = R.data, Kwota = R.kwota, Opis = R.opis, Kategoria = R.Kategoria_rozliczen.nazwa }).ToList();
+
+            lvListaRozliczen.ItemsSource = query;
+        }
 
 
-
+    }
+    class SkroconeRozliczenie
+    {
+        public DateTime Data { get; set; }
+        public string Opis { get; set; }
+        public double? Kwota { get; set; }  
+        public string Kategoria { get; set; }
     }
 }

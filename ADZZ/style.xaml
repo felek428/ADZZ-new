@@ -3,7 +3,24 @@
                     xmlns:local="clr-namespace:ADZZ"
                     xmlns:Charts="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
                     >
-
+    <Style TargetType="{x:Type ToolTip}" x:Key="stylToolTip">
+        <Setter Property="MaxWidth" Value="20" />
+        <!--OR-->
+        <!--<Setter Property="MaxWidth" Value="{Binding Path=(lib:ToolTipProperties.MaxWidth)}" />-->
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentPresenter Content="{TemplateBinding Content}">
+                        <ContentPresenter.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </ContentPresenter.Resources>
+                    </ContentPresenter>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!-- __________________________________Styl ComboBox_________________________________ -->
     <ControlTemplate x:Key="ComboBoxToggleButton"
                  TargetType="{x:Type ToggleButton}">

@@ -36,24 +36,44 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
         {
-            Rasa nowaRasa = new Rasa();
-            nowaRasa.nazwa = tbNazwaRasy.Text;
-            nowaRasa.id_gatunek = wybranyGatunekId;
+            var query = from Rasa in Polaczenie.Rasa
+                        where Rasa.id_gatunek == wybranyGatunekId
+                        select Rasa.nazwa;
+            bool czyIstnieje = false;
+            foreach (var item in query)
+            {
+                if (item.ToLower().Equals(tbNazwaRasy.Text.ToLower()))
+                {
+                    czyIstnieje = true;
+                }
+                
+            }
             
-            
-            Polaczenie.Rasa.InsertOnSubmit(nowaRasa);
-            Polaczenie.SubmitChanges();
 
-            
+            if(czyIstnieje == false)
+            {
+                Rasa nowaRasa = new Rasa();
+                nowaRasa.nazwa = tbNazwaRasy.Text;
+                nowaRasa.id_gatunek = wybranyGatunekId;
+
+
+                Polaczenie.Rasa.InsertOnSubmit(nowaRasa);
+                Polaczenie.SubmitChanges();
+
+
                 cbRasa.IsEnabled = true;
-                var query = from Rasa in Polaczenie.Rasa
-                            where Rasa.id_gatunek == wybranyGatunekId
-                            select Rasa.nazwa;
+
                 cbRasa.ItemsSource = query;
                 cbRasa.SelectedItem = nowaRasa.nazwa;
-            
 
-            Close();
+
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Podana nazwa już istnieje!");
+            }
+          
         }
     }
 }

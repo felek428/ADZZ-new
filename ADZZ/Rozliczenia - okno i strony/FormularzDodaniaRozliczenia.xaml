@@ -48,6 +48,36 @@
                 <Button x:Name="btDodajCene" Content="Dodaj" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="42" Click="btDodajCene_Click" Margin="75,130,0,0"/>
             </Grid>
         </GroupBox>
+        <ListView x:Name="lvListaRozliczen" HorizontalAlignment="Stretch" Height="146" Margin="141,296,446,8" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemContainerStyle>
+                
+                <Style TargetType="ListViewItem">
 
+                    <Setter Property="ToolTip">
+                        <Setter.Value>
+                            <UniformGrid Columns="1">
+                                <TextBlock Text="{Binding Path=Opis}" MaxWidth="200" TextWrapping="Wrap"/>
+                            </UniformGrid>
+                        </Setter.Value>
+                    </Setter>
+
+
+
+                </Style>
+                
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Kategoria" DisplayMemberBinding="{Binding Path=Kategoria}"/>
+                    <GridViewColumn Header="Kwota" DisplayMemberBinding="{Binding Path=Kwota}"/>
+                    <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=Data}"/>
+                    <GridViewColumn Header="Opis" DisplayMemberBinding="{Binding Path=Opis}"/>
+                </GridView>
+                
+            </ListView.View>
+            
+        </ListView>
+        
     </Grid>
 </Page>
