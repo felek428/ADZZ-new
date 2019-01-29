@@ -110,8 +110,8 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         /// <param name="e"></param>
         private void BtDodaj_Click(object sender, RoutedEventArgs e)
         {
-        
 
+      
             Rozliczenia nowy = new Rozliczenia();
             if (WyborRozliczenia.SelectedItem != null && DataDP.SelectedDate != null)
             {
@@ -145,10 +145,14 @@ namespace ADZZ.Rozliczenia___okno_i_strony
                     var queryNrStada = from Stado in Polaczenie.Stado
                                        where Stado.nr_stada == cbNrStada.SelectedItem.ToString()
                                        select Stado.Id;
-                    nowy.id_stado = queryNrStada.FirstOrDefault();
-                }
-                
 
+                    nowy.id_stado = queryNrStada.FirstOrDefault();
+                }else if(cbNrStada.Text.Length > 0 && (cbKolczyk.SelectedItem == null && cbNrStada.SelectedItem == null))
+                {
+                    MessageBox.Show("Podany identyfikator zwierząt nie istnieje!");
+                    return;
+                }
+               
                 if(tbLitry.Text != string.Empty)
                 {
                     nowy.ilosc_litrow = Convert.ToInt32(tbLitry.Text);
@@ -159,7 +163,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
 
 
-                
+                MessageBox.Show("Powiodło się!");
 
 
 
@@ -172,6 +176,8 @@ namespace ADZZ.Rozliczenia___okno_i_strony
                 tbLitry.Text = string.Empty;
                 tbLitry.Visibility = Visibility.Hidden;
                 lbLitry.Visibility = Visibility.Hidden;
+
+                WypelnijListe();
             }
             else
             {
@@ -286,7 +292,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
                     kolczyk.walidacjaKolczyk(cbKolczyk);
                     break;
                 case 1:
-                    kolczyk.walidacjaKolczyk(cbNrStada);
+                    //kolczyk.walidacjaKolczyk(cbNrStada);
                     break;
                 default:
                     break;
@@ -337,7 +343,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         private void WypelnijListe()
         {
             var query = (from R in Polaczenie.Rozliczenia
-                         select new SkroconeRozliczenie { Data = R.data, Kwota = R.kwota, Opis = R.opis, Kategoria = R.Kategoria_rozliczen.nazwa }).ToList();
+                         select new SkroconeRozliczenie { Data = R.data.ToShortDateString(), Kwota = R.kwota, Opis = R.opis, Kategoria = R.Kategoria_rozliczen.nazwa }).ToList();
 
             lvListaRozliczen.ItemsSource = query;
         }
@@ -346,7 +352,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
     }
     class SkroconeRozliczenie
     {
-        public DateTime Data { get; set; }
+        public string Data { get; set; }
         public string Opis { get; set; }
         public double? Kwota { get; set; }  
         public string Kategoria { get; set; }

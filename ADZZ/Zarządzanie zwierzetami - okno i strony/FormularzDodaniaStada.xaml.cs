@@ -55,7 +55,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         private void tbKolczyk_TextChanged(object sender, TextChangedEventArgs e)
         {
             Kolczyk sprawdzenie = new Kolczyk();
-            sprawdzenie.walidacjaKolczyk(tbKolczyk);
+            if (GatunekCB.SelectedItem.ToString().Equals("Trzoda"))
+            {
+                sprawdzenie.walidacjaKolczyk(tbKolczyk);
+            }
+            
         }
 
         private void wypelnienieGatunekCb(ComboBox comboBox)
@@ -111,9 +115,9 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             tbIlosc.Text = string.Empty;
             GatunekCB.SelectedIndex = -1;
             okresOdDP.SelectedDate = null;
-            /*
+            
             WpisDoStado(noweStado);
-            WpisDoHistoriaStada(nowaHistoriaStada, OstatniWpisStado());*/
+            WpisDoHistoriaStada(nowaHistoriaStada, OstatniWpisStado());
 
         }
         /// <summary>
@@ -123,7 +127,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         /// <param name="nowaHistoria"></param>
         private void WpisDoBazy(Stado noweStado, Historia_Stada nowaHistoria)
         {
-            if (tbKolczyk.Text != string.Empty && tbIlosc.Text != string.Empty && GatunekCB.SelectedItem != null && okresOdDP.SelectedDate != null)
+            if (tbIlosc.Text != string.Empty && GatunekCB.SelectedItem != null && okresOdDP.SelectedDate != null)
             {
                 WpisDoStado(noweStado);
 
@@ -147,7 +151,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void WpisDoStado(Stado noweStado)
         {
-            if (tbKolczyk.Text != string.Empty && tbIlosc.Text != string.Empty && GatunekCB.SelectedItem != null && okresOdDP.SelectedDate != null)
+            if (tbIlosc.Text != string.Empty && GatunekCB.SelectedItem != null && okresOdDP.SelectedDate != null)
             {
                 var queryGatunek = (from Gatunek in Polaczenie.Gatunek
                                     where Gatunek.nazwa == (string)GatunekCB.SelectedItem
@@ -200,6 +204,27 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                          select Stado.Id).ToList().Last();
 
             return query;
+        }
+
+        private void GatunekCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tbKolczyk.Text = string.Empty;
+            if(GatunekCB.SelectedItem != null)
+            {
+                if (GatunekCB.SelectedItem.ToString().Equals("Trzoda"))
+                {
+                    nrKolczykaL.Content = "Nr siedziby stada:";
+                    nrKolczykaL.Visibility = Visibility.Visible;
+                    tbKolczyk.Visibility = Visibility.Visible;
+                }
+                else if (GatunekCB.SelectedItem.ToString().Equals("Drób"))
+                {
+                    nrKolczykaL.Content = "Nazwa:";
+                    nrKolczykaL.Visibility = Visibility.Visible;
+                    tbKolczyk.Visibility = Visibility.Visible;
+                }
+            }
+            
         }
     }
 }

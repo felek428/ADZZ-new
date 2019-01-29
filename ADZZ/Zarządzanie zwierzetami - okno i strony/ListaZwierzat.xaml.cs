@@ -55,7 +55,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             else if (wybranyIndex == 1)
             {
                 var query = (from Stado in Polaczenie.Stado
-                             select new ZwierzeNiepelnyOpis { NrKolczyka = Stado.nr_stada, NazwaGatunek = Stado.Gatunek.nazwa }).ToList();
+                             select new ZwierzeNiepelnyOpis { NrKolczyka = Stado.nr_stada, NazwaGatunek = Stado.Gatunek.nazwa, Id = Stado.Id }).ToList();
                 LVListaZwierzat.ItemsSource = query;
 
             }
@@ -142,13 +142,27 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void btUsun_Click(object sender, RoutedEventArgs e)
         {
-            if(LVListaZwierzat.SelectedItem != null)
+            if(wybranyIndex == 0)
             {
-                Zwierze usunZwierze = Polaczenie.Zwierze.Single(x => x.Id == WybranyId);
-    
-                Polaczenie.Zwierze.DeleteOnSubmit(usunZwierze);
-                Polaczenie.SubmitChanges();
+                if (LVListaZwierzat.SelectedItem != null)
+                {
+                    Zwierze usunZwierze = Polaczenie.Zwierze.Single(x => x.Id == WybranyId);
+
+                    Polaczenie.Zwierze.DeleteOnSubmit(usunZwierze);
+                    Polaczenie.SubmitChanges();
+                }
             }
+            else
+            {
+                if (LVListaZwierzat.SelectedItem != null)
+                {
+                    Stado usunStado = Polaczenie.Stado.Single(x => x.Id == WybranyId);
+
+                    Polaczenie.Stado.DeleteOnSubmit(usunStado);
+                    Polaczenie.SubmitChanges();
+                }
+            }
+            
             WypelnijListe();
         }
     }
