@@ -15,7 +15,7 @@
         <GroupBox Header="Ogólne informacje" HorizontalAlignment="Left" Height="233" Margin="37,34,0,0" VerticalAlignment="Top" Width="319">
             <Frame x:Name="ramkaInformacji"/>
         </GroupBox>
-        <GroupBox x:Name="GBFinanse" Header="Finanse" HorizontalAlignment="Left" Height="474" Margin="420,38,0,0" VerticalAlignment="Top" Width="627">
+        <GroupBox x:Name="GBFinanse" Header="Finanse" HorizontalAlignment="Left" Height="478" Margin="420,34,0,0" VerticalAlignment="Top" Width="627">
             <Charts:Chart x:Name="Wykres" Margin="10" BorderThickness="0">
                 <Charts:Chart.Series >
                     <!--<Charts:LineSeries Title="WYDAJNOSC" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"/>-->

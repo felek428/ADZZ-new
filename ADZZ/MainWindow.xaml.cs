@@ -92,7 +92,7 @@ namespace ADZZ
 
         private void ramkaAkcji_ContentRendered(object sender, EventArgs e)
         {
-           
+            
         
         }
 
@@ -100,5 +100,7 @@ namespace ADZZ
         {
             ramkaAkcji.Content = new StatystykiZwierzat();
         }
+
+        
     }
 }

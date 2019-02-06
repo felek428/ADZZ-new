@@ -40,8 +40,8 @@
                         </BulletDecorator>
                     </Expander.Header>
                     <StackPanel>
-                        <Button x:Name="BtListaZwierzat" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Lista zwierząt" FontSize="22" FontWeight="Bold" Click="BtListaZwierzat_Click"/>
                         <Button x:Name="BtDodajZwierze" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Dodaj zwierzę" FontSize="22" FontWeight="Bold" Click="BtDodajZwierze_Click"/>
+                        <Button x:Name="BtListaZwierzat" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Lista zwierząt" FontSize="22" FontWeight="Bold" Click="BtListaZwierzat_Click"/>
                         <Button x:Name="BtKalendarz" Focusable="False" Height="50" Background="Teal" HorizontalAlignment="Left" Width="274" Content="Kalendarz rujowy" FontSize="22" FontWeight="Bold" Click="BtKalendarz_Click"/>
                     </StackPanel>
                 </Expander>

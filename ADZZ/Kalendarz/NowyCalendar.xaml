@@ -19,7 +19,9 @@
                 <Button Style="{StaticResource NowyStylButton}" x:Name="PreviousButton" FontSize="20" FontFamily="Segoe UI Symbol" Content="&#xE112;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="75" Click="Previous_Click"/>
                 <Button Style="{StaticResource NowyStylButton}" x:Name="MonthYear" Click="MonthYear_Click"  Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="75" Height="30" />
                 <Button Style="{StaticResource NowyStylButton}" x:Name="NextButton" IsEnabledChanged="NextButton_IsEnabledChanged"  FontSize="20" FontFamily="Segoe UI Symbol" Content="&#xE111;" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="75" Click="NextButton_Click"/>
-                <TextBlock HorizontalAlignment="Left" Margin="161,9,0,0" TextWrapping="Wrap" Text="{Binding Path=actualYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="40"/>
+                <Border x:Name="obramowanieRok" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Margin="161,9,0,0" Height="16" BorderBrush="Gray" BorderThickness="2">
+                    <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="{Binding Path=ActualYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                </Border>
             </Grid>
             <Grid x:Name="DaysOfWeek" DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>

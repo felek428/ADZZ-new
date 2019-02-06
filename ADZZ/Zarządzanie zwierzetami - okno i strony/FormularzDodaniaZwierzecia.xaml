@@ -12,7 +12,7 @@
     <Grid x:Name="mainGrid" Background="White">
         <Label x:Name="nrKolczykaL" Content="Nr kolczyka:" HorizontalAlignment="Left" Margin="13,10,0,0" VerticalAlignment="Top" Width="78" />
         <Label x:Name="plecL" Content="Płeć:" HorizontalAlignment="Left" Margin="13,41,0,0" VerticalAlignment="Top" Width="35"/>
-        <Label x:Name="dataUrL" Content="Data Urodzenia:" HorizontalAlignment="Left" Margin="13,72,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label x:Name="dataUrL" Content="Data urodzenia:" HorizontalAlignment="Left" Margin="13,72,0,0" VerticalAlignment="Top" Width="101"/>
         <Label x:Name="gatunekL" Content="Gatunek:" HorizontalAlignment="Left" Margin="13,103,0,0" VerticalAlignment="Top" Width="61"/>
         <Label x:Name="rasaL" Content="Rasa:" HorizontalAlignment="Left" Margin="13,134,0,0" VerticalAlignment="Top" Width="39"/>
         <Label x:Name="okresOdL" Content="Okres aktywności od:" HorizontalAlignment="Left" Margin="13,165,0,0" VerticalAlignment="Top" Width="129"/>
@@ -27,6 +27,13 @@
         <DatePicker x:Name="okresOdDP" HorizontalAlignment="Left" Margin="153,167,0,0" VerticalAlignment="Top" Width="127" IsEnabled="False" SelectedDateChanged="okresOdDP_SelectedDateChanged" TextBoxBase.TextChanged="okresOdDP_TextChanged"/>
         <DatePicker x:Name="okresDoDP" HorizontalAlignment="Left" Margin="153,198,0,0" VerticalAlignment="Top" Width="127" IsEnabled="False" SelectedDateChanged="okresDoDP_SelectedDateChanged"/>
         <Ikony:PackIcon Name="infoDodajRase" Kind="Information" Height="22" Width="35" Margin="280,138,0,0" ToolTip="Brakuje ras? Kliknij aby dodać nowe!" MouseLeftButtonDown="infoDodajRase_MouseLeftButtonDown" MouseEnter="infoDodajRase_MouseEnter" MouseLeave="infoDodajRase_MouseLeave" Visibility="Hidden"/>
+
+        <Label Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red" Margin="79,10,0,0" Height="23" Width="20" />
+        <Label Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red" Margin="128,165,0,0" Height="23" Width="20" />
+        <Label Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red" Margin="62,103,0,0" Height="23" Width="20" />
+        <Label Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red" Margin="99,72,0,0" Height="23" Width="20" />
+        <Label Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red" Margin="40,41,0,0" Height="23" Width="20" />
+        
 
     </Grid>
 </Page>

@@ -111,10 +111,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
             WpisDoBazy(noweStado, nowaHistoriaStada);
 
-            tbKolczyk.Text = string.Empty;
-            tbIlosc.Text = string.Empty;
-            GatunekCB.SelectedIndex = -1;
-            okresOdDP.SelectedDate = null;
+           
             
             WpisDoStado(noweStado);
             WpisDoHistoriaStada(nowaHistoriaStada, OstatniWpisStado());
@@ -127,7 +124,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         /// <param name="nowaHistoria"></param>
         private void WpisDoBazy(Stado noweStado, Historia_Stada nowaHistoria)
         {
-            if (tbIlosc.Text != string.Empty && GatunekCB.SelectedItem != null && okresOdDP.SelectedDate != null)
+            if (tbKolczyk.Text != string.Empty && tbIlosc.Text != string.Empty && GatunekCB.SelectedItem != null && okresOdDP.SelectedDate != null)
             {
                 WpisDoStado(noweStado);
 
@@ -142,10 +139,23 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 Polaczenie.SubmitChanges();
 
 
+                tbKolczyk.Text = string.Empty;
+                tbIlosc.Text = string.Empty;
+                GatunekCB.SelectedIndex = -1;
+                okresOdDP.SelectedDate = null;
+                nrKolczykaL.Visibility = Visibility.Hidden;
+                lbGwiazdaNrStada.Visibility = Visibility.Hidden;
+                lbGwiazdaNazwaStada.Visibility = Visibility.Hidden;
+                tbKolczyk.Visibility = Visibility.Hidden;
+
                 MessageBox.Show("Powiodło się");
 
                 
 
+            }
+            else
+            {
+                MessageBox.Show("Uzupełnij brakujące pola!");
             }
         }
 
@@ -213,18 +223,27 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             {
                 if (GatunekCB.SelectedItem.ToString().Equals("Trzoda"))
                 {
-                    nrKolczykaL.Content = "Nr siedziby stada:";
+                    string labelContent = "Nr siedziby stada:";
+                    nrKolczykaL.Content =  labelContent;
                     nrKolczykaL.Visibility = Visibility.Visible;
+                    lbGwiazdaNrStada.Visibility = Visibility.Visible;
+                    lbGwiazdaNazwaStada.Visibility = Visibility.Hidden;
                     tbKolczyk.Visibility = Visibility.Visible;
                 }
                 else if (GatunekCB.SelectedItem.ToString().Equals("Drób"))
                 {
-                    nrKolczykaL.Content = "Nazwa:";
+                    string labelContent = "Nazwa:";
+                    nrKolczykaL.Content = labelContent;
+
+                    lbGwiazdaNrStada.Visibility = Visibility.Hidden;
+                    lbGwiazdaNazwaStada.Visibility = Visibility.Visible;
                     nrKolczykaL.Visibility = Visibility.Visible;
                     tbKolczyk.Visibility = Visibility.Visible;
                 }
             }
             
         }
+
+        
     }
 }

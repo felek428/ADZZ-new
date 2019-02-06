@@ -108,7 +108,12 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             }
             else
             {
-                return ((lista as ZwierzeNiepelnyOpis).NrKolczyka.IndexOf(tbFiltr.Text,StringComparison.OrdinalIgnoreCase) >=0);
+                var zmienna = ((lista as ZwierzeNiepelnyOpis)
+                    .NrKolczyka
+                    .IndexOf(tbFiltr.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                return ((lista as ZwierzeNiepelnyOpis)
+                    .NrKolczyka
+                    .IndexOf(tbFiltr.Text,StringComparison.OrdinalIgnoreCase) >=0);
             }
         }
 

@@ -216,7 +216,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void WpisDoBazyZwierze(Zwierze zwierze)
         {
-            if (tbKolczyk != null && (maleCheckB.IsChecked == true || femaleCheckB.IsChecked == true) && DataUrDP.SelectedDate != null && okresOdDP.SelectedDate != null)
+            if (tbKolczyk != null && (maleCheckB.IsChecked == true || femaleCheckB.IsChecked == true) && GatunekCB.SelectedItem != null && DataUrDP.SelectedDate != null && okresOdDP.SelectedDate != null)
             {
                 zwierze.nr_kolczyka = tbKolczyk.Text;
                 zwierze.data_urodzenia = DataUrDP.SelectedDate.Value.Date;

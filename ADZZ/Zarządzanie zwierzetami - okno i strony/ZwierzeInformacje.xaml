@@ -6,15 +6,13 @@
       xmlns:Charts="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
        
       xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
-      mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="1109"
+      mc:Ignorable="d"
       Title="ZwierzeInformacje"
-      Background="White">
+      Background="White" Height="647.5" Width="1116.5">
 
     <Grid>
-        <Button x:Name="btnPowrot" Content="Powrót" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="btnPowrot_Click"/>
 
-        <GroupBox x:Name="GBFinanse" Header="Finanse" HorizontalAlignment="Left" Height="474" Margin="396,216,0,0" VerticalAlignment="Top" Width="703">
+        <GroupBox x:Name="GBFinanse" Header="Finanse" HorizontalAlignment="Right" Height="624" Margin="0,0,20,14" VerticalAlignment="Bottom" Width="703">
             <Charts:Chart x:Name="Wykres" Margin="10" BorderThickness="0">
                 <Charts:Chart.Series >
                     <!--<Charts:LineSeries Title="WYDAJNOSC" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"/>-->
@@ -30,7 +28,8 @@
         <GroupBox x:Name="GBOgolneInformacje" Header="Ogólne informacje" HorizontalAlignment="Left" Height="336" Margin="10,10,0,0" VerticalAlignment="Top" Width="323">
             <Frame x:Name="ramkaInformacje"/>
         </GroupBox>
-        <GroupBox Header="Lista ruji" HorizontalAlignment="Left" Height="270" Margin="10,364,0,0" VerticalAlignment="Top" Width="232">
+        <GroupBox Header="Lista rui" HorizontalAlignment="Left" Height="270" Margin="10,364,0,0" VerticalAlignment="Top" Width="155
+                  ">
             <ListView x:Name="LVListaRuji">
                 <ListView.View>
                     <GridView>
@@ -39,7 +38,7 @@
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <GroupBox Header="Lista wycieleń" HorizontalAlignment="Left" Height="152" Margin="396,10,0,0" VerticalAlignment="Top" Width="234">
+        <GroupBox Header="Lista wycieleń" HorizontalAlignment="Left" Height="270" Margin="178,364,0,0" VerticalAlignment="Top" Width="155">
             <ListView x:Name="LVListaWycielen">
                 <ListView.View>
                     <GridView>

@@ -10,7 +10,13 @@
       Title="FormularzDodaniaStada">
 
     <Grid Background="White">
-        <Label x:Name="nrKolczykaL" Content="Nr siedziby stada:" HorizontalAlignment="Left" Margin="13,112,0,0" VerticalAlignment="Top" Width="111" Visibility="Hidden" />
+        <Label Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="64,8,0,0" Foreground="Red"/>
+        <Label Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,44,0,0" Foreground="Red"/>
+        <Label Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,78,0,0" Foreground="Red"/>
+        <Label x:Name="lbGwiazdaNrStada" Visibility="Hidden" Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,112,0,0" Foreground="Red" Height="26"/>
+        <Label x:Name="lbGwiazdaNazwaStada" Content="*" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,112,0,0" Foreground="Red" Height="26" Width="22"/>
+        <Label x:Name="nrKolczykaL" Content="Nazwa:"  HorizontalAlignment="Left" Margin="13,112,0,0" VerticalAlignment="Top" Width="111" Visibility="Hidden" />
+
         <Label x:Name="iloscL" Content="Ilość:" HorizontalAlignment="Left" Margin="13,78,0,0" VerticalAlignment="Top" Width="101"/>
         <Label x:Name="gatunekL" Content="Gatunek:" HorizontalAlignment="Left" Margin="14,8,0,0" VerticalAlignment="Top" Width="60"/>
         <Label x:Name="okresOdL" Content="Okres aktywności od:" HorizontalAlignment="Left" Margin="14,44,0,0" VerticalAlignment="Top" Width="128"/>
@@ -19,6 +25,7 @@
         <ComboBox x:Name="GatunekCB" HorizontalAlignment="Left" Margin="154,12,0,0" VerticalAlignment="Top" Width="126" SelectionChanged="GatunekCB_SelectionChanged" />
         <DatePicker x:Name="okresOdDP" HorizontalAlignment="Left" Margin="154,46,0,0" VerticalAlignment="Top" Width="126" IsEnabled="True"/>
         <TextBox x:Name="tbIlosc" HorizontalAlignment="Left" Height="24" Margin="153,80,0,0"  VerticalAlignment="Top" Width="127" TextChanged="tbIlosc_TextChanged" />
+        
 
 
     </Grid>
