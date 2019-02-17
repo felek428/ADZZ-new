@@ -28,7 +28,9 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         List<string> listaRodzajuRozliczen = new List<string>(); //Chwilowo, poki nie jest podłączona baza
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private FormularzDodaniaRozliczenia actualForm;
-        private int wybranyTyp; 
+        private int wybranyTyp;
+        private int WybraneIdRozliczenie;
+        private int WybraneIdMleko;
         
         public FormularzDodaniaRozliczenia(int wybranyTyp)
         {
@@ -47,7 +49,8 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             TrescCbKolczyk.WypelnienieCbKolczykZwierze(cbKolczyk);
             TrescCbKolczyk.WypelnienieCbKolczykStado(cbNrStada);
             WypelnijCbRok();
-            WypelnijListe();
+            WypelnijListeRozliczenia();
+            WypelnijListeMleko();
         }
         public FormularzDodaniaRozliczenia()
         {
@@ -177,7 +180,8 @@ namespace ADZZ.Rozliczenia___okno_i_strony
                 tbLitry.Visibility = Visibility.Hidden;
                 lbLitry.Visibility = Visibility.Hidden;
 
-                WypelnijListe();
+                WypelnijListeRozliczenia();
+                WypelnijListeMleko();
             }
             else
             {
@@ -313,48 +317,239 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
         private void btDodajCene_Click(object sender, RoutedEventArgs e)
         {
-            if (cbMiesiac.SelectedItem != null && cbPolowa.SelectedItem != null && tbCenaMleka.Text != string.Empty)
+            Historia_cen queryCena = null;
+
+            if (Convert.ToInt32(cbPolowa.SelectedItem) == 1)
             {
-                Historia_cen nowaCena = new Historia_cen();
-                
+                 queryCena = (from H in Polaczenie.Historia_cen
+                                 where H.okres_od.Equals(DataPierwszaPolowa())
+                                 select H).SingleOrDefault();
 
-                
-                if(Convert.ToInt32(cbPolowa.SelectedItem) == 1)
+            }
+            else if (Convert.ToInt32(cbPolowa.SelectedItem) == 2)
+            {
+                 queryCena = (from H in Polaczenie.Historia_cen
+                                 where H.okres_od.Equals(DataDrugaPolowa())
+                                 select H).SingleOrDefault();
+            }
+            
+
+            if (queryCena == null)
+            {
+                if (cbMiesiac.SelectedItem != null && cbPolowa.SelectedItem != null && tbCenaMleka.Text != string.Empty)
                 {
-                    nowaCena.okres_od = Convert.ToDateTime("1." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
-                    nowaCena.okres_do = Convert.ToDateTime("15." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+                    Historia_cen nowaCena = new Historia_cen();
+
+
+
+                    if (Convert.ToInt32(cbPolowa.SelectedItem) == 1)
+                    {
+                        nowaCena.okres_od = Convert.ToDateTime("1." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+                        nowaCena.okres_do = Convert.ToDateTime("15." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+
+                    }
+                    else if (Convert.ToInt32(cbPolowa.SelectedItem) == 2)
+                    {
+                        nowaCena.okres_od = Convert.ToDateTime("16." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+                        nowaCena.okres_do = Convert.ToDateTime(DateTime.DaysInMonth(Convert.ToInt32(cbRok.SelectedItem), Convert.ToInt32(cbMiesiac.SelectedItem)) + "." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+
+                    }
+
+                    nowaCena.id_kategoria_rozliczen = 1;
+                    nowaCena.cena = Convert.ToDouble(tbCenaMleka.Text);
+
+                    Polaczenie.Historia_cen.InsertOnSubmit(nowaCena);
+                    Polaczenie.SubmitChanges();
+
+                    MessageBox.Show("Dodano!");
 
                 }
-                else if(Convert.ToInt32(cbPolowa.SelectedItem) == 2)
+                else
                 {
-                    nowaCena.okres_od = Convert.ToDateTime("16." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
-                    nowaCena.okres_do = Convert.ToDateTime(DateTime.DaysInMonth(Convert.ToInt32(cbRok.SelectedItem), Convert.ToInt32(cbMiesiac.SelectedItem)) + "." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
-
+                    MessageBox.Show("Wprowadź cene!");
                 }
-
-                nowaCena.id_kategoria_rozliczen = 1;
-                nowaCena.cena = Convert.ToDouble(tbCenaMleka.Text);
-
-                Polaczenie.Historia_cen.InsertOnSubmit(nowaCena);
-                Polaczenie.SubmitChanges();
                 
             }
+            else
+            {
+                if(tbCenaMleka.Text != string.Empty)
+                {
+                    queryCena.cena = Convert.ToDouble(tbCenaMleka.Text);
+                    Polaczenie.SubmitChanges();
+
+                    
+                }
+                else if(tbCenaMleka.Text == string.Empty || Convert.ToInt32(tbCenaMleka.Text) == 0)
+                {
+                    
+
+                    Polaczenie.Historia_cen.DeleteOnSubmit(queryCena);
+                    Polaczenie.SubmitChanges();
+                }
+
+                MessageBox.Show("Zaktualizowano!");
+            }
+            
         }
-        private void WypelnijListe()
+        private void WypelnijListeRozliczenia()
         {
             var query = (from R in Polaczenie.Rozliczenia
-                         select new SkroconeRozliczenie { Data = R.data.ToShortDateString(), Kwota = R.kwota, Opis = R.opis, Kategoria = R.Kategoria_rozliczen.nazwa }).ToList();
+                         where R.id_kategoria != 1
+                         orderby R.data descending
+                         select new Rozliczenie { Data = R.data.ToShortDateString(), Kwota = R.kwota, Opis = R.opis, Kategoria = R.Kategoria_rozliczen.nazwa, Id = R.Id }).ToList();
 
             lvListaRozliczen.ItemsSource = query;
         }
+        private void WypelnijListeMleko()
+        {
+            var query = (from R in Polaczenie.Rozliczenia
+                         where R.id_kategoria == 1
+                         orderby R.data descending
+                         select new Rozliczenie { Data = R.data.ToShortDateString(), Litry = R.ilosc_litrow, Kategoria = R.Kategoria_rozliczen.nazwa,  Kolczyk = R.Zwierze.nr_kolczyka, Id = R.Id}).ToList();
+
+            lvMleko.ItemsSource = query;
+        }
+
+        private void PobierzCeneMleka()
+        {
+
+            if(cbRok.SelectedItem != null && cbPolowa.SelectedItem != null && cbMiesiac.SelectedItem != null)
+            {
+                DateTime? Data = null;
+
+                if (Convert.ToInt32(cbPolowa.SelectedItem) == 1)
+                {
+                    Data = DataPierwszaPolowa();
+                   
+
+                }
+                else if (Convert.ToInt32(cbPolowa.SelectedItem) == 2)
+                {
+                    Data = DataDrugaPolowa();
+                }
+
+                var query = (from H in Polaczenie.Historia_cen
+                            where H.okres_od.Equals(Data)
+                            select H.cena).FirstOrDefault();
+
+                tbCenaMleka.Text = query.ToString();
+            }
+        }
+
+        private void cbRok_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PobierzCeneMleka();
+        }
+
+        private void cbMiesiac_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PobierzCeneMleka();
+        }
+
+        private void cbPolowa_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PobierzCeneMleka();
+        }
+
+        private DateTime? DataPierwszaPolowa()
+        {
+            var Data = Convert.ToDateTime(Convert.ToDateTime("1." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString()).ToShortDateString());
 
 
+            return Data;
+        }
+        private DateTime? DataDrugaPolowa()
+        {
+            var Data = Convert.ToDateTime("16." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+
+
+            return Data;
+        }
+        private void lvRozliczeniaItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            var item = sender as ListViewItem;
+            if (item != null && item.IsSelected)
+            {
+                var ZaznaczonaPozycja = (Rozliczenie)lvListaRozliczen.SelectedItem;
+                WybraneIdRozliczenie = ZaznaczonaPozycja.Id;
+
+            }
+        }
+        private void lvMlekoItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            var item = sender as ListViewItem;
+            if (item != null && item.IsSelected)
+            {
+                var ZaznaczonaPozycja = (Rozliczenie)lvMleko.SelectedItem;
+                WybraneIdMleko = ZaznaczonaPozycja.Id;
+
+            }
+        }
+
+        private void lvListaRozliczen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvListaRozliczen.SelectedItem != null)
+            {
+                btUsunRozliczenie.IsEnabled = true;
+
+            }
+            else
+            {
+                btUsunRozliczenie.IsEnabled = false;
+            }
+        }
+
+        private void lvMleko_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvMleko.SelectedItem != null)
+            {
+                btUsunMleko.IsEnabled = true;
+
+            }
+            else
+            {
+                btUsunMleko.IsEnabled = false;
+            }
+        }
+
+        private void btUsunRozliczenie_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (lvListaRozliczen.SelectedItem != null)
+            {
+                Rozliczenia usunRozliczenie = Polaczenie.Rozliczenia.Single(x => x.Id == WybraneIdRozliczenie);
+
+                Polaczenie.Rozliczenia.DeleteOnSubmit(usunRozliczenie);
+                Polaczenie.SubmitChanges();
+            }
+            
+            WypelnijListeRozliczenia();
+        }
+
+        private void btUsunMleko_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (lvMleko.SelectedItem != null)
+            {
+                Rozliczenia usunRozliczenie = Polaczenie.Rozliczenia.Single(x => x.Id == WybraneIdMleko);
+
+                Polaczenie.Rozliczenia.DeleteOnSubmit(usunRozliczenie);
+                Polaczenie.SubmitChanges();
+            }
+            
+            WypelnijListeMleko();
+        }
     }
-    class SkroconeRozliczenie
+    class Rozliczenie
     {
         public string Data { get; set; }
         public string Opis { get; set; }
         public double? Kwota { get; set; }  
+        public int? Litry { get; set; }  
         public string Kategoria { get; set; }
+        public string Kolczyk { get; set; }
+        public int Id { get; set; }
     }
 }

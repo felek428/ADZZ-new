@@ -119,8 +119,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 WpisDoBazyZwierze(NowyZwierzak);
 
 
-                Polaczenie.Zwierze.InsertOnSubmit(NowyZwierzak);
-                Polaczenie.SubmitChanges();
+                
 
                
 
@@ -268,6 +267,9 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
  
                 }
                 MessageBox.Show("Powiodło się!");
+
+                Polaczenie.Zwierze.InsertOnSubmit(zwierze);
+                Polaczenie.SubmitChanges();
             }
             else
             {

@@ -33,12 +33,9 @@ namespace ADZZ
         {
             Label note = new Label();
             note.Content = typNotatki;
-            //note.MouseLeftButtonUp += new MouseButtonEventHandler(Label_MouseLeftButtonUp);
-            //note.GotFocus += new RoutedEventHandler(Label_GotFocus);
             this.kolczyk = kolczyk;
             note.ToolTip = note.Content + "\n" + kolczyk;
 
-            note.Focusable = true;
             Border noteBorder = new Border();
             noteBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
             noteBorder.BorderThickness = new Thickness(1, 1, 1, 1);
@@ -46,29 +43,26 @@ namespace ADZZ
             noteBorder.Background = new SolidColorBrush(Colors.AliceBlue);
             noteBorder.Child = note;
             noteBorder.Focusable = true;
-            noteBorder.MouseLeftButtonUp += new MouseButtonEventHandler(Label_MouseLeftButtonUp);
+            noteBorder.MouseLeftButtonUp += new MouseButtonEventHandler(Border_MouseLeftButtonUp);
             noteBorder.MouseRightButtonUp += new MouseButtonEventHandler(Border_MouseRightButtonUp);
-            noteBorder.GotFocus += new RoutedEventHandler(Label_GotFocus);
+            noteBorder.GotFocus += new RoutedEventHandler(Border_GotFocus);
             noteBorder.LostFocus += new RoutedEventHandler(Border_LostFocus);
             ClickedDay.Dok.Children.Add(noteBorder);
             DockPanel.SetDock(noteBorder, Dock.Top);
         }
 
-        private void Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if(e.ClickCount == 1 && (sender as Border).IsFocused == false)
             {
-
-                (sender as Border).Focus();
-                
-                
+                (sender as Border).Focus();   
             }
             if(e.ClickCount == 1 && (sender as Border).IsFocused == true)
             {
                 Keyboard.ClearFocus();
             }
         }
-        private void Label_GotFocus(object sender, RoutedEventArgs e)
+        private void Border_GotFocus(object sender, RoutedEventArgs e)
         {
             (sender as Border).Background = new SolidColorBrush(Colors.LightBlue);
             selectedBorder = (sender as Border);        

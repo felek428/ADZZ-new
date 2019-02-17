@@ -102,7 +102,7 @@ namespace NewCalendar
             MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
             MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
             CreateDaysOfWeek();
-            CreateCalendarDayButton(GetCurrentMonthDaysNumber(ActualYear,actualMonth),GetCurrentMonth());
+            CreateCalendarDayButton(GetMonthDaysNumber(ActualYear,actualMonth),GetCurrentMonth());
             CreatePreviousMonthDays(GetLastMonthDaysNumber());
             CreateNextMonthDays();
              /*           
@@ -297,7 +297,7 @@ namespace NewCalendar
                 actualMonth = DateTime.ParseExact((sender as NowyCalendarButton).Content.ToString().ToLower(), "MMMM", CultureInfo.CurrentCulture).Month; // pobiera miesiac po nacisnieciu guzika i nastepnie zamienia go na int
                 previousMonth = actualMonth - 1;
                 nextMonth = actualMonth + 1;
-                CreateCalendarDayButton(GetCurrentMonthDaysNumber(ActualYear, actualMonth), actualMonth);
+                CreateCalendarDayButton(GetMonthDaysNumber(ActualYear, actualMonth), actualMonth);
                 
                 if(actualMonth == 1)
                 {
@@ -323,7 +323,7 @@ namespace NewCalendar
                 }
 
 
-                CreatePreviousMonthDays(GetCurrentMonthDaysNumber(ActualYear, previousMonth));
+                CreatePreviousMonthDays(GetMonthDaysNumber(ActualYear, previousMonth));
                 CreateNextMonthDays();
                 MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth); // przypisanie na nowo nazwy obecnego miesiaca i wyswietlenie na buttonie
                 states = 0;
@@ -368,18 +368,18 @@ namespace NewCalendar
             MonthView.Children.Clear();
             var indexRow = 0;
 
-            var queryRozrod = from Rozrod in Polaczenie.Rozrod
+            var queryRozrod = (from Rozrod in Polaczenie.Rozrod
                               where Rozrod.Data.Month == month && Rozrod.Data.Year == ActualYear
-                              select Rozrod;
-            var ListaRozrod = queryRozrod.ToList();
+                              select Rozrod).ToList();
+            
             for (int i = 0; i < daysNumber; i++)
             {
-                var dayOfWeek = DateTime.Parse((ActualYear + "/" + month + "/" + (i+1).ToString()).ToString()).DayOfWeek.ToString(); //sprawdza jaki to dzien tygodnia
+                var dayOfWeek = DateTime.Parse((ActualYear + "/" + month + "/" + (i+1).ToString()).ToString()).DayOfWeek.ToString();                                                                          //sprawdza jaki to dzien tygodnia
                 
-                var lista = DaysOfWeek.ColumnDefinitions.ToList(); // pobieram kolumny do listy 
-                var indexCol = lista.IndexOf(DaysOfWeek.ColumnDefinitions.Where(c => c.Name == dayOfWeek).SingleOrDefault()); //pobieram index kolumny podanego dnia
+                var lista = DaysOfWeek.ColumnDefinitions.ToList();                                                                                                                                            // pobieram kolumny do listy 
+                var indexCol = lista.IndexOf(DaysOfWeek.ColumnDefinitions.Where(c => c.Name == dayOfWeek).SingleOrDefault());                                                                                 //pobieram index kolumny podanego dnia
                 
-                if(i == 0) //pobieram numer kolumny w ktorej zostal wpisany 1 dzien podczas 1 iteracji
+                if(i == 0)                                                                                                                     //pobieram numer kolumny w ktorej zostal wpisany 1 dzien podczas 1 iteracji
                 {
                     previousDaysLimit = indexCol;
                 }
@@ -388,7 +388,7 @@ namespace NewCalendar
                 dayBorder.BorderThickness = new Thickness(1, 1, 1, 1);
                 dayBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
      
-                var dayList = ListaRozrod.Where(x => x.Data.Day == i + 1).ToList();
+                var dayList = queryRozrod.Where(x => x.Data.Day == i + 1).ToList();
                 for(int j = 0; j < dayList.Count(); j++)
                 {
                     
@@ -479,19 +479,16 @@ namespace NewCalendar
             var indexRow = 0;
             for (int i = previousDaysLimit; i > 0; i--)
             {
-                string year = DateTime.Now.Year.ToString();
-                string month = (Convert.ToInt32(DateTime.Now.Month.ToString())-1).ToString();
                      
-                NowyCalendarDayButton dzien = new NowyCalendarDayButton(monthDays - (i - 1), actualMonth, ActualYear);
+                NowyCalendarDayButton day = new NowyCalendarDayButton(monthDays - (i - 1), 0, 0);
                 
-                dzien.Opacity = 0.2;
-                dzien.IsEnabled = false;
+                day.Opacity = 0.2;
+                day.IsEnabled = false;
 
                 Border dayBorder = new Border();
                 dayBorder.BorderThickness = new Thickness(1, 1, 1, 1);
                 dayBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
-
-                dayBorder.Child = dzien;
+                dayBorder.Child = day;
 
                 MonthView.Children.Add(dayBorder);
                 Grid.SetColumn(dayBorder, (previousDaysLimit-i));
@@ -506,8 +503,8 @@ namespace NewCalendar
             var buffor = 0;
             var yearBuffor = ActualYear;
             var indexRow = rowStart;
-            var MonthDays = Convert.ToInt32(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month).ToString()); //pobiera liczbe dni wybranego miesiaca w roku
-            for (int i = 0; i < gridChildren-(previousDaysLimit+GetCurrentMonthDaysNumber(ActualYear,actualMonth)); i++) // 42 stala liczba "dzieci" w gridzie, dlatego wpisana statycznie
+            var MonthDays = Convert.ToInt32(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month).ToString());                                       //pobiera liczbe dni wybranego miesiaca w roku
+            for (int i = 0; i < gridChildren-(previousDaysLimit+GetMonthDaysNumber(ActualYear,actualMonth)); i++)                                            // 42 stala liczba "dzieci" w gridzie, dlatego wpisana statycznie
             {
                 if (actualMonth == 12)
                 {
@@ -519,21 +516,17 @@ namespace NewCalendar
                     buffor = actualMonth+1;
                 }
 
-
-                var dayOfWeek = DateTime.Parse((yearBuffor + "/" + buffor + "/" + (i + 1).ToString()).ToString()).DayOfWeek.ToString(); //sprawdza jaki to dzien tygodnia
-
+                var dayOfWeek = DateTime.Parse((yearBuffor + "/" + buffor + "/" + (i + 1).ToString()).ToString()).DayOfWeek.ToString();                             //sprawdza jaki to dzien tygodnia
                 var lista = DaysOfWeek.ColumnDefinitions.ToList();
-                var indexCol = lista.IndexOf(DaysOfWeek.ColumnDefinitions.Where(c => c.Name == dayOfWeek).SingleOrDefault()); //pobieram index kolumny podanego dnia
+                var indexCol = lista.IndexOf(DaysOfWeek.ColumnDefinitions.Where(c => c.Name == dayOfWeek).SingleOrDefault());                               //pobieram index kolumny podanego dnia
         
-                NowyCalendarDayButton day = new NowyCalendarDayButton(i+1, actualMonth, ActualYear);
-                
+                NowyCalendarDayButton day = new NowyCalendarDayButton(i+1, 0, 0); 
                 day.Opacity = 0.2;
                 day.IsEnabled = false;
 
                 Border dayBorder = new Border();
                 dayBorder.BorderThickness = new Thickness(1, 1, 1, 1);
                 dayBorder.BorderBrush = new SolidColorBrush(Colors.SkyBlue);
-
                 dayBorder.Child = day;
 
                 MonthView.Children.Add(dayBorder);
@@ -581,9 +574,9 @@ namespace NewCalendar
                 }
                 MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
                 MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth); //pobiera nazwe miesiaca w jezyku jaki jest ustawiony na komputerze na podstawie int'a
-                CreateCalendarDayButton(GetCurrentMonthDaysNumber(ActualYear, actualMonth), GetCurrentMonth());
+                CreateCalendarDayButton(GetMonthDaysNumber(ActualYear, actualMonth), GetCurrentMonth());
 
-                CreatePreviousMonthDays(GetCurrentMonthDaysNumber(ActualYear, previousMonth));
+                CreatePreviousMonthDays(GetMonthDaysNumber(ActualYear, previousMonth));
                 CreateNextMonthDays();
             }
             else if (states == 1)
@@ -655,8 +648,8 @@ namespace NewCalendar
                     nextMonth += 1;
                 }
                 MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
-                CreateCalendarDayButton(GetCurrentMonthDaysNumber(ActualYear, actualMonth), GetCurrentMonth());
-                CreatePreviousMonthDays(GetCurrentMonthDaysNumber(ActualYear, previousMonth));
+                CreateCalendarDayButton(GetMonthDaysNumber(ActualYear, actualMonth), GetCurrentMonth());
+                CreatePreviousMonthDays(GetMonthDaysNumber(ActualYear, previousMonth));
                 CreateNextMonthDays();
             }else if(states == 1)
             {
@@ -718,11 +711,11 @@ namespace NewCalendar
         /// <param name="year">Rok</param>
         /// <param name="month">Miesiac w ktorym pobieram liczbe dni</param>
         /// <returns></returns>
-        private int GetCurrentMonthDaysNumber(int year, int month)
+        private int GetMonthDaysNumber(int year, int month)
         {
-            var date = Convert.ToInt32(DateTime.DaysInMonth(year, month).ToString());
+            var daysNumber = DateTime.DaysInMonth(year, month);
             
-            return date;
+            return daysNumber;
         }
         /// <summary>
         /// Pobiera liczbe dni poprzedniego miesiaca
@@ -740,7 +733,7 @@ namespace NewCalendar
                 buffor = actualMonth - 1;
             }
 
-            return GetCurrentMonthDaysNumber(ActualYear,buffor);
+            return GetMonthDaysNumber(ActualYear,buffor);
         }      
         private int GetCurrentMonth()
         {

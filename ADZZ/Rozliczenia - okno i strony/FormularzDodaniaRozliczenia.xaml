@@ -6,78 +6,131 @@
       xmlns:local="clr-namespace:ADZZ.Rozliczenia___okno_i_strony"
       xmlns:Ikony="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="900"
       Title="FormularzDodaniaRozliczenia">
 
-    <Grid Background="White">
-        <Label x:Name="typRozliczeniaL" Content="Kategoria rozliczenia:" HorizontalAlignment="Left" Margin="14,35,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="WyborRozliczenia" HorizontalAlignment="Left" Margin="142,37,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" />
-        <Label x:Name="kwotaL" Content="Kwota:" HorizontalAlignment="Left" Margin="14,62,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="opisL" Content="Opis:" HorizontalAlignment="Left" Margin="14,120,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbOpis" MaxLength="200" HorizontalAlignment="Left" Height="101" Margin="142,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="256" Visibility="Visible"/>
-        <Button Style="{StaticResource NowyStylButton}" x:Name="BtDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="322,245,0,0" VerticalAlignment="Top" Width="76" Click="BtDodaj_Click"/>
-        <Label x:Name="dataL" Content="Data:" HorizontalAlignment="Left" Margin="14,91,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="DataDP" HorizontalAlignment="Left" Height="25" Margin="142,92,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbKwota"   HorizontalAlignment="Left" Height="23" Margin="142,64,0,0"  VerticalAlignment="Top" Width="120" TextChanged="tbKwota_TextChanged"/>
-        <Label x:Name="lbLitry" Content="Litry:" HorizontalAlignment="Left" Margin="267,63,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <TextBox x:Name="tbLitry" HorizontalAlignment="Left" Height="23" Margin="307,64,0,0"  VerticalAlignment="Top" Width="91" RenderTransformOrigin="0.5,0.478" Visibility="Hidden"/>
-        <Label x:Name="lbNrKolczyka" Content="Nr Kolczyka:" HorizontalAlignment="Left" Margin="14,7,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <ComboBox x:Name="cbKolczyk"  HorizontalAlignment="Left" Margin="142,10,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" TextBoxBase.TextChanged="cbKolczyk_TextChanged" Height="23" Visibility="Hidden"/>
-        <Label x:Name="lbNrStada" Content="Nr stada:" HorizontalAlignment="Left" Margin="14,7,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <ComboBox x:Name="cbNrStada"  HorizontalAlignment="Left" Margin="142,10,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" TextBoxBase.TextChanged="cbKolczyk_TextChanged" Height="23" Visibility="Hidden"/>
-        <Ikony:PackIcon Name="infoDodajKategorie" Kind="Information" Height="22" Width="36" Margin="266,37,0,0" ToolTip="Brakuje kategorii? Kliknij aby dodać nowe!" MouseLeftButtonDown="PackIcon_MouseLeftButtonDown" MouseEnter="infoDodajKategorie_MouseEnter" MouseLeave="infoDodajKategorie_MouseLeave"/>
+    <Grid Background="White" x:Name="Glowny">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="300" Height="300"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <GroupBox x:Name="FormDodawania" Header="Formularz dodawania" VerticalAlignment="Top" HorizontalAlignment="Left" Width="402" Height="280" Grid.Column="0" Grid.Row="0" Margin="10,10,0,0" >
 
-        <GroupBox x:Name="gbCenaMleka" Header="Cena mleka" HorizontalAlignment="Left" Height="171" Margin="495,19,0,0" VerticalAlignment="Top" Width="129" RenderTransformOrigin="0.5,0.5">
-            <GroupBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.118"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-0.123"/>
-                </TransformGroup>
-            </GroupBox.RenderTransform>
-            <Grid>
-                <ComboBox x:Name="cbMiesiac" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="55" Margin="0,28,0,0"/>
+
+            <Grid Margin="4,8,0,0" >
+                <Label x:Name="typRozliczeniaL" Content="Kategoria rozliczenia:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="WyborRozliczenia" HorizontalAlignment="Left" Margin="128,32,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" />
+                <Label x:Name="kwotaL" Content="Kwota:" HorizontalAlignment="Left" Margin="0,57,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="opisL" Content="Opis:" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbOpis" MaxLength="200" HorizontalAlignment="Left" Height="101" Margin="128,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="256" Visibility="Visible"/>
+                <Button Style="{StaticResource NowyStylButton}" x:Name="BtDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="308,221,0,0" VerticalAlignment="Top" Width="76" Click="BtDodaj_Click"/>
+                <Label x:Name="dataL" Content="Data:" HorizontalAlignment="Left" Margin="0,86,0,0" VerticalAlignment="Top"/>
+                <DatePicker x:Name="DataDP" HorizontalAlignment="Left" Height="25" Margin="128,87,0,0" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="tbKwota"   HorizontalAlignment="Left" Height="23" Margin="128,59,0,0"  VerticalAlignment="Top" Width="120" TextChanged="tbKwota_TextChanged"/>
+                <Label x:Name="lbLitry" Content="Litry:" HorizontalAlignment="Left" Margin="253,58,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+                <TextBox x:Name="tbLitry" HorizontalAlignment="Left" Height="23" Margin="293,59,0,0"  VerticalAlignment="Top" Width="91" RenderTransformOrigin="0.5,0.478" Visibility="Hidden"/>
+                <Label x:Name="lbNrKolczyka" Content="Nr Kolczyka:" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+                <ComboBox x:Name="cbKolczyk"  HorizontalAlignment="Left" Margin="128,5,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" TextBoxBase.TextChanged="cbKolczyk_TextChanged" Height="23" Visibility="Hidden"/>
+                <Label x:Name="lbNrStada" Content="Nr stada:" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+                <ComboBox x:Name="cbNrStada"  HorizontalAlignment="Left" Margin="128,5,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" TextBoxBase.TextChanged="cbKolczyk_TextChanged" Height="23" Visibility="Hidden"/>
+                <Ikony:PackIcon x:Name="infoDodajKategorie" Kind="Information" Height="22" Width="36" Margin="252,32,0,0" ToolTip="Brakuje kategorii? Kliknij aby dodać nowe!" MouseLeftButtonDown="PackIcon_MouseLeftButtonDown" MouseEnter="infoDodajKategorie_MouseEnter" MouseLeave="infoDodajKategorie_MouseLeave"/>
+
+            </Grid>
+
+        </GroupBox>
+
+        <GroupBox x:Name="gbCenaMleka" Header="Cena mleka" HorizontalAlignment="Left" Height="176" Margin="10,10,0,0" VerticalAlignment="Top" Width="129" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="0">
+
+            <Grid >
+                <ComboBox x:Name="cbMiesiac" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="55" Margin="0,28,0,0" SelectionChanged="cbMiesiac_SelectionChanged"/>
                 <Label x:Name="lbMiesiac" Content="Miesiąc:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,24,0,0"/>
-                <ComboBox x:Name="cbRok" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="55" Margin="0,1,0,0"/>
+                <ComboBox x:Name="cbRok" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="55" Margin="0,1,0,0" SelectionChanged="cbRok_SelectionChanged"/>
                 <Label x:Name="lbRok" Content="Rok:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,-2,0,0"/>
-                <ComboBox x:Name="cbPolowa" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="55" Margin="0,55,0,0"/>
+                <ComboBox x:Name="cbPolowa" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="55" Margin="0,55,0,0" SelectionChanged="cbPolowa_SelectionChanged"/>
                 <Label x:Name="lbPolowa" Content="Połowa:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,51,0,0" Width="52"/>
                 <Label x:Name="lbCena" Content="Cena:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,79,0,0" Width="40"/>
                 <TextBox x:Name="tbCenaMleka"   HorizontalAlignment="Right" Height="23"   VerticalAlignment="Top" Width="55" TextChanged="tbKwota_TextChanged" Margin="0,82,0,0"/>
-                <Button x:Name="btDodajCene" Content="Dodaj" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="42" Click="btDodajCene_Click" Margin="75,130,0,0"/>
+                <Button x:Name="btDodajCene" Content="Dodaj" Style="{StaticResource NowyStylButton}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="64" Click="btDodajCene_Click" Margin="42,126,0,0"/>
             </Grid>
         </GroupBox>
-        <ListView x:Name="lvListaRozliczen" HorizontalAlignment="Stretch" Height="146" Margin="141,296,446,8" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemContainerStyle>
-                
-                <Style TargetType="ListViewItem">
+        <GroupBox Header="Rozliczenia" Grid.Column="0" Grid.Row="1" Margin="10">
+            <Grid>
 
-                    <Setter Property="ToolTip">
-                        <Setter.Value>
-                            <UniformGrid Columns="1">
-                                <TextBlock Text="{Binding Path=Opis}" MaxWidth="200" TextWrapping="Wrap"/>
-                            </UniformGrid>
-                        </Setter.Value>
-                    </Setter>
+                <ListView x:Name="lvListaRozliczen"  
+                     Grid.Column="0" Margin="0,35,0,0" SelectionChanged="lvListaRozliczen_SelectionChanged"  >
+                    <ListView.ItemContainerStyle>
+
+                        <Style TargetType="ListViewItem">
+
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <UniformGrid Columns="1">
+                                        <TextBlock Text="{Binding Path=Opis}" MaxWidth="200" TextWrapping="Wrap"/>
+                                    </UniformGrid>
+                                </Setter.Value>
+                            </Setter>
+
+                            <EventSetter Event="MouseLeftButtonUp" Handler="lvRozliczeniaItem_MouseLeftButtonDown"/>
+
+                        </Style>
+
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Kategoria" DisplayMemberBinding="{Binding Path=Kategoria}"/>
+                            <GridViewColumn Header="Kwota" DisplayMemberBinding="{Binding Path=Kwota}"/>
+                            <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=Data}"/>
+                            <GridViewColumn Header="Opis" DisplayMemberBinding="{Binding Path=Opis}" Width="200"/>
+                        </GridView>
+
+                    </ListView.View>
+
+                </ListView>
+                <Button x:Name="btUsunRozliczenie" Style="{StaticResource NowyStylButton}" Content="Usuń" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="75" Margin="0,7,0,0" IsEnabled="False" Click="btUsunRozliczenie_Click"/>
+            </Grid>
+
+        </GroupBox>
+
+        <GroupBox Header="Mleko" Grid.Column="1" Grid.Row="1" Margin="10">
+            <Grid>
+                <ListView x:Name="lvMleko" Margin="0,35,0,0" SelectionChanged="lvMleko_SelectionChanged"  >
+                    <ListView.ItemContainerStyle>
+
+                        <Style TargetType="ListViewItem">
+
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <UniformGrid Columns="1">
+                                        <TextBlock Text="{Binding Path=Opis}" MaxWidth="200" TextWrapping="Wrap"/>
+                                    </UniformGrid>
+                                </Setter.Value>
+                            </Setter>
+
+                            <EventSetter Event="MouseLeftButtonUp" Handler="lvMlekoItem_MouseLeftButtonDown"/>
+
+                        </Style>
+
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Nr kolczyka" DisplayMemberBinding="{Binding Path=Kolczyk}" Width="100"/>
+                            <GridViewColumn Header="Litry" DisplayMemberBinding="{Binding Path=Litry}"/>
+                            <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=Data}"/>
+
+                        </GridView>
+
+                    </ListView.View>
+                    
+                </ListView>
+                <Button x:Name="btUsunMleko" Style="{StaticResource ResourceKey=NowyStylButton}" Content="Usuń" HorizontalAlignment="Right" Margin="0,7,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="btUsunMleko_Click"/>
+            </Grid>
+
+        </GroupBox>
 
 
-
-                </Style>
-                
-            </ListView.ItemContainerStyle>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Kategoria" DisplayMemberBinding="{Binding Path=Kategoria}"/>
-                    <GridViewColumn Header="Kwota" DisplayMemberBinding="{Binding Path=Kwota}"/>
-                    <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=Data}"/>
-                    <GridViewColumn Header="Opis" DisplayMemberBinding="{Binding Path=Opis}"/>
-                </GridView>
-                
-            </ListView.View>
-            
-        </ListView>
-        
     </Grid>
 </Page>
