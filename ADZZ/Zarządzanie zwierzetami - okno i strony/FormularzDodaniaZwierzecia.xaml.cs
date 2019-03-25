@@ -91,9 +91,19 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                                        where Zwierze.Id == wybraneZwierzeId
                                        select Zwierze).SingleOrDefault();
 
-                WpisDoBazyZwierze(queryZmiana);
+                if (tbKolczyk != null && (maleCheckB.IsChecked == true || femaleCheckB.IsChecked == true) && GatunekCB.SelectedItem != null && DataUrDP.SelectedDate != null && okresOdDP.SelectedDate != null)
+                {
+                    WpisDoBazyZwierze(queryZmiana);
+                    MessageBox.Show("Powiodło się!");
+                    Polaczenie.SubmitChanges();
+        
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Uzupelnij brakujace pola");
+                }
 
-                Polaczenie.SubmitChanges();
 
                 
             }
@@ -115,13 +125,13 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             
                 Zwierze NowyZwierzak = new Zwierze();
 
-                
+            if (tbKolczyk != null && (maleCheckB.IsChecked == true || femaleCheckB.IsChecked == true) && GatunekCB.SelectedItem != null && DataUrDP.SelectedDate != null && okresOdDP.SelectedDate != null)
+            {
                 WpisDoBazyZwierze(NowyZwierzak);
+                MessageBox.Show("Powiodło się!");
 
-
-                
-
-               
+                Polaczenie.Zwierze.InsertOnSubmit(NowyZwierzak);
+                Polaczenie.SubmitChanges();
 
                 tbKolczyk.Text = string.Empty;
                 maleCheckB.IsChecked = false;
@@ -132,9 +142,11 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                 okresOdDP.SelectedDate = null;
                 okresDoDP.SelectedDate = null;
                 infoDodajRase.Visibility = Visibility.Hidden;
-
-            
-            
+            }
+            else
+            {
+                MessageBox.Show("Uzupelnij brakujace pola");
+            }
         }
 
         private void GatunekCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -215,8 +227,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
         private void WpisDoBazyZwierze(Zwierze zwierze)
         {
-            if (tbKolczyk != null && (maleCheckB.IsChecked == true || femaleCheckB.IsChecked == true) && GatunekCB.SelectedItem != null && DataUrDP.SelectedDate != null && okresOdDP.SelectedDate != null)
-            {
+            
                 zwierze.nr_kolczyka = tbKolczyk.Text;
                 zwierze.data_urodzenia = DataUrDP.SelectedDate.Value.Date;
 
@@ -242,7 +253,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
                 if (GatunekCB.SelectedItem == null)
                 {
-                    zwierze.id_gatunek = null;
+                    zwierze.id_gatunek = 1;
                 }
                 else
                 {
@@ -266,15 +277,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                     zwierze.Rasa = Polaczenie.Rasa.Single(x => x.Id == queryRasa);
  
                 }
-                MessageBox.Show("Powiodło się!");
-
-                Polaczenie.Zwierze.InsertOnSubmit(zwierze);
-                Polaczenie.SubmitChanges();
-            }
-            else
-            {
-                MessageBox.Show("Uzupelnij brakujace pola");
-            }
+                
 
         }
 

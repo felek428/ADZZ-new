@@ -37,14 +37,15 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
             InitializeComponent();
             actualForm = this;
-           // listaKategorii = new ObservableCollection<string>();
-           // DataContext = this;
+            this.wybranyTyp = wybranyTyp;
+            // listaKategorii = new ObservableCollection<string>();
+            // DataContext = this;
             StworzListe(listaRodzajuRozliczen);
             WypelnienieComboBox();                      //Wypelnianie combobox|  Sposób wypełniania bedzie inny
             //WyborRozliczenia.ItemsSource = listaKategorii;
             TypZwierzat noweTypy = new TypZwierzat();
             TypKontrolek(wybranyTyp);
-            this.wybranyTyp = wybranyTyp;
+            
             Kolczyk TrescCbKolczyk = new Kolczyk();
             TrescCbKolczyk.WypelnienieCbKolczykZwierze(cbKolczyk);
             TrescCbKolczyk.WypelnienieCbKolczykStado(cbNrStada);
@@ -78,7 +79,7 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         }
         public void StworzListe(List<string> lista)
         {
-            lista.Add("Przychód");                              //Stala lista przychod/wydatek, ale to bede zaciagal z bazy
+            lista.Add("Przychód");                              //Stala lista przychod/wydatek
             lista.Add("Wydatek");
         }
         /// <summary>
@@ -86,11 +87,21 @@ namespace ADZZ.Rozliczenia___okno_i_strony
         /// </summary>
         public void WypelnienieComboBox()
         {
+            List<string> queryKategoria = new List<string>();
             listaKategorii.Clear();
-            var queryKategoria = from Kategoria_rozliczen in Polaczenie.Kategoria_rozliczen
-                                 select Kategoria_rozliczen.nazwa;
+            if(wybranyTyp == 0)
+            {
+                queryKategoria = (from Kategoria_rozliczen in Polaczenie.Kategoria_rozliczen
+                                     select Kategoria_rozliczen.nazwa).ToList();
+            }
+            else
+            {
+                queryKategoria = (from Kategoria_rozliczen in Polaczenie.Kategoria_rozliczen
+                                     where Kategoria_rozliczen.Id != 1
+                                     select Kategoria_rozliczen.nazwa).ToList();
+            }
             
-            foreach (var item in queryKategoria.ToList())
+            foreach (var item in queryKategoria)
             {
                 listaKategorii.Add(item);
             }
@@ -201,27 +212,24 @@ namespace ADZZ.Rozliczenia___okno_i_strony
             var textbox = (sender as TextBox);
             foreach (var znak in textbox.Text.ToCharArray())
             {
-                if (Char.IsDigit(znak) && dotExist ==true && miejscaDziesietne < 2)
+                if (Char.IsDigit(znak) && dotExist == true && miejscaDziesietne < 2)
                 {
                     newText += znak;
                     miejscaDziesietne++;
                 }
                 else if (Char.IsDigit(znak) && dotExist == false)
                 {
-                    newText += znak;}
+                    newText += znak;
+                }
                 else if (znak == ',' && dotExist == false)
                 {
                     newText += znak;
                     dotExist = true;
                 }
-
-
             }
             textbox.Text = newText;
             textbox.Focus();
             textbox.Select(textbox.Text.Length,0);
-
-
         }
         private void usuniecieOstatniegoZnaku()
         {
@@ -344,13 +352,13 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
                     if (Convert.ToInt32(cbPolowa.SelectedItem) == 1)
                     {
-                        nowaCena.okres_od = Convert.ToDateTime("1." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+                        nowaCena.okres_od = DataPierwszaPolowa();
                         nowaCena.okres_do = Convert.ToDateTime("15." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
 
                     }
                     else if (Convert.ToInt32(cbPolowa.SelectedItem) == 2)
                     {
-                        nowaCena.okres_od = Convert.ToDateTime("16." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
+                        nowaCena.okres_od = DataDrugaPolowa();
                         nowaCena.okres_do = Convert.ToDateTime(DateTime.DaysInMonth(Convert.ToInt32(cbRok.SelectedItem), Convert.ToInt32(cbMiesiac.SelectedItem)) + "." + cbMiesiac.SelectedItem.ToString() + "." + cbRok.SelectedItem.ToString());
 
                     }
@@ -363,10 +371,15 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
                     MessageBox.Show("Dodano!");
 
+                    cbMiesiac.SelectedIndex = -1;
+                    cbRok.SelectedIndex = -1;
+                    cbPolowa.SelectedIndex = -1;
+                    tbCenaMleka.Text = string.Empty;
+
                 }
                 else
                 {
-                    MessageBox.Show("Wprowadź cene!");
+                    MessageBox.Show("Uzupełnij puste pola!");
                 }
                 
             }

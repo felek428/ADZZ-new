@@ -22,15 +22,18 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
     {
         PolaczenieBazaDataContext Polaczenie = new PolaczenieBazaDataContext();
         private int wybraneStadoId;
+        private string kolczyk;
         public FormularzDodaniaStada(string kolczyk)
         {
             InitializeComponent();
+            this.kolczyk = kolczyk;
             wypelnienieGatunekCb(GatunekCB);
             btDodaj.Content = "Aktualizuj";
             btDodaj.Click -= new RoutedEventHandler(btDodaj_Click);
             btDodaj.Click += new RoutedEventHandler(btAktualizuj_Click);
             tbKolczyk.IsEnabled = false;
-
+            GatunekCB.IsEnabled = false;
+            nrKolczykaL.Visibility = Visibility.Hidden;
             var queryStado = (from Stado in Polaczenie.Stado
                               where Stado.nr_stada == kolczyk
                               select Stado).FirstOrDefault();
@@ -38,13 +41,16 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
             var queryHistoria = (from Historia in Polaczenie.Historia_Stada
                                  where Historia.id_stado == queryStado.Id
+                                 orderby Historia.okres_od ascending
                                  select Historia).ToList().Last();
 
-            tbKolczyk.Text = kolczyk;
+
+            
+
             tbIlosc.Text = queryHistoria.ilosc.ToString();
             GatunekCB.SelectedItem = queryStado.Gatunek.nazwa;
             okresOdDP.SelectedDate = queryHistoria.okres_od;
-
+            tbKolczyk.Text = kolczyk;
         }
         public FormularzDodaniaStada()
         {
@@ -55,10 +61,14 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         private void tbKolczyk_TextChanged(object sender, TextChangedEventArgs e)
         {
             Kolczyk sprawdzenie = new Kolczyk();
-            if (GatunekCB.SelectedItem.ToString().Equals("Trzoda"))
+            if(GatunekCB.SelectedItem != null)
             {
-                sprawdzenie.walidacjaKolczyk(tbKolczyk);
+                if (GatunekCB.SelectedItem.ToString().Equals("Trzoda"))
+                {
+                    sprawdzenie.walidacjaKolczyk(tbKolczyk);
+                }
             }
+            
             
         }
 
@@ -99,6 +109,7 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             Polaczenie.SubmitChanges();
             Historia_Stada queryHistoria = (from Historia in Polaczenie.Historia_Stada
                                             where Historia.id_stado == wybraneStadoId
+                                            orderby Historia.okres_od ascending
                                             select Historia).ToList().Last();
             WpisDoHistoriaStada(queryHistoria, wybraneStadoId);
 
@@ -177,7 +188,8 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
         {
             if (tbKolczyk.Text != string.Empty && tbIlosc.Text != string.Empty && GatunekCB.SelectedItem != null && okresOdDP.SelectedDate != null)
             {
-                if(staraHistoria.okres_od != okresOdDP.SelectedDate.Value.Date && !tbIlosc.Text.Equals(staraHistoria.ilosc))
+                
+                if((staraHistoria.okres_od != okresOdDP.SelectedDate.Value.Date && !tbIlosc.Text.Equals(staraHistoria.ilosc.ToString())) || !tbIlosc.Text.Equals(staraHistoria.ilosc.ToString()))
                 {
                     staraHistoria.okres_do = okresOdDP.SelectedDate;
                     Polaczenie.SubmitChanges();
@@ -190,6 +202,12 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
                     nowaHistoria.ilosc = Convert.ToInt32(tbIlosc.Text);
                     Polaczenie.Historia_Stada.InsertOnSubmit(nowaHistoria);
                     Polaczenie.SubmitChanges();
+
+                    MessageBox.Show("Powiodło się!");
+                }
+                else
+                {
+                    MessageBox.Show("Podana data lub ilość jest nieprawidłowa!");
                 }
 
                 

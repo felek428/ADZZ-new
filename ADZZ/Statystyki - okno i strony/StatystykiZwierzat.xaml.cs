@@ -28,7 +28,7 @@ namespace ADZZ.Statystyki___okno_i_strony
         DateTime? okresOd;
         DateTime? okresDo;
         PieSeries bufforSeria;
-        string WybranyZakres;
+        int? iloscStada;
         List<Brush> listaKolorow = new List<Brush>();
         int licznikKolorow = 0;
         public StatystykiZwierzat()
@@ -56,13 +56,17 @@ namespace ADZZ.Statystyki___okno_i_strony
         {
             if (dlugoscListy > 15 && czyDlugie == true)
             {
-                wykres.Width = 130 * dlugoscListy;
+                wykres.MinWidth = 130 * dlugoscListy;
             }
-            else if (dlugoscListy > 9)
+            else if (dlugoscListy >= 6)
             {
-                wykres.Width = 80 * dlugoscListy;
+               // wykres.Width = 90 * dlugoscListy;
+                wykres.MinWidth = 90 * dlugoscListy;
             }
-            else wykres.Width = this.Width - 80;
+            else
+            {
+                wykres.Width = this.Width - 80;
+            }
         }
         private void WypelnienieCbStatystyk()
         {
@@ -82,7 +86,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             cbZakres.Items.Add("-------");
             cbZakres.Items.Add("Gatunek");
             cbZakres.Items.Add("Rasa");
-            cbZakres.Items.Add("Płeć");
+            //cbZakres.Items.Add("Płeć");
             cbZakres.SelectedIndex = 0;
         }
         private void WypelnienieCbStado()
@@ -137,10 +141,8 @@ namespace ADZZ.Statystyki___okno_i_strony
                         if(id == 0)
                         {
                             licznikSztuk++;
-                        }
-                        
+                        }              
                     }
-
                 }
             }
             return licznikSztuk;
@@ -485,10 +487,6 @@ namespace ADZZ.Statystyki___okno_i_strony
                                     }
                                 }
                             }
-
-
-
-
                         }
                     }
                 }
@@ -496,7 +494,7 @@ namespace ADZZ.Statystyki___okno_i_strony
 
 
 
-                zestawienie.Add(new KeyValuePair<string, double>(kategoria.nazwa, buffor));
+                zestawienie.Add(new KeyValuePair<string, double>(kategoria.nazwa, Math.Round(buffor, 2)));
             }
 
             return zestawienie;
@@ -510,6 +508,7 @@ namespace ADZZ.Statystyki___okno_i_strony
             switch (cbRodzajStatystyk.SelectedItem)
             {
                 case "Liczba zwierząt":
+                    WykresKolumnowy.MinWidth = 0;
                     lbOd.Visibility = Visibility.Visible;
                     lbDo.Visibility = Visibility.Visible;
                     dpOd.Visibility = Visibility.Visible;
@@ -522,11 +521,12 @@ namespace ADZZ.Statystyki___okno_i_strony
                     cbTyp.Visibility = Visibility.Visible;
                     lbTyp.Visibility = Visibility.Visible;
 
-                    cbStado.SelectedIndex = 0;
+                   // cbStado.SelectedIndex = 0;
                     svColumn.Visibility = Visibility.Visible;
 
                     if (cbTyp.SelectedIndex == 0)
                     {
+                        WykresKolumnowy.Width = double.NaN;
                         WykresKolumnowy.Axes.Clear();
                         WykresKolumnowy.Series.Clear();
                         var LiczbaAktywnych = LiczbaZwierzatAktywnych();
@@ -556,7 +556,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                             }
                             else if (LiczbaNieaktywnych.Count > 0)
                             {
-                                DodajSerie(typeof(ColumnSeries), "Liczba nieaktywnych zwierzat", WykresKolumnowy,true);
+                                DodajSerie(typeof(ColumnSeries), "Liczba nieaktywnych zwierzat", WykresKolumnowy, true);
                                 ((ColumnSeries)WykresKolumnowy.Series[1]).ItemsSource = LiczbaNieaktywnych;
                             }
 
@@ -566,6 +566,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     }
                     else
                     {
+                        WykresLiniowy.MinWidth = 0;
                         svColumn.Visibility = Visibility.Hidden;
                         svLine.Visibility = Visibility.Visible;
                         checkbNieaktywne.Visibility = Visibility.Hidden;
@@ -577,14 +578,18 @@ namespace ADZZ.Statystyki___okno_i_strony
                         lbStado.Visibility = Visibility.Visible;
 
                         var listaStad = QueryStado();
-
+                        WykresLiniowy.Width = double.NaN;
+                        WykresLiniowy.Axes.Clear();
                         WykresLiniowy.Series.Clear();
 
-                        
-                        DodajSerie(typeof(LineSeries), cbStado.SelectedItem.ToString(), WykresLiniowy);
+                        var liczbaStada = LiczbaZwierzatStada(cbStado.SelectedItem.ToString(), okresOd, okresDo);
+                        var maxAktywnych = liczbaStada.Aggregate((a, b) => a.Value < b.Value ? b : a);
 
-                        ((LineSeries)WykresLiniowy.Series[0]).ItemsSource = LiczbaZwierzatStada(cbStado.SelectedItem.ToString(),okresOd,okresDo);
-                       
+
+                        DodajSerie(typeof(LineSeries), cbStado.SelectedItem.ToString(), WykresLiniowy);
+                        
+                        ((LineSeries)WykresLiniowy.Series[0]).ItemsSource = liczbaStada;
+                        WykresLiniowy.Axes.Add(DajOs(((int)maxAktywnych.Value * 105) / 100));
 
 
 
@@ -593,7 +598,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     
                     break;
                 case "Liczba laktacji":
-
+                    WykresKolumnowy.MinWidth = 0;
 
                     svColumn.Visibility = Visibility.Visible;
 
@@ -601,7 +606,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     WykresKolowy.Series.Clear();
                     WykresKolumnowy.Axes.Clear();
                     WykresKolumnowy.Series.Clear();
-
+                    WykresKolumnowy.Width = double.NaN;
                     var laktacje = LiczbaLaktacji();
                     var maxLaktacje = laktacje.Aggregate((a, b) => a.Value < b.Value ? b : a);
 
@@ -659,14 +664,15 @@ namespace ADZZ.Statystyki___okno_i_strony
                     
                     break;
                 case "Cena mleka":
+                    WykresLiniowy.MinWidth = 0;
                     lbOd.Visibility = Visibility.Visible;
                     lbDo.Visibility = Visibility.Visible;
                     dpOd.Visibility = Visibility.Visible;
                     dpDo.Visibility = Visibility.Visible;
 
                     svLine.Visibility = Visibility.Visible;
-
-
+                    WykresLiniowy.Width = double.NaN;
+                    WykresLiniowy.Axes.Clear();
                     WykresLiniowy.Series.Clear();
 
                     DodajSerie(typeof(LineSeries), "Cena mleka", WykresLiniowy);
@@ -676,13 +682,14 @@ namespace ADZZ.Statystyki___okno_i_strony
                     
                     break;
                 case "Wydajność mleczna":
+                    WykresKolumnowy.MinWidth = 0;
                     lbOd.Visibility = Visibility.Visible;
                     lbDo.Visibility = Visibility.Visible;
                     dpOd.Visibility = Visibility.Visible;
                     dpDo.Visibility = Visibility.Visible;
 
                     svColumn.Visibility = Visibility.Visible;
-
+                    WykresKolumnowy.Width = double.NaN;
                     WykresKolumnowy.Axes.Clear();
                     WykresKolumnowy.Series.Clear();
                     
@@ -697,6 +704,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     RozszerzWykres(WydajnoscMleczna(okresOd,okresDo).Count, WykresKolumnowy, true);
                     break;
                 case "Zestawienie rozliczeń":
+                    WykresKolumnowy.MinWidth = 0;
                     lbOd.Visibility = Visibility.Visible;
                     lbDo.Visibility = Visibility.Visible;
                     dpOd.Visibility = Visibility.Visible;
@@ -705,7 +713,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                     svColumn.Visibility = Visibility.Visible;
 
                     var rozliczenia = ZestawienieRozliczen(okresOd, okresDo);
-
+                    WykresKolumnowy.Width = double.NaN;
                     WykresKolumnowy.Series.Clear();
                     WykresKolumnowy.Axes.Clear();
                     var maxRozliczenie = rozliczenia.Aggregate((a, b) => a.Value < b.Value ? b : a);
@@ -740,6 +748,7 @@ namespace ADZZ.Statystyki___okno_i_strony
                 {
                     if (nr_kolczyka == historia.Stado.nr_stada)
                     {
+                        iloscStada = historia.ilosc;
                         zestawienie.Add(new KeyValuePair<string, int>(Convert.ToDateTime(historia.okres_od).ToShortDateString(), (int)historia.ilosc));
                     }
                 }
@@ -817,96 +826,40 @@ namespace ADZZ.Statystyki___okno_i_strony
         /// <param name="tytulSerii">Nazwa serii wyswietlana w legendzie</param>
         /// <param name="wykres">Nazwa wykresu na który nanoszona jest seria</param>
         private void DodajSerie(Type typ, string tytulSerii, Chart wykres, bool wiecejSerii = false)
-        {
-            
-            
+        {                 
             if (typ == typeof(ColumnSeries))
             {
+                ColumnSeries nowaSeria = new ColumnSeries();
+                nowaSeria.DependentValuePath = "Value";
+                nowaSeria.IndependentValuePath = "Key";
+                nowaSeria.Title = tytulSerii;
                 if (wiecejSerii == false)
-                {
-                    ColumnSeries nowaSeria = new ColumnSeries();
-                    nowaSeria.DependentValuePath = "Value";
-                    nowaSeria.IndependentValuePath = "Key";
-                    nowaSeria.Title = tytulSerii;
-
-
-
-                    //nowaSeria.Style = FindResource("stylek") as Style;
-                    Random r = new Random();
-                    var kolor = new SolidColorBrush(Color.FromArgb(
-                          0xFF,
-                          (byte)r.Next(255),
-                          (byte)r.Next(255),
-                          (byte)r.Next(255)));
-
-
-                    ColumnDataPoint a = new ColumnDataPoint();
-                    
+                {                                 
                     Style styl = new Style();
-                    styl.BasedOn = this.FindResource("Styl1") as Style;
+                    styl.BasedOn = this.FindResource("StylColumnDataPoint") as Style;
                     styl.TargetType = typeof(ColumnDataPoint);
-                  //  styl.Setters.Add(new Setter(ColumnDataPoint.BackgroundProperty, kolor));
                     Style stylLegend = FindResource("LegendStyle") as Style;
-
-
-
                     nowaSeria.DataPointStyle = styl;
                     nowaSeria.LegendItemStyle = stylLegend;
                     wykres.Series.Add(nowaSeria);
                 }
                 else
-                {
-                    ColumnSeries nowaSeria = new ColumnSeries();
-                    nowaSeria.DependentValuePath = "Value";
-                    nowaSeria.IndependentValuePath = "Key";
-                    nowaSeria.Title = tytulSerii;
-
-
-
-                    //nowaSeria.Style = FindResource("stylek") as Style;
-                    Random r = new Random();
-                    var kolor = new SolidColorBrush(Color.FromArgb(
-                          0xFF,
-                          (byte)r.Next(255),
-                          (byte)r.Next(255),
-                          (byte)r.Next(255)));
-
-
-                    
+                {                  
                     Style styl = new Style();
-                    styl.BasedOn = this.FindResource("Styl2") as Style;
+                    styl.BasedOn = this.FindResource("StylColumnDataPoint2") as Style;
                     styl.TargetType = typeof(ColumnDataPoint);
-                    //styl.Setters.Add(new Setter(ColumnDataPoint.BackgroundProperty, kolor));
-
                     Style stylLegend = FindResource("LegendStyle2") as Style;
-                    
-
-
-
-
                     nowaSeria.DataPointStyle = styl;
                     nowaSeria.LegendItemStyle = stylLegend;
                     wykres.Series.Add(nowaSeria);
-                }
-                
+                }           
             }
             else if(typ == typeof(PieSeries))
             {
                 PieSeries nowaSeria = new PieSeries();
                 nowaSeria.DependentValuePath = "Value";
                 nowaSeria.IndependentValuePath = "Key";
-                nowaSeria.Title = tytulSerii;
-                
-                Style styl = new Style();
-                styl.BasedOn = this.FindResource("PieStyl") as Style;
-                styl.TargetType = typeof(PieDataPoint);
-                //styl.Setters.Add(new Setter(PieDataPoint.BackgroundProperty, Brushes.MediumPurple));
-
-                //nowaSeria.DataPointStyle = styl;
-
-                Style legendStyle = FindResource("PieLegendStyle") as Style;
-
-                //nowaSeria.LegendItemStyle = legendStyle;
+                nowaSeria.Title = tytulSerii;      
 
                 bufforSeria = nowaSeria;
                 wykres.Series.Add(nowaSeria);
@@ -951,20 +904,17 @@ namespace ADZZ.Statystyki___okno_i_strony
             LinearAxis os = new LinearAxis();
             os.Orientation = AxisOrientation.Y;
             os.Minimum = 0;
-           // os.Maximum = MaxWartosc;
             os.Maximum = (MaxWartosc * 105) / 100;
             if(os.Maximum <= 10)
             {
                 os.Interval = (int)(RoundResult((double)os.Maximum)/ (RoundResult((double)os.Maximum)));
-
+                
             }
             else
             {
                 os.Interval = (int)(RoundResult((double)os.Maximum) / 10);
             }
             os.ShowGridLines = true;
-
-            
 
             return os;
         }
@@ -1096,7 +1046,8 @@ namespace ADZZ.Statystyki___okno_i_strony
         /// <returns></returns>
         private List<Historia_Stada> QueryHistoriaStada()
         {
-            var query = (from H in Polaczenie.Historia_Stada                     
+            var query = (from H in Polaczenie.Historia_Stada 
+                         orderby H.okres_od ascending
                          select H).ToList();
             return query;
         }
@@ -1196,7 +1147,6 @@ namespace ADZZ.Statystyki___okno_i_strony
             Style styl = FindResource("PieLegendStyle") as Style;
 
             listaKolorow.Add(kolor);
-           // bufforSeria.LegendItemStyle = styl;
             System.Threading.Thread.Sleep(50);
         }
 

@@ -32,23 +32,52 @@ namespace ADZZ.Rozliczenia___okno_i_strony
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
         {
-            Kategoria_rozliczen nowaKategoria = new Kategoria_rozliczen();
-            switch (cbCzyPrzychod.SelectedItem)
+            var query = from KR in Polaczenie.Kategoria_rozliczen    
+                        select KR.nazwa;
+            bool czyIstnieje = false;
+            foreach (var item in query)
             {
-                case "Przychód":
-                    nowaKategoria.czyPrzychod = 1;
-                    break;
-                case "Wydatek":
-                    nowaKategoria.czyPrzychod = 0;
-                    break;
+                if (item.ToLower().Equals(tbNazwaKategorii.Text.ToLower()))
+                {
+                    czyIstnieje = true;
+                }
+
             }
-            nowaKategoria.nazwa = tbNazwaKategorii.Text;
-            Polaczenie.Kategoria_rozliczen.InsertOnSubmit(nowaKategoria);
-            Polaczenie.SubmitChanges();
-            actualForm.WypelnienieComboBox();
-            actualForm.WyborRozliczenia.SelectedItem = tbNazwaKategorii.Text;
-            cbListaKategorii.SelectedItem = tbNazwaKategorii.Text;
-            Close();
+
+
+            if (czyIstnieje == false)
+            {
+                if (tbNazwaKategorii.Text != string.Empty && cbCzyPrzychod.SelectedItem != null)
+                {
+                    Kategoria_rozliczen nowaKategoria = new Kategoria_rozliczen();
+                    switch (cbCzyPrzychod.SelectedItem)
+                    {
+                        case "Przychód":
+                            nowaKategoria.czyPrzychod = 1;
+                            break;
+                        case "Wydatek":
+                            nowaKategoria.czyPrzychod = 0;
+                            break;
+                    }
+                    nowaKategoria.nazwa = tbNazwaKategorii.Text;
+                    Polaczenie.Kategoria_rozliczen.InsertOnSubmit(nowaKategoria);
+                    Polaczenie.SubmitChanges();
+                    actualForm.WypelnienieComboBox();
+                    actualForm.WyborRozliczenia.SelectedItem = tbNazwaKategorii.Text;
+                    cbListaKategorii.SelectedItem = tbNazwaKategorii.Text;
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Uzupełnij puste pola!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Podana nazwa już istnieje!");
+            }
+           
+           
         }
 
         private void WypelnienieCbCzyPrzychod()

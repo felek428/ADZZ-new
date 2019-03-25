@@ -13,26 +13,26 @@
 
     <Page.Resources>
 
-        
 
-        
-        
+
+
+
 
     </Page.Resources>
 
     <Grid>
         <ComboBox x:Name="cbRodzajStatystyk" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbRodzajStatystyk_SelectionChanged"/>
 
-        <ScrollViewer x:Name="svPie" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,100,5,0">
+        <ScrollViewer x:Name="svPie" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="-2,100,0,0">
             <Charts:Chart x:Name="WykresKolowy" Margin="0,37,0,0" BorderThickness="0" Visibility="Visible" >
                 <Charts:PieSeries x:Name="SeriaPie" IndependentValueBinding="{Binding Key}" DependentValueBinding="{Binding Value}" ItemsSource="{Binding points}"/>
-                
+
             </Charts:Chart>
         </ScrollViewer>
 
 
 
-        <ScrollViewer x:Name="svLine" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,100,5,0">
+        <ScrollViewer x:Name="svLine" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="-2,100,0,0">
 
 
 
@@ -45,7 +45,7 @@
             </Charts:Chart>
 
         </ScrollViewer>
-        <ScrollViewer x:Name="svColumn" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,100,5,0" >
+        <ScrollViewer x:Name="svColumn" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="-2,100,0,0" >
 
             <Charts:Chart x:Name="WykresKolumnowy"  BorderThickness="0" Visibility="Visible">
 
@@ -57,13 +57,13 @@
         <Label x:Name="lbDo" Content="Do:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="dpOd" HorizontalAlignment="Left" Margin="44,41,0,0" VerticalAlignment="Top" SelectedDateChanged="dpOd_SelectedDateChanged"/>
         <DatePicker x:Name="dpDo" HorizontalAlignment="Left" Margin="44,70,0,0" VerticalAlignment="Top" SelectedDateChanged="dpDo_SelectedDateChanged"/>
-        <Label x:Name="lbZakres" Content="Zakres:" HorizontalAlignment="Left" Margin="156,41,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <ComboBox x:Name="cbZakres" HorizontalAlignment="Left" Margin="208,41,0,0" VerticalAlignment="Top" Width="120" Height="26" Visibility="Hidden" SelectionChanged="cbZakres_SelectionChanged"/>
-        <CheckBox x:Name="checkbNieaktywne" Content="Pokaż nieaktywne" HorizontalAlignment="Left" Margin="158,76,0,0" VerticalAlignment="Top" IsChecked="False" Visibility="Hidden" Checked="checkbNieaktywne_Checked" Unchecked="checkbNieaktywne_Unchecked"/>
-        <Label x:Name="lbTyp" Content="Typ:" HorizontalAlignment="Left" Margin="339,41,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <ComboBox x:Name="cbTyp" HorizontalAlignment="Left" Margin="385,41,0,0" VerticalAlignment="Top" Width="120" Height="26" Visibility="Hidden" SelectionChanged="cbTyp_SelectionChanged"/>
-        <Label x:Name="lbStado" Content="Stado:" HorizontalAlignment="Left" Margin="339,72,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <ComboBox x:Name="cbStado" HorizontalAlignment="Left" Margin="385,72,0,0" VerticalAlignment="Top" Width="120" Height="26" Visibility="Hidden" SelectionChanged="cbStado_SelectionChanged"/>
-        
+        <Label x:Name="lbZakres" Content="Zakres:" HorizontalAlignment="Left" Margin="156,41,0,0" VerticalAlignment="Top" Visibility="Visible"/>
+        <ComboBox x:Name="cbZakres" HorizontalAlignment="Left" Margin="208,41,0,0" VerticalAlignment="Top" Width="115" Height="26" Visibility="Visible" SelectionChanged="cbZakres_SelectionChanged"/>
+        <CheckBox x:Name="checkbNieaktywne" Content="Pokaż nieaktywne" HorizontalAlignment="Left" Margin="158,76,0,0" VerticalAlignment="Top" IsChecked="False" Visibility="Visible" Checked="checkbNieaktywne_Checked" Unchecked="checkbNieaktywne_Unchecked"/>
+        <Label x:Name="lbTyp" Content="Typ:" HorizontalAlignment="Left" Margin="346,41,0,0" VerticalAlignment="Top" Visibility="Visible"/>
+        <ComboBox x:Name="cbTyp" HorizontalAlignment="Left" Margin="382,41,0,0" VerticalAlignment="Top" Width="116" Height="26" Visibility="Visible" SelectionChanged="cbTyp_SelectionChanged"/>
+        <Label x:Name="lbStado" Content="Nr stada:" HorizontalAlignment="Left" Margin="322,72,0,0" VerticalAlignment="Top" Visibility="Visible"/>
+        <ComboBox x:Name="cbStado" HorizontalAlignment="Left" Margin="382,72,0,0" VerticalAlignment="Top" Width="116" Height="26" Visibility="Visible" SelectionChanged="cbStado_SelectionChanged"/>
+
     </Grid>
 </Page>

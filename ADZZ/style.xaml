@@ -548,7 +548,7 @@
         </Setter>
     </Style>
     <!--____________________________Style ColumnDataPoint_______________________________-->
-    <Style TargetType="Charts:ColumnDataPoint" x:Key="Styl1">
+    <Style TargetType="Charts:ColumnDataPoint" x:Key="StylColumnDataPoint">
 
         <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />
@@ -598,8 +598,9 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Grid Background="{TemplateBinding Background}">
-                            <Label Content="{Binding Path=Value}" HorizontalAlignment="Center" Margin="0,-25"/>
-                            <Rectangle Fill="MediumPurple" />
+                           
+                            <TextBlock Text="{Binding Path=Value}" HorizontalAlignment="Center" Margin="0,-18"/>
+                            <Rectangle Fill="MediumPurple"/>
                             <Rectangle>
                                 <Rectangle.Fill>
                                     <LinearGradientBrush ColorInterpolationMode="SRgbLinearInterpolation" MappingMode="RelativeToBoundingBox">
@@ -622,7 +623,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="Charts:ColumnDataPoint" x:Key="Styl2">
+    <Style TargetType="Charts:ColumnDataPoint" x:Key="StylColumnDataPoint2">
 
         <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />
@@ -672,7 +673,8 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Grid Background="{TemplateBinding Background}">
-                            <Label Content="{Binding Path=Value}" HorizontalAlignment="Center" Margin="0,-25"/>
+                            
+                            <TextBlock Text="{Binding Path=Value}" HorizontalAlignment="Center" Margin="0,-18"/>
                             <Rectangle Fill="Red" />
                             <Rectangle>
                                 <Rectangle.Fill>

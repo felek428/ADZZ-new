@@ -100,7 +100,8 @@ namespace NewCalendar
             SetDefaultNextPreviousMonth();
             ActualYear = DateTime.Now.Year;
             MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
-            MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
+            //MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
+            MonthYear.Content = char.ToUpper(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth)[0]) + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth).Substring(1);
             CreateDaysOfWeek();
             CreateCalendarDayButton(GetMonthDaysNumber(ActualYear,actualMonth),GetCurrentMonth());
             CreatePreviousMonthDays(GetLastMonthDaysNumber());
@@ -286,6 +287,7 @@ namespace NewCalendar
         /// <param name="e"></param>
         private void ClickDayButton(object sender, MouseButtonEventArgs e)
         {
+        
             if(sender is NowyCalendarButton && states == 1 )
             {
                 YearView.Children.Clear();
@@ -325,7 +327,7 @@ namespace NewCalendar
 
                 CreatePreviousMonthDays(GetMonthDaysNumber(ActualYear, previousMonth));
                 CreateNextMonthDays();
-                MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth); // przypisanie na nowo nazwy obecnego miesiaca i wyswietlenie na buttonie
+                MonthYear.Content = char.ToUpper(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth)[0]) + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth).Substring(1); // przypisanie na nowo nazwy obecnego miesiaca i wyswietlenie na buttonie
                 states = 0;
             }
             else if (sender is NowyCalendarButton && states == 2)
@@ -434,7 +436,7 @@ namespace NewCalendar
 
                 TextBlock tbDay = new TextBlock();
                 tbDay.VerticalAlignment = VerticalAlignment.Center;
-                tbDay.FontSize = 16;
+                tbDay.FontSize = 12;
                 tbDay.Foreground = new SolidColorBrush(Colors.Black);  
                 tbDay.Text = DaysNameTranslate(DaysOfWeek.ColumnDefinitions[i].Name);
                 tbDay.TextAlignment = TextAlignment.Center;
@@ -573,7 +575,7 @@ namespace NewCalendar
                     nextMonth -= 1;
                 }
                 MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
-                MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth); //pobiera nazwe miesiaca w jezyku jaki jest ustawiony na komputerze na podstawie int'a
+                MonthYear.Content = char.ToUpper(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth)[0]) + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth).Substring(1); //pobiera nazwe miesiaca w jezyku jaki jest ustawiony na komputerze na podstawie int'a
                 CreateCalendarDayButton(GetMonthDaysNumber(ActualYear, actualMonth), GetCurrentMonth());
 
                 CreatePreviousMonthDays(GetMonthDaysNumber(ActualYear, previousMonth));
@@ -647,7 +649,7 @@ namespace NewCalendar
                     previousMonth += 1;
                     nextMonth += 1;
                 }
-                MonthYear.Content = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth);
+                MonthYear.Content = char.ToUpper(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth)[0]) + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(actualMonth).Substring(1);
                 CreateCalendarDayButton(GetMonthDaysNumber(ActualYear, actualMonth), GetCurrentMonth());
                 CreatePreviousMonthDays(GetMonthDaysNumber(ActualYear, previousMonth));
                 CreateNextMonthDays();

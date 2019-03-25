@@ -52,22 +52,30 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
 
             if(czyIstnieje == false)
             {
-                Rasa nowaRasa = new Rasa();
-                nowaRasa.nazwa = tbNazwaRasy.Text;
-                nowaRasa.id_gatunek = wybranyGatunekId;
+                if(tbNazwaRasy.Text != string.Empty)
+                {
+                    Rasa nowaRasa = new Rasa();
+                    nowaRasa.nazwa = tbNazwaRasy.Text;
+                    nowaRasa.id_gatunek = wybranyGatunekId;
 
 
-                Polaczenie.Rasa.InsertOnSubmit(nowaRasa);
-                Polaczenie.SubmitChanges();
+                    Polaczenie.Rasa.InsertOnSubmit(nowaRasa);
+                    Polaczenie.SubmitChanges();
 
 
-                cbRasa.IsEnabled = true;
+                    cbRasa.IsEnabled = true;
 
-                cbRasa.ItemsSource = query;
-                cbRasa.SelectedItem = nowaRasa.nazwa;
+                    cbRasa.ItemsSource = query;
+                    cbRasa.SelectedItem = nowaRasa.nazwa;
 
 
-                Close();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Uzupełnij puste pole!");
+                }
+                
             }
             else
             {

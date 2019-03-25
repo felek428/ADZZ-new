@@ -10,7 +10,7 @@
       Background="White">
 
     <Grid>
-        <Frame x:Name="RamkaAkcjiTypy" Margin="0,67,0,0" Navigated="RamkaAkcjiTypy_Navigated"/>
+        <Frame x:Name="RamkaAkcjiTypy" Margin="0,37,0,0" Navigated="RamkaAkcjiTypy_Navigated"/>
         <ComboBox x:Name="cbTypZwierzat" Visibility="Visible" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="96,10,0,0" SelectionChanged="cbTypZwierzat_SelectionChanged" />
         <Label x:Name="lbTypZwierzat" Visibility="Visible" Content="Typ zwierzat: " HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
 

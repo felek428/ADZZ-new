@@ -7,8 +7,8 @@
         xmlns:Ikony="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:Kalendarz="clr-namespace:NewCalendar"
         mc:Ignorable="d"
-        Title="ADZZ" Height="800" Width="1400" MinHeight="550" MinWidth="1150"  
-        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="ADZZ" Height="600" Width="800" MinHeight="550" MinWidth="800"  
+        WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid Margin="0,0,0,0" HorizontalAlignment="Left" Width="283" >
             <ListBox Background="LightSeaGreen" Margin="0,0,0,0">

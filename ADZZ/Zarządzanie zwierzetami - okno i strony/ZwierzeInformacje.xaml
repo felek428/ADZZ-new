@@ -8,45 +8,59 @@
       xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
       mc:Ignorable="d"
       Title="ZwierzeInformacje"
-      Background="White" Height="647.5" Width="1116.5">
+      Background="White" d:DesignHeight="647.5" d:DesignWidth="1116.5">
 
     <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <GroupBox x:Name="GBOgolneInformacje" Header="Ogólne informacje" HorizontalAlignment="Left" Height="306" Margin="10,10,0,0" VerticalAlignment="Top" Width="323" Grid.Column="0" Grid.Row="0">
+                        <Frame x:Name="ramkaInformacje"/>
+                    </GroupBox>
+                    <GroupBox Header="Lista rui" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Stretch" Width="155
+                      " Grid.Column="0" Grid.Row="1">
+                        <ListView x:Name="LVListaRuji">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=NowaData}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </GroupBox>
+                    <GroupBox Header="Lista wycieleń" HorizontalAlignment="Left" Margin="178,15,0,10" Width="155" Grid.Column="0" Grid.Row="1">
+                        <ListView x:Name="LVListaWycielen">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=NowaData}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </GroupBox>
+                </Grid>
 
-        <GroupBox x:Name="GBFinanse" Header="Finanse" HorizontalAlignment="Right" Height="624" Margin="0,0,20,14" VerticalAlignment="Bottom" Width="703">
-            <Charts:Chart x:Name="Wykres" Margin="10" BorderThickness="0">
-                <Charts:Chart.Series >
-                    <!--<Charts:LineSeries Title="WYDAJNOSC" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"/>-->
-                    <!--Wykres liniowy-->
-                    <!--<Charts:ColumnSeries Title="Wydajnosc" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"   />-->
-                    <!--Wykres slupkowy-->
-                    <Charts:PieSeries Title="Wydajnosc" x:Name="Seria" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
-                    <!--Wykres kolowy-->
-                </Charts:Chart.Series>
-            </Charts:Chart>
-        </GroupBox>
+                <GroupBox x:Name="GBFinanse" Header="Finanse" MinWidth="703" Grid.Column="1" MinHeight="624" Margin="0,10" >
+                    <Charts:Chart x:Name="Wykres" Margin="10" BorderThickness="0">
+                        <Charts:Chart.Series >
+                            <!--<Charts:LineSeries Title="WYDAJNOSC" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"/>-->
+                            <!--Wykres liniowy-->
+                            <!--<Charts:ColumnSeries Title="Wydajnosc" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"   />-->
+                            <!--Wykres slupkowy-->
+                            <Charts:PieSeries Title="Wydajnosc" x:Name="Seria" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
+                            <!--Wykres kolowy-->
+                        </Charts:Chart.Series>
+                    </Charts:Chart>
+                </GroupBox>
 
-        <GroupBox x:Name="GBOgolneInformacje" Header="Ogólne informacje" HorizontalAlignment="Left" Height="336" Margin="10,10,0,0" VerticalAlignment="Top" Width="323">
-            <Frame x:Name="ramkaInformacje"/>
-        </GroupBox>
-        <GroupBox Header="Lista rui" HorizontalAlignment="Left" Height="270" Margin="10,364,0,0" VerticalAlignment="Top" Width="155
-                  ">
-            <ListView x:Name="LVListaRuji">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=NowaData}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </GroupBox>
-        <GroupBox Header="Lista wycieleń" HorizontalAlignment="Left" Height="270" Margin="178,364,0,0" VerticalAlignment="Top" Width="155">
-            <ListView x:Name="LVListaWycielen">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Path=NowaData}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </GroupBox>
 
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

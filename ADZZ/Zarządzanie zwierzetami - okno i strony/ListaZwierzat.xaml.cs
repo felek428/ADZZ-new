@@ -55,10 +55,18 @@ namespace ADZZ.Zarządzanie_zwierzetami___okno_i_strony
             else if (wybranyIndex == 1)
             {
                 var query = (from Stado in Polaczenie.Stado
+                             orderby Stado.Id ascending
                              select new ZwierzeNiepelnyOpis { NrKolczyka = Stado.nr_stada, NazwaGatunek = Stado.Gatunek.nazwa, Id = Stado.Id }).ToList();
                 LVListaZwierzat.ItemsSource = query;
 
+                if(Kolumny.Columns.Count > 2)
+                {
+                    Kolumny.Columns.RemoveAt(2);     // usuwa kolumnę Rasa, która jest niepotrzebna
+                }
+                
+
             }
+            
         }
 
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)

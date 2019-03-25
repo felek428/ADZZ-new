@@ -54,7 +54,7 @@ namespace ADZZ.Kalendarz
         {
             Console.WriteLine(cbKolczyk.SelectedItem);
 
-            if (typNotatkiCB.SelectedItem != null || cbKolczyk.SelectedItem != null)
+            if (typNotatkiCB.SelectedItem != null && cbKolczyk.SelectedItem != null)
             {
                 
 

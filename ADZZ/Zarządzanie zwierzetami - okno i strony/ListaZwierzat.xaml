@@ -10,26 +10,26 @@
       Background="White">
 
     <Grid>
-        
-        <ListView x:Name="LVListaZwierzat"  Margin="20,57,0,20" HorizontalAlignment="Left" Width="Auto" SelectionChanged="LVListaZwierzat_SelectionChanged">
+
+        <ListView x:Name="LVListaZwierzat"  Margin="13,57,0,20" HorizontalAlignment="Left" Width="Auto" SelectionChanged="LVListaZwierzat_SelectionChanged">
             <ListView.View>
-                <GridView  >
+                <GridView x:Name="Kolumny">
                     <GridViewColumn Header="Nr kolczyka" DisplayMemberBinding="{Binding Path=NrKolczyka}"/>
                     <GridViewColumn Header="Gatunek" DisplayMemberBinding="{Binding Path=NazwaGatunek}"/>
-                    <GridViewColumn Header="Rasa" DisplayMemberBinding="{Binding Path=NazwaRasa}" />
+                    <GridViewColumn x:Name="ColRasa" Header="Rasa" DisplayMemberBinding="{Binding Path=NazwaRasa}"  />
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
                     <EventSetter Event="MouseLeftButtonUp" Handler="ListViewItem_MouseLeftButtonDown"/>
-                    
+
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <Label x:Name="lbFiltr" Content="Szukaj:" HorizontalAlignment="Left" Margin="20,26,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbFiltr" HorizontalAlignment="Left" Height="23" Margin="66,29,0,0"  VerticalAlignment="Top" Width="149" TextChanged="TBFiltr_TextChanged"/>
-        <Button x:Name="btUsun" Content="Usuń" IsEnabled="False" Style="{StaticResource NowyStylButton}" HorizontalAlignment="Left" Margin="220,29,0,0" VerticalAlignment="Top" Width="62" Click="btUsun_Click" Height="23"/>
-        
+        <Label x:Name="lbFiltr" Content="Szukaj:" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="49"/>
+        <TextBox x:Name="tbFiltr" HorizontalAlignment="Left" Height="23" Margin="59,29,0,0"  VerticalAlignment="Top" Width="149" TextChanged="TBFiltr_TextChanged"/>
+        <Button x:Name="btUsun" Content="Usuń" IsEnabled="False" Style="{StaticResource NowyStylButton}" HorizontalAlignment="Left" Margin="213,29,0,0" VerticalAlignment="Top" Width="62" Click="btUsun_Click" Height="23"/>
+
     </Grid>
 </Page>

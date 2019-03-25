@@ -13,13 +13,13 @@
             <Grid x:Name="Buttons" DockPanel.Dock="Top" Height="35">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="250"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource NowyStylButton}" x:Name="PreviousButton" FontSize="20" FontFamily="Segoe UI Symbol" Content="&#xE112;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="75" Click="Previous_Click"/>
                 <Button Style="{StaticResource NowyStylButton}" x:Name="MonthYear" Click="MonthYear_Click"  Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="75" Height="30" />
                 <Button Style="{StaticResource NowyStylButton}" x:Name="NextButton" IsEnabledChanged="NextButton_IsEnabledChanged"  FontSize="20" FontFamily="Segoe UI Symbol" Content="&#xE111;" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="75" Click="NextButton_Click"/>
-                <Border x:Name="obramowanieRok" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Margin="161,9,0,0" Height="16" BorderBrush="Gray" BorderThickness="2">
+                <Border x:Name="obramowanieRok" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Margin="0,9,177,0" Height="16" BorderBrush="Gray" BorderThickness="2" Grid.Column="1">
                     <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="{Binding Path=ActualYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
                 </Border>
             </Grid>

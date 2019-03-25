@@ -6,26 +6,36 @@
       xmlns:local="clr-namespace:ADZZ.Zarządzanie_zwierzetami___okno_i_strony"
       xmlns:Charts="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
 
-      mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="1109"
+      mc:Ignorable="d"
       Title="StadoInformacje"
-      Background="White">
+      Background="White" d:DesignHeight="500" d:DesignWidth="980">
 
     <Grid>
-        <GroupBox Header="Ogólne informacje" HorizontalAlignment="Left" Height="233" Margin="37,34,0,0" VerticalAlignment="Top" Width="319">
-            <Frame x:Name="ramkaInformacji"/>
-        </GroupBox>
-        <GroupBox x:Name="GBFinanse" Header="Finanse" HorizontalAlignment="Left" Height="478" Margin="420,34,0,0" VerticalAlignment="Top" Width="627">
-            <Charts:Chart x:Name="Wykres" Margin="10" BorderThickness="0">
-                <Charts:Chart.Series >
-                    <!--<Charts:LineSeries Title="WYDAJNOSC" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"/>-->
-                    <!--Wykres liniowy-->
-                    <!--<Charts:ColumnSeries Title="Wydajnosc" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"   />-->
-                    <!--Wykres slupkowy-->
-                    <Charts:PieSeries Title="Wydajnosc" x:Name="Seria" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
-                    <!--Wykres kolowy-->
-                </Charts:Chart.Series>
-            </Charts:Chart>
-        </GroupBox>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="354*"/>
+                    <ColumnDefinition Width="755*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <GroupBox Header="Ogólne informacje" HorizontalAlignment="Left" Height="233" Margin="10,10,0,0" VerticalAlignment="Top" Width="319" Grid.Column="0">
+                    <Frame x:Name="ramkaInformacji"/>
+                </GroupBox>
+                <GroupBox x:Name="GBFinanse" Header="Finanse"  MinHeight="478" Margin="10"  MinWidth="627" Grid.Column="1">
+                    <Charts:Chart x:Name="Wykres" Margin="10" BorderThickness="0">
+                        <Charts:Chart.Series >
+                            <!--<Charts:LineSeries Title="WYDAJNOSC" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"/>-->
+                            <!--Wykres liniowy-->
+                            <!--<Charts:ColumnSeries Title="Wydajnosc" x:Name="Seria" IndependentValuePath="X" DependentValuePath="Y" ItemsSource="{Binding points}"   />-->
+                            <!--Wykres slupkowy-->
+                            <Charts:PieSeries Title="Wydajnosc" x:Name="Seria" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
+                            <!--Wykres kolowy-->
+                        </Charts:Chart.Series>
+                    </Charts:Chart>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

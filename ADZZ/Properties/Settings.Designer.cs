@@ -44,5 +44,27 @@ namespace ADZZ.Properties {
                 return ((string)(this["BazaZwierzatConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\BazaZwierzat.mdf;Integrate" +
+            "d Security=True;Connect Timeout=30")]
+        public string BazaZwierzatConnectionString2 {
+            get {
+                return ((string)(this["BazaZwierzatConnectionString2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\idea 305\\Documents\\" +
+            "BazaZwierzata.mdf\";Integrated Security=True;Connect Timeout=30")]
+        public string BazaZwierzataConnectionString {
+            get {
+                return ((string)(this["BazaZwierzataConnectionString"]));
+            }
+        }
     }
 }

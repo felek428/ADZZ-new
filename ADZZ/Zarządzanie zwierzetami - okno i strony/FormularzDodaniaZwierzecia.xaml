@@ -19,7 +19,7 @@
         <Label x:Name="okresDoL" Content="Okres aktywności do:" HorizontalAlignment="Left" Margin="13,196,0,0" VerticalAlignment="Top" Width="129"/>
         <TextBox x:Name="tbKolczyk" HorizontalAlignment="Left" MaxLength="14" Height="23" Margin="153,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="127" TextChanged="tbKolczyk_TextChanged" />
         <DatePicker x:Name="DataUrDP" HorizontalAlignment="Left" Height="23" Margin="153,75,0,0" VerticalAlignment="Top" Width="127" SelectedDateChanged="DataUrDP_SelectedDateChanged" />
-        <Button Style="{StaticResource NowyStylButton}" x:Name="btDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="201,268,0,0" VerticalAlignment="Top" Width="79" Click="BtDodaj_Click"/>
+        <Button Style="{StaticResource NowyStylButton}" x:Name="btDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="201,255,0,0" VerticalAlignment="Top" Width="79" Click="BtDodaj_Click"/>
         <ComboBox x:Name="GatunekCB" HorizontalAlignment="Left" Margin="153,107,0,0" VerticalAlignment="Top" Width="127" SelectionChanged="GatunekCB_SelectionChanged" />
         <ComboBox x:Name="RasaCB" HorizontalAlignment="Left" Margin="153,138,0,0" VerticalAlignment="Top" Width="127" IsEnabled="False" SelectionChanged="RasaCB_SelectionChanged"/>
         <CheckBox x:Name="maleCheckB" Content="M" HorizontalAlignment="Left" Margin="153,47,0,0" VerticalAlignment="Top" Click="maleCheckB_Click" Width="33"/>
